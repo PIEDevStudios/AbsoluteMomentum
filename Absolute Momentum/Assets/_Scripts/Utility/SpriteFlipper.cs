@@ -29,11 +29,11 @@ public class SpriteFlipper : MonoBehaviour
 
     public void CheckSpriteDirection()
     {
-        if (rb.velocity.x > 0 && !isFacingRight)
+        if (rb.linearVelocity.x > 0 && !isFacingRight)
         {
             FlipSprite();
         }
-        else if (rb.velocity.x < 0 && isFacingRight)
+        else if (rb.linearVelocity.x < 0 && isFacingRight)
         {
             FlipSprite();
         }

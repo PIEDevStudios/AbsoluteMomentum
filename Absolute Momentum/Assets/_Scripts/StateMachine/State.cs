@@ -9,7 +9,7 @@ public class State : MonoBehaviour
 {
     protected StateMachineCore core;
 
-    protected Rigidbody2D rb => core.rb;
+    protected Rigidbody rb => core.rb;
     protected Animator animator => core.animator;
     public bool isComplete { get; protected set; }
 

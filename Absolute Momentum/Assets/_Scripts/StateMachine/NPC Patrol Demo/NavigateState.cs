@@ -28,13 +28,13 @@ public class NavigateState : State
         {
             isComplete = true;
         }
-        core.transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x) * 2f, core.transform.localScale.y, 1);
+        core.transform.localScale = new Vector3(Mathf.Sign(rb.linearVelocity.x) * 2f, core.transform.localScale.y, 1);
     }
 
     public override void DoFixedUpdateState()
     {
         base.DoFixedUpdateState();
         Vector2 direction = (destination - (Vector2) core.transform.position).normalized;
-        rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(direction.x * speed, rb.linearVelocity.y);
     }
 }
