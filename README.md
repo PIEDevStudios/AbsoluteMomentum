@@ -1,0 +1,1 @@
+A phenomenon has caught on worldwide. Speed is life, and adrenaline is the only thing that matters. World peace? Non-Existent. War? Zero Interest. Cybernetic implants in your legs that make you move 3 cm/s faster? Absolutely. Everyone is here, and everyone is watching. Impress the world, and learn the ways of Absolute Momentum.
