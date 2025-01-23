@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class GroundSensor : MonoBehaviour
 {
-    public BoxCollider2D groundCheck;
+    [SerializeField] private float rayLength;
     public LayerMask groundLayer;
     public bool grounded { get; private set; }
 
-    private void FixedUpdate()
+    private void Update()
     {
         CheckGround();
     }
 
     private void CheckGround()
     {
-        grounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundLayer).Length > 0;
+        grounded = Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
+        Debug.DrawRay(transform.position, Vector3.down * rayLength);
     }
 }

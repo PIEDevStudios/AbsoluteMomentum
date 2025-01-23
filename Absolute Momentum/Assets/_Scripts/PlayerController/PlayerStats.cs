@@ -31,18 +31,6 @@ public class PlayerStats : ScriptableObject
     [field:SerializeField] public float EndJumpEarlyForce {get; private set;}
     [field:SerializeField] public uint JumpFrameBufferAmount {get; private set;}
     [field:SerializeField] public float FallSpeedLimit {get; private set;}
-
-    [field:Header("Rolling")]
-    [field:SerializeField] public float RollSpeed {get; private set;}
-    [field:SerializeField] public float RollDuration {get; private set;}
-    [field:SerializeField] public float RollDrag {get; private set;}
     
-    [field:Header("Climbing")]
-    
-    [field:SerializeField] public float ClimbingRiseSpeed {get; private set;}
-    
-    [field:Header("Attack")]
-    public float Damage {get; private set;}
-    public float AttackSpeedMult {get; private set;}
     
 }

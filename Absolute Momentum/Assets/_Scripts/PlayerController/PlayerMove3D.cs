@@ -21,8 +21,8 @@ public class PlayerMove3D : State
         base.DoEnterLogic();
         player.SetTrigger("Walk");
         rb.linearDamping = stats.GroundDrag;
-        footstepEmitter = AudioManager.Instance.InitializeEventEmitter(FMODEvents.Sounds.PlayerFootsteps_Grass, player.playerObj.gameObject);
-        footstepEmitter.Play();
+        // footstepEmitter = AudioManager.Instance.InitializeEventEmitter(FMODEvents.Sounds.PlayerFootsteps_Grass, player.playerObj.gameObject);
+        // footstepEmitter.Play();
         // player.ChangeGravity(stats.GroundGravity);
     }
 
@@ -31,7 +31,7 @@ public class PlayerMove3D : State
         base.DoExitLogic();
         player.animator.SetBool("Sprint", false);
         animator.Play("Walk");
-        footstepEmitter.Stop();
+        // footstepEmitter.Stop();
         
         // player.ChangeGravity(stats.NormalGravity);
     }
@@ -66,7 +66,7 @@ public class PlayerMove3D : State
             acceleration = stats.SprintAcceleration;
             player.animator.SetBool("Sprint", true);
             
-            footstepEmitter.EventInstance.setParameterByName("Sprinting", 1.0f);
+            // footstepEmitter.EventInstance.setParameterByName("Sprinting", 1.0f);
         }
         else
         {
@@ -74,7 +74,7 @@ public class PlayerMove3D : State
             acceleration = stats.WalkAcceleration;
             player.animator.SetBool("Sprint", false);
             
-            footstepEmitter.EventInstance.setParameterByName("Sprinting", 0.0f);
+            // footstepEmitter.EventInstance.setParameterByName("Sprinting", 0.0f);
         }
     }
     

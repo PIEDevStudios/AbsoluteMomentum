@@ -84,6 +84,7 @@ public class PlayerJumpManager : MonoBehaviour
             {
                 Debug.Log("Jump");
                 player.stateMachine.SetState(player.airborne);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
                 rb.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse);
             }
 
