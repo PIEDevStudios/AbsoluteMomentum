@@ -136,11 +136,11 @@ public class Player : StateMachineCore
     /// </summary>
     public void ResetAllTriggers()
     {
-        animator.ResetTrigger("Jump");
-        animator.ResetTrigger("Walk");
-        animator.ResetTrigger("Roll");
-        animator.ResetTrigger("Attack");
-        animator.ResetTrigger("Idle");
+        // animator.ResetTrigger("Jump");
+        // animator.ResetTrigger("Walk");
+        // animator.ResetTrigger("Roll");
+        // animator.ResetTrigger("Attack");
+        // animator.ResetTrigger("Idle");
     }
 
     /// <summary>
@@ -149,8 +149,8 @@ public class Player : StateMachineCore
     /// <param name="trigger"></param>
     public void SetTrigger(string trigger)
     {
-        ResetAllTriggers();
-        animator.SetTrigger(trigger);
+        // ResetAllTriggers();
+        // animator.SetTrigger(trigger);
     }
 
     #endregion
