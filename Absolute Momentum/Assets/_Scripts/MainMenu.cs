@@ -83,7 +83,7 @@ public class MainMenu : MonoBehaviour
             Debug.Log("Join Code: " + joinCode);
             lobbyCodeText.text = joinCode;
 
-            RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
+            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(allocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartHost();
@@ -107,8 +107,7 @@ public class MainMenu : MonoBehaviour
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
-            RelayServerData test = new RelayServerData();
+            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
