@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 /// <summary>
@@ -10,6 +11,16 @@ public class StateMachine
 {
     public State currentState  { get; private set; } 
     public State previousState { get; private set; }
+    
+    // This event is called when a state is changed and passes the previous state (from state) and new state (to state)
+    public event EventHandler OnStateChanged;
+
+    public class OnStateChangedEventArgs : EventArgs
+    {
+        public State previousState;
+        public State nextState;
+    }
+    
 
     /// <summary>
     /// Sets the state machine with a specified state
@@ -18,12 +29,17 @@ public class StateMachine
     /// <param name="_forceReset"</param>
     public void SetState(State _newState, bool _forceReset = false)
     {
+        
         if(currentState != _newState || _forceReset)
         {
+            //Debug.Log("Changing State to " + _newState);
             currentState?.DoExitLogic();
+            currentState?.gameObject.SetActive(false);
             previousState = currentState;
             currentState = _newState;
+            currentState.gameObject.SetActive(true);
             currentState.DoEnterLogic();
+            OnStateChanged?.Invoke(this, new OnStateChangedEventArgs { previousState = previousState, nextState = currentState });
         }
 
     }

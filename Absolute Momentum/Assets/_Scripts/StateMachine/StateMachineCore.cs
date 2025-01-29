@@ -7,7 +7,12 @@ public abstract class StateMachineCore : MonoBehaviour
     /// <summary>
     /// Dictonary used to hold states that are NOT a part of a heirarchical state machine.
     /// </summary>
+    [Header("StateMachineCore Variables")]
     public Rigidbody rb;
+    /// <summary>
+    /// GameObject that is the parent to all states in this stateMachineCore
+    /// </summary>
+    public GameObject statesParent;
     public Animator animator;
     public StateMachine stateMachine { get; private set; }
     /// <summary>
@@ -26,11 +31,21 @@ public abstract class StateMachineCore : MonoBehaviour
     {
         stateMachine = new StateMachine();
 
-        State[] _allChildStates = GetComponentsInChildren<State>();
+        State[] _allChildStates;
+
+        if (statesParent == null)
+        {
+            _allChildStates = GetComponentsInChildren<State>();
+        }
+        else
+        {
+            _allChildStates = statesParent.GetComponentsInChildren<State>();
+        }
 
         foreach (State _state in _allChildStates)
         {
             _state.SetCore(this);
+            _state.gameObject.SetActive(false);
         }
     }
 
@@ -60,7 +75,15 @@ public abstract class StateMachineCore : MonoBehaviour
 
             GUIStyle style = new GUIStyle();
             style.alignment = TextAnchor.MiddleCenter;
-            style.normal.textColor = Color.white;
+            if(stateMachine.currentState.isComplete)
+            {
+                style.normal.textColor = Color.green;
+            }
+            else
+            {
+                style.normal.textColor = Color.red;
+            }
+            style.fontSize = 40;
             UnityEditor.Handles.Label(transform.position + Vector3.up * 3, "Active States: " + string.Join(" > ", states), style);
         
         }
