@@ -19,8 +19,8 @@ public class PlayerMove3D : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        player.SetTrigger("Walk");
         rb.linearDamping = stats.GroundDrag;
+        player.ChangeGravity(0);
         // footstepEmitter = AudioManager.Instance.InitializeEventEmitter(FMODEvents.Sounds.PlayerFootsteps_Grass, player.playerObj.gameObject);
         // footstepEmitter.Play();
         // player.ChangeGravity(stats.GroundGravity);
@@ -29,9 +29,7 @@ public class PlayerMove3D : State
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        player.animator.SetBool("Sprint", false);
-        animator.Play("Walk");
-        // footstepEmitter.Stop();
+        player.ChangeGravity(stats.NormalGravity);
         
         // player.ChangeGravity(stats.NormalGravity);
     }
@@ -60,21 +58,15 @@ public class PlayerMove3D : State
     /// </summary>
     private void CheckForSprint()
     {
-        if (playerInput.sprintHeld)
+        if (!playerInput.sprintHeld)
         {
             maxSpeed = stats.MaxSprintSpeed;
             acceleration = stats.SprintAcceleration;
-            player.animator.SetBool("Sprint", true);
-            
-            // footstepEmitter.EventInstance.setParameterByName("Sprinting", 1.0f);
         }
         else
         {
             maxSpeed = stats.MaxWalkSpeed;
             acceleration = stats.WalkAcceleration;
-            player.animator.SetBool("Sprint", false);
-            
-            // footstepEmitter.EventInstance.setParameterByName("Sprinting", 0.0f);
         }
     }
     
@@ -101,7 +93,8 @@ public class PlayerMove3D : State
     {
         if (!player.groundSensor.grounded)
         {
-            rb.AddForce(Vector3.down * stats.GroundGravity);
+            Debug.Log("Stick to slope");
+            rb.AddForce(Vector3.down * stats.StickToSlopeForce);
         }
     }
 

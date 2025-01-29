@@ -79,7 +79,7 @@ public class SceneSwapManager : Singleton<SceneSwapManager>
         //player = InputManager.Instance.gameObject;
         //playerCol = player.GetComponentInChildren<Collider2D>();
 
-        DoorTriggerInteraction[] doors = FindObjectsOfType<DoorTriggerInteraction>();
+        DoorTriggerInteraction[] doors = FindObjectsByType<DoorTriggerInteraction>(FindObjectsSortMode.None);
 
         foreach(DoorTriggerInteraction door in doors)
         {

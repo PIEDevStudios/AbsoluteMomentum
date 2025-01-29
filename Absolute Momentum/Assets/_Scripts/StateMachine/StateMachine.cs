@@ -13,7 +13,7 @@ public class StateMachine
     public State previousState { get; private set; }
     
     // This event is called when a state is changed and passes the previous state (from state) and new state (to state)
-    public event EventHandler OnStateChanged;
+    public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
 
     public class OnStateChangedEventArgs : EventArgs
     {

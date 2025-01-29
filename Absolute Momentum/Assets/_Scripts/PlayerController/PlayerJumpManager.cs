@@ -11,9 +11,6 @@ public class PlayerJumpManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private PlayerInput playerInput;
     private PlayerStats playerStats => player.stats;
-    [HorizontalLine]
-    [Header("Sensors")]
-    [SerializeField] private GroundSensor groundSensor;
     float FrameBufferNum => playerStats.JumpFrameBufferAmount;
     float JumpForce => playerStats.JumpForce;
     private float downwardForce => playerStats.EndJumpEarlyForce;
@@ -35,7 +32,7 @@ public class PlayerJumpManager : MonoBehaviour
             framesSinceLastSpacebar = 0;
         }
         
-        if((groundSensor.grounded && rb.linearVelocity.y < 0))
+        if((player.groundSensor.grounded || player.slopeSensor.isOnSlope) && rb.linearVelocity.y < 0)
         {
             jumping = false;
         }
@@ -54,7 +51,7 @@ public class PlayerJumpManager : MonoBehaviour
         {
             framesSinceOnGround = (int)FrameBufferNum;
         }
-        else if (player.stateMachine.currentState is not PlayerAirborne3D && (groundSensor.grounded))
+        else if (player.stateMachine.currentState is not PlayerAirborne3D && (player.groundSensor.grounded || player.slopeSensor.isOnSlope))
         {
             framesSinceOnGround = 0;
         }
@@ -80,7 +77,7 @@ public class PlayerJumpManager : MonoBehaviour
 
         if (framesSinceOnGround < FrameBufferNum)
         {
-            if(groundSensor.grounded)
+            if(player.groundSensor.grounded || player.slopeSensor.isOnSlope)
             {
                 Debug.Log("Jump");
                 player.stateMachine.SetState(player.airborne);

@@ -18,12 +18,12 @@ MonoBehaviour:
   <SprintAcceleration>k__BackingField: 1.5
   <GroundDrag>k__BackingField: 10
   <NoInputDeceleration>k__BackingField: 25
+  <StickToSlopeForce>k__BackingField: 150
   <AirAccelerationMultiplier>k__BackingField: 0.2
   <AirDrag>k__BackingField: 0
   gravityEnabled: 1
   <NormalGravity>k__BackingField: 40
-  <GroundGravity>k__BackingField: 100
-  <CurrentGravity>k__BackingField: 40
+  <CurrentGravity>k__BackingField: 0
   <JumpForce>k__BackingField: 14
   <EndJumpEarlyForce>k__BackingField: 0
   <JumpFrameBufferAmount>k__BackingField: 10

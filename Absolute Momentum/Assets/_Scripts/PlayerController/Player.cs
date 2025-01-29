@@ -27,7 +27,7 @@ public class Player : StateMachineCore
     [field:SerializeField] public Transform playerObj { get; private set; }
     [Expandable]
     [SerializeField] public PlayerStats stats;
-    [SerializeField] private PlayerInput playerInput;
+    [field:SerializeField] public PlayerInput playerInput {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
     
     // Variables used for debugging

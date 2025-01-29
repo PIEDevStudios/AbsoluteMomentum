@@ -5,6 +5,7 @@ using UnityEngine;
 public class GroundSensor : MonoBehaviour
 {
     [SerializeField] private float rayLength;
+    [SerializeField] private CapsuleCollider playerCapsuleCollider;
     public LayerMask groundLayer;
     public bool grounded { get; private set; }
 
@@ -15,7 +16,13 @@ public class GroundSensor : MonoBehaviour
 
     private void CheckGround()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
-        Debug.DrawRay(transform.position, Vector3.down * rayLength);
+        // grounded = Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
+        grounded = Physics.SphereCast(new Ray(transform.position, Vector3.down), playerCapsuleCollider.radius, rayLength, groundLayer);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position+Vector3.down*rayLength, playerCapsuleCollider.radius);
     }
 }

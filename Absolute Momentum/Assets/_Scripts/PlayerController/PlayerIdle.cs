@@ -11,21 +11,32 @@ public class PlayerIdle : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        player.SetTrigger("Idle");
+        // In player idle and move states, we set the gravity to 0 so we don't slide down slopes
+        player.ChangeGravity(0);
     }
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
         rb.linearDamping = stats.GroundDrag;
+        player.ChangeGravity(stats.NormalGravity);
     }
-    
-    private void OnTriggerStay(Collider other)
+
+    public override void DoUpdateState()
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        base.DoUpdateState();
+        if (player.groundSensor.grounded)
         {
-            rb.linearDamping = 100;
+            rb.linearVelocity = Vector3.zero;
         }
     }
+    
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+    //     {
+    //         rb.linearDamping = 100;
+    //     }
+    // }
     
 }

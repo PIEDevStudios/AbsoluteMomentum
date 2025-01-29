@@ -14,6 +14,7 @@ public class PlayerStats : ScriptableObject
     [field:SerializeField] public float SprintAcceleration {get; private set;}
     [field:SerializeField] public float GroundDrag {get; private set;}
     [field:SerializeField] public float NoInputDeceleration {get; private set;}
+    [field:SerializeField] public float StickToSlopeForce {get; private set;}
     
     [field:Header("Air Movement")]
     [field:SerializeField] public float AirAccelerationMultiplier {get; private set;}
@@ -22,7 +23,6 @@ public class PlayerStats : ScriptableObject
     [field: Header("Gravity")] 
     [field: SerializeField] public bool gravityEnabled;
     [field:SerializeField] public float NormalGravity {get; private set;}
-    [field:SerializeField] public float GroundGravity {get; private set;}
     
     [field:ReadOnly, SerializeField] public float CurrentGravity {get; set;}
     
