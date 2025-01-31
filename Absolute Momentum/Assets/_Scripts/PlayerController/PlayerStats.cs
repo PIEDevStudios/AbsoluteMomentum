@@ -8,29 +8,30 @@ using UnityEngine.Serialization;
 public class PlayerStats : ScriptableObject
 {
     [field:Header("Ground Movement")]
-    [field:SerializeField] public float MaxWalkSpeed {get; private set;}
-    [field:SerializeField] public float MaxSprintSpeed {get; private set;}
-    [field:SerializeField] public float WalkAcceleration {get; private set;}
-    [field:SerializeField] public float SprintAcceleration {get; private set;}
-    [field:SerializeField] public float GroundDrag {get; private set;}
-    [field:SerializeField] public float NoInputDeceleration {get; private set;}
-    [field:SerializeField] public float StickToSlopeForce {get; private set;}
+    public float MaxWalkSpeed;
+    public float MaxSprintSpeed;
+    public float WalkAcceleration;
+    public float SprintAcceleration;
+    public float GroundDrag;
+    public float NoInputDeceleration;
+    public float StickToSlopeForce;
     
     [field:Header("Air Movement")]
-    [field:SerializeField] public float AirAccelerationMultiplier {get; private set;}
-    [field:SerializeField] public float AirDrag {get; private set;}
+    public float AirAcceleration;
+    public float AirDrag;
 
     [field: Header("Gravity")] 
-    [field: SerializeField] public bool gravityEnabled;
-    [field:SerializeField] public float NormalGravity {get; private set;}
-    
-    [field:ReadOnly, SerializeField] public float CurrentGravity {get; set;}
+    public bool gravityEnabled;
+
+    public float NormalGravity;
+
+    [field: ReadOnly, SerializeField] public float CurrentGravity;
     
     [field:Header("Jumping")]
-    [field:SerializeField] public float JumpForce {get; private set;}
-    [field:SerializeField] public float EndJumpEarlyForce {get; private set;}
-    [field:SerializeField] public uint JumpFrameBufferAmount {get; private set;}
-    [field:SerializeField] public float FallSpeedLimit {get; private set;}
+    public float JumpForce;
+    public float EndJumpEarlyForce;
+    public uint JumpFrameBufferAmount;
+    public float FallSpeedLimit;
     
     
 }

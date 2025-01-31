@@ -10,13 +10,20 @@ public class PlayerAirborne3D : State
     [SerializeField] private Transform orientation;
     private PlayerStats stats => player.stats;
     private float maxSpeed, acceleration;
-    private bool sprintOnEnter; // true if player was sprinting as they were entering the state
+    private Vector3 speedOnEnter; // Player's flat (x and z) speed when they enter airborne
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
         player.SetTrigger("Jump");
         rb.linearDamping = stats.AirDrag;
-        SetMaxSpeed();
+        
+        
+        // Set max speed and acceleration
+        
+        speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        
+        acceleration = stats.SprintAcceleration * stats.AirAcceleration;
+        maxSpeed = speedOnEnter.magnitude;
     }
     public override void DoFixedUpdateState()
     {
@@ -51,24 +58,6 @@ public class PlayerAirborne3D : State
         if (playerInput.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-        }
-    }
-
-    /// <summary>
-    /// Set the maxSpeed depending on if the player was sprinting before transitioning into airborne
-    /// </summary>
-    private void SetMaxSpeed()
-    {
-        sprintOnEnter = playerInput.sprintHeld;
-        if (sprintOnEnter)
-        {
-            acceleration = stats.SprintAcceleration * stats.AirAccelerationMultiplier;
-            maxSpeed = stats.MaxSprintSpeed;
-        }
-        else
-        {
-            acceleration = stats.WalkAcceleration * stats.AirAccelerationMultiplier;
-            maxSpeed = stats.MaxWalkSpeed;
         }
     }
 }

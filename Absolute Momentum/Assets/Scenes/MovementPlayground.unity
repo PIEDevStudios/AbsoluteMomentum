@@ -798,29 +798,9 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3024991555
       objectReference: {fileID: 0}
-    - target: {fileID: 21610813915541202, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 5262f36c2c8c6a04aa7266536674ef55, type: 2}
-    - target: {fileID: 1269488202452132282, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
-      propertyPath: rayLength
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2465335586155040666, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 3238629911873270863, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_Name
       value: PlayerWithCameras
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633578369210212324, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
-      propertyPath: Lens.FieldOfView
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5996516877215897752, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7418350527356540808, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -861,10 +841,6 @@ PrefabInstance:
     - target: {fileID: 7418350527356540808, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8038911511778787065, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
-      propertyPath: rayLength
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
