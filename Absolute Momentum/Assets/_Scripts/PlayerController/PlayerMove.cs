@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using FMODUnity;
 
-public class PlayerMove3D : State
+public class PlayerMove : State
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Player player;
@@ -21,6 +21,7 @@ public class PlayerMove3D : State
         base.DoEnterLogic();
         rb.linearDamping = stats.GroundDrag;
         player.ChangeGravity(0);
+        rb.AddForce(-player.groundSensor.hit.normal * 2f, ForceMode.Impulse);
         // footstepEmitter = AudioManager.Instance.InitializeEventEmitter(FMODEvents.Sounds.PlayerFootsteps_Grass, player.playerObj.gameObject);
         // footstepEmitter.Play();
         // player.ChangeGravity(stats.GroundGravity);

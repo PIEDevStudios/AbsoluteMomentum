@@ -10,8 +10,8 @@ public class Player : StateMachineCore
     [field: HorizontalLine(color: EColor.Gray)]
     [field: Header("States")]
     [field: SerializeField] public PlayerIdle idle { get; private set; }
-    [field: SerializeField] public PlayerMove3D move { get; private set; }
-    [field: SerializeField] public PlayerAirborne3D airborne { get; private set; }
+    [field: SerializeField] public PlayerMove move { get; private set; }
+    [field: SerializeField] public PlayerAirborne airborne { get; private set; }
     // Sensor scripts used for ground checks and wall checks
     [field:HorizontalLine(color: EColor.Gray)]
     [field:Header("Sensors")]
@@ -28,6 +28,7 @@ public class Player : StateMachineCore
     [Expandable]
     [SerializeField] public PlayerStats stats;
     [field:SerializeField] public PlayerInput playerInput {get; private set;}
+    public CapsuleCollider playerCollider {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
     
     // Variables used for debugging
@@ -41,6 +42,7 @@ public class Player : StateMachineCore
         ResetPlayer();
         
         // Disable gravity and simulate gravity manually (to allow for different gravity scales)
+        playerCollider = GetComponent<CapsuleCollider>();
         rb.useGravity = false;
         stats.gravityEnabled = true;
         ChangeGravity(stats.NormalGravity);

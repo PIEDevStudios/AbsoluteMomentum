@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAirborne3D : State
+public class PlayerAirborne : State
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Player player;

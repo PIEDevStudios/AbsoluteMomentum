@@ -51,7 +51,7 @@ public class PlayerJumpManager : MonoBehaviour
         {
             framesSinceOnGround = (int)FrameBufferNum;
         }
-        else if (player.stateMachine.currentState is not PlayerAirborne3D && (player.groundSensor.grounded || player.slopeSensor.isOnSlope))
+        else if (player.stateMachine.currentState is not PlayerAirborne && (player.groundSensor.grounded || player.slopeSensor.isOnSlope))
         {
             framesSinceOnGround = 0;
         }
@@ -73,7 +73,7 @@ public class PlayerJumpManager : MonoBehaviour
         Debug.Log("Attempt Jump");
         
         // Only allow the player to jump in move and idle state
-        if (!(player.stateMachine.currentState is PlayerMove3D || player.stateMachine.currentState is PlayerIdle)) return;
+        if (!(player.stateMachine.currentState is PlayerMove || player.stateMachine.currentState is PlayerIdle)) return;
 
         if (framesSinceOnGround < FrameBufferNum)
         {

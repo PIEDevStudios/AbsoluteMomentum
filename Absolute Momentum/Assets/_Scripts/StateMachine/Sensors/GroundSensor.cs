@@ -8,6 +8,7 @@ public class GroundSensor : MonoBehaviour
     [SerializeField] private CapsuleCollider playerCapsuleCollider;
     public LayerMask groundLayer;
     public bool grounded { get; private set; }
+    public RaycastHit hit { get; private set; }
 
     private void Update()
     {
@@ -17,7 +18,8 @@ public class GroundSensor : MonoBehaviour
     private void CheckGround()
     {
         // grounded = Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
-        grounded = Physics.SphereCast(new Ray(transform.position, Vector3.down), playerCapsuleCollider.radius, rayLength, groundLayer);
+        grounded = Physics.SphereCast(transform.position, playerCapsuleCollider.radius, Vector3.down, out RaycastHit _hit, rayLength, groundLayer);
+        hit = _hit;
     }
 
     private void OnDrawGizmosSelected()

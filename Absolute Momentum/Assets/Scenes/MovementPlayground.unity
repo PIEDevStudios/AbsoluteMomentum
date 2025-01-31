@@ -802,11 +802,19 @@ PrefabInstance:
       propertyPath: spawnPos.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2066814955437762464, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3238629911873270863, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_Name
       value: PlayerWithCameras
       objectReference: {fileID: 0}
     - target: {fileID: 3238629911873270863, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371746405641386805, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -849,6 +857,10 @@ PrefabInstance:
     - target: {fileID: 7418350527356540808, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038911511778787065, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: rayLength
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1226,7 +1238,7 @@ Transform:
   m_GameObject: {fileID: 721988206}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.8433957, y: 0.06105525, z: 16.904316}
+  m_LocalPosition: {x: 5.8433957, y: 0.331, z: 16.904316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

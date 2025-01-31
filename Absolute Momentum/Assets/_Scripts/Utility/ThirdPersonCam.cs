@@ -35,7 +35,7 @@ public class ThirdPersonCam : MonoBehaviour
         Vector2 _inputVector = playerInput.moveVector;
         Vector3 _inputDir = orientation.forward * _inputVector.y + orientation.right * _inputVector.x;
 
-        if (_inputDir != Vector3.zero && (Player.stateMachine.currentState is PlayerIdle || Player.stateMachine.currentState is PlayerMove3D || Player.stateMachine.currentState is PlayerAirborne3D))
+        if (_inputDir != Vector3.zero && (Player.stateMachine.currentState is PlayerIdle || Player.stateMachine.currentState is PlayerMove || Player.stateMachine.currentState is PlayerAirborne))
         {
             playerObj.forward = Vector3.Slerp(playerObj.forward, _inputDir.normalized, Time.deltaTime * rotationSpeed);
         }

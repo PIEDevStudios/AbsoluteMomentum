@@ -11,6 +11,7 @@ public class BasePad : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Activate Pad");
             ActivatePad(other);
         }
     }
