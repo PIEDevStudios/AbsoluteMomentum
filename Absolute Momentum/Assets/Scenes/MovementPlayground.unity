@@ -1963,6 +1963,30 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3024991555
       objectReference: {fileID: 0}
+    - target: {fileID: 150652173085642761, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: Orbits.Top.Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 150652173085642761, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: Orbits.Top.Radius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 150652173085642761, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: TrackerSettings.BindingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 150652173085642761, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 150652173085642761, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 150652173085642761, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.z
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 927473891614420570, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: spawnPos.y
       value: 2
@@ -1982,6 +2006,18 @@ PrefabInstance:
     - target: {fileID: 3371746405641386805, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4633578369210212324, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: Target.LookAtTarget
+      value: 
+      objectReference: {fileID: 1228114547}
+    - target: {fileID: 4845153332312034484, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: Damping.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845153332312034484, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: Damping.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7418350527356540808, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4389,6 +4425,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1228114547 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1962527492032367718, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+  m_PrefabInstance: {fileID: 529376776}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1243964250
 Mesh:
   m_ObjectHideFlags: 0

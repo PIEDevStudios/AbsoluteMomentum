@@ -66,8 +66,8 @@ public class PlayerMove : State
         }
         else
         {
-            maxSpeed = stats.MaxWalkSpeed;
-            acceleration = stats.WalkAcceleration;
+            // maxSpeed = stats.MaxWalkSpeed;
+            // acceleration = stats.WalkAcceleration;
         }
     }
     

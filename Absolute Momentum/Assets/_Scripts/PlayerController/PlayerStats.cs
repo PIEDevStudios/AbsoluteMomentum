@@ -19,6 +19,7 @@ public class PlayerStats : ScriptableObject
     [field:Header("Air Movement")]
     public float AirAcceleration;
     public float AirDrag;
+    public float AirSoftMaxSpeed;
 
     [field: Header("Gravity")] 
     public bool gravityEnabled;

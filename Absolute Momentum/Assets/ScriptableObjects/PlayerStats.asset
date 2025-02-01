@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   MaxWalkSpeed: 4
-  MaxSprintSpeed: 7
+  MaxSprintSpeed: 20
   WalkAcceleration: 1
-  SprintAcceleration: 1.5
+  SprintAcceleration: 3
   GroundDrag: 10
   NoInputDeceleration: 25
   StickToSlopeForce: 150
-  AirAcceleration: 4
+  AirAcceleration: 0.25
   AirDrag: 0
+  AirSoftMaxSpeed: 10
   gravityEnabled: 1
   NormalGravity: 40
   CurrentGravity: 0

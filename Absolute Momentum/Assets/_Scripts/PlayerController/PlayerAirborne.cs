@@ -9,7 +9,7 @@ public class PlayerAirborne : State
     [SerializeField] private Player player;
     [SerializeField] private Transform orientation;
     private PlayerStats stats => player.stats;
-    private float maxSpeed, acceleration;
+    private float hardMaxSpeed, softMaxSpeed, acceleration;
     private Vector3 speedOnEnter; // Player's flat (x and z) speed when they enter airborne
     public override void DoEnterLogic()
     {
@@ -23,24 +23,52 @@ public class PlayerAirborne : State
         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         
         acceleration = stats.SprintAcceleration * stats.AirAcceleration;
-        maxSpeed = speedOnEnter.magnitude;
+        hardMaxSpeed = speedOnEnter.magnitude;
+        softMaxSpeed = player.stats.AirSoftMaxSpeed;
+    }
+
+    public override void DoUpdateState()
+    {
+        base.DoUpdateState();
+        LimitVelocity();
+        
     }
     public override void DoFixedUpdateState()
     {
         base.DoFixedUpdateState();
         rb.AddForce((orientation.forward * playerInput.moveVector.y + orientation.right * playerInput.moveVector.x).normalized * acceleration * 100f);
         NoInputDeceleration();
-        LimitVelocity();
+        
     }
 
+    /// <summary>
+    /// Limits the player's velocity
+    /// If the player's velocity goes above the hardMaxSpeed limit, set speed to hardMaxSpeed
+    /// If the player's velocity drops below the hardMaxSpeed limit and hardMaxSpeed > softMaxSpeed, set new hardMaxSpeed limit to current velo
+    /// If the player's velocity drops below the hardMaxSpeed limit and currentVelo <= softMaxSpeed, set new hardMaxSpeed limit to softMaxSpeed 
+    /// </summary>
     private void LimitVelocity()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        if (flatVel.magnitude > maxSpeed)
+        if (flatVel.magnitude > hardMaxSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * maxSpeed;
+            Debug.Log("LIMITING VELOCITY: " + flatVel.magnitude);
+            Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
+            Debug.Log("LIMITED VELOCITY: " + limitedVel.magnitude);
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
+        flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        
+        if (flatVel.magnitude < hardMaxSpeed && flatVel.magnitude > softMaxSpeed)
+        {
+            hardMaxSpeed = flatVel.magnitude;
+        }
+        else if (flatVel.magnitude < softMaxSpeed)
+        {
+            hardMaxSpeed = softMaxSpeed;
+        }
+        
+        
         // Clamp Fall speed
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
     }
