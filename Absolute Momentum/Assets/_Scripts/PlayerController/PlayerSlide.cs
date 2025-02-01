@@ -8,9 +8,11 @@ public class PlayerSlide : State
     [field: SerializeField] public SlideAirborne airborne { get; private set; }
     [SerializeField] private Transform orientation, colliderPivot, graphics;
     private Vector3 enterHitboxScale;
+ 
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        
         enterHitboxScale = colliderPivot.localScale;
         colliderPivot.localScale = player.stats.slidePlayerScale;
         graphics.localScale = player.stats.slidePlayerScale;

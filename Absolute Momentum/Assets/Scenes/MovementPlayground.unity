@@ -1971,6 +1971,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2040783066}
+    - target: {fileID: 4086899325005282245, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 1934375476}
     - target: {fileID: 7418350527356540808, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.434
@@ -5461,6 +5465,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1934375476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6228127852056927477, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+  m_PrefabInstance: {fileID: 529376776}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1941085956
 Mesh:
   m_ObjectHideFlags: 0

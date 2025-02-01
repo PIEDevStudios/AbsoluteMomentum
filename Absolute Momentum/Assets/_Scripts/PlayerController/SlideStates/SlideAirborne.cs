@@ -15,7 +15,7 @@ public class SlideAirborne : State
         rb.linearDamping = stats.AirDrag;
         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         hardMaxSpeed = speedOnEnter.magnitude;
-        softMaxSpeed = player.stats.AirSoftMaxSpeed;
+        softMaxSpeed = 0f;
     }
     
     
@@ -28,6 +28,7 @@ public class SlideAirborne : State
     public override void DoFixedUpdateState()
     {
         base.DoFixedUpdateState();
+        rb.AddForce((orientation.right * playerInput.moveVector.x).normalized * stats.SlideAirAcceleration * 100f);
         NoInputDeceleration();
     }
     
