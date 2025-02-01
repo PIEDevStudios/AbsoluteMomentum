@@ -19,7 +19,6 @@ public class PlayerIdle : State
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        rb.linearDamping = stats.GroundDrag;
         player.ChangeGravity(stats.NormalGravity);
     }
 

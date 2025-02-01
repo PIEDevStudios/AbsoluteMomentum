@@ -15,6 +15,16 @@ public class PlayerSlide : State
         colliderPivot.localScale = player.stats.slidePlayerScale;
         graphics.localScale = player.stats.slidePlayerScale;
         
+        
+        if (!player.groundSensor.grounded && !player.slopeSensor.isOnSlope)
+        {
+            stateMachine.SetState(airborne, true);
+        }
+        
+        if (player.groundSensor.grounded)
+        {
+            stateMachine.SetState(grounded, true);
+        }
 
     }
 

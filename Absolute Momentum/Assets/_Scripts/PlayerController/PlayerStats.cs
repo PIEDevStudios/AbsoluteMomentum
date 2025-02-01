@@ -25,6 +25,7 @@ public class PlayerStats : ScriptableObject
     public float minimumSlideSpeed; // minimum speed required to enter slide state (grounded)
 
     public float minimumSlideAirTime; // minimum airtime required to enter slide state (airborne)
+    [FormerlySerializedAs("slideDrag")] public float slideStopForce;
     public Vector3 slidePlayerScale;
 
     [field: Header("Gravity")] 
