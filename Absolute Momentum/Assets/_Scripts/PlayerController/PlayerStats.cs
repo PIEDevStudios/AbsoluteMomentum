@@ -28,12 +28,14 @@ public class PlayerStats : ScriptableObject
     public bool gravityEnabled;
 
     public float NormalGravity;
+    public float FallingGravityMultiplier;
 
     [field: ReadOnly, SerializeField] public float CurrentGravity;
     
     [field:Header("Jumping")]
     public float JumpForce;
-    public float EndJumpEarlyForce;
+    [FormerlySerializedAs("EndJumpEarlyForce")] public float EndJumpEarlyForceScale;
+    public float EndJumpEarlyTime;
     public uint JumpFrameBufferAmount;
     public float FallSpeedLimit;
     

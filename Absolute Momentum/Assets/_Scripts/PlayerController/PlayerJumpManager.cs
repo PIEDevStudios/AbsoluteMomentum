@@ -13,7 +13,7 @@ public class PlayerJumpManager : MonoBehaviour
     private PlayerStats playerStats => player.stats;
     float FrameBufferNum => playerStats.JumpFrameBufferAmount;
     float JumpForce => playerStats.JumpForce;
-    private float downwardForce => playerStats.EndJumpEarlyForce;
+    private float downwardForce => playerStats.EndJumpEarlyForceScale;
 
     private int framesSinceLastSpacebar, framesSinceOnGround;
     private bool jumping;
@@ -38,9 +38,9 @@ public class PlayerJumpManager : MonoBehaviour
         }
         
         //creates variable jump, adds downward force if player lets go of space making character fall faster leading to smaller jump
-        if (jumping && playerInput.jumpReleasedThisFrame && rb.linearVelocity.y > 0)
+        if (jumping && playerInput.jumpReleasedThisFrame && framesSinceOnGround <= playerStats.EndJumpEarlyTime)
         {
-            rb.AddForce(Vector3.down * downwardForce, ForceMode.Impulse);
+            rb.AddForce(Vector3.down * Mathf.Abs(rb.linearVelocity.y) * downwardForce, ForceMode.Impulse);
         }
 
     }
@@ -72,8 +72,8 @@ public class PlayerJumpManager : MonoBehaviour
     {
         Debug.Log("Attempt Jump");
         
-        // Only allow the player to jump in move and idle state
-        if (!(player.stateMachine.currentState is PlayerMove || player.stateMachine.currentState is PlayerIdle)) return;
+        // Only allow the player to jump in these states
+        if (!(player.stateMachine.currentState is PlayerMove || player.stateMachine.currentState is PlayerIdle || player.stateMachine.currentState is PlayerSlide)) return;
 
         if (framesSinceOnGround < FrameBufferNum)
         {

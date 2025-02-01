@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerSlide : State
 {
     [SerializeField] private Player player;
+    [field: SerializeField] public SlideGrounded grounded { get; private set; }
+    [field: SerializeField] public SlideAirborne airborne { get; private set; }
     [SerializeField] private Transform orientation, colliderPivot, graphics;
     private Vector3 enterHitboxScale;
     public override void DoEnterLogic()
@@ -13,13 +15,13 @@ public class PlayerSlide : State
         colliderPivot.localScale = player.stats.slidePlayerScale;
         graphics.localScale = player.stats.slidePlayerScale;
         
-        // Add force down to stick the player to the ground
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+
     }
 
     public override void DoUpdateState()
     {
         base.DoUpdateState();
+        HandleTransitions();
     }
 
     public override void DoExitLogic()
@@ -28,4 +30,23 @@ public class PlayerSlide : State
         colliderPivot.localScale = enterHitboxScale;
         graphics.localScale = enterHitboxScale;
     }
+
+
+    /// <summary>
+    /// Handles transitions between states in slide state machine
+    /// </summary>
+    private void HandleTransitions()
+    {
+        
+        if (!player.groundSensor.grounded && !player.slopeSensor.isOnSlope)
+        {
+            stateMachine.SetState(airborne);
+        }
+        
+        if (player.groundSensor.grounded)
+        {
+            stateMachine.SetState(grounded);
+        }
+    }
+    
 }

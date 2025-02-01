@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef464e9f8b6dd1747993335ea6a2723c, type: 3}
-  m_Name: PlayerStats
+  m_Name: PlayerStatsCOPY
   m_EditorClassIdentifier: 
   MaxWalkSpeed: 4
   MaxSprintSpeed: 20
@@ -25,10 +25,10 @@ MonoBehaviour:
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
   gravityEnabled: 1
   NormalGravity: 40
-  FallingGravityMultiplier: 1.25
-  CurrentGravity: 0
-  JumpForce: 20
+  FallingGravityMultiplier: 1.5
+  CurrentGravity: 40
+  JumpForce: 30
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25
   JumpFrameBufferAmount: 10
-  FallSpeedLimit: 25
+  FallSpeedLimit: 30

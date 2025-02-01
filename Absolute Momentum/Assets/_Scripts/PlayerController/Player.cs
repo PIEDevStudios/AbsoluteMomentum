@@ -70,8 +70,16 @@ public class Player : StateMachineCore
     
     void FixedUpdate() 
     {
-        // Simulate custom gravity
-        rb.AddForce(Vector3.down * stats.CurrentGravity, ForceMode.Force);
+        if (rb.linearVelocity.y > 0)
+        {
+            // Simulate custom gravity
+            rb.AddForce(Vector3.down * stats.CurrentGravity, ForceMode.Force);
+        }
+        else
+        {
+            rb.AddForce(Vector3.down * stats.CurrentGravity * stats.FallingGravityMultiplier, ForceMode.Force);
+        }
+
         
         // Call FixedUpdate logic
         stateMachine.currentState.DoFixedUpdateBranch(); 
