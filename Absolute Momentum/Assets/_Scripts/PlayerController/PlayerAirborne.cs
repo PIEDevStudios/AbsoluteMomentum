@@ -52,9 +52,7 @@ public class PlayerAirborne : State
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         if (flatVel.magnitude > hardMaxSpeed)
         {
-            Debug.Log("LIMITING VELOCITY: " + flatVel.magnitude);
             Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
-            Debug.Log("LIMITED VELOCITY: " + limitedVel.magnitude);
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
         flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);

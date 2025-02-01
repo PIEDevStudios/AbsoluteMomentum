@@ -17,6 +17,11 @@ public class PlayerInput : MonoBehaviour
     public bool jumpHeld { get; private set; }
     public bool sprintHeld { get; private set; }
     public bool sprintPressedThisFrame { get; private set; }
+    
+    public bool slidePressedThisFrame { get; private set; }
+    public bool slideReleasedThisFrame { get; private set; }
+    public bool slideHeld { get; private set; }
+    
     public bool ResetInput { get; private set;}
 
     private void OnEnable()
@@ -49,7 +54,11 @@ public class PlayerInput : MonoBehaviour
         
         // Sprint
         sprintHeld = playerActionMap.FindAction("Sprint").ReadValue<float>() > 0;
-        sprintPressedThisFrame = playerActionMap.FindAction("Attack").WasPerformedThisFrame();
+        sprintPressedThisFrame = playerActionMap.FindAction("Sprint").WasPerformedThisFrame();
+        
+        slidePressedThisFrame = playerActionMap.FindAction("Slide").WasPerformedThisFrame();
+        slideReleasedThisFrame = playerActionMap.FindAction("Slide").WasReleasedThisFrame();
+        slideHeld = playerActionMap.FindAction("Slide").ReadValue<float>() > 0;
         
         
         // DEBUG INPUTS

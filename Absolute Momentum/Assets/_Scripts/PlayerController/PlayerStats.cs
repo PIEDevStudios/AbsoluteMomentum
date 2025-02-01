@@ -21,6 +21,9 @@ public class PlayerStats : ScriptableObject
     public float AirDrag;
     public float AirSoftMaxSpeed;
 
+    [field: Header("Slide Movement")]
+    public Vector3 slidePlayerScale;
+
     [field: Header("Gravity")] 
     public bool gravityEnabled;
 

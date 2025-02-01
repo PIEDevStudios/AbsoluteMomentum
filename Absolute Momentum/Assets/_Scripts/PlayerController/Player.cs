@@ -12,6 +12,7 @@ public class Player : StateMachineCore
     [field: SerializeField] public PlayerIdle idle { get; private set; }
     [field: SerializeField] public PlayerMove move { get; private set; }
     [field: SerializeField] public PlayerAirborne airborne { get; private set; }
+    [field: SerializeField] public PlayerSlide slide { get; private set; }
     // Sensor scripts used for ground checks and wall checks
     [field:HorizontalLine(color: EColor.Gray)]
     [field:Header("Sensors")]
@@ -28,8 +29,9 @@ public class Player : StateMachineCore
     [Expandable]
     [SerializeField] public PlayerStats stats;
     [field:SerializeField] public PlayerInput playerInput {get; private set;}
-    public CapsuleCollider playerCollider {get; private set;}
+    [field:SerializeField] public CapsuleCollider playerCollider {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
+    
     
     // Variables used for debugging
     [Header("Debug")] 
@@ -42,7 +44,6 @@ public class Player : StateMachineCore
         ResetPlayer();
         
         // Disable gravity and simulate gravity manually (to allow for different gravity scales)
-        playerCollider = GetComponent<CapsuleCollider>();
         rb.useGravity = false;
         stats.gravityEnabled = true;
         ChangeGravity(stats.NormalGravity);
@@ -90,6 +91,20 @@ public class Player : StateMachineCore
         float yInput = playerInput.moveVector.y;
         
         
+        // condition for transitioning to a "grounded" state (move or idle) when transitioning from airborne
+        bool airborneGroundCheck = stateMachine.currentState == airborne && rb.linearVelocity.y <= 0;
+        
+        // condition for transitioning to a "grounded" state (move or idle) when transitioning from any state besides airborne
+        bool nonAirborneGroundCheck = stateMachine.currentState == idle || stateMachine.currentState == move || stateMachine.currentState == slide;
+        
+        // Transition to slide
+        if (playerInput.slideHeld)
+        {
+            stateMachine.SetState(slide);
+            return;
+        }
+        
+        
         // Transition to airborne
         if (!groundSensor.grounded && !slopeSensor.isOnSlope)
         {
@@ -97,14 +112,8 @@ public class Player : StateMachineCore
             return;
         }
         
-        // condition for transitioning to a "grounded" state (move or idle) when transitioning from airborne
-        bool airborneGroundCheck = stateMachine.currentState == airborne && rb.linearVelocity.y <= 0;
-        
-        // condition for transitioning to a "grounded" state (move or idle) when transitioning from any state besides airborne
-        bool nonAirborneGroundCheck = stateMachine.currentState == idle || stateMachine.currentState == move;
-        
         // Transition to move
-        if (groundSensor.grounded && (xInput != 0 || yInput != 0) && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
+        if (groundSensor.grounded && (xInput != 0 || yInput != 0) && !playerInput.slideHeld && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(move);
             return;
@@ -113,11 +122,14 @@ public class Player : StateMachineCore
         float timeSinceLastMove = Time.time - playerInput.timeOfLastMoveInput;
         
         // Transition to idle
-        if (groundSensor.grounded && timeSinceLastMove >= 0.1f && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
+        if (groundSensor.grounded && timeSinceLastMove >= 0.1f && !playerInput.slideHeld && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(idle);
             return;
         }
+
+
+        
     }
     
     #endregion
