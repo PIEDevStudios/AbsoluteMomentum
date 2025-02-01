@@ -36,6 +36,8 @@ public class Player : StateMachineCore
     // Variables used for debugging
     [Header("Debug")] 
     [SerializeField] private Vector3 spawnPos;
+    
+    private float timeSinceLastGrounded;
 
     #region Unity Methods
     void Awake()
@@ -60,6 +62,13 @@ public class Player : StateMachineCore
         if (playerInput.ResetInput)
         {
             ResetPlayer();
+        }
+        
+        timeSinceLastGrounded += Time.deltaTime;
+
+        if (groundSensor.grounded)
+        {
+            timeSinceLastGrounded = 0;
         }
 
 
@@ -103,10 +112,14 @@ public class Player : StateMachineCore
         bool airborneGroundCheck = stateMachine.currentState == airborne && rb.linearVelocity.y <= 0;
         
         // condition for transitioning to a "grounded" state (move or idle) when transitioning from any state besides airborne
-        bool nonAirborneGroundCheck = stateMachine.currentState == idle || stateMachine.currentState == move || stateMachine.currentState == slide;
+        bool nonAirborneGroundCheck = stateMachine.currentState == idle || stateMachine.currentState == move;
+        
+        Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, slopeSensor.hit.normal);
         
         // Transition to slide
-        if (playerInput.slideHeld)
+        bool groundedSlideTransition = groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
+        bool airborneSlideTransition = !groundSensor.grounded && timeSinceLastGrounded > stats.minimumSlideAirTime;
+        if (playerInput.slideHeld && (groundedSlideTransition || airborneSlideTransition))
         {
             stateMachine.SetState(slide);
             return;
@@ -114,14 +127,14 @@ public class Player : StateMachineCore
         
         
         // Transition to airborne
-        if (!groundSensor.grounded && !slopeSensor.isOnSlope)
+        if (!groundSensor.grounded && !slopeSensor.isOnSlope && (stateMachine.currentState != slide || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(airborne);
             return;
         }
         
         // Transition to move
-        if (groundSensor.grounded && (xInput != 0 || yInput != 0) && !playerInput.slideHeld && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
+        if (groundSensor.grounded && (xInput != 0 || yInput != 0) && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(move);
             return;
@@ -130,7 +143,7 @@ public class Player : StateMachineCore
         float timeSinceLastMove = Time.time - playerInput.timeOfLastMoveInput;
         
         // Transition to idle
-        if (groundSensor.grounded && timeSinceLastMove >= 0.1f && !playerInput.slideHeld && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
+        if (groundSensor.grounded && timeSinceLastMove >= 0.1f && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(idle);
             return;

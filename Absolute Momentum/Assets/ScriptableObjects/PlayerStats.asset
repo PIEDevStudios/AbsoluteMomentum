@@ -15,13 +15,15 @@ MonoBehaviour:
   MaxWalkSpeed: 4
   MaxSprintSpeed: 20
   WalkAcceleration: 1
-  SprintAcceleration: 3
+  SprintAcceleration: 2
   GroundDrag: 10
   NoInputDeceleration: 25
   StickToSlopeForce: 150
   AirAcceleration: 0.25
   AirDrag: 0
   AirSoftMaxSpeed: 10
+  minimumSlideSpeed: 10
+  minimumSlideAirTime: 0.25
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
   gravityEnabled: 1
   NormalGravity: 40

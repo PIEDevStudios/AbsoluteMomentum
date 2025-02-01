@@ -21,6 +21,12 @@ public class PlayerSlide : State
     public override void DoUpdateState()
     {
         base.DoUpdateState();
+        
+        if (player.playerInput.slideReleasedThisFrame)
+        {
+            isComplete = true;
+        }
+        
         HandleTransitions();
     }
 
