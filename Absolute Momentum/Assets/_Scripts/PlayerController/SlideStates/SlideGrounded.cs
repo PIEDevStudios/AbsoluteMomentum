@@ -21,13 +21,10 @@ public class SlideGrounded : State
         rb.linearDamping = player.stats.SlideDrag;
         player.ChangeGravity(0f);
         
-        // If the player enters grounded on a slope(NEED TO FIX THIS FORMULA)
-        if (player.slopeSensor.isOnSlope)
+        // If the player enters grounded on a slope
+        if (player.slopeSensor.isOnSlope && player.groundSensor.grounded)
         {
-            directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
-            Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross);
-            // Debug.Log(player.slopeSensor.hit.normal);
-            rb.AddForce(direction.normalized * player.stats.SlideBoostMultiplier * Mathf.Abs(rb.linearVelocity.y), ForceMode.Impulse);
+            SlopeBoost();
         }
         
         // Add force down to stick the player to the ground
@@ -70,11 +67,23 @@ public class SlideGrounded : State
     /// </summary>
     private void StickToSlope()
     {
-        if (!player.groundSensor.grounded)
+        if (player.slopeSensor.isOnSlope)
         {
-            Debug.Log("Stick to slope");
-            rb.AddForce(Vector3.down * player.stats.StickToSlopeForce, ForceMode.Force);
+            rb.AddForce(-player.slopeSensor.hit.normal * player.stats.StickToSlopeForce, ForceMode.Force);
         }
+        
+    }
+
+
+    private void SlopeBoost()
+    {
+        // Calculate direction of the vector we need to cross the normal with depending on which way the slope is pointed
+        directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
+        Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross);
+        // float slopeAngleFactor = 1 / player.slopeSensor.hit.normal.y;
+        float ySpeedFactor = Mathf.Abs(Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal).y);
+        // Debug.Log("Y Velo factor: " + ySpeedFactor * player.stats.BoostYVeloMult);
+        rb.AddForce(direction.normalized * (player.stats.BoostYVeloMult * ySpeedFactor), ForceMode.Impulse);
     }
     
         

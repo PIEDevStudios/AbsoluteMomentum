@@ -24,10 +24,12 @@ public class PlayerStats : ScriptableObject
     [field: Header("Slide Movement")]
     public float minimumSlideSpeed; // minimum speed required to enter slide state (grounded)
 
-    [FormerlySerializedAs("minimumSlideAirTime")] public float MinimumSlideAirTime; // minimum airtime required to enter slide state (airborne)
-    [FormerlySerializedAs("SlideStopForce")] [FormerlySerializedAs("slideStopForce")] public float SlideDrag;
-    [FormerlySerializedAs("slideBoostMultiplier")] public float SlideBoostMultiplier;
-    [FormerlySerializedAs("slideGroundAcceleration")] public float SlideGroundAcceleration;
+    public float MinimumSlideAirTime; // minimum airtime required to enter slide state (airborne)
+    public float SlideDrag;
+    [FormerlySerializedAs("SlideBoostMultiplier")] public float BoostYVeloMult; 
+    public float BoostSlopeAngleMult;
+
+    public float SlideGroundAcceleration;
     public float SlideAirAcceleration;
     public Vector3 slidePlayerScale;
 
@@ -41,7 +43,7 @@ public class PlayerStats : ScriptableObject
     
     [field:Header("Jumping")]
     public float JumpForce;
-    [FormerlySerializedAs("EndJumpEarlyForce")] public float EndJumpEarlyForceScale;
+    public float EndJumpEarlyForceScale;
     public float EndJumpEarlyTime;
     public uint JumpFrameBufferAmount;
     public float FallSpeedLimit;

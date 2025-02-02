@@ -19,7 +19,6 @@ public class PlayerMove : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        Debug.Log("PlayerMove");
         rb.linearDamping = stats.GroundDrag;
         player.ChangeGravity(0);
         rb.AddForce(-player.groundSensor.hit.normal * 2f, ForceMode.Impulse);
