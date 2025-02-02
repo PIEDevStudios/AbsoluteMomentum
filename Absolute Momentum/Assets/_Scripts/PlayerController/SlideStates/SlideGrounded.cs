@@ -6,6 +6,7 @@ public class SlideGrounded : State
 {
     [SerializeField] private Player player;
     [SerializeField] private Transform orientation;
+    private Vector3 directionCross;
     private PlayerStats stats => player.stats;
     private float hardMaxSpeed, softMaxSpeed;
     private Vector3 speedOnEnter; // Player's flat (x and z) speed when they enter airborne
@@ -20,9 +21,14 @@ public class SlideGrounded : State
         rb.linearDamping = player.stats.SlideDrag;
         player.ChangeGravity(0f);
         
-        // Give player speedboost (NEED TO FIX THIS FORMULA)
-        Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
-        rb.AddForce(flatVel.normalized * player.stats.SlideBoostMultiplier * Mathf.Abs(rb.linearVelocity.y), ForceMode.Impulse);
+        // If the player enters grounded on a slope(NEED TO FIX THIS FORMULA)
+        if (player.slopeSensor.isOnSlope)
+        {
+            directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
+            Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross);
+            // Debug.Log(player.slopeSensor.hit.normal);
+            rb.AddForce(direction.normalized * player.stats.SlideBoostMultiplier * Mathf.Abs(rb.linearVelocity.y), ForceMode.Impulse);
+        }
         
         // Add force down to stick the player to the ground
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -44,10 +50,10 @@ public class SlideGrounded : State
         // Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
         // rb.AddForce(-flatVel * player.stats.SlideStopForce, ForceMode.Force);
         
-        RaycastHit hit = player.slopeSensor.hit;
-        Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;
-        Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
-        rb.AddForce((rightOriented * player.playerInput.moveVector.x).normalized * (player.stats.SlideGroundAcceleration * 100f));
+        // RaycastHit hit = player.slopeSensor.hit;
+        // Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;
+        // Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
+        // rb.AddForce((rightOriented * player.playerInput.moveVector.x).normalized * (player.stats.SlideGroundAcceleration * 100f));
         LimitVelocity();
         
         StickToSlope();
