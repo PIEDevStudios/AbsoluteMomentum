@@ -42,10 +42,14 @@ public class SlideGrounded : State
     public override void DoFixedUpdateState()
     {
         base.DoFixedUpdateState();
-
-        // Slide stop force
-        // Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
-        // rb.AddForce(-flatVel * player.stats.SlideStopForce, ForceMode.Force);
+        
+        if (player.slopeSensor.isOnSlope && player.groundSensor.grounded)
+        {
+            directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
+            Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross);
+            Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
+            rb.AddForce(direction * player.stats.SlopeSlideForce * flatVel.magnitude, ForceMode.Force);
+        }
         
         // RaycastHit hit = player.slopeSensor.hit;
         // Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;

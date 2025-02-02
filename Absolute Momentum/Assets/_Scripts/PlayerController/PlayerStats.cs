@@ -26,8 +26,8 @@ public class PlayerStats : ScriptableObject
 
     public float MinimumSlideAirTime; // minimum airtime required to enter slide state (airborne)
     public float SlideDrag;
-    [FormerlySerializedAs("SlideBoostMultiplier")] public float BoostYVeloMult; 
-    public float BoostSlopeAngleMult;
+    public float BoostYVeloMult; 
+    public float SlopeSlideForce; // amount that the slope pulls the player down 
 
     public float SlideGroundAcceleration;
     public float SlideAirAcceleration;
