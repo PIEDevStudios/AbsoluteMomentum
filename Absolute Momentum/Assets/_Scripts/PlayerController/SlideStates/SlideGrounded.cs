@@ -36,27 +36,38 @@ public class SlideGrounded : State
     public override void DoUpdateState()
     {
         base.DoUpdateState();
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
+        player.playerObj.forward = flatVel;
+
+
+        
+        // If we are moving too slow to maintain a slide, force player into the move state
+        if (flatVel.magnitude < player.stats.minimumSlideSpeed)
+        {
+            player.stateMachine.SetState(player.move);
+        }
         
     }
 
     public override void DoFixedUpdateState()
     {
         base.DoFixedUpdateState();
-        
+        Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
         if (player.slopeSensor.isOnSlope && player.groundSensor.grounded)
         {
             directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
             Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross);
-            Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
-            rb.AddForce(direction * player.stats.SlopeSlideForce * flatVel.magnitude, ForceMode.Force);
+            rb.AddForce(direction * (player.stats.SlopeSlideForce * flatVel.magnitude), ForceMode.Force);
         }
         
-        // RaycastHit hit = player.slopeSensor.hit;
-        // Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;
-        // Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
-        // rb.AddForce((rightOriented * player.playerInput.moveVector.x).normalized * (player.stats.SlideGroundAcceleration * 100f));
+        RaycastHit hit = player.slopeSensor.hit;
+        Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;
+        Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
+        Vector3 playerInputVector = forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x;
+        Debug.Log("Acceleration amount " + player.stats.SlideGroundAcceleration * (1 / flatVel.magnitude));
+        Debug.Log("");
+        rb.AddForce(playerInputVector.normalized * (player.stats.SlideGroundAcceleration * (1/flatVel.magnitude)), ForceMode.Force);
         LimitVelocity();
-        
         StickToSlope();
     }
 
