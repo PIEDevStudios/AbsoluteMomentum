@@ -15,14 +15,14 @@ MonoBehaviour:
   MaxWalkSpeed: 4
   MaxSprintSpeed: 20
   WalkAcceleration: 1
-  SprintAcceleration: 2
+  SprintAcceleration: 2.5
   GroundDrag: 10
   NoInputDeceleration: 25
   StickToSlopeForce: 400
   AirAcceleration: 0.25
   AirDrag: 0
   AirSoftMaxSpeed: 10
-  minimumSlideSpeed: 10
+  minimumSlideSpeed: 15
   MinimumSlideAirTime: 0.25
   SlideDrag: 0.75
   BoostYVeloMult: 1

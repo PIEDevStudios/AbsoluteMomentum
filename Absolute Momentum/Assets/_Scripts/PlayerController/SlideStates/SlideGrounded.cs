@@ -65,7 +65,10 @@ public class SlideGrounded : State
         Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
         Vector3 playerInputVector = forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x;
         Debug.Log("Acceleration amount " + player.stats.SlideGroundAcceleration * (1 / flatVel.magnitude));
-        Debug.Log("");
+        Debug.Log("Force Vector: " + playerInputVector.normalized * (player.stats.SlideGroundAcceleration * (1/flatVel.magnitude)));
+        Vector3 correctionVector = flatVel.normalized;
+        correctionVector = Vector3.Cross(playerInputVector.normalized * (player.stats.SlideGroundAcceleration * (1/flatVel.magnitude)), correctionVector);
+        Debug.Log("Corrected Force Vector: " + correctionVector);
         rb.AddForce(playerInputVector.normalized * (player.stats.SlideGroundAcceleration * (1/flatVel.magnitude)), ForceMode.Force);
         LimitVelocity();
         StickToSlope();
