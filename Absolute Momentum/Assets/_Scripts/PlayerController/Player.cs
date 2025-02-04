@@ -119,7 +119,7 @@ public class Player : StateMachineCore
         // Transition to slide
         bool groundedSlideTransition = groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
         bool airborneSlideTransition = !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;
-        if (playerInput.slideHeld && (groundedSlideTransition || airborneSlideTransition))
+        if (playerInput.slidePressedThisFrame && (groundedSlideTransition || airborneSlideTransition))
         {
             stateMachine.SetState(slide);
             return;

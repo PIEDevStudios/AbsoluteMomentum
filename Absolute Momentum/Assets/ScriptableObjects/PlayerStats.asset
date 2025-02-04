@@ -22,11 +22,11 @@ MonoBehaviour:
   AirAcceleration: 0.25
   AirDrag: 0
   AirSoftMaxSpeed: 10
-  minimumSlideSpeed: 15
+  minimumSlideSpeed: 10
   MinimumSlideAirTime: 0.25
-  SlideDrag: 0.75
-  BoostYVeloMult: 1
-  SlopeSlideForce: 1
+  SlideDrag: 0
+  BoostYVeloMult: 0
+  SlopeSlideForce: 10
   SlideGroundAcceleration: 500
   SlideAirAcceleration: 1
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
