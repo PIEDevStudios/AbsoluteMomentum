@@ -22,9 +22,9 @@ public class Player : StateMachineCore
 
     
     // References to other components on the player
-    [HorizontalLine(color: EColor.Gray)]
+    [field:HorizontalLine(color: EColor.Gray)]
     [Header("Player Components")]
-    [SerializeField] private Transform graphics;
+    [field:SerializeField] public Transform graphics { get; private set; }
     [field:SerializeField] public Transform playerObj { get; private set; }
     [Expandable]
     [SerializeField] public PlayerStats stats;

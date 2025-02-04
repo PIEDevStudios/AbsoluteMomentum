@@ -22,7 +22,7 @@ public class SlideGrounded : State
         player.ChangeGravity(0f);
         
         // If the player enters grounded on a slope
-        if (player.slopeSensor.isOnSlope && player.groundSensor.grounded)
+        if (player.slopeSensor.isOnSlope && player.groundSensor.grounded && rb.linearVelocity.y < 0f)
         {
             SlopeBoost();
         }
@@ -37,9 +37,17 @@ public class SlideGrounded : State
     {
         base.DoUpdateState();
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
-        player.playerObj.forward = flatVel;
+        player.graphics.forward = flatVel;
 
 
+        if (player.slopeSensor.isOnSlope)
+        {
+            rb.linearDamping = 0f;
+        }
+        else
+        {
+            rb.linearDamping = player.stats.SlideDrag;
+        }
         
         // If we are moving too slow to maintain a slide, force player into the move state
         if (flatVel.magnitude < player.stats.minimumSlideSpeed)
@@ -54,12 +62,14 @@ public class SlideGrounded : State
         base.DoFixedUpdateState();
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
         
-        if (player.slopeSensor.isOnSlope && player.groundSensor.grounded)
+        if (player.slopeSensor.isOnSlope && player.groundSensor.grounded && rb.linearVelocity.y < 0f)
         {
             directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
             Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross).normalized;
             rb.AddForce(direction * (player.stats.SlopeSlideForce), ForceMode.Force);
         }
+        
+        // Player Turning
         
         RaycastHit hit = player.slopeSensor.hit;
         Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;

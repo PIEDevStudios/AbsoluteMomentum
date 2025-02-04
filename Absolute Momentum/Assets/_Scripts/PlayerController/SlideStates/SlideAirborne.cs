@@ -24,14 +24,22 @@ public class SlideAirborne : State
         base.DoUpdateState();
 
         LimitVelocity();
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
-        player.playerObj.forward = flatVel;
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        player.graphics.forward = flatVel;
     }
     
     public override void DoFixedUpdateState()
     {
         base.DoFixedUpdateState();
-        rb.AddForce((orientation.right * playerInput.moveVector.x).normalized * stats.SlideAirAcceleration * 100f);
+        // Player Turning
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        Vector3 playerInputVector = orientation.forward * player.playerInput.moveVector.y + orientation.right * player.playerInput.moveVector.x;
+        Vector3 forceVector = playerInputVector.normalized * (player.stats.SlideAirAcceleration * (1 / flatVel.magnitude));
+        Vector3 forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized) * flatVel.normalized;
+        Vector3 perpendicularForce = forceVector - forceInVeloDirection;
+        Debug.Log("Flat Vel: " + flatVel);
+        Debug.Log("Corrected Force Vector: " + perpendicularForce);
+        rb.AddForce(perpendicularForce, ForceMode.Force);
         NoInputDeceleration();
     }
     
