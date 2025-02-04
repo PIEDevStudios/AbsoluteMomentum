@@ -117,9 +117,9 @@ public class Player : StateMachineCore
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, slopeSensor.hit.normal);
         
         // Transition to slide
-        bool groundedSlideTransition = groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
-        bool airborneSlideTransition = !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;
-        if (playerInput.slidePressedThisFrame && (groundedSlideTransition || airborneSlideTransition))
+        bool groundedSlideTransition = playerInput.slidePressedThisFrame && groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
+        bool airborneSlideTransition = playerInput.slideHeld && !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;
+        if (groundedSlideTransition || airborneSlideTransition)
         {
             stateMachine.SetState(slide);
             return;

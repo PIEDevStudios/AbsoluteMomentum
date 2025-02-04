@@ -22,7 +22,10 @@ public class SlideAirborne : State
     public override void DoUpdateState()
     {
         base.DoUpdateState();
+
         LimitVelocity();
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
+        player.playerObj.forward = flatVel;
     }
     
     public override void DoFixedUpdateState()
@@ -66,16 +69,18 @@ public class SlideAirborne : State
     private void NoInputDeceleration()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        // If our velocity is close to 0 and still not pressing an input, set velo to 0
+        if (playerInput.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
+        {
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+            return;
+        }
         // If player is not pressing any move button, decelerate them
         if (playerInput.moveVector.magnitude == 0f)
         {
             Debug.DrawRay(player.transform.position, -flatVel.normalized, Color.blue);
             rb.AddForce(-flatVel.normalized * stats.NoInputDeceleration);
         }
-        // If our velocity is close to 0 and still not pressing an input, set velo to 0
-        if (playerInput.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
-        {
-            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-        }
+
     }
 }

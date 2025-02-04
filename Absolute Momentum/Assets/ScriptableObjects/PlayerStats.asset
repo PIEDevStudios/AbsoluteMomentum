@@ -18,24 +18,24 @@ MonoBehaviour:
   SprintAcceleration: 2.5
   GroundDrag: 10
   NoInputDeceleration: 25
-  StickToSlopeForce: 400
+  StickToSlopeForce: 100
   AirAcceleration: 0.25
   AirDrag: 0
   AirSoftMaxSpeed: 10
-  minimumSlideSpeed: 10
+  minimumSlideSpeed: 0
   MinimumSlideAirTime: 0.25
   SlideDrag: 0
-  BoostYVeloMult: 0
-  SlopeSlideForce: 10
-  SlideGroundAcceleration: 500
+  BoostYVeloMult: 1
+  SlopeSlideForce: 50
+  SlideGroundAcceleration: 1500
   SlideAirAcceleration: 1
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
   gravityEnabled: 1
-  NormalGravity: 40
-  FallingGravityMultiplier: 1.1
+  NormalGravity: 45
+  FallingGravityMultiplier: 1
   CurrentGravity: 0
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25
   JumpFrameBufferAmount: 10
-  FallSpeedLimit: 35
+  FallSpeedLimit: 50

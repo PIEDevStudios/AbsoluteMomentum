@@ -28,7 +28,7 @@ public class SlideGrounded : State
         }
         
         // Add force down to stick the player to the ground
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        // rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
         
 
     }
@@ -53,11 +53,12 @@ public class SlideGrounded : State
     {
         base.DoFixedUpdateState();
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
+        
         if (player.slopeSensor.isOnSlope && player.groundSensor.grounded)
         {
             directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
-            Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross);
-            rb.AddForce(direction * (player.stats.SlopeSlideForce * flatVel.magnitude), ForceMode.Force);
+            Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross).normalized;
+            rb.AddForce(direction * (player.stats.SlopeSlideForce), ForceMode.Force);
         }
         
         RaycastHit hit = player.slopeSensor.hit;
@@ -132,22 +133,22 @@ public class SlideGrounded : State
         
         
         
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        if (flatVel.magnitude > hardMaxSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
-            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-        }
-        flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        
-        if (flatVel.magnitude < hardMaxSpeed && flatVel.magnitude > softMaxSpeed)
-        {
-            hardMaxSpeed = flatVel.magnitude;
-        }
-        else if (flatVel.magnitude < softMaxSpeed)
-        {
-            hardMaxSpeed = softMaxSpeed;
-        }
+        // Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        // if (flatVel.magnitude > hardMaxSpeed)
+        // {
+        //     Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
+        //     rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+        // }
+        // flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        //
+        // if (flatVel.magnitude < hardMaxSpeed && flatVel.magnitude > softMaxSpeed)
+        // {
+        //     hardMaxSpeed = flatVel.magnitude;
+        // }
+        // else if (flatVel.magnitude < softMaxSpeed)
+        // {
+        //     hardMaxSpeed = softMaxSpeed;
+        // }
         
         
         // Clamp Fall speed
