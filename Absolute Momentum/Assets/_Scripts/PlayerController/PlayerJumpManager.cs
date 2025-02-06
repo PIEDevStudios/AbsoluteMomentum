@@ -38,7 +38,7 @@ public class PlayerJumpManager : MonoBehaviour
         }
         
         //creates variable jump, adds downward force if player lets go of space making character fall faster leading to smaller jump
-        if (jumping && playerInput.jumpReleasedThisFrame && framesSinceOnGround <= playerStats.EndJumpEarlyTime)
+        if (jumping && playerInput.jumpReleasedThisFrame && framesSinceOnGround <= playerStats.EndJumpEarlyTime && player.stateMachine.currentState == player.airborne)
         {
             rb.AddForce(Vector3.down * Mathf.Abs(rb.linearVelocity.y) * downwardForce, ForceMode.Impulse);
         }
