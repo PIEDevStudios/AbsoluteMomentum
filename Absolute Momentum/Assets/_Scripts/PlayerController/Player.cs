@@ -13,6 +13,8 @@ public class Player : StateMachineCore
     [field: SerializeField] public PlayerMove move { get; private set; }
     [field: SerializeField] public PlayerAirborne airborne { get; private set; }
     [field: SerializeField] public PlayerSlide slide { get; private set; }
+    [field: SerializeField] public PlayerWallrun wallrun { get; private set; }
+
     // Sensor scripts used for ground checks and wall checks
     [field:HorizontalLine(color: EColor.Gray)]
     [field:Header("Sensors")]
@@ -26,6 +28,7 @@ public class Player : StateMachineCore
     [Header("Player Components")]
     [field:SerializeField] public Transform graphics { get; private set; }
     [field:SerializeField] public Transform playerObj { get; private set; }
+    [field:SerializeField] public Transform orientation { get; private set; }
     [Expandable]
     [SerializeField] public PlayerStats stats;
     [field:SerializeField] public PlayerInput playerInput {get; private set;}
@@ -124,7 +127,13 @@ public class Player : StateMachineCore
             stateMachine.SetState(slide);
             return;
         }
-        
+
+        // Transition to wallrun
+        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && playerInput.moveVector.y > 0 && stateMachine.currentState != slide)
+        {
+            stateMachine.SetState(wallrun);
+            return;
+        }
         
         // Transition to airborne
         if (!groundSensor.grounded && !slopeSensor.isOnSlope && (stateMachine.currentState != slide || stateMachine.currentState.isComplete))

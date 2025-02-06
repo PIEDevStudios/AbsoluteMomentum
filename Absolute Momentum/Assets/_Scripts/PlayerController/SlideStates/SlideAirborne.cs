@@ -25,7 +25,7 @@ public class SlideAirborne : State
 
         LimitVelocity();
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        player.graphics.forward = flatVel;
+        player.playerObj.forward = flatVel;
     }
     
     public override void DoFixedUpdateState()

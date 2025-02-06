@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(menuName = "Player Stats�")]
 public class PlayerStats : ScriptableObject
 {
-    [field:Header("Ground Movement")]
+    [Header("Ground Movement")]
     public float MaxWalkSpeed;
     public float MaxSprintSpeed;
     public float WalkAcceleration;
@@ -16,12 +16,12 @@ public class PlayerStats : ScriptableObject
     public float NoInputDeceleration;
     public float StickToSlopeForce;
     
-    [field:Header("Air Movement")]
+    [Header("Air Movement")]
     public float AirAcceleration;
     public float AirDrag;
     public float AirSoftMaxSpeed;
 
-    [field: Header("Slide Movement")]
+    [Header("Slide Movement")]
     public float minimumSlideSpeed; // minimum speed required to enter slide state (grounded)
 
     public float MinimumSlideAirTime; // minimum airtime required to enter slide state (airborne)
@@ -33,15 +33,18 @@ public class PlayerStats : ScriptableObject
     public float SlideAirAcceleration;
     public Vector3 slidePlayerScale;
 
-    [field: Header("Gravity")] 
+    [Header("Wall Movement")]
+    public float wallrunForce;
+
+    [Header("Gravity")] 
     public bool gravityEnabled;
 
     public float NormalGravity;
     public float FallingGravityMultiplier;
 
-    [field: ReadOnly, SerializeField] public float CurrentGravity;
+    [ReadOnly, SerializeField] public float CurrentGravity;
     
-    [field:Header("Jumping")]
+    [Header("Jumping")]
     public float JumpForce;
     public float EndJumpEarlyForceScale;
     public float EndJumpEarlyTime;
