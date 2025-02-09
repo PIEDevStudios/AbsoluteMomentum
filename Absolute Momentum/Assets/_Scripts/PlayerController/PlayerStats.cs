@@ -20,6 +20,8 @@ public class PlayerStats : ScriptableObject
     public float AirAcceleration;
     public float AirDrag;
     public float AirSoftMaxSpeed;
+    public float AirStrafeAcceleration;
+    public AnimationCurve airDragCurve;
 
     [Header("Slide Movement")]
     public float minimumSlideSpeed; // minimum speed required to enter slide state (grounded)

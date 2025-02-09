@@ -40,6 +40,8 @@ public class SlideAirborne : State
         Debug.Log("Flat Vel: " + flatVel);
         Debug.Log("Corrected Force Vector: " + perpendicularForce);
         rb.AddForce(perpendicularForce, ForceMode.Force);
+        rb.AddForce(flatVel.normalized * stats.AirStrafeAcceleration * Mathf.Abs(player.playerInput.moveVector.x), ForceMode.Force);
+       
         NoInputDeceleration();
     }
     
