@@ -36,6 +36,10 @@ public class PlayerStats : ScriptableObject
     [Header("Wall Movement")]
     public float wallrunForce;
 
+    public float wallrunResetTime;
+    public float wallJumpUpForce;
+    public float wallJumpSideForce;
+
     [Header("Gravity")] 
     public bool gravityEnabled;
 

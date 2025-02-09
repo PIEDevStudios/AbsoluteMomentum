@@ -34,7 +34,8 @@ public class Player : StateMachineCore
     [field:SerializeField] public PlayerInput playerInput {get; private set;}
     [field:SerializeField] public CapsuleCollider playerCollider {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
-    
+
+    [ReadOnly] public float wallrunResetTimer;
     
     // Variables used for debugging
     [Header("Debug")] 
@@ -60,6 +61,7 @@ public class Player : StateMachineCore
     {
         // Calls update logic in the currently active state
         stateMachine.currentState.DoUpdateBranch();
+        wallrunResetTimer -= Time.deltaTime;
         
         // Debug reset player input
         if (playerInput.ResetInput)
@@ -127,9 +129,9 @@ public class Player : StateMachineCore
             stateMachine.SetState(slide);
             return;
         }
-
+        
         // Transition to wallrun
-        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && playerInput.moveVector.y > 0 && stateMachine.currentState != slide)
+        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && playerInput.moveVector.y > 0 && stateMachine.currentState != slide && wallrunResetTimer < 0f)
         {
             stateMachine.SetState(wallrun);
             return;

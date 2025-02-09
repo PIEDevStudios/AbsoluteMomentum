@@ -51,5 +51,12 @@ public class PlayerWallrun : State
         
         rb.AddForce(wallForward * player.stats.wallrunForce, ForceMode.Force);
         
+        // Keep on wall force
+        if (!(wallSensor.wallLeft && player.playerInput.moveVector.x > 0) && !(wallSensor.wallRight && player.playerInput.moveVector.x < 0))
+        {
+            rb.AddForce(-wallNormal * 100f, ForceMode.Force);
+        }
+        
+        
     }
 }
