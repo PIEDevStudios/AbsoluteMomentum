@@ -22,6 +22,40 @@ MonoBehaviour:
   AirAcceleration: 0.25
   AirDrag: 0
   AirSoftMaxSpeed: 10
+  AirStrafeAcceleration: 100
+  airDragCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.004841398
+      outSlope: -0.004841398
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 19.868519
+      value: 0.9038086
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 48.893215
+      value: 130.41231
+      inSlope: 4.4620104
+      outSlope: 4.4620104
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   minimumSlideSpeed: 0
   MinimumSlideAirTime: 0.25
   SlideDrag: 0.5
@@ -30,10 +64,14 @@ MonoBehaviour:
   SlideGroundAcceleration: 1500
   SlideAirAcceleration: 2000
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
+  wallrunForce: 10
+  wallrunResetTime: 0.25
+  wallJumpUpForce: 15
+  wallJumpSideForce: 15
   gravityEnabled: 1
   NormalGravity: 45
   FallingGravityMultiplier: 1
-  CurrentGravity: 0
+  CurrentGravity: 45
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25

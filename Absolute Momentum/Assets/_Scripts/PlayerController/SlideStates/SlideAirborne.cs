@@ -25,7 +25,7 @@ public class SlideAirborne : State
 
         LimitVelocity();
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        player.graphics.forward = flatVel;
+        player.playerObj.forward = flatVel;
     }
     
     public override void DoFixedUpdateState()
@@ -40,6 +40,8 @@ public class SlideAirborne : State
         Debug.Log("Flat Vel: " + flatVel);
         Debug.Log("Corrected Force Vector: " + perpendicularForce);
         rb.AddForce(perpendicularForce, ForceMode.Force);
+        rb.AddForce(flatVel.normalized * stats.AirStrafeAcceleration * Mathf.Abs(player.playerInput.moveVector.x), ForceMode.Force);
+       
         NoInputDeceleration();
     }
     

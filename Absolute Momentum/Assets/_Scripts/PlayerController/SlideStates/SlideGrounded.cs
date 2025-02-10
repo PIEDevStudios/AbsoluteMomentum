@@ -37,7 +37,7 @@ public class SlideGrounded : State
     {
         base.DoUpdateState();
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
-        player.graphics.forward = flatVel;
+        player.playerObj.forward = flatVel;
 
 
         if (player.slopeSensor.isOnSlope)
