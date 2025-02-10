@@ -39,7 +39,7 @@ public class PlayerMove : State
     {
         base.DoUpdateState();
         CheckForSprint();
-        LimitVelocity();
+        //LimitVelocity();
     }
     public override void DoFixedUpdateState()
     {
@@ -50,7 +50,7 @@ public class PlayerMove : State
         // Adds a force to the player in the direction they are pressing relative to the camera
         //Debug.Log("MOVE FIXED UPDATE");
         rb.AddForce((forwardOriented * playerInput.moveVector.y + rightOriented * playerInput.moveVector.x).normalized * (acceleration * 100f));
-        LimitVelocity();
+        //LimitVelocity();
         StickToSlope();
     }
 
