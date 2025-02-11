@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
+
 public class PlayerItemPickup : MonoBehaviour
 {
     [SerializeField] private ItemPoolSO itemPool;
-
+    [SerializeField] private Transform itemParent; // The parent transform for the items
     void Update() {
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -12,9 +14,12 @@ public class PlayerItemPickup : MonoBehaviour
     }
     private void SelectItem()
     {
-        Random rnd = new Random();  
-        int randomItemNum = rnd.Next(itemPool.items.Length);
+        int randomItemNum = Random.Range(0, itemPool.items.Length);
         ItemPickupSO selectedItem = itemPool.items[randomItemNum];
-        Instantiate(selectedItem.powerup);
+        if (selectedItem != null)
+        {
+            Instantiate(selectedItem.powerup, itemParent);
+        }
+
     }
 }
