@@ -16,10 +16,19 @@ public class BoostTrigger : MonoBehaviour
 
             if (playerRigidbody != null)
             {
-                // Use player's movement direction for boosting
-                Vector3 boostDirection = playerRigidbody.linearVelocity.magnitude > 0.1f
-                    ? playerRigidbody.linearVelocity.normalized // Move in current direction
-                    : playerInput.transform.forward; // Default to facing direction if not moving
+                Vector3 boostDirection;
+
+                // Check if the player is moving (velocity magnitude > 0.1)
+                if (playerRigidbody.linearVelocity.magnitude > 0.1f)
+                {
+                    // Use the player's movement direction for boosting
+                    boostDirection = playerRigidbody.linearVelocity.normalized;
+                }
+                else
+                {
+                    // Default to the direction the player is facing
+                    boostDirection = playerInput.transform.forward;
+                }
 
                 // Apply force
                 playerRigidbody.AddForce(boostDirection * forceAmount, ForceMode.VelocityChange);
