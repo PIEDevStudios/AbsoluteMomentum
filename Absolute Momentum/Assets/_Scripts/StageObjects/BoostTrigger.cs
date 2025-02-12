@@ -1,8 +1,14 @@
+using System;
 using UnityEngine;
 
 public class BoostTrigger : MonoBehaviour
 {
-    public float forceAmount = 25f; 
+    public float forceAmount = 25f;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -22,6 +28,10 @@ public class BoostTrigger : MonoBehaviour
                 if (playerRigidbody.linearVelocity.magnitude > 0.1f)
                 {
                     // Use the player's movement direction for boosting
+                    
+                    // get player script
+                    // playerInput.moveVector.x * orientation.right + playerInput.moveVector.y * orientation.forward
+                    // playerInput.moveVector
                     boostDirection = playerRigidbody.linearVelocity.normalized;
                 }
                 else
@@ -44,5 +54,10 @@ public class BoostTrigger : MonoBehaviour
         {
             Debug.Log("Object inside trigger is not the player.");
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // null out references
     }
 }
