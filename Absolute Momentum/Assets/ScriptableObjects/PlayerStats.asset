@@ -67,13 +67,13 @@ MonoBehaviour:
   wallrunForce: 10
   wallrunResetTime: 0.25
   wallJumpUpForce: 15
-  wallJumpSideForce: 15
+  wallJumpSideForce: 30
   gravityEnabled: 1
   NormalGravity: 45
   FallingGravityMultiplier: 1
-  CurrentGravity: 45
+  CurrentGravity: 0
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25
   JumpFrameBufferAmount: 10
-  FallSpeedLimit: 50
+  FallSpeedLimit: 300
