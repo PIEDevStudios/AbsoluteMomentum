@@ -39,7 +39,6 @@ public class PlayerMove : State
     {
         base.DoUpdateState();
         CheckForSprint();
-        LimitVelocity();
     }
     public override void DoFixedUpdateState()
     {
@@ -50,7 +49,6 @@ public class PlayerMove : State
         // Adds a force to the player in the direction they are pressing relative to the camera
         //Debug.Log("MOVE FIXED UPDATE");
         rb.AddForce((forwardOriented * playerInput.moveVector.y + rightOriented * playerInput.moveVector.x).normalized * (acceleration * 100f));
-        LimitVelocity();
         StickToSlope();
     }
 
@@ -74,18 +72,18 @@ public class PlayerMove : State
     /// <summary>
     /// Limits the player's horizontal/flat velocity (velocity in x and z axis)
     /// </summary>
-    private void LimitVelocity()
-    {
-        RaycastHit hit = player.slopeSensor.hit;
-        Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, hit.normal);
-        
-        if (flatVel.magnitude > maxSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * maxSpeed;
-            Vector3 verticalVel = rb.linearVelocity - flatVel;
-            rb.linearVelocity = limitedVel + verticalVel;
-        }
-    }
+    // private void LimitVelocity()
+    // {
+    //     RaycastHit hit = player.slopeSensor.hit;
+    //     Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, hit.normal);
+    //     
+    //     if (flatVel.magnitude > maxSpeed)
+    //     {
+    //         Vector3 limitedVel = flatVel.normalized * maxSpeed;
+    //         Vector3 verticalVel = rb.linearVelocity - flatVel;
+    //         rb.linearVelocity = limitedVel + verticalVel;
+    //     }
+    // }
 
     /// <summary>
     /// If the player's ground check is not on the ground but the slope cast is on the ground, apply a downward force to stick the player to the slope
