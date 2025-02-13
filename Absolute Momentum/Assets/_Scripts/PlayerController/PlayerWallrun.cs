@@ -8,10 +8,12 @@ public class PlayerWallrun : State
 
     public override void DoEnterLogic()
     {
-        player.ChangeGravity(0);
+        
         rb.linearDamping = 0f;
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        if (rb.linearVelocity.y < 0f)
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         base.DoEnterLogic();
+        
     }
 
     public override void DoUpdateState()
@@ -20,6 +22,11 @@ public class PlayerWallrun : State
         if (!wallSensor.wallRight && !wallSensor.wallLeft)
         {
             isComplete = true;
+        }
+
+        if (rb.linearVelocity.y < 0f && player.stats.CurrentGravity != player.stats.WallrunGravity)
+        {
+            player.ChangeGravity(player.stats.WallrunGravity);
         }
     }
 

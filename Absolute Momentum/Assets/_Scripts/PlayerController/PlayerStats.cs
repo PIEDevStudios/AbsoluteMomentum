@@ -46,6 +46,7 @@ public class PlayerStats : ScriptableObject
     public bool gravityEnabled;
 
     public float NormalGravity;
+    public float WallrunGravity;
     public float FallingGravityMultiplier;
 
     [ReadOnly, SerializeField] public float CurrentGravity;
