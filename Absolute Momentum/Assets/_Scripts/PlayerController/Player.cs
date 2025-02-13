@@ -138,7 +138,7 @@ public class Player : StateMachineCore
         }
         
         // Transition to airborne
-        if (!groundSensor.grounded && !slopeSensor.isOnSlope && (stateMachine.currentState != slide || stateMachine.currentState.isComplete))
+        if (!groundSensor.grounded && !slopeSensor.isOnSlope && ((stateMachine.currentState != slide && stateMachine.currentState != wallrun) || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(airborne);
             return;

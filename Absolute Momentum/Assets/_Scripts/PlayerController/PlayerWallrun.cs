@@ -19,8 +19,16 @@ public class PlayerWallrun : State
     public override void DoUpdateState()
     {
         base.DoUpdateState();
+        
         if (!wallSensor.wallRight && !wallSensor.wallLeft)
         {
+            Debug.Log("No Wall detected");
+            isComplete = true;
+        }
+
+        if (player.groundSensor.grounded)
+        {
+            Debug.Log("Player Hit Ground");
             isComplete = true;
         }
 
