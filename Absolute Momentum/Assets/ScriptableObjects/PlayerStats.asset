@@ -92,7 +92,7 @@ MonoBehaviour:
   minimumSlideSpeed: 15
   MinimumSlideAirTime: 0.25
   SlideDrag: 0.5
-  BoostYVeloMult: 1
+  BoostYVeloMult: 0
   SlopeSlideForce: 60
   SlideGroundAcceleration: 1500
   SlideAirAcceleration: 2000
@@ -138,7 +138,7 @@ MonoBehaviour:
   NormalGravity: 45
   WallrunGravity: 10
   FallingGravityMultiplier: 1
-  CurrentGravity: 0
+  CurrentGravity: 45
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25
