@@ -16,9 +16,42 @@ MonoBehaviour:
   MaxSprintSpeed: 20
   WalkAcceleration: 1
   SprintAcceleration: 2.5
-  GroundDrag: 10
+  GroundDrag: 0
   NoInputDeceleration: 0
   StickToSlopeForce: 100
+  groundDragCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.048698425
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 19.868519
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 37.642025
+      value: 393.9225
+      inSlope: 22.163465
+      outSlope: 22.163465
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   AirAcceleration: 0.25
   AirDrag: 0
   AirSoftMaxSpeed: 10
@@ -27,17 +60,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -0.004841398
-      outSlope: -0.004841398
+      time: -0.048698425
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 19.868519
-      value: 0.9038086
+      time: 100
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -45,10 +78,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 48.893215
-      value: 130.41231
-      inSlope: 4.4620104
-      outSlope: 4.4620104
+      time: 200
+      value: 200
+      inSlope: 2
+      outSlope: 2
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -56,7 +89,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  minimumSlideSpeed: 0
+  minimumSlideSpeed: 15
   MinimumSlideAirTime: 0.25
   SlideDrag: 0.5
   BoostYVeloMult: 1
@@ -64,6 +97,39 @@ MonoBehaviour:
   SlideGroundAcceleration: 1500
   SlideAirAcceleration: 2000
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
+  slideDragCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.048698425
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 60
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 109.29354
+      value: 119.7398
+      inSlope: 2.4291174
+      outSlope: 0
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   wallrunForce: 10
   wallrunResetTime: 0.4
   wallJumpUpForce: 15

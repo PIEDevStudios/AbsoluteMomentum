@@ -22,6 +22,7 @@ public class PlayerMove : State
         rb.linearDamping = stats.GroundDrag;
         player.ChangeGravity(0);
         rb.AddForce(-player.groundSensor.hit.normal * 2f, ForceMode.Impulse);
+        player.playerSpeedManager.currentCurve = stats.groundDragCurve;
         // footstepEmitter = AudioManager.Instance.InitializeEventEmitter(FMODEvents.Sounds.PlayerFootsteps_Grass, player.playerObj.gameObject);
         // footstepEmitter.Play();
         // player.ChangeGravity(stats.GroundGravity);

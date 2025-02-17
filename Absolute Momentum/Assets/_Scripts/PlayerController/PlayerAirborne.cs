@@ -24,6 +24,7 @@ public class PlayerAirborne : State
         acceleration = stats.SprintAcceleration * stats.AirAcceleration;
         hardMaxSpeed = speedOnEnter.magnitude;
         softMaxSpeed = player.stats.AirSoftMaxSpeed;
+        player.playerSpeedManager.currentCurve = stats.airDragCurve;
     }
 
     public override void DoUpdateState()

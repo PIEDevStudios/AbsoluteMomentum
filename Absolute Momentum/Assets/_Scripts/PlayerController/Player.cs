@@ -34,14 +34,17 @@ public class Player : StateMachineCore
     [field:SerializeField] public PlayerInput playerInput {get; private set;}
     [field:SerializeField] public CapsuleCollider playerCollider {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
+    [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
 
     [ReadOnly] public float wallrunResetTimer;
+    [ReadOnly] public bool leavingGround;
     
     // Variables used for debugging
     [Header("Debug")] 
     [SerializeField] private Vector3 spawnPos;
     
     private float timeSinceLastGrounded;
+    
 
     #region Unity Methods
     void Awake()
@@ -77,6 +80,11 @@ public class Player : StateMachineCore
         }
 
 
+        if (!groundSensor.grounded)
+        {
+            leavingGround = false;
+        }
+        
         // State transitions
         HandleTransitions();
         
@@ -114,7 +122,7 @@ public class Player : StateMachineCore
         
         
         // condition for transitioning to a "grounded" state (move or idle) when transitioning from airborne
-        bool airborneGroundCheck = stateMachine.currentState == airborne && rb.linearVelocity.y <= 0;
+        bool airborneGroundCheck = stateMachine.currentState == airborne && !leavingGround;
         
         // condition for transitioning to a "grounded" state (move or idle) when transitioning from any state besides airborne
         bool nonAirborneGroundCheck = stateMachine.currentState == idle || stateMachine.currentState == move;

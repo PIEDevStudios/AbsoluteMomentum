@@ -14,7 +14,7 @@ public class SlideGrounded : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        
+        player.playerSpeedManager.currentCurve = stats.slideDragCurve;
         speedOnEnter = Vector3.zero;
         skipFirstLimitCall = true;
         

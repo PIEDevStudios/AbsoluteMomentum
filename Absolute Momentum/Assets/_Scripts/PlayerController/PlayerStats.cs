@@ -15,6 +15,7 @@ public class PlayerStats : ScriptableObject
     public float GroundDrag;
     public float NoInputDeceleration;
     public float StickToSlopeForce;
+    public AnimationCurve groundDragCurve;
     
     [Header("Air Movement")]
     public float AirAcceleration;
@@ -34,6 +35,7 @@ public class PlayerStats : ScriptableObject
     public float SlideGroundAcceleration;
     public float SlideAirAcceleration;
     public Vector3 slidePlayerScale;
+    public AnimationCurve slideDragCurve;
 
     [Header("Wall Movement")]
     public float wallrunForce;
