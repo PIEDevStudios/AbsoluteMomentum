@@ -8,9 +8,7 @@ using UnityEngine.Serialization;
 public class PlayerStats : ScriptableObject
 {
     [Header("Ground Movement")]
-    public float MaxWalkSpeed;
-    public float MaxSprintSpeed;
-    public float WalkAcceleration;
+    // public float MaxSprintSpeed;
     public float SprintAcceleration;
     public float GroundDrag;
     public float NoInputDeceleration;
@@ -20,7 +18,7 @@ public class PlayerStats : ScriptableObject
     [Header("Air Movement")]
     public float AirAcceleration;
     public float AirDrag;
-    public float AirSoftMaxSpeed;
+    // public float AirSoftMaxSpeed;
     public float AirStrafeAcceleration;
     public AnimationCurve airDragCurve;
 
@@ -43,6 +41,7 @@ public class PlayerStats : ScriptableObject
     public float wallrunResetTime;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
+    public AnimationCurve wallDragCurve;
 
     [Header("Gravity")] 
     public bool gravityEnabled;

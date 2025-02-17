@@ -23,7 +23,6 @@ public class PlayerAirborne : State
         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         acceleration = stats.SprintAcceleration * stats.AirAcceleration;
         hardMaxSpeed = speedOnEnter.magnitude;
-        softMaxSpeed = player.stats.AirSoftMaxSpeed;
         player.playerSpeedManager.currentCurve = stats.airDragCurve;
     }
 

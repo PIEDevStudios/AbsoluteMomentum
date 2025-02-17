@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef464e9f8b6dd1747993335ea6a2723c, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  MaxWalkSpeed: 4
-  MaxSprintSpeed: 20
-  WalkAcceleration: 1
   SprintAcceleration: 2.5
   GroundDrag: 0
   NoInputDeceleration: 0
@@ -54,7 +51,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   AirAcceleration: 0.25
   AirDrag: 0
-  AirSoftMaxSpeed: 10
   AirStrafeAcceleration: 100
   airDragCurve:
     serializedVersion: 2
@@ -134,6 +130,39 @@ MonoBehaviour:
   wallrunResetTime: 0.4
   wallJumpUpForce: 15
   wallJumpSideForce: 30
+  wallDragCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.048698425
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 60
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 109.29354
+      value: 119.7398
+      inSlope: 2.4291174
+      outSlope: 0
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   gravityEnabled: 1
   NormalGravity: 45
   WallrunGravity: 10

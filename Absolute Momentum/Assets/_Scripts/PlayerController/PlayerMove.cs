@@ -60,7 +60,6 @@ public class PlayerMove : State
     {
         if (!playerInput.sprintHeld)
         {
-            maxSpeed = stats.MaxSprintSpeed;
             acceleration = stats.SprintAcceleration;
         }
         else
