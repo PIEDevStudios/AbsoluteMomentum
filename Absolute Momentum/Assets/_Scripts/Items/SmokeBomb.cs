@@ -1,0 +1,40 @@
+using System;
+using UnityEditor;
+using UnityEngine;
+using DG.Tweening;
+
+public class SmokeBomb : BaseItem
+{
+    private bool ItemHeld = false;
+    public Transform player;
+    public float orbitRadius = 3f;
+    public float orbitDuration = 5f;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public override void HoldItem()
+    {
+        base.HoldItem();
+        ItemHeld = true;
+
+        transform.position = player.position + new Vector3(orbitRadius, 0, 0);
+        transform.DORotate(new Vector3(0, 360, 0), orbitDuration, RotateMode.FastBeyond360)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+    }
+
+    public override void ActivateItem()
+    {
+        base.ActivateItem();
+        ItemHeld = false;
+    }
+}
