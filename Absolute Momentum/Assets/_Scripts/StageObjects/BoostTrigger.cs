@@ -4,60 +4,57 @@ using UnityEngine;
 public class BoostTrigger : MonoBehaviour
 {
     public float forceAmount = 25f;
+    
+    private PlayerInput cachedPlayerInput;
+    private Rigidbody cachedRigidbody;
 
     private void OnTriggerEnter(Collider other)
     {
+        // Cache the PlayerInput component on entry
+        cachedPlayerInput = other.GetComponentInParent<PlayerInput>();
         
+        if (cachedPlayerInput != null)
+        {
+            cachedRigidbody = cachedPlayerInput.GetComponent<Rigidbody>();
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Get the root Player object using PlayerInput
-        PlayerInput playerInput = other.GetComponentInParent<PlayerInput>();
-
-        if (playerInput != null)
+        if (cachedPlayerInput != null && cachedRigidbody != null)
         {
-            // Get Rigidbody from the Player
-            Rigidbody playerRigidbody = playerInput.GetComponent<Rigidbody>();
+            Vector3 boostDirection;
 
-            if (playerRigidbody != null)
+            // Check if the player is moving (velocity magnitude > 0.1)
+            if (cachedRigidbody.linearVelocity.magnitude > 0.1f)
             {
-                Vector3 boostDirection;
-
-                // Check if the player is moving (velocity magnitude > 0.1)
-                if (playerRigidbody.linearVelocity.magnitude > 0.1f)
-                {
-                    // Use the player's movement direction for boosting
-                    
-                    // get player script
-                    // playerInput.moveVector.x * orientation.right + playerInput.moveVector.y * orientation.forward
-                    // playerInput.moveVector
-                    boostDirection = playerRigidbody.linearVelocity.normalized;
-                }
-                else
-                {
-                    // Default to the direction the player is facing
-                    boostDirection = playerInput.transform.forward;
-                }
-
-                // Apply force
-                playerRigidbody.AddForce(boostDirection * forceAmount, ForceMode.VelocityChange);
-                
-                Debug.Log("Boost applied in direction: " + boostDirection);
+                // Use the player's movement direction for boosting
+                boostDirection = cachedRigidbody.linearVelocity.normalized;
             }
             else
             {
-                Debug.LogWarning("Player has no Rigidbody.");
+                // Default to the direction the player is facing
+                boostDirection = cachedPlayerInput.transform.forward;
             }
+
+            // Apply force
+            cachedRigidbody.AddForce(boostDirection * forceAmount, ForceMode.VelocityChange);
+            
+            Debug.Log("Boost applied in direction: " + boostDirection);
         }
         else
         {
-            Debug.Log("Object inside trigger is not the player.");
+            Debug.Log("Object inside trigger is not the player or missing components.");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // null out references
+        // Clear cached references on exit
+        if (cachedPlayerInput == other.GetComponentInParent<PlayerInput>())
+        {
+            cachedPlayerInput = null;
+            cachedRigidbody = null;
+        }
     }
 }
