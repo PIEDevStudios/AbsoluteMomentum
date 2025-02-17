@@ -65,11 +65,12 @@ MonoBehaviour:
   SlideAirAcceleration: 2000
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
   wallrunForce: 10
-  wallrunResetTime: 0.25
+  wallrunResetTime: 0.4
   wallJumpUpForce: 15
   wallJumpSideForce: 30
   gravityEnabled: 1
   NormalGravity: 45
+  WallrunGravity: 10
   FallingGravityMultiplier: 1
   CurrentGravity: 0
   JumpForce: 20

@@ -8,18 +8,33 @@ public class PlayerWallrun : State
 
     public override void DoEnterLogic()
     {
-        player.ChangeGravity(0);
+        
         rb.linearDamping = 0f;
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        if (rb.linearVelocity.y < 0f)
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         base.DoEnterLogic();
+        
     }
 
     public override void DoUpdateState()
     {
         base.DoUpdateState();
+        
         if (!wallSensor.wallRight && !wallSensor.wallLeft)
         {
+            Debug.Log("No Wall detected");
             isComplete = true;
+        }
+
+        if (player.groundSensor.grounded)
+        {
+            Debug.Log("Player Hit Ground");
+            isComplete = true;
+        }
+
+        if (rb.linearVelocity.y < 0f && player.stats.CurrentGravity != player.stats.WallrunGravity)
+        {
+            player.ChangeGravity(player.stats.WallrunGravity);
         }
     }
 

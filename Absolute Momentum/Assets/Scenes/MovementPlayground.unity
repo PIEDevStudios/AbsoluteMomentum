@@ -10708,9 +10708,17 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3024991555
       objectReference: {fileID: 0}
+    - target: {fileID: 2752407882252921317, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: radiusMultiplier
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 3238629911873270863, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_Name
       value: PlayerWithCameras
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982119891738854935, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: radiusMultiplier
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7418350527356540808, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_LocalPosition.x
