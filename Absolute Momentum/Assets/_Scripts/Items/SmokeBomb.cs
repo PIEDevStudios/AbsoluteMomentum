@@ -9,6 +9,12 @@ public class SmokeBomb : BaseItem
     public Transform player;
     public float orbitRadius = 3f;
     public float orbitDuration = 5f;
+    public Transform cam;
+    public Trasnform throwPoint;
+    public float throwForce = 70f;
+    public float throwUpwardForce = 10f; 
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,7 +24,10 @@ public class SmokeBomb : BaseItem
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.F) && ItemHeld)
+        {
+            ActivateItem()
+        }
     }
 
     public override void HoldItem()
@@ -36,5 +45,11 @@ public class SmokeBomb : BaseItem
     {
         base.ActivateItem();
         ItemHeld = false;
+
+        GameObject projectile = Instantiate(item, throwPoint.position, cam.rotation);
+
+        Rigidbody projectileRb = project.GetComponent<Rigidbody>();
+
+        Vector3 forceToAdd = cam.transform.forward * throwForce + transform.up  * throwUpwardForce;
     }
 }
