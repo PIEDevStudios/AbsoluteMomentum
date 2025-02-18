@@ -33,12 +33,17 @@ public class SlideAirborne : State
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         Vector3 playerInputVector = orientation.forward * player.playerInput.moveVector.y + orientation.right * player.playerInput.moveVector.x;
         Vector3 forceVector = playerInputVector.normalized * (player.stats.SlideAirAcceleration * (1 / flatVel.magnitude));
-        Vector3 forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized) * flatVel.normalized;
-        Vector3 perpendicularForce = forceVector - forceInVeloDirection;
+        float forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized);
+        Vector3 perpendicularForce = forceVector - (forceInVeloDirection * flatVel.normalized);
         Debug.Log("Flat Vel: " + flatVel);
         Debug.Log("Corrected Force Vector: " + perpendicularForce);
         rb.AddForce(perpendicularForce, ForceMode.Force);
-        // rb.AddForce(flatVel.normalized * stats.AirStrafeAcceleration * Mathf.Abs(player.playerInput.moveVector.x), ForceMode.Force);
+        
+        if (forceInVeloDirection < 0f)
+        {
+            rb.AddForce(forceInVeloDirection * flatVel.normalized, ForceMode.Force);
+        }
+        
         LimitVelocity();
         NoInputDeceleration();
     }
@@ -52,12 +57,6 @@ public class SlideAirborne : State
     /// </summary>
     private void LimitVelocity()
     {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        if (flatVel.magnitude > hardMaxSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
-            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-        }
         // Clamp Fall speed
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
     }

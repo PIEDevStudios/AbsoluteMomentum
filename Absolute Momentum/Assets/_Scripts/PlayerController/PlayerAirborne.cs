@@ -21,7 +21,7 @@ public class PlayerAirborne : State
         // Set max speed and acceleration
         
         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        acceleration = stats.SprintAcceleration * stats.AirAcceleration;
+        acceleration = stats.AirAcceleration;
         hardMaxSpeed = speedOnEnter.magnitude;
         player.playerSpeedManager.currentCurve = stats.airDragCurve;
     }
@@ -33,7 +33,20 @@ public class PlayerAirborne : State
     public override void DoFixedUpdateState()
     {
         base.DoFixedUpdateState();
-        rb.AddForce((orientation.forward * playerInput.moveVector.y + orientation.right * playerInput.moveVector.x).normalized * acceleration * 100f);
+        
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        Vector3 playerInputVector = orientation.forward * player.playerInput.moveVector.y + orientation.right * player.playerInput.moveVector.x;
+        Vector3 forceVector = playerInputVector.normalized * acceleration;
+        float forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized);
+        Vector3 perpendicularForce = forceVector - (forceInVeloDirection * flatVel.normalized);
+        
+        rb.AddForce(perpendicularForce, ForceMode.Force);
+
+        if (forceInVeloDirection < 0f)
+        {
+            rb.AddForce(forceInVeloDirection * flatVel.normalized, ForceMode.Force);
+        }
+        
         NoInputDeceleration();
         LimitVelocity();
     }
@@ -46,26 +59,7 @@ public class PlayerAirborne : State
     /// </summary>
     private void LimitVelocity()
     {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        if (flatVel.magnitude > hardMaxSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
-            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-        }
-        
-        // flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        //
-        // if (flatVel.magnitude < hardMaxSpeed && flatVel.magnitude > softMaxSpeed)
-        // {
-        //     hardMaxSpeed = flatVel.magnitude;
-        // }
-        // else if (flatVel.magnitude < softMaxSpeed)
-        // {
-        //     hardMaxSpeed = softMaxSpeed;
-        // }
-        //
-        //
-        // // Clamp Fall speed
+        // Clamp Fall speed
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
     }
 

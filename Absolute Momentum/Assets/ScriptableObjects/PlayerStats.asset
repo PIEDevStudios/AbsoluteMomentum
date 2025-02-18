@@ -49,7 +49,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AirAcceleration: 0.25
+  AirAcceleration: 100
   AirDrag: 0
   AirStrafeAcceleration: 100
   airDragCurve:
@@ -167,7 +167,7 @@ MonoBehaviour:
   NormalGravity: 45
   WallrunGravity: 10
   FallingGravityMultiplier: 1
-  CurrentGravity: 45
+  CurrentGravity: 0
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25
