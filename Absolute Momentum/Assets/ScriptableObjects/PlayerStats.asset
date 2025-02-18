@@ -29,7 +29,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 19.868519
+      time: 10
       value: 0
       inSlope: 0
       outSlope: 0
@@ -38,10 +38,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 37.642025
-      value: 393.9225
-      inSlope: 22.163465
-      outSlope: 22.163465
+      time: 37.327328
+      value: 357.95132
+      inSlope: 13.098659
+      outSlope: 13.098659
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -65,7 +65,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 100
+      time: 50
       value: 0
       inSlope: 0
       outSlope: 0
@@ -74,10 +74,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 200
-      value: 200
-      inSlope: 2
-      outSlope: 2
+      time: 71.08417
+      value: 200.34904
+      inSlope: 9.502345
+      outSlope: 9.502345
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -91,7 +91,7 @@ MonoBehaviour:
   BoostYVeloMult: 0
   SlopeSlideForce: 60
   SlideGroundAcceleration: 1500
-  SlideAirAcceleration: 2000
+  SlideAirAcceleration: 5000
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
   slideDragCurve:
     serializedVersion: 2
@@ -172,4 +172,4 @@ MonoBehaviour:
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25
   JumpFrameBufferAmount: 10
-  FallSpeedLimit: 300
+  FallSpeedLimit: 60
