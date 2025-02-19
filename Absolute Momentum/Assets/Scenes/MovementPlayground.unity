@@ -10360,6 +10360,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerWithCameras
       objectReference: {fileID: 0}
+    - target: {fileID: 3238629911873270863, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7418350527356540808, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 103.318855

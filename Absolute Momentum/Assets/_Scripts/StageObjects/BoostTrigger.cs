@@ -1,5 +1,7 @@
 using System;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class BoostTrigger : MonoBehaviour
 {
@@ -10,6 +12,11 @@ public class BoostTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
+        
         // Cache the PlayerInput component on entry
         cachedPlayerInput = other.GetComponentInParent<PlayerInput>();
         
@@ -34,7 +41,7 @@ public class BoostTrigger : MonoBehaviour
             else
             {
                 // Default to the direction the player is facing
-                boostDirection = cachedPlayerInput.transform.forward;
+                boostDirection = Vector3.zero;
             }
 
             // Apply force
