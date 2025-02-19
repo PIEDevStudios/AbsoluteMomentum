@@ -10,7 +10,7 @@ public class SmokeBomb : BaseItem
     public float orbitRadius = 3f;
     public float orbitDuration = 5f;
     public Transform cam;
-    public Trasnform throwPoint;
+    public Transform throwPoint;
     public float throwForce = 70f;
     public float throwUpwardForce = 10f; 
 
@@ -26,7 +26,7 @@ public class SmokeBomb : BaseItem
     {
         if (Input.GetKeyDown(KeyCode.F) && ItemHeld)
         {
-            ActivateItem()
+            ActivateItem();
         }
     }
 
@@ -48,8 +48,10 @@ public class SmokeBomb : BaseItem
 
         GameObject projectile = Instantiate(item, throwPoint.position, cam.rotation);
 
-        Rigidbody projectileRb = project.GetComponent<Rigidbody>();
+        Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
 
         Vector3 forceToAdd = cam.transform.forward * throwForce + transform.up  * throwUpwardForce;
+
+        projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
     }
 }
