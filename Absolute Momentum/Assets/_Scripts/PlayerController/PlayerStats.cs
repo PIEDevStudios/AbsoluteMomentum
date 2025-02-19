@@ -58,6 +58,8 @@ public class PlayerStats : ScriptableObject
     public float EndJumpEarlyTime;
     public uint JumpFrameBufferAmount;
     public float FallSpeedLimit;
-    
-    
+
+    [Header("Dash")]
+    public float DashSpeed;
+    public float DashTime;
 }
