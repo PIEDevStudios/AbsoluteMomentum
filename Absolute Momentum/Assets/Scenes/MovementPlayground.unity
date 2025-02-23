@@ -23191,6 +23191,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1313575999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 990830039854890529, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+  m_PrefabInstance: {fileID: 529376776}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1316194542
 Mesh:
   m_ObjectHideFlags: 0
@@ -29100,7 +29105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2040783066}
   orientation: {fileID: 1546899434}
-  timeInDash: 0
+  velocityChangeMidDashStrength: 0
+  camera: {fileID: 1313575999}
+  timeInDash: 0.02
 --- !u!1 &1505337032
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class PlayerDash : State
 {
     [SerializeField] private Player player;
     [SerializeField] private Transform orientation;
+    [SerializeField] private float velocityChangeMidDashStrength;
     [SerializeField] private GameObject camera;
     private Vector3 lastVelocity;
 
@@ -65,7 +66,7 @@ public class PlayerDash : State
             dashDir = lastMovementVector;
         }
         
-        dashDir = Vector3.Slerp(lastMovementVector, dashDir, 0.02f).normalized;
+        dashDir = Vector3.Slerp(lastMovementVector, dashDir, velocityChangeMidDashStrength).normalized;
         player.rb.linearVelocity = dashDir * stats.DashSpeed;
 
         lastMovementVector = dashDir;
