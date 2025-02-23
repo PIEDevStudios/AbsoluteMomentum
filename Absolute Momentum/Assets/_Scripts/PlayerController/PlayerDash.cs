@@ -54,7 +54,7 @@ public class PlayerDash : State
 #if AllowVelocityChangeMidDash
     private void SetDashVelocity()
     {
-#if I1
+#if I1 || I2
         Vector3 dashDir = (orientation.forward * playerInput.moveVector.y + orientation.right * playerInput.moveVector.x).normalized;
 #elif I3
         Vector3 dashDir = (camera.transform.forward * playerInput.moveVector.y + camera.transform.right * playerInput.moveVector.x).normalized;
