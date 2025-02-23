@@ -1,19 +1,24 @@
+using Unity.Multiplayer.Center.NetcodeForGameObjectsExample;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerWalljumpManager : MonoBehaviour
+public class PlayerWalljumpManager : NetworkBehaviour
 {
     [SerializeField] private Player player;
     private WallSensor wallSensor => player.wallSensor;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void OnNetworkSpawn()
     {
-        
+        if (!IsOwner)
+        {
+            return;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!IsOwner) return;
         
         if (player.stateMachine.currentState == player.wallrun)
         {

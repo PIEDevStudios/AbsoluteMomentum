@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayLength: 0.6
   playerCapsuleCollider: {fileID: 5730637736431374959}
+  radiusMultiplier: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -275,15 +276,20 @@ MonoBehaviour:
   <move>k__BackingField: {fileID: 1618725839944101103}
   <airborne>k__BackingField: {fileID: 645736383528987055}
   <slide>k__BackingField: {fileID: 5952704536679141815}
+  <wallrun>k__BackingField: {fileID: 0}
   <groundSensor>k__BackingField: {fileID: 4101196671528148134}
   <wallSensor>k__BackingField: {fileID: 7603103142646631856}
   <slopeSensor>k__BackingField: {fileID: 1100782720451990777}
-  graphics: {fileID: 2009142866258475792}
+  <graphics>k__BackingField: {fileID: 0}
   <playerObj>k__BackingField: {fileID: 5034370465468976250}
+  <orientation>k__BackingField: {fileID: 0}
   stats: {fileID: 11400000, guid: c8f0da422cc38be46b59da0d57816f3d, type: 2}
   <playerInput>k__BackingField: {fileID: 1525283314685725058}
   <playerCollider>k__BackingField: {fileID: 5730637736431374959}
   jumpManager: {fileID: 4919181516297226756}
+  <playerSpeedManager>k__BackingField: {fileID: 0}
+  wallrunResetTimer: 0
+  leavingGround: 0
   spawnPos: {x: 0, y: 2, z: 0}
 --- !u!114 &1525283314685725058
 MonoBehaviour:
@@ -419,7 +425,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1299262452964842265}
+  <grounded>k__BackingField: {fileID: 0}
+  <airborne>k__BackingField: {fileID: 0}
   orientation: {fileID: 5239416510845905334}
+  colliderPivot: {fileID: 0}
+  graphics: {fileID: 0}
 --- !u!1 &5080216241117331571
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,10 +725,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaba382b981d2de42bb132a322a42703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayLength: 0
+  player: {fileID: 0}
+  wallCheckDistance: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
+  minHeightSensor: {fileID: 0}
 --- !u!1 &7845907470865677617
 GameObject:
   m_ObjectHideFlags: 0

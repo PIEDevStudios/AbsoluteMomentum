@@ -1,9 +1,10 @@
 using Unity.Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class ThirdPersonCam : MonoBehaviour
+public class ThirdPersonCam : NetworkBehaviour
 {
     public Transform orientation;
     public Transform PlayerTransform;
@@ -17,8 +18,13 @@ public class ThirdPersonCam : MonoBehaviour
     {
         freeLookCam = GetComponent<CinemachineOrbitalFollow>();
     }
-    private void Start()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner)
+        {
+            enabled = false;
+            return;
+        }
         Cursor.lockState = CursorLockMode.Locked;
     }
 

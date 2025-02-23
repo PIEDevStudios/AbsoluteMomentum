@@ -1,10 +1,11 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Multiplayer.Center.NetcodeForGameObjectsExample;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerJumpManager : MonoBehaviour
+public class PlayerJumpManager : ClientNetworkTransform
 {
     [Header("Player Components")]
     [SerializeField] private Rigidbody rb;
@@ -18,8 +19,12 @@ public class PlayerJumpManager : MonoBehaviour
     private int framesSinceLastSpacebar, framesSinceOnGround;
     private bool jumping;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         framesSinceLastSpacebar = (int)FrameBufferNum; // ensure player doesn't jump on start
         framesSinceOnGround = (int)FrameBufferNum;
     }
@@ -27,6 +32,8 @@ public class PlayerJumpManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
+        
         if (playerInput.jumpPressedThisFrame)
         {
             framesSinceLastSpacebar = 0;
@@ -47,6 +54,7 @@ public class PlayerJumpManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!IsOwner) return;
         if (framesSinceOnGround == -1)
         {
             framesSinceOnGround = (int)FrameBufferNum;

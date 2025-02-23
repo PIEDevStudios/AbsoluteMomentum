@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Player : StateMachineCore
@@ -35,6 +36,9 @@ public class Player : StateMachineCore
     [field:SerializeField] public CapsuleCollider playerCollider {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
+    [SerializeField] private CinemachineVirtualCameraBase playerCamera;
+    [SerializeField] private AudioListener audioListner;
+
 
     [ReadOnly] public float wallrunResetTimer;
     [ReadOnly] public bool leavingGround;
@@ -47,10 +51,19 @@ public class Player : StateMachineCore
     
 
     #region Unity Methods
-    void Awake()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner)
+        {
+            audioListner.enabled = false;
+            playerCamera.Priority = 0;
+            enabled = false;
+            return;
+        }
+        
         SetupInstances();
-        ResetPlayer();
+        stateMachine.SetState(idle);
+        // ResetPlayer();
         
         // Disable gravity and simulate gravity manually (to allow for different gravity scales)
         rb.useGravity = false;
@@ -58,10 +71,16 @@ public class Player : StateMachineCore
         ChangeGravity(stats.NormalGravity);
         
         Cursor.lockState = CursorLockMode.Locked;
+        
+        audioListner.enabled = true;
+        playerCamera.Priority = 100;
+        
     }
     
     void Update()
     {
+        if (!IsOwner) return;
+        
         // Calls update logic in the currently active state
         stateMachine.currentState.DoUpdateBranch();
         wallrunResetTimer -= Time.deltaTime;
@@ -92,6 +111,8 @@ public class Player : StateMachineCore
     
     void FixedUpdate() 
     {
+        if (!IsOwner) return;
+        
         if (rb.linearVelocity.y > 0)
         {
             // Simulate custom gravity
@@ -211,11 +232,10 @@ public class Player : StateMachineCore
     
     #region Debug Methods
     /// <summary>
-    /// DEBUG METHOD. Resets the player's position and health
+    /// DEBUG METHOD. Resets the player's position
     /// </summary>
     private void ResetPlayer()
     {
-        stateMachine.SetState(idle);
         rb.linearVelocity = Vector3.zero;
         rb.transform.position = spawnPos;
     }
@@ -224,7 +244,7 @@ public class Player : StateMachineCore
     {
         base.OnDrawGizmos();
 #if UNITY_EDITOR
-        if (Application.isPlaying)
+        if (Application.isPlaying && IsOwner)
         {
             GUIStyle style = new GUIStyle();
             style.alignment = TextAnchor.MiddleCenter;
@@ -235,6 +255,6 @@ public class Player : StateMachineCore
         }
 #endif
     }
-    #endregion
+     #endregion
     
 }

@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using static UnityEngine.KeyCode;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : NetworkBehaviour
 {
     [SerializeField] private InputActionAsset playerInputAction;
     public Vector2 moveVector { get; private set; }
@@ -23,9 +24,10 @@ public class PlayerInput : MonoBehaviour
     public bool slideHeld { get; private set; }
     
     public bool ResetInput { get; private set;}
-
+    
     private void OnEnable()
     {
+        if (!IsOwner) return;
         playerInputAction.Enable();
     }
 

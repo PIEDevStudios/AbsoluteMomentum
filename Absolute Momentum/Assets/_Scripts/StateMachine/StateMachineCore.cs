@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public abstract class StateMachineCore : MonoBehaviour
+public abstract class StateMachineCore : NetworkBehaviour
 {
     /// <summary>
     /// Dictonary used to hold states that are NOT a part of a heirarchical state machine.
@@ -69,10 +70,10 @@ public abstract class StateMachineCore : MonoBehaviour
     public virtual void OnDrawGizmos()
     {
         #if UNITY_EDITOR
-        if (Application.isPlaying)
+        if (Application.isPlaying && stateMachine != null)
         {
             List<State> states = stateMachine.GetActiveStateBranch();
-
+    
             GUIStyle style = new GUIStyle();
             style.alignment = TextAnchor.MiddleCenter;
             if(stateMachine.currentState.isComplete)
