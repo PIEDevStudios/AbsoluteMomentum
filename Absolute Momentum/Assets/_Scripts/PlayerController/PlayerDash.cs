@@ -1,5 +1,6 @@
 #define I2
 #define AllowVelocityChangeMidDash
+#define UseCameraForVelocityChange
 #define ReorientVelocity
 
 using Unity.VisualScripting;
@@ -54,9 +55,9 @@ public class PlayerDash : State
 #if AllowVelocityChangeMidDash
     private void SetDashVelocity()
     {
-#if I1 || I2
+#if UseCameraForVelocityChange
         Vector3 dashDir = (orientation.forward * playerInput.moveVector.y + orientation.right * playerInput.moveVector.x).normalized;
-#elif I3
+#else
         Vector3 dashDir = (camera.transform.forward * playerInput.moveVector.y + camera.transform.right * playerInput.moveVector.x).normalized;
 #endif
         if (dashDir == Vector3.zero)
