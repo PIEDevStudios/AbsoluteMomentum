@@ -62,4 +62,22 @@ public class PlayerStats : ScriptableObject
     [Header("Dash")]
     public float DashSpeed;
     public float DashTime;
+    public float velocityChangeMidDashStrength;
+    public enum DashImpl
+    {
+        UseOrientation = 1,
+        UseVelocity = 2,
+        UseHorizontalVelocity = 3,
+        UseCamera = 4,
+    }
+    public enum VelocityChangeImpl
+    {
+        None = 1,
+        UseOrientation = 2,
+        UseCamera = 3,
+    }
+    
+    public DashImpl DashImplementation;
+    public VelocityChangeImpl VelocityChangeImplementation;
+    public bool ReorientVelocity;
 }
