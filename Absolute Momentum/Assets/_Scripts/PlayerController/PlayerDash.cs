@@ -99,7 +99,7 @@ public class PlayerDash : State
             }
         
             dashDir = Vector3.Slerp(lastMovementVector, dashDir, stats.velocityChangeMidDashStrength).normalized;
-            player.rb.linearVelocity = dashDir * stats.DashSpeed;
+            player.rb.linearVelocity = dashDir * DashSpeed;
 
             lastMovementVector = dashDir;
         }
