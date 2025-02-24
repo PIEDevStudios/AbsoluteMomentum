@@ -72,34 +72,42 @@ public class PlayerJumpManager : MonoBehaviour
     {
         Debug.Log("Attempt Jump");
         
+        // If its been too long since the last jump input, return
+        if (framesSinceOnGround >= FrameBufferNum)
+        {
+            player.leavingGround = false;
+            return;
+        }
+        
         // Only allow the player to jump in these states
         if (!(player.stateMachine.currentState is PlayerMove || player.stateMachine.currentState is PlayerIdle || player.stateMachine.currentState is PlayerSlide)) return;
 
-        if (framesSinceOnGround < FrameBufferNum)
+
+
+        if(player.groundSensor.grounded || player.slopeSensor.isOnSlope)
         {
-
-
-            if(player.groundSensor.grounded || player.slopeSensor.isOnSlope)
+            if (player.stateMachine.currentState != player.slide)
             {
-                if (player.stateMachine.currentState != player.slide)
-                {
-                    player.stateMachine.SetState(player.airborne);
-                }
-                
-                
-                Debug.Log("Jump");
-                
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-                rb.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse);
+                player.stateMachine.SetState(player.airborne);
             }
             
-           
-
-            jumping = true;
-
-            framesSinceLastSpacebar = (int)FrameBufferNum; // ensure two jumps don't happen off one input
-            framesSinceOnGround = -1; // magic� (look at fixed update)
+            
+            Debug.Log("Jump");
+            
+            
+            // If we buffer our jump, reset our y velocity before the jump
+            if (framesSinceLastSpacebar != 1)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            }
+            rb.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse);
+            player.leavingGround = true;
         }
+        
+        jumping = true;
+
+        framesSinceLastSpacebar = (int)FrameBufferNum; // ensure two jumps don't happen off one input
+        framesSinceOnGround = -1; // magic� (look at fixed update)
     }
 
     private void OnDrawGizmos()

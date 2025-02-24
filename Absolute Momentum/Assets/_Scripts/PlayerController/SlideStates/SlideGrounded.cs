@@ -14,7 +14,7 @@ public class SlideGrounded : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        
+        player.playerSpeedManager.currentCurve = stats.slideDragCurve;
         speedOnEnter = Vector3.zero;
         skipFirstLimitCall = true;
         
@@ -81,7 +81,6 @@ public class SlideGrounded : State
         Debug.Log("Flat Vel: " + flatVel);
         Debug.Log("Corrected Force Vector: " + perpendicularForce);
         rb.AddForce(perpendicularForce, ForceMode.Force);
-        LimitVelocity();
         StickToSlope();
     }
 
@@ -122,47 +121,47 @@ public class SlideGrounded : State
     /// If the player's velocity drops below the hardMaxSpeed limit and hardMaxSpeed > softMaxSpeed, set new hardMaxSpeed limit to current velo
     /// If the player's velocity drops below the hardMaxSpeed limit and currentVelo <= softMaxSpeed, set new hardMaxSpeed limit to softMaxSpeed 
     /// </summary>
-    private void LimitVelocity()
-    {
-        // Skips first limit call to wait for boost force to kick in
-        if (skipFirstLimitCall)
-        {
-            skipFirstLimitCall = false;
-            return;
-        }
-        
-        // set speedOnEnter once boost force has kicked in
-        if (speedOnEnter == Vector3.zero)
-        {
-            // for speed limiting
-            speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-            hardMaxSpeed = speedOnEnter.magnitude;
-            softMaxSpeed = 0f;
-            return;
-        }
-        
-        
-        
-        // Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        // if (flatVel.magnitude > hardMaxSpeed)
-        // {
-        //     Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
-        //     rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-        // }
-        // flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        //
-        // if (flatVel.magnitude < hardMaxSpeed && flatVel.magnitude > softMaxSpeed)
-        // {
-        //     hardMaxSpeed = flatVel.magnitude;
-        // }
-        // else if (flatVel.magnitude < softMaxSpeed)
-        // {
-        //     hardMaxSpeed = softMaxSpeed;
-        // }
-        
-        
-        // Clamp Fall speed
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
-    }
+    // private void LimitVelocity()
+    // {
+    //     // Skips first limit call to wait for boost force to kick in
+    //     if (skipFirstLimitCall)
+    //     {
+    //         skipFirstLimitCall = false;
+    //         return;
+    //     }
+    //     
+    //     // set speedOnEnter once boost force has kicked in
+    //     if (speedOnEnter == Vector3.zero)
+    //     {
+    //         // for speed limiting
+    //         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+    //         hardMaxSpeed = speedOnEnter.magnitude;
+    //         softMaxSpeed = 0f;
+    //         return;
+    //     }
+    //     
+    //     
+    //     
+    //     // Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+    //     // if (flatVel.magnitude > hardMaxSpeed)
+    //     // {
+    //     //     Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
+    //     //     rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+    //     // }
+    //     // flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+    //     //
+    //     // if (flatVel.magnitude < hardMaxSpeed && flatVel.magnitude > softMaxSpeed)
+    //     // {
+    //     //     hardMaxSpeed = flatVel.magnitude;
+    //     // }
+    //     // else if (flatVel.magnitude < softMaxSpeed)
+    //     // {
+    //     //     hardMaxSpeed = softMaxSpeed;
+    //     // }
+    //     
+    //     
+    //     // Clamp Fall speed
+    //     rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
+    // }
     
 }

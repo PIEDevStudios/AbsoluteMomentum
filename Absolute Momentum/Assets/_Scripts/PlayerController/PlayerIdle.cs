@@ -14,6 +14,7 @@ public class PlayerIdle : State
         // In player idle and move states, we set the gravity to 0 so we don't slide down slopes
         player.ChangeGravity(0);
         rb.AddForce(-player.groundSensor.hit.normal * 2f, ForceMode.Impulse);
+        player.playerSpeedManager.currentCurve = stats.groundDragCurve;
     }
 
     public override void DoExitLogic()
