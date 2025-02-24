@@ -176,6 +176,8 @@ MonoBehaviour:
   DashSpeed: 50
   DashTime: 0.2
   velocityChangeMidDashStrength: 0.04
+  AddSpeedToDash: 2
   DashImplementation: 2
   VelocityChangeImplementation: 1
   ReorientVelocity: 1
+  AddSpeedFromDash: 3

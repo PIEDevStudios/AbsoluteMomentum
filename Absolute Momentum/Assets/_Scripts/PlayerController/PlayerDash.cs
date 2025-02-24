@@ -15,7 +15,7 @@ public class PlayerDash : State
     private PlayerInput playerInput => player.playerInput;
 
     private Vector3 lastMovementVector;
-
+    private float DashSpeed;
     
     public override void DoEnterLogic()
     {
@@ -53,6 +53,27 @@ public class PlayerDash : State
         {
             lastMovementVector = camera.transform.forward;
         }
+        
+        if (stats.AddSpeedToDash == PlayerStats.DashSpeedAddImpl.AddAllSpeed)
+        {
+            DashSpeed = stats.DashSpeed + player.rb.linearVelocity.magnitude;
+        }
+        else if (stats.AddSpeedToDash == PlayerStats.DashSpeedAddImpl.AddHorizontalSpeed)
+        {
+            DashSpeed = stats.DashSpeed + Vector3.ProjectOnPlane(player.rb.linearVelocity, Vector3.up).magnitude;
+        }
+        else if (stats.AddSpeedToDash == PlayerStats.DashSpeedAddImpl.AddOrientedSpeed)
+        {
+            DashSpeed = stats.DashSpeed + Vector3.Dot(player.rb.linearVelocity, lastMovementVector);
+        }
+        else if (stats.AddSpeedToDash == PlayerStats.DashSpeedAddImpl.AddHorizontalOrientedSpeed)
+        {
+            DashSpeed = stats.DashSpeed + Vector3.Dot(Vector3.ProjectOnPlane(player.rb.linearVelocity, Vector3.up), lastMovementVector);
+        }
+        else
+        {
+            DashSpeed = stats.DashSpeed;
+        }
 
         SetDashVelocity();
     }
@@ -84,7 +105,7 @@ public class PlayerDash : State
         }
         else
         {
-            player.rb.linearVelocity = lastMovementVector * stats.DashSpeed;
+            player.rb.linearVelocity = lastMovementVector * DashSpeed;
         }
     }
 
@@ -92,14 +113,27 @@ public class PlayerDash : State
     {
         base.DoExitLogic();
         player.ChangeGravity(stats.NormalGravity);
-
+        Vector3 Direction;
         if (stats.ReorientVelocity)
         {
-            player.rb.linearVelocity = lastVelocity.magnitude * lastMovementVector;
+            Direction = lastMovementVector;
         }
         else
         {
-            player.rb.linearVelocity = lastVelocity;
+            Direction = lastVelocity.normalized;
+        }
+        
+        if (stats.AddSpeedFromDash == PlayerStats.DashSpeedFromImpl.SetDashSpeed)
+        {
+            player.rb.linearVelocity = DashSpeed * Direction;
+        }
+        else if (stats.AddSpeedFromDash == PlayerStats.DashSpeedFromImpl.AddDashSpeed)
+        {
+            player.rb.linearVelocity = (lastVelocity.magnitude + stats.DashSpeed) * Direction;
+        }
+        else
+        {
+            player.rb.linearVelocity = lastVelocity.magnitude * Direction;
         }
     }
     public override void DoFixedUpdateState()
