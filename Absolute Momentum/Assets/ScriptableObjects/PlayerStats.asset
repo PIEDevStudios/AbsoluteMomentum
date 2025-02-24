@@ -167,9 +167,17 @@ MonoBehaviour:
   NormalGravity: 45
   WallrunGravity: 10
   FallingGravityMultiplier: 1
-  CurrentGravity: 0
+  CurrentGravity: 45
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25
   JumpFrameBufferAmount: 10
   FallSpeedLimit: 60
+  DashSpeed: 50
+  DashTime: 0.2
+  velocityChangeMidDashStrength: 0.02
+  AddSpeedToDash: 2
+  DashImplementation: 1
+  VelocityChangeImplementation: 2
+  ReorientVelocity: 1
+  AddSpeedFromDash: 1

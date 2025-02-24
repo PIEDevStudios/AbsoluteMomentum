@@ -24,6 +24,8 @@ public class PlayerInput : MonoBehaviour
     
     public bool ResetInput { get; private set;}
 
+    public bool dashPressedThisFrame { get; private set; }
+
     private void OnEnable()
     {
         playerInputAction.Enable();
@@ -59,7 +61,7 @@ public class PlayerInput : MonoBehaviour
         slidePressedThisFrame = playerActionMap.FindAction("Slide").WasPerformedThisFrame();
         slideReleasedThisFrame = playerActionMap.FindAction("Slide").WasReleasedThisFrame();
         slideHeld = playerActionMap.FindAction("Slide").ReadValue<float>() > 0;
-        
+        dashPressedThisFrame = playerActionMap.FindAction("Dash").WasPerformedThisFrame();
         
         // DEBUG INPUTS
         ResetInput = Input.GetKeyDown(R);
