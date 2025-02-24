@@ -35,9 +35,7 @@ public class SmokeBomb : BaseItem
         ItemHeld = true;
 
         transform.position = player.transform.position + new Vector3(orbitRadius, 0, 0);
-        transform.DORotate(new Vector3(0, 360, 0), orbitDuration, RotateMode.FastBeyond360)
-            .SetEase(Ease.Linear)
-            .SetLoops(-1, LoopType.Restart);
+        
     }
 
     public override void ActivateItem()
@@ -52,5 +50,7 @@ public class SmokeBomb : BaseItem
         Vector3 forceToAdd = player.orientation.forward * throwForce + transform.up  * throwUpwardForce;
 
         projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
+
+        Destroy(gameObject);
     }
 }
