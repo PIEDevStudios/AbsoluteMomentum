@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2418398038787002882}
   - component: {fileID: 9188915638034826394}
   - component: {fileID: 2506813200229502347}
+  - component: {fileID: 3629568134539881294}
   m_Layer: 0
-  m_Name: Apple
+  m_Name: Smoke Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,3 +109,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3629568134539881294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9197291775953825093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969942cef3c94bb47a09405c3c80dd48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  orbitRadius: 3
+  orbitDuration: 5
+  throwForce: 70
+  throwUpwardForce: 10
+  item: {fileID: 6924457004929308279, guid: af12df61ded64144e89dcfb712dbc8b8, type: 3}
