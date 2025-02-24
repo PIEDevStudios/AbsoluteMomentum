@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
 /// Base class that all state scriptable objects inherit from.
 /// </summary>
-public class State : MonoBehaviour
+public class State : NetworkBehaviour
 {
     protected StateMachineCore core;
 
@@ -57,6 +58,12 @@ public class State : MonoBehaviour
     /// Consider this the "FixedUpdate" method of this state.
     /// </summary>
     public virtual void DoFixedUpdateState() { }
+    
+    /// <summary>
+    /// This method is called once every server tick while this state is active.
+    /// </summary>
+    public virtual void DoTickUpdateState(PlayerInput.InputValues inputValues) { }
+    
 
     /// <summary>
     /// This method is called during ExitLogic().
@@ -86,12 +93,21 @@ public class State : MonoBehaviour
     }
 
     /// <summary>
-    /// Calls DoUpdate for every state down the branch
+    /// Calls DoFixedUpdate for every state down the branch
     /// </summary>
     public void DoFixedUpdateBranch()
     {
         currentState?.DoFixedUpdateBranch();
         DoFixedUpdateState();
+    }
+
+    /// <summary>
+    /// Calls DoTickUpdate for every state down the branch
+    /// </summary>
+    public void DoTickUpdateBranch(PlayerInput.InputValues inputValues)
+    {
+        currentState?.DoTickUpdateBranch(inputValues);
+        DoTickUpdateState(inputValues);
     }
 
 }

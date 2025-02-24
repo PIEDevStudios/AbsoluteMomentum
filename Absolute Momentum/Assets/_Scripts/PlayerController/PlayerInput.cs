@@ -24,6 +24,23 @@ public class PlayerInput : NetworkBehaviour
     public bool slideHeld { get; private set; }
     
     public bool ResetInput { get; private set;}
+
+    public struct InputValues
+    {
+        public Vector2 moveVector;
+        public Vector2 lookVector;
+        public float timeOfLastMoveInput;
+        public bool jumpPressedThisFrame;
+        public bool jumpReleasedThisFrame;
+        public bool jumpHeld;
+        public bool sprintHeld;
+        public bool sprintPressedThisFrame;
+        public bool slidePressedThisFrame;
+        public bool slideReleasedThisFrame;
+        public bool slideHeld;
+        public bool ResetInput;
+    }
+    
     
     private void OnEnable()
     {
@@ -66,4 +83,25 @@ public class PlayerInput : NetworkBehaviour
         // DEBUG INPUTS
         ResetInput = Input.GetKeyDown(R);
     }
+
+    public InputValues GetInputValues()
+    {
+        return new InputValues()
+        {
+            moveVector = moveVector,
+            lookVector = lookVector,
+            timeOfLastMoveInput = timeOfLastMoveInput,
+            jumpPressedThisFrame = jumpPressedThisFrame,
+            jumpReleasedThisFrame = jumpReleasedThisFrame,
+            jumpHeld = jumpHeld,
+            sprintPressedThisFrame = sprintPressedThisFrame,
+            sprintHeld = sprintHeld,
+            slidePressedThisFrame = slidePressedThisFrame,
+            slideReleasedThisFrame = slideReleasedThisFrame,
+            slideHeld = slideHeld,
+            ResetInput = ResetInput
+        };
+    }
+        
+        
 }

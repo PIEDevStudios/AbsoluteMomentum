@@ -76,70 +76,18 @@ public class Player : StateMachineCore
         playerCamera.Priority = 100;
         
     }
-    
-    void Update()
-    {
-        if (!IsOwner) return;
-        
-        // Calls update logic in the currently active state
-        stateMachine.currentState.DoUpdateBranch();
-        wallrunResetTimer -= Time.deltaTime;
-        
-        // Debug reset player input
-        if (playerInput.ResetInput)
-        {
-            ResetPlayer();
-        }
-        
-        timeSinceLastGrounded += Time.deltaTime;
-
-        if (groundSensor.grounded)
-        {
-            timeSinceLastGrounded = 0;
-        }
-
-
-        if (!groundSensor.grounded)
-        {
-            leavingGround = false;
-        }
-        
-        // State transitions
-        HandleTransitions();
-        
-    }
-    
-    void FixedUpdate() 
-    {
-        if (!IsOwner) return;
-        
-        if (rb.linearVelocity.y > 0)
-        {
-            // Simulate custom gravity
-            rb.AddForce(Vector3.down * stats.CurrentGravity, ForceMode.Force);
-        }
-        else
-        {
-            rb.AddForce(Vector3.down * stats.CurrentGravity * stats.FallingGravityMultiplier, ForceMode.Force);
-        }
-
-        
-        // Call FixedUpdate logic
-        stateMachine.currentState.DoFixedUpdateBranch(); 
-    }
-
     #endregion
     
     #region Helper (Private) Methods
     /// <summary>
     /// Handles transitions between states in player state machine
     /// </summary>
-    private void HandleTransitions()
+    private void HandleTransitions(PlayerInput.InputValues inputValues)
     {
         
-        // Cache xInput and yInput from playerInput script
-        float xInput = playerInput.moveVector.x;
-        float yInput = playerInput.moveVector.y;
+        // Cache xInput and yInput from inputValues
+        float xInput = inputValues.moveVector.x;
+        float yInput = inputValues.moveVector.y;
         
         
         // condition for transitioning to a "grounded" state (move or idle) when transitioning from airborne
@@ -151,8 +99,8 @@ public class Player : StateMachineCore
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, slopeSensor.hit.normal);
         
         // Transition to slide
-        bool groundedSlideTransition = playerInput.slidePressedThisFrame && groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
-        bool airborneSlideTransition = playerInput.slideHeld && !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;
+        bool groundedSlideTransition = inputValues.slidePressedThisFrame && groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
+        bool airborneSlideTransition = inputValues.slideHeld && !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;
         if (groundedSlideTransition || airborneSlideTransition)
         {
             stateMachine.SetState(slide);
@@ -160,7 +108,7 @@ public class Player : StateMachineCore
         }
         
         // Transition to wallrun
-        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && playerInput.moveVector.y > 0 && stateMachine.currentState != slide && wallrunResetTimer < 0f)
+        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && inputValues.moveVector.y > 0 && stateMachine.currentState != slide && wallrunResetTimer < 0f)
         {
             stateMachine.SetState(wallrun);
             return;
@@ -180,7 +128,7 @@ public class Player : StateMachineCore
             return;
         }
 
-        float timeSinceLastMove = Time.time - playerInput.timeOfLastMoveInput;
+        float timeSinceLastMove = Time.time - inputValues.timeOfLastMoveInput;
         
         // Transition to idle
         if (groundSensor.grounded && timeSinceLastMove >= 0.1f && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
@@ -196,7 +144,53 @@ public class Player : StateMachineCore
     #endregion
     
     #region Public Methods
-    
+
+    /// <summary>
+    /// Method we use to move so that we can simulate physics
+    /// </summary>
+    public void Move(PlayerInput.InputValues inputValues)
+    {
+                
+        // Calls update logic in the currently active state
+        stateMachine.currentState.DoUpdateBranch();
+        wallrunResetTimer -= Time.deltaTime;
+        
+        // Debug reset player input
+        if (inputValues.ResetInput)
+        {
+            ResetPlayer();
+        }
+        
+        timeSinceLastGrounded += Time.deltaTime;
+
+        if (groundSensor.grounded)
+        {
+            timeSinceLastGrounded = 0;
+        }
+
+
+        if (!groundSensor.grounded)
+        {
+            leavingGround = false;
+        }
+        
+        // State transitions
+        HandleTransitions(inputValues);
+        
+        
+        // Old FixedUpdate logic
+        if (rb.linearVelocity.y > 0)
+        {
+            // Simulate custom gravity
+            rb.AddForce(Vector3.down * stats.CurrentGravity, ForceMode.Force);
+        }
+        else
+        {
+            rb.AddForce(Vector3.down * stats.CurrentGravity * stats.FallingGravityMultiplier, ForceMode.Force);
+        }
+        // Call FixedUpdate logic
+        stateMachine.currentState.DoTickUpdateBranch(inputValues);
+    }
     /// <summary>
     /// Changes the custom gravity scale that the player is currently experiencing
     /// </summary>

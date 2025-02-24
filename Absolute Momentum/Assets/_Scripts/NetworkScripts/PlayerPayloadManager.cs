@@ -12,6 +12,7 @@ public class PlayerPayloadManager : NetworkBehaviour
     private NetworkTimer timer;
     private const float KServerTickRate = 60f;
     private const int KBufferSize = 1024;
+    [SerializeField] private float reconiliationThreshold = 10f;
     
     // Netcode client specific
     private CircularBuffer<StatePayload> clientStateBuffer;
@@ -74,6 +75,7 @@ public class PlayerPayloadManager : NetworkBehaviour
         {
             HandleClientTick();
             HandleServerTick();
+            
         }
     }
 
@@ -96,6 +98,68 @@ public class PlayerPayloadManager : NetworkBehaviour
         StatePayload statePayload = ProcessMovement(inputPayload);
         
         //HandleServerReconciliation();
+    }
+
+    bool ShouldReconcile()
+    {
+        bool isNewServerState = !lastServerState.Equals(default);
+        bool isLastStateUndefinedOrDifferent = lastProcessedState.Equals(default) || !lastProcessedState.Equals(lastServerState);
+        
+        return isNewServerState && isLastStateUndefinedOrDifferent;
+    }
+
+    void HandleServerReconciliation()
+    {
+        if (!ShouldReconcile()) return;
+
+        float positionError;
+        int bufferIndex;
+        StatePayload rewindState = default;
+
+        bufferIndex = lastServerState.tick % KBufferSize;
+
+        if (bufferIndex - 1 < 0) return;
+
+        rewindState = IsHost ? serverStateBuffer.Get(bufferIndex - 1) : lastServerState;
+        positionError = Vector3.Distance(rewindState.position, clientStateBuffer.Get(bufferIndex - 1).position);
+
+        if (positionError > reconiliationThreshold)
+        {
+            ReconcileState(rewindState);
+        }
+        
+        lastProcessedState = rewindState;
+
+    }
+
+    void ReconcileState(StatePayload rewindState)
+    {
+        player.transform.position = rewindState.position;
+        player.transform.rotation = rewindState.rotation;
+        player.rb.linearVelocity = rewindState.velocity;
+        player.rb.angularVelocity = rewindState.angularVelocity;
+
+        if (!rewindState.Equals(lastServerState)) return;
+        
+        clientStateBuffer.Add(rewindState, rewindState.tick);
+        
+        // Replay all inputs from the rewind state to the current state
+
+        int tickToReplay = lastServerState.tick;
+
+        while (tickToReplay != timer.CurrentTick)
+        {
+            int bufferIndex = tickToReplay % KBufferSize;
+            StatePayload statePayload = ProcessMovement(clientInputBuffer.Get(bufferIndex));
+            clientStateBuffer.Add(statePayload, bufferIndex);
+            tickToReplay++;
+        }
+        
+        
+        
+        
+
+
     }
     
     [ServerRpc]
@@ -123,9 +187,9 @@ public class PlayerPayloadManager : NetworkBehaviour
 
     StatePayload SimulateMovement(InputPayload inputPayload)
     {
-        Physics.simulationMode = SimulationMode.Script;
         
-        // MOVE METHOD HERE
+        Physics.simulationMode = SimulationMode.Script;
+        player.Move(player.playerInput.GetInputValues());
         Physics.Simulate(Time.fixedDeltaTime);
         Physics.simulationMode = SimulationMode.FixedUpdate;
 
@@ -149,7 +213,8 @@ public class PlayerPayloadManager : NetworkBehaviour
     
     StatePayload ProcessMovement(InputPayload inputPayload)
     {
-        // INSERT MOVE METHOD HERE
+        
+        player.Move(player.playerInput.GetInputValues());
 
         return new StatePayload()
         {

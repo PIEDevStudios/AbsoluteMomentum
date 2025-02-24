@@ -568,6 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7418350527356540808}
   - component: {fileID: -6967538368332478927}
+  - component: {fileID: 3814472826557957008}
   m_Layer: 0
   m_Name: PlayerWithCameras
   m_TagString: Untagged
@@ -618,6 +619,20 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &3814472826557957008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238629911873270863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688112e3ad79db142895a5065d20d85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  player: {fileID: 927473891614420570}
 --- !u!1 &3590163595013568163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,7 +1193,7 @@ MonoBehaviour:
   InLocalSpace: 0
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
-  SlerpPosition: 0
+  SlerpPosition: 1
   authorityMode: 1
 --- !u!136 &5863603627128022828 stripped
 CapsuleCollider:
