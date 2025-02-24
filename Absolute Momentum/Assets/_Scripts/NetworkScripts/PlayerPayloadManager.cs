@@ -58,6 +58,7 @@ public class PlayerPayloadManager : NetworkBehaviour
         timer = new NetworkTimer(KServerTickRate);
         clientStateBuffer = new CircularBuffer<StatePayload>(KBufferSize);
         clientInputBuffer = new CircularBuffer<InputPayload>(KBufferSize);
+        
         serverStateBuffer = new CircularBuffer<StatePayload>(KBufferSize);
         serverInputQueue = new Queue<InputPayload>();
     }
@@ -96,8 +97,9 @@ public class PlayerPayloadManager : NetworkBehaviour
         SendToServerRpc(inputPayload);
 
         StatePayload statePayload = ProcessMovement(inputPayload);
+        clientStateBuffer.Add(statePayload, bufferIndex);
         
-        //HandleServerReconciliation();
+        HandleServerReconciliation();
     }
 
     bool ShouldReconcile()
