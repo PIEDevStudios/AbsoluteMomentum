@@ -172,6 +172,8 @@ public class PlayerPayloadManager : NetworkBehaviour
 
     void HandleServerTick()
     {
+        if (!IsServer) return;
+        StatePayload statePayload;
         var bufferIndex = -1;
         while (serverInputQueue.Count > 0)
         {
@@ -179,7 +181,22 @@ public class PlayerPayloadManager : NetworkBehaviour
             
             bufferIndex = inputPayload.tick % KBufferSize;
             
-            StatePayload statePayload = SimulateMovement(inputPayload);
+            if (IsHost) //If we dont check if its host then we will have double input from host. I mean host will move twice faster then he should
+            {
+                statePayload = new StatePayload()
+                {
+                    tick = inputPayload.tick,
+                    position = player.transform.position,
+                    rotation = player.transform.rotation,
+                    velocity = player.rb.linearVelocity,
+                    angularVelocity = player.rb.angularVelocity
+                };
+                serverStateBuffer.Add(statePayload, bufferIndex);
+                SendToClientRpc(statePayload);
+                continue;
+            }
+            
+            statePayload = SimulateMovement(inputPayload);
             serverStateBuffer.Add(statePayload, bufferIndex);
         }
 
