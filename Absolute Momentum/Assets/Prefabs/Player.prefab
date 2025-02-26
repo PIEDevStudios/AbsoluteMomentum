@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49755b1510b6c5945bb0a1782741e51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   playerInput: {fileID: 1525283314685725058}
   player: {fileID: 1299262452964842265}
   orientation: {fileID: 5239416510845905334}
@@ -228,6 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5340615071919367284}
+  - component: {fileID: 2144020904869229155}
   - component: {fileID: 1299262452964842265}
   - component: {fileID: 1525283314685725058}
   - component: {fileID: 4919181516297226756}
@@ -257,6 +259,31 @@ Transform:
   - {fileID: 424649657988135205}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2144020904869229155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463898940094336630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1570850608
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &1299262452964842265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0670fe68c34e748acc23c9bb9695bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   rb: {fileID: 8237087416313951437}
   statesParent: {fileID: 1655228503329868735}
   animator: {fileID: 126379346444952541}
@@ -288,6 +316,8 @@ MonoBehaviour:
   <playerCollider>k__BackingField: {fileID: 5730637736431374959}
   jumpManager: {fileID: 4919181516297226756}
   <playerSpeedManager>k__BackingField: {fileID: 0}
+  playerCamera: {fileID: 0}
+  audioListner: {fileID: 0}
   wallrunResetTimer: 0
   leavingGround: 0
   spawnPos: {x: 0, y: 2, z: 0}
@@ -303,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83dd6345abae2ed4cb2d276b04548a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   playerInputAction: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &4919181516297226756
 MonoBehaviour:
@@ -316,6 +347,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fda582db669114c92da5f6d4b81c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AuthorityMode: 0
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
+  authorityMode: 1
   rb: {fileID: 8237087416313951437}
   player: {fileID: 1299262452964842265}
   playerInput: {fileID: 1525283314685725058}
@@ -424,6 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1153e6d0ee2203c48afe7f83c7aeae2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 1299262452964842265}
   <grounded>k__BackingField: {fileID: 0}
   <airborne>k__BackingField: {fileID: 0}
@@ -526,7 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14084df8b560ab44f82ef4f198fee3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 1525283314685725058}
+  ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 1299262452964842265}
   orientation: {fileID: 5239416510845905334}
 --- !u!1 &5916963312763216956
@@ -862,6 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb5848fad86f9942a2e8583889197a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 1299262452964842265}
 --- !u!1 &9082769044036778093
 GameObject:

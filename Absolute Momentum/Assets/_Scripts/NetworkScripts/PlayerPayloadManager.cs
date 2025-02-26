@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,8 +13,10 @@ public class PlayerPayloadManager : NetworkBehaviour
     private NetworkTimer timer;
     private const float KServerTickRate = 60f;
     private const int KBufferSize = 1024;
+    [Header("Netcode")]
     [SerializeField] private float reconiliationThreshold = 10f;
-    
+    [SerializeField] private GameObject serverCube;
+    [SerializeField] private GameObject clientCube;
     // Netcode client specific
     private CircularBuffer<StatePayload> clientStateBuffer;
     private CircularBuffer<InputPayload> clientInputBuffer;
@@ -66,12 +69,14 @@ public class PlayerPayloadManager : NetworkBehaviour
     void Update()
     {
         timer.Update(Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            transform.position += transform.forward * 20f;
+        }
     }
 
     void FixedUpdate()
     {
-        if (!IsOwner) return;
-
         while (timer.ShouldTick())
         {
             HandleClientTick();
@@ -82,7 +87,7 @@ public class PlayerPayloadManager : NetworkBehaviour
 
     void HandleClientTick()
     {
-        if (!IsClient) return;
+        if (!IsClient || !IsOwner) return;
 
         var currentTick = timer.CurrentTick;
         var bufferIndex = currentTick % KBufferSize;
@@ -97,6 +102,7 @@ public class PlayerPayloadManager : NetworkBehaviour
         SendToServerRpc(inputPayload);
 
         StatePayload statePayload = ProcessMovement(inputPayload);
+        clientCube.transform.position = new Vector3(statePayload.position.x, statePayload.position.y + 4, statePayload.position.z);
         clientStateBuffer.Add(statePayload, bufferIndex);
         
         HandleServerReconciliation();
@@ -113,21 +119,18 @@ public class PlayerPayloadManager : NetworkBehaviour
     void HandleServerReconciliation()
     {
         if (!ShouldReconcile()) return;
-
-        float positionError;
-        int bufferIndex;
-        StatePayload rewindState = default;
-
-        bufferIndex = lastServerState.tick % KBufferSize;
-
+        int bufferIndex = lastServerState.tick % KBufferSize;
         if (bufferIndex - 1 < 0) return;
-
-        rewindState = IsHost ? serverStateBuffer.Get(bufferIndex - 1) : lastServerState;
-        positionError = Vector3.Distance(rewindState.position, clientStateBuffer.Get(bufferIndex - 1).position);
-
+        
+        StatePayload rewindState = IsHost ? serverStateBuffer.Get(bufferIndex - 1) : lastServerState;
+        StatePayload clientState = IsHost ? clientStateBuffer.Get(bufferIndex - 1) : clientStateBuffer.Get(bufferIndex);
+        float positionError = Vector3.Distance(rewindState.position, clientState.position);
+        Debug.Log("Server trying to reconcile. Position error: " + positionError + " RSTATE: " + rewindState.position + " CSTATE: " + clientState.position);
+ 
         if (positionError > reconiliationThreshold)
         {
             ReconcileState(rewindState);
+            Debug.Log("Server reconciled");
         }
         
         lastProcessedState = rewindState;
@@ -191,35 +194,19 @@ public class PlayerPayloadManager : NetworkBehaviour
                     velocity = player.rb.linearVelocity,
                     angularVelocity = player.rb.angularVelocity
                 };
+                serverCube.transform.position = new Vector3(statePayload.position.x, statePayload.position.y + 4, statePayload.position.z);
                 serverStateBuffer.Add(statePayload, bufferIndex);
                 SendToClientRpc(statePayload);
                 continue;
             }
             
-            statePayload = SimulateMovement(inputPayload);
+            statePayload = ProcessMovement(inputPayload);
+            serverCube.transform.position = new Vector3(statePayload.position.x, statePayload.position.y + 4, statePayload.position.z);
             serverStateBuffer.Add(statePayload, bufferIndex);
         }
 
         if (bufferIndex == -1) return;
         SendToClientRpc(serverStateBuffer.Get(bufferIndex));
-    }
-
-    StatePayload SimulateMovement(InputPayload inputPayload)
-    {
-        
-        Physics.simulationMode = SimulationMode.Script;
-        player.Move(player.playerInput.GetInputValues());
-        Physics.Simulate(Time.fixedDeltaTime);
-        Physics.simulationMode = SimulationMode.FixedUpdate;
-
-        return new StatePayload()
-        {
-            tick = inputPayload.tick,
-            position = player.transform.position,
-            rotation = player.transform.rotation,
-            velocity = player.rb.linearVelocity,
-            angularVelocity = player.rb.angularVelocity,
-        };
     }
     
     [ClientRpc]

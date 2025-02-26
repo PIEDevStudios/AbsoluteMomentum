@@ -53,7 +53,6 @@ public class PlayerMove : State
         Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
         // Adds a force to the player in the direction they are pressing relative to the camera
         //Debug.Log("MOVE FIXED UPDATE");
-        Debug.Log(inputValues.moveVector);
         rb.AddForce((forwardOriented * inputValues.moveVector.y + rightOriented * inputValues.moveVector.x).normalized * (stats.SprintAcceleration * 100f));
         StickToSlope();
     }
