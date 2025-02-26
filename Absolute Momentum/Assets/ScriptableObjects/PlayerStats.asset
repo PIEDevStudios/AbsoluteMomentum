@@ -12,32 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef464e9f8b6dd1747993335ea6a2723c, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  MaxWalkSpeed: 4
-  MaxSprintSpeed: 20
-  WalkAcceleration: 1
   SprintAcceleration: 2.5
-  GroundDrag: 10
+  GroundDrag: 0
   NoInputDeceleration: 0
   StickToSlopeForce: 100
-  AirAcceleration: 0.25
-  AirDrag: 0
-  AirSoftMaxSpeed: 10
-  AirStrafeAcceleration: 100
-  airDragCurve:
+  groundDragCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -0.004841398
-      outSlope: -0.004841398
+      time: -0.048698425
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 19.868519
-      value: 0.9038086
+      time: 10
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -45,10 +38,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 48.893215
-      value: 130.41231
-      inSlope: 4.4620104
-      outSlope: 4.4620104
+      time: 37.327328
+      value: 357.95132
+      inSlope: 13.098659
+      outSlope: 13.098659
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -56,24 +49,135 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  minimumSlideSpeed: 0
+  AirAcceleration: 100
+  AirDrag: 0
+  AirStrafeAcceleration: 100
+  airDragCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.048698425
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 50
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 71.08417
+      value: 200.34904
+      inSlope: 9.502345
+      outSlope: 9.502345
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minimumSlideSpeed: 15
   MinimumSlideAirTime: 0.25
   SlideDrag: 0.5
-  BoostYVeloMult: 1
+  BoostYVeloMult: 0
   SlopeSlideForce: 60
   SlideGroundAcceleration: 1500
-  SlideAirAcceleration: 2000
+  SlideAirAcceleration: 5000
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
+  slideDragCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.048698425
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 60
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 109.29354
+      value: 119.7398
+      inSlope: 2.4291174
+      outSlope: 0
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   wallrunForce: 10
-  wallrunResetTime: 0.25
+  wallrunResetTime: 0.4
   wallJumpUpForce: 15
-  wallJumpSideForce: 15
+  wallJumpSideForce: 30
+  wallDragCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.048698425
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 60
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 109.29354
+      value: 119.7398
+      inSlope: 2.4291174
+      outSlope: 0
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   gravityEnabled: 1
   NormalGravity: 45
+  WallrunGravity: 10
   FallingGravityMultiplier: 1
   CurrentGravity: 45
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25
   JumpFrameBufferAmount: 10
-  FallSpeedLimit: 50
+  FallSpeedLimit: 60
+  DashSpeed: 50
+  DashTime: 0.2
+  velocityChangeMidDashStrength: 0.02
+  AddSpeedToDash: 2
+  DashImplementation: 1
+  VelocityChangeImplementation: 2
+  ReorientVelocity: 1
+  AddSpeedFromDash: 1

@@ -14,6 +14,7 @@ public class Player : StateMachineCore
     [field: SerializeField] public PlayerAirborne airborne { get; private set; }
     [field: SerializeField] public PlayerSlide slide { get; private set; }
     [field: SerializeField] public PlayerWallrun wallrun { get; private set; }
+    [field: SerializeField] public PlayerDash dash { get; private set; }
 
     // Sensor scripts used for ground checks and wall checks
     [field:HorizontalLine(color: EColor.Gray)]
@@ -34,14 +35,17 @@ public class Player : StateMachineCore
     [field:SerializeField] public PlayerInput playerInput {get; private set;}
     [field:SerializeField] public CapsuleCollider playerCollider {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
+    [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
 
     [ReadOnly] public float wallrunResetTimer;
+    [ReadOnly] public bool leavingGround;
     
     // Variables used for debugging
     [Header("Debug")] 
     [SerializeField] private Vector3 spawnPos;
     
     private float timeSinceLastGrounded;
+    
 
     #region Unity Methods
     void Awake()
@@ -77,6 +81,11 @@ public class Player : StateMachineCore
         }
 
 
+        if (!groundSensor.grounded)
+        {
+            leavingGround = false;
+        }
+        
         // State transitions
         HandleTransitions();
         
@@ -114,13 +123,24 @@ public class Player : StateMachineCore
         
         
         // condition for transitioning to a "grounded" state (move or idle) when transitioning from airborne
-        bool airborneGroundCheck = stateMachine.currentState == airborne && rb.linearVelocity.y <= 0;
+        bool airborneGroundCheck = stateMachine.currentState == airborne && !leavingGround;
         
         // condition for transitioning to a "grounded" state (move or idle) when transitioning from any state besides airborne
         bool nonAirborneGroundCheck = stateMachine.currentState == idle || stateMachine.currentState == move;
         
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, slopeSensor.hit.normal);
-        
+
+        // Transition to dash
+        if (playerInput.dashPressedThisFrame && true) // TODO: ensure player has whatever item is required to dash
+        {
+            stateMachine.SetState(dash);
+            return;
+        }
+        else if (stateMachine.currentState == dash && !dash.isComplete)
+        {
+            return;
+        }
+
         // Transition to slide
         bool groundedSlideTransition = playerInput.slidePressedThisFrame && groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
         bool airborneSlideTransition = playerInput.slideHeld && !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;
@@ -138,7 +158,7 @@ public class Player : StateMachineCore
         }
         
         // Transition to airborne
-        if (!groundSensor.grounded && !slopeSensor.isOnSlope && (stateMachine.currentState != slide || stateMachine.currentState.isComplete))
+        if (!groundSensor.grounded && !slopeSensor.isOnSlope && ((stateMachine.currentState != slide && stateMachine.currentState != wallrun) || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(airborne);
             return;

@@ -9,8 +9,9 @@ public class SpeedText : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        speedText.text = "X Speed: " +
-                         new Vector3(player.rb.linearVelocity.x, 0, player.rb.linearVelocity.z).magnitude.ToString("F2") +
-                         "m/s\nY Speed: " + player.rb.linearVelocity.y.ToString("F2") + "m/s";
+        Vector3 flatVel = new Vector3(player.rb.linearVelocity.x, 0, player.rb.linearVelocity.z);
+        speedText.text = "Speed: " +
+                         flatVel.magnitude.ToString("F2") +
+                         "m/s\nV Speed: " + player.rb.linearVelocity.y.ToString("F2") + "m/s";
     }
 }
