@@ -5,10 +5,11 @@ using Vector3 = UnityEngine.Vector3;
 
 public class BoostTrigger : MonoBehaviour
 {
-    public float forceAmount = 25f;
+    public float acceleration = 35f;
     
     private PlayerInput cachedPlayerInput;
     private Rigidbody cachedRigidbody;
+    private Transform playerOrientation; // Reference to the player's orientation
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,51 +18,59 @@ public class BoostTrigger : MonoBehaviour
             return;
         }
         
-        // Cache the PlayerInput component on entry
         cachedPlayerInput = other.GetComponentInParent<PlayerInput>();
         
         if (cachedPlayerInput != null)
         {
             cachedRigidbody = cachedPlayerInput.GetComponent<Rigidbody>();
+            // Get the player's orientation component
+            playerOrientation = cachedPlayerInput.transform.Find("Orientation");
+            
+            if (playerOrientation == null)
+            {
+                Debug.LogWarning("Player Orientation not found - using player's transform");
+                playerOrientation = cachedPlayerInput.transform;
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (cachedPlayerInput != null && cachedRigidbody != null)
+        if (cachedPlayerInput != null && cachedRigidbody != null && playerOrientation != null)
         {
-            Vector3 boostDirection;
-
-            // Check if the player is moving (velocity magnitude > 0.1)
-            if (cachedRigidbody.linearVelocity.magnitude > 0.1f)
+            // Only apply boost if player is actually providing input
+            if (cachedPlayerInput.moveVector.magnitude > 0.1f)
             {
-                // Use the player's movement direction for boosting
-                boostDirection = cachedRigidbody.linearVelocity.normalized;
+                // Use player's orientation for movement direction
+                Vector3 moveDirection = (playerOrientation.forward * cachedPlayerInput.moveVector.y + 
+                                       playerOrientation.right * cachedPlayerInput.moveVector.x).normalized;
+                
+                // Check if we're moving roughly in the same direction as current velocity
+                if (cachedRigidbody.linearVelocity.magnitude > 0.1f)
+                {
+                    float dotProduct = Vector3.Dot(moveDirection, cachedRigidbody.linearVelocity.normalized);
+                    // If we're moving in a very different direction, don't apply boost
+                    if (dotProduct < -0.5f)
+                    {
+                        return;
+                    }
+                }
+                
+                // Apply boost in the movement direction
+                cachedRigidbody.AddForce(moveDirection * acceleration, ForceMode.VelocityChange);
+                
+                Debug.Log($"Boost applied in direction: {moveDirection}, Current Velocity: {cachedRigidbody.linearVelocity}");
             }
-            else
-            {
-                // Default to the direction the player is facing
-                boostDirection = Vector3.zero;
-            }
-
-            // Apply force
-            cachedRigidbody.AddForce(boostDirection * forceAmount, ForceMode.VelocityChange);
-            
-            Debug.Log("Boost applied in direction: " + boostDirection);
-        }
-        else
-        {
-            Debug.Log("Object inside trigger is not the player or missing components.");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // Clear cached references on exit
         if (cachedPlayerInput == other.GetComponentInParent<PlayerInput>())
         {
             cachedPlayerInput = null;
             cachedRigidbody = null;
+            playerOrientation = null;
         }
     }
 }
