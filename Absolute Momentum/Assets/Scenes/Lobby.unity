@@ -590,13 +590,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1162899898218621875, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1274684875278229346, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127000695595195218, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 2178071878704560964, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2543933793887329125, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: lobbyStartTrigger
       value: 
       objectReference: {fileID: 1854381714}
+    - target: {fileID: 3078890735658695397, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921479032613712938, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7084287641340502982, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175287942948005950, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8274325484903086195, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: m_Pivot.x
@@ -678,8 +706,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8338368616356418349, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420331555165157175, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8845237882314999781, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+    - {fileID: 8254927548005173462, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+    - {fileID: 8175287942948005950, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
