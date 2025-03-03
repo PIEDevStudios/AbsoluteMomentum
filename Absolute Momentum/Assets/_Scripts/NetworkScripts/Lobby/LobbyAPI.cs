@@ -39,7 +39,6 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
     public delegate void LobbyJoinedHandler(Lobby lobby);
     public event LobbyJoinedHandler OnLobbyJoined;
 
-    // [SerializeField] private TutorialController tutorialController;
 
     private async void Start()
     {
@@ -53,10 +52,6 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
         if (!AuthenticationService.Instance.IsSignedIn)
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            // if (tutorialController != null)
-            // {
-            //     tutorialController.CheckTutorial();
-            // }
         }
 
         playerName = "Emery" + UnityEngine.Random.Range(10,99);
@@ -114,7 +109,8 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
 
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
-            RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
+            // RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
+            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(allocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartHost();
@@ -216,8 +212,9 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
+            // RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
 
+            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartClient();
@@ -253,8 +250,9 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
 
+            // RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
+            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartClient();
