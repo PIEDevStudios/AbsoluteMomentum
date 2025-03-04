@@ -106,7 +106,7 @@ public class MainMenu : MonoBehaviour
         }
 
         lobbyHud.SetActive(true);
-        lobbyMenu.SetActive(false);
+        hostLobbyMenu.SetActive(false);
     }
 
     public async void JoinRelay()
