@@ -1,451 +1,249 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Unity.Services.Authentication;
+using UnityEngine;
 using Unity.Services.Core;
+using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
-using UnityEngine;
-using Unity.Netcode.Transports.UTP;
-using Unity.Netcode;
-using Unity.Networking.Transport.Relay;
-using Unity.Services.Relay.Models;
 using Unity.Services.Relay;
+using Unity.Services.Relay.Models;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using Unity.Networking.Transport.Relay;
 using TMPro;
-using System.Collections;
-using UnityEngine.SceneManagement;
 
-public class LobbyAPI : SingletonPersistent<LobbyAPI>
+public class LobbyManager : MonoBehaviour
 {
-    public event Action<List<Lobby>> LobbiesUpdated;
+    [SerializeField] private TextMeshProUGUI usernameText;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    public static LobbyManager Instance { get; private set; }
+    
+    private Lobby currentLobby;
+    private string playerName;
 
+    // Time variables for periodic lobby updates
     private float heartbeatTimeMax = 15f;
     private float lobbyUpdateTimeMax = 1.1f;
-    private int lobbyCount = 25;
-
-    private Lobby hostLobby;
-    private Lobby joinedLobby;
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
 
-    private string playerName;
-    [SerializeField] private TextMeshProUGUI usernameText;
-
-    public delegate void LobbyJoinedHandler(Lobby lobby);
-    public event LobbyJoinedHandler OnLobbyJoined;
-
-
-    private async void Start()
+    private void Awake()
     {
-        await UnityServices.InitializeAsync();
-
-        AuthenticationService.Instance.SignedIn += () => {
-            if(AuthenticationService.Instance.PlayerName != null)
-                usernameText.text = AuthenticationService.Instance.PlayerName.Substring(0, AuthenticationService.Instance.PlayerName.Length - 5);
-        };
-
-        if (!AuthenticationService.Instance.IsSignedIn)
+        // Singleton pattern
+        if (Instance == null)
         {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            // Initialize UGS services as soon as possible
+            // This tells the compiler you’re intentionally not awaiting the task.
+            _ = InitializeServices();
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
-        playerName = "Emery" + UnityEngine.Random.Range(10,99);
-        Debug.Log(playerName);
+    // Initialize Unity Gaming Services and sign in
+    private async Task InitializeServices()
+    {
+        try
+        {
+            await UnityServices.InitializeAsync();
+
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            }
+
+            // Generate a random player name and update the UI if set
+            playerName = "Player" + UnityEngine.Random.Range(100, 999);
+            if (usernameText != null)
+            {
+                usernameText.text = playerName;
+            }
+
+            // Initialize timers
+            heartbeatTimer = heartbeatTimeMax;
+            lobbyUpdateTimer = lobbyUpdateTimeMax;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to initialize Unity Services: " + e);
+        }
     }
 
     private void Update()
     {
+        // Periodically send heartbeat pings and update lobby info
         HandleLobbyHeartbeat();
         HandleLobbyPollUpdate();
     }
 
+    // Sends a heartbeat to keep the lobby alive (for hosts)
     private async void HandleLobbyHeartbeat()
     {
-        if (hostLobby != null)
+        if (currentLobby != null && IsHost())
         {
             heartbeatTimer -= Time.deltaTime;
-
             if (heartbeatTimer < 0f)
             {
                 heartbeatTimer = heartbeatTimeMax;
-
-                await LobbyService.Instance.SendHeartbeatPingAsync(hostLobby.Id);
+                try
+                {
+                    await LobbyService.Instance.SendHeartbeatPingAsync(currentLobby.Id);
+                    Debug.Log("Heartbeat sent for lobby " + currentLobby.Id);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Heartbeat error: " + e);
+                }
             }
         }
     }
 
+    // Updates lobby information periodically (for joined lobbies)
     private async void HandleLobbyPollUpdate()
     {
-        if (joinedLobby != null)
+        if (currentLobby != null)
         {
             lobbyUpdateTimer -= Time.deltaTime;
-
             if (lobbyUpdateTimer < 0f)
             {
                 lobbyUpdateTimer = lobbyUpdateTimeMax;
-
-                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
-                joinedLobby = lobby;
+                try
+                {
+                    currentLobby = await LobbyService.Instance.GetLobbyAsync(currentLobby.Id);
+                    Debug.Log("Lobby info updated. Player count: " + currentLobby.Players.Count);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Lobby poll update error: " + e);
+                }
             }
         }
     }
 
-    // Created lobby
-    public async void CreateLobby(string lobbyName, 
-                                  int maxPlayers, 
-                                  bool isPriv, 
-                                  string mapName,
-                                  string gamemode)
+    // Creates a lobby and sets up a relay allocation for hosting
+    public async void CreateLobby(string lobbyName, int maxPlayers, bool isPrivate, string mapName, string gameMode)
     {
         try
         {
-            // Host relay
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
-
+            // Create relay allocation for host (maxPlayers-1 because host is already connected)
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxPlayers - 1);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-
-            // RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
-            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(allocation, "dtls");
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
+            RelayServerData relayData = AllocationUtils.ToRelayServerData(allocation, "dtls");
+            
+            // Set relay data for the host transport component
+            UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+            transport.SetRelayServerData(relayData);
+            
+            // Start the host using Netcode for GameObjects
             NetworkManager.Singleton.StartHost();
 
-            // Lobby options
-            CreateLobbyOptions lobbyOptions = new CreateLobbyOptions
+            // Prepare lobby creation options with additional data
+            CreateLobbyOptions options = new CreateLobbyOptions
             {
-                IsPrivate = isPriv,
-                Player = GetPlayer(),
+                IsPrivate = isPrivate,
+                Player = GetPlayerData(),
                 Data = new Dictionary<string, DataObject>
                 {
-                    // Map, string name, and S1 allows us to filter later on
-                    {"Map", new DataObject(DataObject.VisibilityOptions.Public, mapName, DataObject.IndexOptions.S1)},
-                    {"Gamemode", new DataObject(DataObject.VisibilityOptions.Public, gamemode, DataObject.IndexOptions.S2)},
-                    {"RelayCode", new DataObject(DataObject.VisibilityOptions.Public, joinCode, DataObject.IndexOptions.S3)},
+                    { "Map", new DataObject(DataObject.VisibilityOptions.Public, mapName, DataObject.IndexOptions.S1) },
+                    { "GameMode", new DataObject(DataObject.VisibilityOptions.Public, gameMode, DataObject.IndexOptions.S2) },
+                    { "RelayJoinCode", new DataObject(DataObject.VisibilityOptions.Public, joinCode, DataObject.IndexOptions.S3) }
                 }
             };
 
-            // Currently a var because lobby.cs is confusing the system
-            Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, lobbyOptions);
-
-            hostLobby = lobby;
-            joinedLobby = hostLobby;
-            
-            Debug.Log("Create Lobby! " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Id + " " + lobby.LobbyCode);
-            Players(hostLobby);
-
-            ListLobbies();
-
+            currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+            Debug.Log("Lobby created: " + currentLobby.Name + " (" + currentLobby.Id + ")");
         }
-        catch(LobbyServiceException e)
+        catch (Exception e)
         {
-            Debug.Log(e);
+            Debug.LogError("Error creating lobby: " + e);
         }
     }
 
-    // Create list of lobbies
-    public async void ListLobbies()
-    {
-        try 
-        {
-            // Set up rules for the query lobby
-            QueryLobbiesOptions queryLobbiesOptions = new QueryLobbiesOptions
-            {
-                Count = lobbyCount,
-                Filters = new List<QueryFilter>
-                {
-                    new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT)
-                },
-                Order = new List<QueryOrder>
-                {
-                    new QueryOrder(false, QueryOrder.FieldOptions.Created)
-                }
-            };
-
-            // Query Lobbies async is queriable in the parameters
-            QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
-
-            List<Lobby> lobbies = queryResponse.Results;
-
-            Debug.Log("Lobbies Found: " + lobbies.Count);
-            foreach (Lobby lobby in lobbies)
-            {
-                Debug.Log(lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["Map"].Value);
-            }
-
-            if (LobbiesUpdated != null)
-            {
-                LobbiesUpdated.Invoke(lobbies);
-            }
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
-
-    // Join lobby with code
+    // Joins a lobby using a provided lobby code and connects to the relay
     public async void JoinLobbyByCode(string lobbyCode)
     {
         try
         {
-            JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions
+            JoinLobbyByCodeOptions options = new JoinLobbyByCodeOptions
             {
-                Player = GetPlayer()
+                Player = GetPlayerData()
             };
+
+            currentLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, options);
+            Debug.Log("Joined lobby: " + currentLobby.Name);
+
+            // Retrieve the relay join code from lobby data
+            string relayJoinCode = currentLobby.Data["RelayJoinCode"].Value;
             
-
-            Lobby lobby = await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode, joinLobbyByCodeOptions);
-            joinedLobby = lobby;
-            OnLobbyJoined?.Invoke(lobby);
-
-            Debug.Log("Joined Lobby with code " + lobbyCode);
-
-            // Joining relay
-            string joinCode = joinedLobby.Data["RelayCode"].Value;
-
-            Debug.Log("Joining Relay with " + joinCode);
-
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-
-            // RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
-
-            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
-            NetworkManager.Singleton.StartClient();
-
-            Players(lobby);
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
-
-    // Join lobby with code
-    public async void JoinLobbyById(string lobbyID)
-    {
-        try
-        {
-            JoinLobbyByIdOptions joinLobbyByIdOptions = new JoinLobbyByIdOptions
-            {
-                Player = GetPlayer()
-            };
+            // Join the relay allocation as a client
+            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode);
+            RelayServerData relayData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
             
-
-            Lobby lobby = await Lobbies.Instance.JoinLobbyByIdAsync(lobbyID, joinLobbyByIdOptions);
-            joinedLobby = lobby;
-
-            Debug.Log("Joined Lobby with ID " + lobbyID);
-
-            // Joining relay
-            string joinCode = joinedLobby.Data["RelayCode"].Value;
-
-            Debug.Log("Joining Relay with " + joinCode);
-
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-
-
-            // RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
-            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
+            // Set relay data on the client transport component
+            UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+            transport.SetRelayServerData(relayData);
+            
+            // Start the client
             NetworkManager.Singleton.StartClient();
-
-            Players(lobby);
         }
-        catch(LobbyServiceException e)
+        catch (Exception e)
         {
-            Debug.Log(e);
+            Debug.LogError("Error joining lobby: " + e);
         }
     }
 
-    private async void QuickJoinLobby()
-    {
-        // Filters avaiable to pick specific maps and other stuff
-        try
-        {
-            await LobbyService.Instance.QuickJoinLobbyAsync();
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-        
-    }
-
-    private Unity.Services.Lobbies.Models.Player GetPlayer()
+    // Creates a Player object with a name for UGS services
+    private Unity.Services.Lobbies.Models.Player GetPlayerData()
     {
         return new Unity.Services.Lobbies.Models.Player
         {
             Data = new Dictionary<string, PlayerDataObject>
             {
-                { "PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName)}
+                { "PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
             }
         };
     }
 
-    private void Players(Lobby lobby)
+    // Helper method to check if the current player is the lobby host
+    private bool IsHost()
     {
-        Debug.Log("Players in Lobby " + lobby.Name + " " + lobby.Data["Map"].Value);
-        foreach(var player in lobby.Players)
-        {
-            Debug.Log(player.Id + " " + player.Data["PlayerName"].Value);
-        }
+        return currentLobby != null && AuthenticationService.Instance.PlayerId == currentLobby.HostId;
     }
 
-    private async void UpdateLobbyMap(string map)
-    {
-        try
-        {
-            hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions 
-            {
-                Data = new Dictionary<string, DataObject> 
-                {
-                    { "Map", new DataObject(DataObject.VisibilityOptions.Public, map)}
-                }
-            });
-            joinedLobby = hostLobby;
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-        
-    }
-
-    private async void UpdatePlayerName(string newPlayerName)
-    {
-        try
-        {
-            playerName = newPlayerName;
-            await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId, new UpdatePlayerOptions
-            {
-                Data = new Dictionary<string, PlayerDataObject>
-                {
-                    { "PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName)}
-
-                }
-            });
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
-
+    // Example method to leave the lobby (for both host and client)
     public async void LeaveLobby()
     {
         try
         {
-            if (joinedLobby != null)
+            if (currentLobby != null)
             {
-                bool isHost = AuthenticationService.Instance.PlayerId == joinedLobby.HostId;
-
-                if (isHost)
+                // If host, delete the lobby; if client, simply remove yourself
+                if (IsHost())
                 {
-                    if (joinedLobby.Players.Count > 1)
-                    {
-                        MigrateLobbyHost();
-                    }
-                    else 
-                    {
-                        await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
-                    }
+                    await LobbyService.Instance.DeleteLobbyAsync(currentLobby.Id);
                 }
-
-                // Remove the current player from the joined lobby
-                await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
-
-                // Clean up lobby references
-                hostLobby = null;
-                joinedLobby = null;
+                else
+                {
+                    await LobbyService.Instance.RemovePlayerAsync(currentLobby.Id, AuthenticationService.Instance.PlayerId);
+                }
+                currentLobby = null;
+                Debug.Log("Left the lobby.");
             }
             else
             {
-                Debug.LogWarning("No lobby to leave.");
+                Debug.LogWarning("No lobby exists to leave.");
             }
         }
-        catch (LobbyServiceException e)
+        catch (Exception e)
         {
-            Debug.Log("Error leaving lobby: " + e.Message);
+            Debug.LogError("Error leaving lobby: " + e);
         }
     }
 
-    private async void KickPlayer(string playerID)
-    {
-        try
-        {
-            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, playerID);
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
-
-    private async void MigrateLobbyHost()
-    {
-        try
-        {
-            hostLobby = await Lobbies.Instance.UpdateLobbyAsync(hostLobby.Id, new UpdateLobbyOptions 
-            {
-                HostId = joinedLobby.Players[1].Id
-            });
-            joinedLobby = hostLobby;
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
-
-    private async void DeleteLobby()
-    {
-        try
-        {
-            await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-        }
-    }
-
-    // Getter methods
-    public async Task<List<Lobby>> GetLobbiesAsync()
-    {
-        try
-        {
-            QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
-            List<Lobby> lobbies = queryResponse.Results;
-            return lobbies;
-        }
-        catch(LobbyServiceException e)
-        {
-            Debug.Log(e);
-            return null;
-        }
-    }
-
-    public string GetLobbyCode()
-    {
-        if (joinedLobby == null)
-        {
-            return "";
-        }
-
-        return "Lobby Code: " + joinedLobby.LobbyCode;
-    }
-
-    public Lobby GetJoinedLobby()
-    {
-        return joinedLobby;
-    }
-
+    // You can add additional methods (QuickJoin, KickPlayer, UpdateLobby, etc.) similarly.
 }

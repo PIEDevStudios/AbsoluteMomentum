@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject lobbyMenu;
+    [SerializeField] private GameObject hostLobbyMenu;
     [SerializeField] private GameObject lobbyHud;
     [SerializeField] private GameObject lobbyStartTrigger;
     [SerializeField] private TextMeshProUGUI lobbyCodeText;
@@ -49,6 +50,17 @@ public class MainMenu : MonoBehaviour
     {
         lobbyMenu.SetActive(false);
         mainMenu.SetActive(true);
+    }
+
+    public void OpenHostLobbyMenu()
+    {
+        hostLobbyMenu.SetActive(true);
+        lobbyMenu.SetActive(false);
+    }
+    public void CloseHostLobbyMenu()
+    {
+        hostLobbyMenu.SetActive(false);
+        lobbyMenu.SetActive(true);
     }
 
     public void OpenSettings()
