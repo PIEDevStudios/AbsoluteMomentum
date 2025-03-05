@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767041133234167550}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21228492, y: -0.46536013, z: 0.11602873, w: 0.8514179}
-  m_LocalPosition: {x: -0.7942071, y: 3.8599334, z: -3.5964568}
+  m_LocalRotation: {x: 0.10567619, y: -0.5891802, z: 0.078096785, w: 0.79724544}
+  m_LocalPosition: {x: 3.101285, y: 2.6474285, z: -0.95228714}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -200,8 +200,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990830039854890529}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31942844, y: -0.4808371, z: 0.19362094, w: 0.7932667}
-  m_LocalPosition: {x: 2.8429816, y: 4.854352, z: -1.4834874}
+  m_LocalRotation: {x: 0.10567619, y: -0.5891802, z: 0.078096785, w: 0.79724544}
+  m_LocalPosition: {x: 3.101285, y: 2.6474285, z: -0.95228714}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -284,7 +284,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 3
   HorizontalAxis:
-    Value: -62.444134
+    Value: -72.93026
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -294,7 +294,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 31.658552
+    Value: -0.5264795
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -695,12 +695,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2825030478
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
+  SynchronizeTransform: 0
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
@@ -1328,7 +1328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 927473891614420570}
-  reconiliationThreshold: 10
+  reconciliationCooldownTime: 0.5
+  reconciliationThreshold: 5
   serverCube: {fileID: 5963350584269457098}
   clientCube: {fileID: 2469956734824857351}
 --- !u!4 &3954004177025399961 stripped

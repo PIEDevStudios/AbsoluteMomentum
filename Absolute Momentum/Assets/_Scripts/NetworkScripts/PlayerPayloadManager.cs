@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class PlayerPayloadManager : NetworkBehaviour
 {
@@ -11,10 +11,13 @@ public class PlayerPayloadManager : NetworkBehaviour
     
     // Netcode General
     private NetworkTimer timer;
+    private float cooldownTimer;
+    private bool canReconcile = true;
     private const float KServerTickRate = 60f;
     private const int KBufferSize = 1024;
-    [Header("Netcode")]
-    [SerializeField] private float reconiliationThreshold = 10f;
+    [Header("Netcode")] 
+    [SerializeField] private float reconciliationCooldownTime = 1f;
+    [SerializeField] private float reconciliationThreshold = 10f;
     [SerializeField] private GameObject serverCube;
     [SerializeField] private GameObject clientCube;
     // Netcode client specific
@@ -30,11 +33,13 @@ public class PlayerPayloadManager : NetworkBehaviour
     {
         public int tick;
         public Vector2 moveVector;
+        public Vector3 position;
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
             serializer.SerializeValue(ref tick);
             serializer.SerializeValue(ref moveVector);
+            serializer.SerializeValue(ref position);
         }
     }
     
@@ -61,7 +66,7 @@ public class PlayerPayloadManager : NetworkBehaviour
         timer = new NetworkTimer(KServerTickRate);
         clientStateBuffer = new CircularBuffer<StatePayload>(KBufferSize);
         clientInputBuffer = new CircularBuffer<InputPayload>(KBufferSize);
-        
+        cooldownTimer = reconciliationCooldownTime;
         serverStateBuffer = new CircularBuffer<StatePayload>(KBufferSize);
         serverInputQueue = new Queue<InputPayload>();
     }
@@ -69,32 +74,32 @@ public class PlayerPayloadManager : NetworkBehaviour
     void Update()
     {
         timer.Update(Time.deltaTime);
+        cooldownTimer -= Time.deltaTime;
+        canReconcile = cooldownTimer <= 0f;
+        
         if (Input.GetKeyDown(KeyCode.Q))
         {
             transform.position += transform.forward * 20f;
         }
-    }
 
-    void FixedUpdate()
-    {
         while (timer.ShouldTick())
         {
+            
             HandleClientTick();
             HandleServerTick();
-            
         }
     }
-
     void HandleClientTick()
     {
-        if (!IsClient || !IsOwner) return;
-
+        if (!IsOwner) return;
+        Debug.Log("Handling Client Tick");
         var currentTick = timer.CurrentTick;
         var bufferIndex = currentTick % KBufferSize;
 
         InputPayload inputPayload = new InputPayload()
         {
             tick = currentTick,
+            position = player.transform.position,
             moveVector = player.playerInput.moveVector
         };
         
@@ -102,7 +107,6 @@ public class PlayerPayloadManager : NetworkBehaviour
         SendToServerRpc(inputPayload);
 
         StatePayload statePayload = ProcessMovement(inputPayload);
-        clientCube.transform.position = new Vector3(statePayload.position.x, statePayload.position.y + 4, statePayload.position.z);
         clientStateBuffer.Add(statePayload, bufferIndex);
         
         HandleServerReconciliation();
@@ -113,13 +117,18 @@ public class PlayerPayloadManager : NetworkBehaviour
         bool isNewServerState = !lastServerState.Equals(default);
         bool isLastStateUndefinedOrDifferent = lastProcessedState.Equals(default) || !lastProcessedState.Equals(lastServerState);
         
-        return isNewServerState && isLastStateUndefinedOrDifferent;
+        return isNewServerState && isLastStateUndefinedOrDifferent && canReconcile;
     }
 
     void HandleServerReconciliation()
     {
+        
+        Debug.Log("Should Reconcile: " + ShouldReconcile() + " lastServerState: "  + lastServerState.tick + lastServerState.position + " lastProcessedState: "  + lastProcessedState.tick + lastProcessedState.position);
+        
         if (!ShouldReconcile()) return;
+        
         int bufferIndex = lastServerState.tick % KBufferSize;
+        
         if (bufferIndex - 1 < 0) return;
         
         StatePayload rewindState = IsHost ? serverStateBuffer.Get(bufferIndex - 1) : lastServerState;
@@ -127,9 +136,10 @@ public class PlayerPayloadManager : NetworkBehaviour
         float positionError = Vector3.Distance(rewindState.position, clientState.position);
         Debug.Log("Server trying to reconcile. Position error: " + positionError + " RSTATE: " + rewindState.position + " CSTATE: " + clientState.position);
  
-        if (positionError > reconiliationThreshold)
+        if (positionError > reconciliationThreshold)
         {
             ReconcileState(rewindState);
+            cooldownTimer = reconciliationCooldownTime;
             Debug.Log("Server reconciled");
         }
         
@@ -139,20 +149,21 @@ public class PlayerPayloadManager : NetworkBehaviour
 
     void ReconcileState(StatePayload rewindState)
     {
-        player.transform.position = rewindState.position;
-        player.transform.rotation = rewindState.rotation;
+        player.rb.position = rewindState.position;
+        player.rb.rotation = rewindState.rotation;
         player.rb.linearVelocity = rewindState.velocity;
         player.rb.angularVelocity = rewindState.angularVelocity;
 
         if (!rewindState.Equals(lastServerState)) return;
         
         clientStateBuffer.Add(rewindState, rewindState.tick);
+       
         
         // Replay all inputs from the rewind state to the current state
 
         int tickToReplay = lastServerState.tick;
 
-        while (tickToReplay != timer.CurrentTick)
+        while (tickToReplay < timer.CurrentTick)
         {
             int bufferIndex = tickToReplay % KBufferSize;
             StatePayload statePayload = ProcessMovement(clientInputBuffer.Get(bufferIndex));
@@ -167,23 +178,26 @@ public class PlayerPayloadManager : NetworkBehaviour
 
     }
     
-    [ServerRpc]
+    [Rpc(SendTo.Server)]
     void SendToServerRpc(InputPayload input)
     {
+        // Debug.Log("Recieved input from client! Tick: " + input.tick + " Position: " + input.position);
+        clientCube.transform.position = new Vector3(input.position.x, input.position.y + 4, input.position.z);
         serverInputQueue.Enqueue(input);
     }
 
     void HandleServerTick()
     {
         if (!IsServer) return;
-        StatePayload statePayload;
+
         var bufferIndex = -1;
         while (serverInputQueue.Count > 0)
         {
             InputPayload inputPayload = serverInputQueue.Dequeue();
             
             bufferIndex = inputPayload.tick % KBufferSize;
-            
+
+            StatePayload statePayload;
             if (IsHost) //If we dont check if its host then we will have double input from host. I mean host will move twice faster then he should
             {
                 statePayload = new StatePayload()
@@ -209,10 +223,11 @@ public class PlayerPayloadManager : NetworkBehaviour
         SendToClientRpc(serverStateBuffer.Get(bufferIndex));
     }
     
-    [ClientRpc]
+    [Rpc(SendTo.NotServer)]
     void SendToClientRpc(StatePayload statePayload)
     {
-        if(!IsOwner) return;
+        Debug.Log($"Received state from server Tick {statePayload.tick} Server POS: {statePayload.position}");
+        if (!IsOwner) return;
         lastServerState = statePayload;
     }
     

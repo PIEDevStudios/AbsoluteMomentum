@@ -20,7 +20,6 @@ public class NetworkTimer
     {
         if (timer >= MinTimeBetweeenTicks)
         {
-            Debug.Log("Server tick!");
             timer -= MinTimeBetweeenTicks;
             CurrentTick++;
             return true;
