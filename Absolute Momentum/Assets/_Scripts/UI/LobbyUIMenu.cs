@@ -73,7 +73,7 @@ public class LobbyUIMenu : MonoBehaviour
 
         foreach (Lobby lobby in lobbies)
         {
-            BuildLobbyItem(lobby.Name, lobby.Data["Map"].Value, lobby.Data["Gamemode"].Value, lobby.Players.Count, lobby.MaxPlayers, lobby.Id);
+            BuildLobbyItem(lobby.Name, lobby.Players.Count, lobby.MaxPlayers, lobby.Id);
         }
     }
 
@@ -95,7 +95,7 @@ public class LobbyUIMenu : MonoBehaviour
         lobbyAPI.OnLobbyJoined -= OnLobbyJoinedHandler;
     }
 
-    private void BuildLobbyItem(string lobbyName, string mapName, string gamemode, int currPlayers, int maxPlayers, string lobbyID)
+    private void BuildLobbyItem(string lobbyName, int currPlayers, int maxPlayers, string lobbyID)
     {
         GameObject currLobbyItem = Instantiate(lobbyItemUI, lobbyHolder.transform);
 

@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 4339416497096015706}
   m_Layer: 5
   m_Name: LobbyUIItem
-  m_TagString: Untagged
+  m_TagString: LobbyItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -339,7 +339,7 @@ MonoBehaviour:
   lobbyID: 
   lobbyAPI: {fileID: 0}
   lobbyUI: {fileID: 0}
-  lobbyGameUI: {fileID: 5415670647054961765}
+  lobbyGameUI: {fileID: 0}
   lobbyNameUI: {fileID: 3147823849319706745}
   playerCountUI: {fileID: 7066485753267109943}
   joinButton: {fileID: 6187272462019400211}
@@ -494,7 +494,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2533994612489576343}
         m_TargetAssemblyTypeName: LobbyUIItem, Assembly-CSharp
         m_MethodName: JoinGame
         m_Mode: 1

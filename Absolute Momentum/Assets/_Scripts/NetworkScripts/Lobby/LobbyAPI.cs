@@ -136,7 +136,7 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
     /// <summary>
     /// Creates a lobby, sets up Relay for hosting, and starts the host.
     /// </summary>
-    public async void CreateLobby(string lobbyName, int maxPlayers, bool isPrivate, string mapName, string gameMode)
+    public async void CreateLobby(string lobbyName, int maxPlayers, bool isPrivate)
     {
         try
         {
@@ -159,8 +159,6 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
                 Player = GetPlayerData(),
                 Data = new Dictionary<string, DataObject>
                 {
-                    { "Map", new DataObject(DataObject.VisibilityOptions.Public, mapName, DataObject.IndexOptions.S1) },
-                    { "GameMode", new DataObject(DataObject.VisibilityOptions.Public, gameMode, DataObject.IndexOptions.S2) },
                     { "RelayJoinCode", new DataObject(DataObject.VisibilityOptions.Public, joinCode, DataObject.IndexOptions.S3) }
                 }
             };
@@ -289,7 +287,12 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
             Debug.Log("Found " + response.Results.Count + " lobbies.");
             foreach (Lobby lobby in response.Results)
             {
-                Debug.Log($"Lobby: {lobby.Name} | Players: {lobby.Players.Count}/{lobby.MaxPlayers} | Map: {lobby.Data["Map"].Value}");
+                Debug.Log($"Lobby: {lobby.Name} | Players: {lobby.Players.Count}/{lobby.MaxPlayers}");
+            }
+
+            if (LobbiesUpdated != null)
+            {
+                LobbiesUpdated.Invoke(response.Results);
             }
         }
         catch (Exception e)
@@ -337,31 +340,6 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
         catch (Exception e)
         {
             Debug.LogError("Error migrating lobby host: " + e);
-        }
-    }
-
-    /// <summary>
-    /// Updates the lobby's map data (host only).
-    /// </summary>
-    public async void UpdateLobbyMap(string mapName)
-    {
-        try
-        {
-            if (currentLobby != null && IsHost())
-            {
-                currentLobby = await LobbyService.Instance.UpdateLobbyAsync(currentLobby.Id, new UpdateLobbyOptions
-                {
-                    Data = new Dictionary<string, DataObject>
-                    {
-                        { "Map", new DataObject(DataObject.VisibilityOptions.Public, mapName, DataObject.IndexOptions.S1) }
-                    }
-                });
-                Debug.Log("Updated lobby map to: " + mapName);
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Error updating lobby map: " + e);
         }
     }
 

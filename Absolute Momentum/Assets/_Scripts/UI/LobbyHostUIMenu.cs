@@ -26,9 +26,7 @@ public class LobbyHostUIMenu : MonoBehaviour
         lobbyAPI.CreateLobby(lobbyName.text, 
                             //  int.Parse(maxPlayers.options[maxPlayers.value].text),
                              8,
-                             privateLobby.isOn,
-                             "map.options[map.value].text",
-                             "gameMd.options[gameMd.value].text");
+                             privateLobby.isOn);
 
         lobbyName.text = "";
         this.gameObject.SetActive(false);
