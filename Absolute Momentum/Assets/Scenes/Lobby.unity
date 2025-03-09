@@ -279,6 +279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 75501995}
+  - component: {fileID: 75501996}
   m_Layer: 5
   m_Name: Host Lobby Setup Menu
   m_TagString: Untagged
@@ -311,6 +312,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &75501996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75501994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda92d7edd24d794c94c990e145431e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyName: {fileID: 88684539}
+  maxPlayers: {fileID: 0}
+  privateLobby: {fileID: 1903532440}
+  lobbyGameUI: {fileID: 1594948518}
+  lobbyUI: {fileID: 1584244719}
 --- !u!1 &88684537
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -353, y: 2.744}
+  m_AnchoredPosition: {x: -353, y: 2.743988}
   m_SizeDelta: {x: 668.034, y: 94.512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &88684539
@@ -816,7 +834,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 69211589}
   m_HandleRect: {fileID: 69211588}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2001,9 +2019,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1584244716}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OpenHostLobbyMenu
+      - m_Target: {fileID: 1584244723}
+        m_TargetAssemblyTypeName: LobbyUIMenu, Assembly-CSharp
+        m_MethodName: HostGameUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2322,9 +2340,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1584244716}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: HostRelay
+      - m_Target: {fileID: 75501996}
+        m_TargetAssemblyTypeName: LobbyHostUIMenu, Assembly-CSharp
+        m_MethodName: HostLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2810,6 +2828,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387125465}
+  - component: {fileID: 1387125466}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -2831,11 +2850,35 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1453802308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00005340576, y: -0.00012906617}
-  m_SizeDelta: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1387125466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387125464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 650, y: 100}
+  m_Spacing: {x: 25, y: 25}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &1449547480
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,6 +3169,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7739726810751991067, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: hostGameUI
+      value: 
+      objectReference: {fileID: 75501994}
+    - target: {fileID: 7739726810751991067, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: lobbyHolder
+      value: 
+      objectReference: {fileID: 1387125464}
+    - target: {fileID: 7739726810751991067, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: joinCodeInput
+      value: 
+      objectReference: {fileID: 1632610254}
     - target: {fileID: 8175287942948005950, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3271,6 +3326,27 @@ RectTransform:
 --- !u!224 &1584244718 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8274325484903086195, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+  m_PrefabInstance: {fileID: 1584244714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1584244719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1162899898218621875, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+  m_PrefabInstance: {fileID: 1584244714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1584244723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7739726810751991067, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+  m_PrefabInstance: {fileID: 1584244714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584244719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f286dfd7d5256ed46801687a83df6d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1594948518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8030346122193823540, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
   m_PrefabInstance: {fileID: 1584244714}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1609526437
@@ -3810,9 +3886,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1584244716}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: JoinRelay
+      - m_Target: {fileID: 1584244723}
+        m_TargetAssemblyTypeName: LobbyUIMenu, Assembly-CSharp
+        m_MethodName: JoinWithCode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3975,7 +4051,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 360, y: -0.000030518}
+  m_AnchoredPosition: {x: 360, y: -0.000030517578}
   m_SizeDelta: {x: 305.451, y: 102.263}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903532440
@@ -4366,9 +4442,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1584244716}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: CloseLobbyMenu
+      - m_Target: {fileID: 2047780218}
+        m_TargetAssemblyTypeName: LobbyAPI, Assembly-CSharp
+        m_MethodName: ListLobbies
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

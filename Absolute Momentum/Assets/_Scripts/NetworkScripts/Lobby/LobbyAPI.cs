@@ -13,11 +13,13 @@ using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
 using TMPro;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyAPI : SingletonPersistent<LobbyAPI>
 {
+    public event Action<List<Lobby>> LobbiesUpdated;
+
     [SerializeField] private TextMeshProUGUI usernameText;
 
-    public static LobbyManager Instance { get; private set; }
+    public static LobbyAPI Instance { get; private set; }
     
     private Lobby currentLobby;
     private string playerName;
@@ -27,6 +29,9 @@ public class LobbyManager : MonoBehaviour
     private float lobbyUpdateTimeMax = 1.1f;
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
+
+    public delegate void LobbyJoinedHandler(Lobby lobby);
+    public event LobbyJoinedHandler OnLobbyJoined;
 
     private void Awake()
     {
@@ -183,6 +188,7 @@ public class LobbyManager : MonoBehaviour
 
             currentLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, options);
             Debug.Log("Joined lobby: " + currentLobby.Name);
+            OnLobbyJoined?.Invoke(currentLobby);
 
             string relayJoinCode = currentLobby.Data["RelayJoinCode"].Value;
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(relayJoinCode);

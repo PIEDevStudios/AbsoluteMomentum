@@ -463,6 +463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5003255898615411116}
+  - component: {fileID: 7739726810751991067}
   m_Layer: 5
   m_Name: Lobby Menu
   m_TagString: Untagged
@@ -495,6 +496,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7739726810751991067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162899898218621875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f286dfd7d5256ed46801687a83df6d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyHolder: {fileID: 0}
+  lobbyItemUI: {fileID: 5415670647054961765, guid: 29117c3988754864bb350873a47e093b, type: 3}
+  hostGameUI: {fileID: 0}
+  lobbyGameUI: {fileID: 8030346122193823540}
+  autoRefreshTime: 10
+  joinCodeInput: {fileID: 0}
 --- !u!1 &2178071878704560964
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +570,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 6149310778641492837}
   mainMenu: {fileID: 2178071878704560964}
   lobbyMenu: {fileID: 1162899898218621875}
+  hostLobbyMenu: {fileID: 0}
   lobbyHud: {fileID: 8030346122193823540}
   lobbyStartTrigger: {fileID: 0}
   lobbyCodeText: {fileID: 8051061085130682981}
