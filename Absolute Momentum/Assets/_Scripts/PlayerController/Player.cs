@@ -15,6 +15,7 @@ public class Player : StateMachineCore
     [field: SerializeField] public PlayerAirborne airborne { get; private set; }
     [field: SerializeField] public PlayerSlide slide { get; private set; }
     [field: SerializeField] public PlayerWallrun wallrun { get; private set; }
+    [field: SerializeField] public PlayerDash dash { get; private set; }
 
     // Sensor scripts used for ground checks and wall checks
     [field:HorizontalLine(color: EColor.Gray)]
@@ -98,7 +99,18 @@ public class Player : StateMachineCore
         bool nonAirborneGroundCheck = stateMachine.currentState == idle || stateMachine.currentState == move;
         
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, slopeSensor.hit.normal);
-        
+
+        // Transition to dash
+        if (playerInput.dashPressedThisFrame && true) // TODO: ensure player has whatever item is required to dash
+        {
+            stateMachine.SetState(dash);
+            return;
+        }
+        else if (stateMachine.currentState == dash && !dash.isComplete)
+        {
+            return;
+        }
+
         // Transition to slide
         bool groundedSlideTransition = inputValues.slidePressedThisFrame && groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
         bool airborneSlideTransition = inputValues.slideHeld && !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;

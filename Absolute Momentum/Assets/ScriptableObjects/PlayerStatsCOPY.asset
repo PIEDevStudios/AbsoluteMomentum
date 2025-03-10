@@ -12,19 +12,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef464e9f8b6dd1747993335ea6a2723c, type: 3}
   m_Name: PlayerStatsCOPY
   m_EditorClassIdentifier: 
-  MaxWalkSpeed: 4
-  MaxSprintSpeed: 20
-  WalkAcceleration: 1
   SprintAcceleration: 3
   GroundDrag: 10
   NoInputDeceleration: 25
   StickToSlopeForce: 150
+  groundDragCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   AirAcceleration: 0.25
   AirDrag: 0
-  AirSoftMaxSpeed: 10
+  AirStrafeAcceleration: 0
+  airDragCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minimumSlideSpeed: 0
+  MinimumSlideAirTime: 0
+  SlideDrag: 0
+  BoostYVeloMult: 0
+  SlopeSlideForce: 0
+  SlideGroundAcceleration: 0
+  SlideAirAcceleration: 0
   slidePlayerScale: {x: 1, y: 0.5, z: 1}
+  slideDragCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  wallrunForce: 0
+  wallrunResetTime: 0
+  wallJumpUpForce: 0
+  wallJumpSideForce: 0
+  wallDragCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   gravityEnabled: 1
   NormalGravity: 40
+  WallrunGravity: 0
   FallingGravityMultiplier: 1.5
   CurrentGravity: 40
   JumpForce: 30
@@ -32,3 +65,5 @@ MonoBehaviour:
   EndJumpEarlyTime: 25
   JumpFrameBufferAmount: 10
   FallSpeedLimit: 30
+  DashSpeed: 50
+  DashTime: 1

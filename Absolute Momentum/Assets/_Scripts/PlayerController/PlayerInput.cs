@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using static UnityEngine.KeyCode;
 
-public class PlayerInput : NetworkBehaviour
+public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private InputActionAsset playerInputAction;
     public Vector2 moveVector { get; private set; }
@@ -25,6 +24,8 @@ public class PlayerInput : NetworkBehaviour
     
     public bool ResetInput { get; private set;}
 
+    public bool dashPressedThisFrame { get; private set; }
+    
     public struct InputValues
     {
         public Vector2 moveVector;
@@ -42,9 +43,10 @@ public class PlayerInput : NetworkBehaviour
     }
     
     
+    
+
     private void OnEnable()
     {
-        if (!IsOwner) return;
         playerInputAction.Enable();
     }
 
@@ -81,29 +83,9 @@ public class PlayerInput : NetworkBehaviour
         slidePressedThisFrame = !heldLastFrame && slideHeld;
         slideReleasedThisFrame = heldLastFrame && !slideHeld;
         
+        dashPressedThisFrame = playerActionMap.FindAction("Dash").WasPerformedThisFrame();
         
         // DEBUG INPUTS
         ResetInput = Input.GetKeyDown(R);
     }
-
-    public InputValues GetInputValues()
-    {
-        return new InputValues()
-        {
-            moveVector = moveVector,
-            lookVector = lookVector,
-            timeOfLastMoveInput = timeOfLastMoveInput,
-            jumpPressedThisFrame = jumpPressedThisFrame,
-            jumpReleasedThisFrame = jumpReleasedThisFrame,
-            jumpHeld = jumpHeld,
-            sprintPressedThisFrame = sprintPressedThisFrame,
-            sprintHeld = sprintHeld,
-            slidePressedThisFrame = slidePressedThisFrame,
-            slideReleasedThisFrame = slideReleasedThisFrame,
-            slideHeld = slideHeld,
-            ResetInput = ResetInput
-        };
-    }
-        
-        
 }
