@@ -30,12 +30,12 @@ public class PlayerAirborne : State
     {
         base.DoUpdateState();
     }
-    public override void DoFixedUpdateState()
+    public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
     {
-        base.DoFixedUpdateState();
+        base.DoTickUpdateState(inputValues);
         
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        Vector3 playerInputVector = orientation.forward * player.playerInput.moveVector.y + orientation.right * player.playerInput.moveVector.x;
+        Vector3 playerInputVector = orientation.forward * inputValues.moveVector.y + orientation.right * inputValues.moveVector.x;
         Vector3 forceVector = playerInputVector.normalized * acceleration;
         float forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized);
         Vector3 perpendicularForce = forceVector - (forceInVeloDirection * flatVel.normalized);

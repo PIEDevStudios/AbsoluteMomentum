@@ -2,10 +2,11 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Multiplayer.Center.NetcodeForGameObjectsExample;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerJumpManager : ClientNetworkTransform
+public class PlayerJumpManager : NetworkBehaviour
 {
     [Header("Player Components")]
     [SerializeField] private Rigidbody rb;
@@ -29,11 +30,11 @@ public class PlayerJumpManager : ClientNetworkTransform
         framesSinceOnGround = (int)FrameBufferNum;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (!IsOwner) return;
         
+        // From update
         if (playerInput.jumpPressedThisFrame)
         {
             framesSinceLastSpacebar = 0;
@@ -43,18 +44,12 @@ public class PlayerJumpManager : ClientNetworkTransform
         {
             jumping = false;
         }
-        
-        //creates variable jump, adds downward force if player lets go of space making character fall faster leading to smaller jump
-        if (jumping && playerInput.jumpReleasedThisFrame && framesSinceOnGround <= playerStats.EndJumpEarlyTime && player.stateMachine.currentState == player.airborne)
-        {
-            rb.AddForce(Vector3.down * Mathf.Abs(rb.linearVelocity.y) * downwardForce, ForceMode.Impulse);
-        }
-
     }
 
-    void FixedUpdate()
+    public void TickUpdate(PlayerInput.InputValues inputValues)
     {
         if (!IsOwner) return;
+        
         if (framesSinceOnGround == -1)
         {
             framesSinceOnGround = (int)FrameBufferNum;
@@ -72,6 +67,17 @@ public class PlayerJumpManager : ClientNetworkTransform
         {
             AttemptJump();
         }
+        
+        
+        //creates variable jump, adds downward force if player lets go of space making character fall faster leading to smaller jump
+        if (jumping && playerInput.jumpReleasedThisFrame && framesSinceOnGround <= playerStats.EndJumpEarlyTime && player.stateMachine.currentState == player.airborne)
+        {
+            rb.AddForce(Vector3.down * Mathf.Abs(rb.linearVelocity.y) * downwardForce, ForceMode.Impulse);
+        }
+    }
+    void FixedUpdate()
+    {
+        
         
         
     }

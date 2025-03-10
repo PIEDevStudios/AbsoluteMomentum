@@ -30,9 +30,9 @@ public class PlayerSlide : State
 
     }
 
-    public override void DoUpdateState()
+    public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
     {
-        base.DoUpdateState();
+        base.DoTickUpdateState(inputValues);
         
         if (player.playerInput.slideReleasedThisFrame)
         {

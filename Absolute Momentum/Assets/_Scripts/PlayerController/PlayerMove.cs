@@ -42,7 +42,7 @@ public class PlayerMove : State
     public override void DoFixedUpdateState()
     {
         base.DoFixedUpdateState();
-
+        
     }
 
     public override void DoTickUpdateState(PlayerInput.InputValues inputValues)

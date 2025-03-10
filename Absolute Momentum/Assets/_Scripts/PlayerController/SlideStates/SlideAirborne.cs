@@ -22,16 +22,15 @@ public class SlideAirborne : State
     public override void DoUpdateState()
     {
         base.DoUpdateState();
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        player.playerObj.forward = flatVel;
     }
     
-    public override void DoFixedUpdateState()
+    public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
     {
-        base.DoFixedUpdateState();
+        base.DoTickUpdateState(inputValues);
         // Player Turning
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        Vector3 playerInputVector = orientation.forward * player.playerInput.moveVector.y + orientation.right * player.playerInput.moveVector.x;
+        player.playerObj.forward = flatVel;
+        Vector3 playerInputVector = orientation.forward * inputValues.moveVector.y + orientation.right * inputValues.moveVector.x;
         Vector3 forceVector = playerInputVector.normalized * (player.stats.SlideAirAcceleration * (1 / flatVel.magnitude));
         float forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized);
         Vector3 perpendicularForce = forceVector - (forceInVeloDirection * flatVel.normalized);

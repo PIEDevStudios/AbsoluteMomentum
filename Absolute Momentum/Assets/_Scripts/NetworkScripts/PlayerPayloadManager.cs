@@ -95,7 +95,10 @@ public class PlayerPayloadManager : NetworkBehaviour
         Debug.Log("Handling Client Tick");
         var currentTick = timer.CurrentTick;
         var bufferIndex = currentTick % KBufferSize;
-
+        
+        // Update the player input in TickUpdate
+        player.playerInput.TickUpdate();
+        
         InputPayload inputPayload = new InputPayload()
         {
             tick = currentTick,
@@ -223,7 +226,7 @@ public class PlayerPayloadManager : NetworkBehaviour
         SendToClientRpc(serverStateBuffer.Get(bufferIndex));
     }
     
-    [Rpc(SendTo.NotServer)]
+    [Rpc(SendTo.ClientsAndHost)]
     void SendToClientRpc(StatePayload statePayload)
     {
         Debug.Log($"Received state from server Tick {statePayload.tick} Server POS: {statePayload.position}");
@@ -234,7 +237,6 @@ public class PlayerPayloadManager : NetworkBehaviour
     
     StatePayload ProcessMovement(InputPayload inputPayload)
     {
-        
         player.Move(player.playerInput.GetInputValues());
 
         return new StatePayload()

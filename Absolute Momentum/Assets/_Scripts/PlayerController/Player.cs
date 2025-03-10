@@ -150,7 +150,6 @@ public class Player : StateMachineCore
     /// </summary>
     public void Move(PlayerInput.InputValues inputValues)
     {
-                
         // Calls update logic in the currently active state
         stateMachine.currentState.DoUpdateBranch();
         wallrunResetTimer -= Time.deltaTime;
@@ -189,6 +188,7 @@ public class Player : StateMachineCore
             rb.AddForce(Vector3.down * stats.CurrentGravity * stats.FallingGravityMultiplier, ForceMode.Force);
         }
         // Call FixedUpdate logic
+        jumpManager.TickUpdate(inputValues);
         stateMachine.currentState.DoTickUpdateBranch(inputValues);
     }
     /// <summary>

@@ -52,9 +52,8 @@ public class PlayerInput : NetworkBehaviour
     {
         playerInputAction.Disable();
     }
-
-
-    void Update()
+    
+    public void TickUpdate()
     {
         InputActionMap playerActionMap = playerInputAction.actionMaps[0];
         moveVector = playerActionMap.FindAction("Move").ReadValue<Vector2>();
@@ -67,17 +66,20 @@ public class PlayerInput : NetworkBehaviour
         
         
         // Jump
-        jumpPressedThisFrame = playerActionMap.FindAction("Jump").WasPerformedThisFrame();
-        jumpReleasedThisFrame = playerActionMap.FindAction("Jump").WasReleasedThisFrame();
+        bool heldLastFrame = jumpPressedThisFrame;
         jumpHeld = playerActionMap.FindAction("Jump").ReadValue<float>() > 0;
+        jumpPressedThisFrame = !heldLastFrame && jumpHeld;
+        jumpReleasedThisFrame = heldLastFrame && !jumpHeld;
         
         // Sprint
+        heldLastFrame = sprintHeld;
         sprintHeld = playerActionMap.FindAction("Sprint").ReadValue<float>() > 0;
-        sprintPressedThisFrame = playerActionMap.FindAction("Sprint").WasPerformedThisFrame();
+        sprintPressedThisFrame = !heldLastFrame && sprintHeld;
         
-        slidePressedThisFrame = playerActionMap.FindAction("Slide").WasPerformedThisFrame();
-        slideReleasedThisFrame = playerActionMap.FindAction("Slide").WasReleasedThisFrame();
+        heldLastFrame = slideHeld;
         slideHeld = playerActionMap.FindAction("Slide").ReadValue<float>() > 0;
+        slidePressedThisFrame = !heldLastFrame && slideHeld;
+        slideReleasedThisFrame = heldLastFrame && !slideHeld;
         
         
         // DEBUG INPUTS

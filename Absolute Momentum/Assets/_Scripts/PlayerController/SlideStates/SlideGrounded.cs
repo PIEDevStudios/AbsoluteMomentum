@@ -36,10 +36,27 @@ public class SlideGrounded : State
     public override void DoUpdateState()
     {
         base.DoUpdateState();
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
+    }
+
+    public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
+    {
+        base.DoTickUpdateState(inputValues);
+        Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
         player.playerObj.forward = flatVel;
-
-
+        if (player.slopeSensor.isOnSlope && player.groundSensor.grounded && rb.linearVelocity.y < 0f)
+        {
+            directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
+            Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross).normalized;
+            rb.AddForce(direction * (player.stats.SlopeSlideForce), ForceMode.Force);
+        }
+        
+        // Transition out of state
+        if (flatVel.magnitude < player.stats.minimumSlideSpeed)
+        {
+            player.stateMachine.SetState(player.move);
+            return;
+        }
+        
         if (player.slopeSensor.isOnSlope)
         {
             rb.linearDamping = 0f;
@@ -49,32 +66,12 @@ public class SlideGrounded : State
             rb.linearDamping = player.stats.SlideDrag;
         }
         
-        // If we are moving too slow to maintain a slide, force player into the move state
-        if (flatVel.magnitude < player.stats.minimumSlideSpeed)
-        {
-            player.stateMachine.SetState(player.move);
-        }
-        
-    }
-
-    public override void DoFixedUpdateState()
-    {
-        base.DoFixedUpdateState();
-        Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
-        
-        if (player.slopeSensor.isOnSlope && player.groundSensor.grounded && rb.linearVelocity.y < 0f)
-        {
-            directionCross = new Vector3(-player.slopeSensor.hit.normal.z, 0, player.slopeSensor.hit.normal.x).normalized;
-            Vector3 direction = Vector3.Cross(player.slopeSensor.hit.normal, directionCross).normalized;
-            rb.AddForce(direction * (player.stats.SlopeSlideForce), ForceMode.Force);
-        }
-        
         // Player Turning
         
         RaycastHit hit = player.slopeSensor.hit;
         Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;
         Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
-        Vector3 playerInputVector = forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x;
+        Vector3 playerInputVector = forwardOriented * inputValues.moveVector.y + rightOriented * inputValues.moveVector.x;
         Vector3 forceVector = playerInputVector.normalized * (player.stats.SlideGroundAcceleration * (1 / flatVel.magnitude));
         Vector3 forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized) * flatVel.normalized;
         Vector3 perpendicularForce = forceVector - forceInVeloDirection;
@@ -82,6 +79,8 @@ public class SlideGrounded : State
         Debug.Log("Corrected Force Vector: " + perpendicularForce);
         rb.AddForce(perpendicularForce, ForceMode.Force);
         StickToSlope();
+        
+        
     }
 
     public override void DoExitLogic()
