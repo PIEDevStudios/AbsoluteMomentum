@@ -101,15 +101,15 @@ public class Player : StateMachineCore
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, slopeSensor.hit.normal);
 
         // Transition to dash
-        if (playerInput.dashPressedThisFrame && true) // TODO: ensure player has whatever item is required to dash
-        {
-            stateMachine.SetState(dash);
-            return;
-        }
-        else if (stateMachine.currentState == dash && !dash.isComplete)
-        {
-            return;
-        }
+        // if (playerInput.dashPressedThisFrame && true) // TODO: ensure player has whatever item is required to dash
+        // {
+        //     stateMachine.SetState(dash);
+        //     return;
+        // }
+        // else if (stateMachine.currentState == dash && !dash.isComplete)
+        // {
+        //     return;
+        // }
 
         // Transition to slide
         bool groundedSlideTransition = inputValues.slidePressedThisFrame && groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;

@@ -68,7 +68,7 @@ public class PlayerInput : MonoBehaviour
         
         
         // Jump
-        bool heldLastFrame = jumpPressedThisFrame;
+        bool heldLastFrame = jumpHeld;
         jumpHeld = playerActionMap.FindAction("Jump").ReadValue<float>() > 0;
         jumpPressedThisFrame = !heldLastFrame && jumpHeld;
         jumpReleasedThisFrame = heldLastFrame && !jumpHeld;
@@ -87,5 +87,24 @@ public class PlayerInput : MonoBehaviour
         
         // DEBUG INPUTS
         ResetInput = Input.GetKeyDown(R);
+    }
+    
+    public InputValues GetInputValues()
+    {
+        return new InputValues()
+        {
+            moveVector = moveVector,
+            lookVector = lookVector,
+            timeOfLastMoveInput = timeOfLastMoveInput,
+            jumpPressedThisFrame = jumpPressedThisFrame,
+            jumpReleasedThisFrame = jumpReleasedThisFrame,
+            jumpHeld = jumpHeld,
+            sprintPressedThisFrame = sprintPressedThisFrame,
+            sprintHeld = sprintHeld,
+            slidePressedThisFrame = slidePressedThisFrame,
+            slideReleasedThisFrame = slideReleasedThisFrame,
+            slideHeld = slideHeld,
+            ResetInput = ResetInput
+        };
     }
 }
