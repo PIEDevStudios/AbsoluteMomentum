@@ -18,7 +18,11 @@ public class PlayerWallrun : State
     public override void DoUpdateState()
     {
         base.DoUpdateState();
-        
+    }
+
+    public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
+    {
+        base.DoTickUpdateState(inputValues);
         if (!wallSensor.wallRight && !wallSensor.wallLeft)
         {
             Debug.Log("No Wall detected");
@@ -35,12 +39,8 @@ public class PlayerWallrun : State
         {
             player.ChangeGravity(player.stats.WallrunGravity);
         }
-    }
-
-    public override void DoFixedUpdateState()
-    {
-        base.DoFixedUpdateState();
-        WallRunningMovement();
+        
+        WallRunningMovement(inputValues);
     }
 
 
@@ -50,7 +50,7 @@ public class PlayerWallrun : State
         player.ChangeGravity(player.stats.NormalGravity);
     }
     
-    private void WallRunningMovement()
+    private void WallRunningMovement(PlayerInput.InputValues inputValues)
     {
         Vector3 wallNormal = wallSensor.wallRight ? wallSensor.wallHitRight.normal : wallSensor.wallHitLeft.normal;
         Vector3 wallForward = Vector3.Cross(wallNormal, Vector3.up);
@@ -66,7 +66,7 @@ public class PlayerWallrun : State
         rb.AddForce(wallForward * player.stats.wallrunForce, ForceMode.Force);
         
         // Keep on wall force
-        if (!(wallSensor.wallLeft && player.playerInput.moveVector.x > 0) && !(wallSensor.wallRight && player.playerInput.moveVector.x < 0))
+        if (!(wallSensor.wallLeft && inputValues.moveVector.x > 0) && !(wallSensor.wallRight && inputValues.moveVector.x < 0))
         {
             rb.AddForce(-wallNormal * 100f, ForceMode.Force);
         }

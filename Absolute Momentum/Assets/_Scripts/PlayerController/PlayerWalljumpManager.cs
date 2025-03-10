@@ -16,13 +16,13 @@ public class PlayerWalljumpManager : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void TickUpdate(PlayerInput.InputValues inputValues)
     {
         if (!IsOwner) return;
         
         if (player.stateMachine.currentState == player.wallrun)
         {
-            if (player.playerInput.jumpPressedThisFrame)
+            if (inputValues.jumpPressedThisFrame)
             {
                 WallJump();
             }

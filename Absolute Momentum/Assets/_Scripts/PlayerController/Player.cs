@@ -35,6 +35,7 @@ public class Player : StateMachineCore
     [field:SerializeField] public PlayerInput playerInput {get; private set;}
     [field:SerializeField] public CapsuleCollider playerCollider {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
+    [SerializeField] private PlayerWalljumpManager walljumpManager;
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
     [SerializeField] private AudioListener audioListner;
@@ -189,6 +190,7 @@ public class Player : StateMachineCore
         }
         // Call FixedUpdate logic
         jumpManager.TickUpdate(inputValues);
+        walljumpManager.TickUpdate(inputValues);
         stateMachine.currentState.DoTickUpdateBranch(inputValues);
     }
     /// <summary>
