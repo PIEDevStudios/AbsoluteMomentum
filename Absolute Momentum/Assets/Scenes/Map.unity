@@ -9672,7 +9672,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6967538368332478927, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3601395795
+      value: 4169291005
       objectReference: {fileID: 0}
     - target: {fileID: 3238629911873270863, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       propertyPath: m_Name
@@ -9728,7 +9728,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8475612010540857988, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 705351624}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3238629911873270863, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1524635109}
   m_SourcePrefab: {fileID: 100100000, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
 --- !u!4 &529376777 stripped
 Transform:
@@ -19299,10 +19302,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d46869b957b0e7428ed1598796b87e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrain: {fileID: 0}
-  scrollViewRectTransform: {fileID: 0}
-  contentRectTransform: {fileID: 0}
-  miniMapIconPrefab: {fileID: 0}
+  terrain: {fileID: 882878186}
+  scrollViewRectTransform: {fileID: 1176106568}
+  contentRectTransform: {fileID: 800025037}
+  miniMapIconPrefab: {fileID: 4177353809442098864, guid: e0f4eb6667eaab040a498f4d8cfd67ca, type: 3}
 --- !u!43 &1180392341
 Mesh:
   m_ObjectHideFlags: 0
@@ -25741,6 +25744,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1707974186}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1524635108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3238629911873270863, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+  m_PrefabInstance: {fileID: 529376776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1524635109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524635108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfe7a3b1cd1829449650eccc620eeab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  IconColor: {r: 1, g: 0, b: 0, a: 1}
+  Text: PENIS
+  TextSize: 100
 --- !u!1 &1539911215
 GameObject:
   m_ObjectHideFlags: 0

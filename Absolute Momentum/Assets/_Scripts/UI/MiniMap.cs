@@ -4,7 +4,7 @@ using UnityEngine;
 public class MiniMap : MonoBehaviour
 {
     public static MiniMap Instance;
-    [SerializeField] Plane terrain;
+    [SerializeField] GameObject plane;
     [SerializeField] RectTransform scrollViewRectTransform;
     [SerializeField] RectTransform contentRectTransform;
     [SerializeField] MiniMapIcon miniMapIconPrefab;
@@ -25,8 +25,8 @@ public class MiniMap : MonoBehaviour
         var miniMapIcon = Instantiate(miniMapIconPrefab);
         miniMapIcon.transform.SetParent(contentRectTransform);
         miniMapIcon.SetIcon(miniMapWorldObject.Icon);
-        miniMapIcon.setColor(miniMapWorldObject.IconColor);
-        miniMapIcon.setText(miniMapWorldObject.Text);
+        miniMapIcon.SetColor(miniMapWorldObject.IconColor);
+        miniMapIcon.SetText(miniMapWorldObject.Text);
         miniMapIcon.SetTextSize(miniMapWorldObject.TextSize);
         miniMapWorldObjectsLookup[miniMapWorldObject] = miniMapIcon;
     }
@@ -54,14 +54,31 @@ public class MiniMap : MonoBehaviour
         return transformationMatrix.MultiplyPoint3x4(pos);
     }
 
-    void CalculateTransformationMatrix() {
+    void CalculateTransformationMatrix()
+    {
+        // Get the size of the minimap UI
         var miniMapDimensions = contentRectTransform.rect.size;
-        var terrainDimensions = new Vector2(terrain.terrainData.size.x, terrain.terrainData.size.z);
 
-        var scaleRatio = miniMapDimensions / terrainDimensions;
+        // Get the size of the Plane (default Unity Plane is 10x10 units)
+        float baseSizeX = 10f;
+        float baseSizeZ = 10f;
 
-        var translation = -miniMapDimensions;
+        // Calculate the scaled dimensions of the Plane
+        float scaledSizeX = baseSizeX * plane.transform.lossyScale.x;
+        float scaledSizeZ = baseSizeZ * plane.transform.lossyScale.z;
 
+        Vector2 planeDimensions = new Vector2(scaledSizeX, scaledSizeZ);
+
+        // Calculate the scale ratio between the minimap and the plane
+        var scaleRatio = new Vector2(
+            miniMapDimensions.x / planeDimensions.x,
+            miniMapDimensions.y / planeDimensions.y
+        );
+
+        // No translation needed since the origin (0,0,0) is the center of the plane
+        var translation = Vector2.zero;
+
+        // Create the transformation matrix
         transformationMatrix = Matrix4x4.TRS(translation, Quaternion.identity, scaleRatio);
     }
 }

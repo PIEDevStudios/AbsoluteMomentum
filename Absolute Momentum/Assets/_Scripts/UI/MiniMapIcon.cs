@@ -10,8 +10,8 @@ public class MiniMapIcon : MonoBehaviour
     public RectTransform IconRectTransform;
 
     public void SetIcon(Sprite Icon) => Image.sprite = Icon;
-    public void setColor(Color color) => Image.color = color;
-    public void setText(string text) {
+    public void SetColor(Color color) => Image.color = color;
+    public void SetText(string text) {
         if(!string.IsNullOrEmpty(text)) {
             Text.enabled = true;
             Text.text = text;
