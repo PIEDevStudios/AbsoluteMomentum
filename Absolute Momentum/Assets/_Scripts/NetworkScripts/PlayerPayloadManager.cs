@@ -126,7 +126,7 @@ public class PlayerPayloadManager : NetworkBehaviour
     void HandleServerReconciliation()
     {
         
-        Debug.Log("Should Reconcile: " + ShouldReconcile() + " lastServerState: "  + lastServerState.tick + lastServerState.position + " lastProcessedState: "  + lastProcessedState.tick + lastProcessedState.position);
+        // Debug.Log("Should Reconcile: " + ShouldReconcile() + " lastServerState: "  + lastServerState.tick + lastServerState.position + " lastProcessedState: "  + lastProcessedState.tick + lastProcessedState.position);
         
         if (!ShouldReconcile()) return;
         
@@ -137,7 +137,7 @@ public class PlayerPayloadManager : NetworkBehaviour
         StatePayload rewindState = IsHost ? serverStateBuffer.Get(bufferIndex - 1) : lastServerState;
         StatePayload clientState = IsHost ? clientStateBuffer.Get(bufferIndex - 1) : clientStateBuffer.Get(bufferIndex);
         float positionError = Vector3.Distance(rewindState.position, clientState.position);
-        Debug.Log("Server trying to reconcile. Position error: " + positionError + " RSTATE: " + rewindState.position + " CSTATE: " + clientState.position);
+        // Debug.Log("Server trying to reconcile. Position error: " + positionError + " RSTATE: " + rewindState.position + " CSTATE: " + clientState.position);
  
         if (positionError > reconciliationThreshold)
         {

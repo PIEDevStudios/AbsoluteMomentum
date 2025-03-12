@@ -17,6 +17,7 @@ public class PlayerAnimationHandler : MonoBehaviour
     /// </summary>
     private void OnStateChanged(object sender, StateMachine.OnStateChangedEventArgs eventArgs)
     {
+        Debug.Log("State changed to : " + eventArgs.nextState);
         SetTrigger(getTriggerName(eventArgs.nextState));
     }
 
@@ -26,13 +27,21 @@ public class PlayerAnimationHandler : MonoBehaviour
         {
             return "Idle";
         }
-        else if (state == player.move)
+        if (state == player.move)
         {
-            return "Walk";
+            return "Run";
         }
-        else if (state == player.airborne)
+        if (state == player.airborne)
         {
             return "Jump";
+        }
+        if (state == player.slide)
+        {
+            return "Slide";
+        }
+        if (state == player.wallrun)
+        {
+            return "Wallrun";
         }
 
         return "";
@@ -44,7 +53,7 @@ public class PlayerAnimationHandler : MonoBehaviour
     public void ResetAllTriggers()
     {
         animator.ResetTrigger("Jump");
-        animator.ResetTrigger("Walk");
+        animator.ResetTrigger("Run");
         animator.ResetTrigger("Roll");
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("Idle");
@@ -63,18 +72,18 @@ public class PlayerAnimationHandler : MonoBehaviour
     /// <summary>
     /// Check if player is sprinting
     /// </summary>
-    private void CheckForSprint()
-    {
-        if (!player.playerInput.sprintHeld)
-        {
-            animator.SetBool("Sprint", true);
-            // footstepEmitter.EventInstance.setParameterByName("Sprinting", 1.0f);
-        }
-        else
-        {
-            animator.SetBool("Sprint", false);
-            // footstepEmitter.EventInstance.setParameterByName("Sprinting", 0.0f);
-        }
-    }
+    // private void CheckForSprint()
+    // {
+    //     if (!player.playerInput.sprintHeld)
+    //     {
+    //         animator.SetBool("Sprint", true);
+    //         // footstepEmitter.EventInstance.setParameterByName("Sprinting", 1.0f);
+    //     }
+    //     else
+    //     {
+    //         animator.SetBool("Sprint", false);
+    //         // footstepEmitter.EventInstance.setParameterByName("Sprinting", 0.0f);
+    //     }
+    // }
     
 }
