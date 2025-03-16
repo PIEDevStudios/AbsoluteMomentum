@@ -1,63 +1,40 @@
+using System;
+using TMPro;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
 
 public class NameTagGetter : NetworkBehaviour
 {
-    [SerializeField] private Text nameTagText; // Assign this in the Inspector
-    private string playerName;
+    [SerializeField] private TextMeshPro nameTagText; // Assign this in the Inspector
+    private NetworkVariable<FixedString64Bytes> playerName = new NetworkVariable<FixedString64Bytes>("", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
-            // Set the player's username 
-            playerName = "Player " + OwnerClientId;
-            SetNameTagServerRpc(playerName);
+            
+            // Disable this clients own name tag
+            nameTagText.enabled = false;
+            
+            // Set this player's username
+            playerName.Value = "Player " + OwnerClientId;
         }
 
-        // Listen for new players joining
-        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-    }
-
-    private void OnClientConnected(ulong clientId)
-    {
-        if (IsServer)
+        // Update nametag when this object spawns
+        UpdateNameTag();
+        
+        
+        playerName.OnValueChanged += (FixedString64Bytes oldValue, FixedString64Bytes newValue) =>
         {
-            // When a new player joins, update their name tag
-            UpdateNameTag(clientId);
-        }
+            UpdateNameTag();
+        };
     }
-
-    private void UpdateNameTag(ulong clientId)
+    private void UpdateNameTag()
     {
-        // Get the player object for the connected client
-        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var networkClient))
-        {
-            var player = networkClient.PlayerObject.GetComponent<NameTagGetter>();
-            if (player != null)
-            {
-                player.SetNameTagClientRpc(player.playerName);
-            }
-        }
+        nameTagText.text = playerName.Value.ToString();
     }
-
-    [ServerRpc]
-    private void SetNameTagServerRpc(string name)
-    {
-        playerName = name;
-        SetNameTagClientRpc(name);
-    }
-
-    [ClientRpc]
-    private void SetNameTagClientRpc(string name)
-    {
-        nameTagText.text = name;
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        // Clean up the event listener
-        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
-    }
+    
+    
 }

@@ -1,15 +1,19 @@
 using System;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerAnimationHandler : MonoBehaviour
+public class PlayerAnimationHandler : NetworkBehaviour
 {
     [SerializeField] private Player player;
     private Animator animator;
-    private void Start()
+    public override void OnNetworkSpawn()
     {
-        player.stateMachine.OnStateChanged += OnStateChanged;
         animator = player.animator;
+        if (IsOwner)
+        {
+            player.stateMachine.OnStateChanged += OnStateChanged;
+        }
     }
 
     /// <summary>

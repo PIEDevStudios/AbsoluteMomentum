@@ -229,7 +229,7 @@ public class PlayerPayloadManager : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     void SendToClientRpc(StatePayload statePayload)
     {
-        Debug.Log($"Received state from server Tick {statePayload.tick} Server POS: {statePayload.position}");
+        // Debug.Log($"Received state from server Tick {statePayload.tick} Server POS: {statePayload.position}");
         if (!IsOwner) return;
         lastServerState = statePayload;
     }
