@@ -9,7 +9,9 @@ using UnityEngine;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-
+/// <summary>
+/// Manages navigation around the main menu
+/// </summary>
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject settingsMenu;
@@ -20,27 +22,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject lobbyStartTrigger;
     [SerializeField] private TextMeshProUGUI lobbyCodeText;
     [SerializeField] private TMP_InputField joinCodeTextInput;
-
-
-    private async void Start()
-    {
-        await UnityServices.InitializeAsync();
-
-        if (AuthenticationService.Instance.IsSignedIn == false)
-        {
-            AuthenticationService.Instance.SignedIn += () =>
-            {
-                Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
-            };
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        }
-        else
-        {
-            mainMenu.transform.parent.gameObject.SetActive(false);
-            //LeaveRelay();
-        }
-    }
-
     public void OpenLobbyMenu()
     {
         lobbyMenu.SetActive(true);
@@ -78,72 +59,4 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
-
-
-
-    #region LobbyMethods
-
-    public async void HostRelay()
-    {
-        // Lobby Size (not including host)
-        try
-        {
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
-
-            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-
-            Debug.Log("Join Code: " + joinCode);
-            lobbyCodeText.text = joinCode;
-
-            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(allocation, "dtls");
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
-            NetworkManager.Singleton.StartHost();
-        }
-        catch (RelayServiceException e)
-        {
-            Debug.Log(e);
-        }
-
-        lobbyHud.SetActive(true);
-        hostLobbyMenu.SetActive(false);
-    }
-
-    public async void JoinRelay()
-    {
-        try
-        {
-            string joinCode = joinCodeTextInput.text;
-
-            Debug.Log("Joining Relay with " + joinCode);
-
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-
-            RelayServerData relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, "dtls");
-
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-
-            NetworkManager.Singleton.StartClient();
-        }
-        catch (RelayServiceException e)
-        {
-            Debug.Log(e);
-        }
-
-        lobbyHud.SetActive(true);
-        lobbyMenu.SetActive(false);
-    }
-
-    public void LeaveRelay()
-    {
-        Debug.Log("Disconnected Client");
-        NetworkManager.Singleton.GetComponent<UnityTransport>().Shutdown();
-        NetworkManager.Singleton.DisconnectClient(NetworkManager.Singleton.LocalClientId);
-        NetworkManager.Singleton.Shutdown();
-    }
-    #endregion
-
-
-
-
 }
