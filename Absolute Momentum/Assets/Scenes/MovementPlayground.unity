@@ -42103,44 +42103,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1849397176}
     - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
-      propertyPath: MissileLifeTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
-      propertyPath: targetOffsetPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: GuidanceCurve.m_Curve.Array.data[0].time
-      value: -10671911
+      value: -18830728
       objectReference: {fileID: 0}
     - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: GuidanceCurve.m_Curve.Array.data[1].time
-      value: 9277396
+      value: 9921513
       objectReference: {fileID: 0}
     - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: GuidanceCurve.m_Curve.Array.data[0].value
-      value: 69.30673
+      value: 100.0842
       objectReference: {fileID: 0}
     - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: GuidanceCurve.m_Curve.Array.data[1].value
-      value: 66.98676
+      value: 99.50828
       objectReference: {fileID: 0}
     - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: GuidanceCurve.m_Curve.Array.data[0].inSlope
-      value: -0.000000116293215
+      value: -0.000000020030443
       objectReference: {fileID: 0}
     - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: GuidanceCurve.m_Curve.Array.data[1].inSlope
-      value: -0.000000116293215
+      value: -0.000000020030443
       objectReference: {fileID: 0}
     - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: GuidanceCurve.m_Curve.Array.data[0].outSlope
-      value: -0.000000116293215
+      value: -0.000000020030443
       objectReference: {fileID: 0}
     - target: {fileID: 4337885052961562208, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: GuidanceCurve.m_Curve.Array.data[1].outSlope
-      value: -0.000000116293215
+      value: -0.000000020030443
       objectReference: {fileID: 0}
     - target: {fileID: 8131985605523127860, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42180,10 +42172,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8131985605523127860, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8754620986605831390, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
-      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9183076436041848315, guid: 32b084e15e5a3944db29e513a4d3468d, type: 3}
