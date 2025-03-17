@@ -52,7 +52,6 @@ public class LobbyUIMenu : MonoBehaviour
     {
         hostGameUI.SetActive(true);
         this.gameObject.SetActive(false);
-        lobbyGameUI.SetActive(true);
     }
 
     public void StartMatch()
