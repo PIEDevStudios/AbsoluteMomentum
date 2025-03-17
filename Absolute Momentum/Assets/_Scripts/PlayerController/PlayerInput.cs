@@ -25,6 +25,8 @@ public class PlayerInput : MonoBehaviour
     public bool ResetInput { get; private set;}
 
     public bool dashPressedThisFrame { get; private set; }
+    
+    public bool FiredMissile  { get; private set; }
 
     private void OnEnable()
     {
@@ -62,7 +64,7 @@ public class PlayerInput : MonoBehaviour
         slideReleasedThisFrame = playerActionMap.FindAction("Slide").WasReleasedThisFrame();
         slideHeld = playerActionMap.FindAction("Slide").ReadValue<float>() > 0;
         dashPressedThisFrame = playerActionMap.FindAction("Dash").WasPerformedThisFrame();
-        
+        FiredMissile = playerActionMap.FindAction("FireMissile").WasPerformedThisFrame();
         // DEBUG INPUTS
         ResetInput = Input.GetKeyDown(R);
     }

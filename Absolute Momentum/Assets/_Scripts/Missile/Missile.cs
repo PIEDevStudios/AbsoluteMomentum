@@ -44,6 +44,7 @@ public class Missile : MonoBehaviour
         if (target == null || !target.TryGetComponent(out targetRigidbody))
         {
             // kill self;
+            Debug.Log($"no target: {target == null} || {!target.TryGetComponent(out targetRigidbody)}");
             Destroy(missile);
         }
         missileRigidbody.useGravity = false;

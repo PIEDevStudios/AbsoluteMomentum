@@ -1,6 +1,8 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Utility;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Player : StateMachineCore
@@ -37,6 +39,9 @@ public class Player : StateMachineCore
     [SerializeField] private PlayerJumpManager jumpManager;
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
 
+    [SerializeField] private GameObject MissilePrefab;
+    private float timeSinceLastMissileFire;
+
     [ReadOnly] public float wallrunResetTimer;
     [ReadOnly] public bool leavingGround;
     
@@ -72,6 +77,12 @@ public class Player : StateMachineCore
         {
             ResetPlayer();
         }
+
+        timeSinceLastMissileFire += Time.deltaTime;
+        if (playerInput.FiredMissile)
+        {
+            TryFireMissile();
+        }
         
         timeSinceLastGrounded += Time.deltaTime;
 
@@ -90,7 +101,40 @@ public class Player : StateMachineCore
         HandleTransitions();
         
     }
-    
+
+    void TryFireMissile()
+    {
+        Debug.Log("missile attempt");
+        if (timeSinceLastMissileFire < 1f)
+        {
+            return;
+        }
+        timeSinceLastMissileFire = 0;
+        
+        Vector3 missileForwards = (orientation.forward + orientation.up).normalized;
+        Quaternion missileRotation = Quaternion.LookRotation(missileForwards, Vector3.Cross(missileForwards,orientation.right));
+        
+        
+
+        Missile m = MissilePrefab.GetComponent<Missile>();
+
+        float distSq = float.MaxValue;
+        GameObject closestPlayer = null;
+        foreach (var player in GameManager.instance.Players)
+        {
+            if (closestPlayer is null || Vector3.SqrMagnitude(player.transform.position - gameObject.transform.position) < distSq)
+            {
+                closestPlayer = player;
+                distSq = Vector3.SqrMagnitude(player.transform.position - gameObject.transform.position);
+            }
+        }
+        
+        m.target = closestPlayer;
+        m.owner = gameObject;
+        Debug.Log($"missile fire {playerObj.position}");
+        
+        GameObject missile = Instantiate(MissilePrefab,  playerObj.position, missileRotation);
+    }
     void FixedUpdate() 
     {
         if (rb.linearVelocity.y > 0)
