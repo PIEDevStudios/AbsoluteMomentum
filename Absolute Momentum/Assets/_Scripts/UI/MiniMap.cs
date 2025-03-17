@@ -8,6 +8,7 @@ public class MiniMap : MonoBehaviour
     [SerializeField] RectTransform scrollViewRectTransform;
     [SerializeField] RectTransform contentRectTransform;
     [SerializeField] MiniMapIcon miniMapIconPrefab;
+    Dictionary<MiniMapWorldObject, MiniMapIcon> miniMapWorldObjectsLookup = new Dictionary<MiniMapWorldObject, MiniMapIcon>();
 
     Matrix4x4 transformationMatrix;
 
@@ -20,7 +21,7 @@ public class MiniMap : MonoBehaviour
     {
         CalculateTransformationMatrix();
     }
-    Dictionary<MiniMapWorldObject, MiniMapIcon> miniMapWorldObjectsLookup = new Dictionary<MiniMapWorldObject, MiniMapIcon>();
+    
     public void RegisterMiniMapWorldObject(MiniMapWorldObject miniMapWorldObject) {
         var miniMapIcon = Instantiate(miniMapIconPrefab);
         miniMapIcon.transform.SetParent(contentRectTransform);
@@ -42,7 +43,7 @@ public class MiniMap : MonoBehaviour
             var miniMapIcon = kvp.Value;
 
             var mapPosition = WorldPositionTomapPosition(miniMapWorldObject.transform.position);
-            
+            Debug.Log("Map Position " + mapPosition);
             miniMapIcon.RectTransform.anchoredPosition = mapPosition;
             var rotation = miniMapWorldObject.transform.rotation.eulerAngles;
             miniMapIcon.IconRectTransform.localRotation = Quaternion.AngleAxis(-rotation.y, Vector3.forward);
