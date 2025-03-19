@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Player : StateMachineCore
@@ -41,6 +42,9 @@ public class Player : StateMachineCore
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
     [SerializeField] private AudioListener audioListner;
 
+    [Header("Missle")]
+    [SerializeField] private GameObject MissilePrefab;
+    private float timeSinceLastMissileFire;
 
     [ReadOnly] public float wallrunResetTimer;
     [ReadOnly] public bool leavingGround;
@@ -78,9 +82,77 @@ public class Player : StateMachineCore
         playerCamera.Priority = 100;
         
     }
+
+    public void Update()
+    {
+        timeSinceLastMissileFire += Time.deltaTime;
+        if (playerInput.FiredMissile)
+        {
+            TryFireMissile();
+        }            
+    }
+    
+
+
+    
+    void FixedUpdate() 
+    {
+        if (rb.linearVelocity.y > 0)
+        {
+            // Simulate custom gravity
+            rb.AddForce(Vector3.down * stats.CurrentGravity, ForceMode.Force);
+        }
+        else
+        {
+            rb.AddForce(Vector3.down * stats.CurrentGravity * stats.FallingGravityMultiplier, ForceMode.Force);
+        }
+
+        
+        // Call FixedUpdate logic
+        stateMachine.currentState.DoFixedUpdateBranch(); 
+    }
+
     #endregion
     
     #region Helper (Private) Methods
+    
+    /// <summary>
+    /// Fires a missle
+    /// </summary>
+    void TryFireMissile()
+    {
+        Debug.Log("missile attempt");
+        if (timeSinceLastMissileFire < 1f)
+        {
+            return;
+        }
+        timeSinceLastMissileFire = 0;
+        
+        Vector3 missileForwards = (orientation.forward + orientation.up).normalized;
+        Quaternion missileRotation = Quaternion.LookRotation(missileForwards, Vector3.Cross(missileForwards,orientation.right));
+        
+        
+
+        Missile m = MissilePrefab.GetComponent<Missile>();
+
+        float distSq = float.MaxValue;
+        GameObject closestPlayer = null;
+        foreach (var player in GameManager.instance.Players)
+        {
+            if (closestPlayer is null || Vector3.SqrMagnitude(player.transform.position - gameObject.transform.position) < distSq)
+            {
+                closestPlayer = player;
+                distSq = Vector3.SqrMagnitude(player.transform.position - gameObject.transform.position);
+            }
+        }
+        
+        m.target = closestPlayer;
+        m.owner = gameObject;
+        Debug.Log($"missile fire {playerObj.position}");
+        
+        GameObject missile = Instantiate(MissilePrefab,  playerObj.position, missileRotation);
+    }
+    
     /// <summary>
     /// Handles transitions between states in player state machine
     /// </summary>
@@ -205,6 +277,7 @@ public class Player : StateMachineCore
         walljumpManager.TickUpdate(inputValues);
         stateMachine.currentState.DoTickUpdateBranch(inputValues);
     }
+    
     /// <summary>
     /// Changes the custom gravity scale that the player is currently experiencing
     /// </summary>

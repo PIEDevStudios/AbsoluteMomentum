@@ -26,6 +26,8 @@ public class PlayerInput : MonoBehaviour
 
     public bool dashPressedThisFrame { get; private set; }
     
+    public bool FiredMissile  { get; private set; }
+    
     public struct InputValues
     {
         public Vector2 moveVector;
@@ -40,6 +42,7 @@ public class PlayerInput : MonoBehaviour
         public bool slideReleasedThisFrame;
         public bool slideHeld;
         public bool ResetInput;
+        public bool FiredMissle;
     }
     
     
@@ -84,6 +87,8 @@ public class PlayerInput : MonoBehaviour
         slideReleasedThisFrame = heldLastFrame && !slideHeld;
         
         dashPressedThisFrame = playerActionMap.FindAction("Dash").WasPerformedThisFrame();
+        
+        FiredMissile = playerActionMap.FindAction("FireMissile").WasPerformedThisFrame();
         
         // DEBUG INPUTS
         ResetInput = Input.GetKeyDown(R);
