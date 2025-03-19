@@ -10,11 +10,12 @@ public class RaceCountdownManager : MonoBehaviour
 
     private void Start()
     {
-        countdownText.gameObject.SetActive(false); // Hide initially
+        countdownText.gameObject.SetActive(false);
     }
-
+    
     public void StartCountdown()
     {
+        countdownText.gameObject.SetActive(true);
         StartCoroutine(CountdownCoroutine());
     }
 
