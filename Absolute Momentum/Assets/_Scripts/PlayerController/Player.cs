@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Utility;
 using Unity.Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
