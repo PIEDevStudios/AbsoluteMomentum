@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using _Scripts.Utility;
 using Unity.Cinemachine;
 using Unity.Mathematics;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using Unity.Netcode;
 
 public class Player : StateMachineCore
 {
@@ -82,6 +84,8 @@ public class Player : StateMachineCore
         audioListner.enabled = true;
         playerCamera.Priority = 100;
         
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        
     }
 
     public void Update()
@@ -116,6 +120,18 @@ public class Player : StateMachineCore
     #endregion
     
     #region Helper (Private) Methods
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        
+        if (scene.name == "Track test") 
+        {
+            Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
+            Debug.Log("Race Manager Instance: " + RaceManager.Instance.gameObject.name);
+            RaceManager.Instance.PlayerLoadedSceneServerRpc(NetworkManager.Singleton.LocalClientId);
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+    }
     
     /// <summary>
     /// Fires a missle
