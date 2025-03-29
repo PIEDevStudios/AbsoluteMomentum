@@ -92,7 +92,7 @@ MonoBehaviour:
   SlopeSlideForce: 60
   SlideGroundAcceleration: 1500
   SlideAirAcceleration: 5000
-  slidePlayerScale: {x: 1, y: 0.5, z: 1}
+  slidePlayerScale: {x: 1, y: 1, z: 1}
   slideDragCurve:
     serializedVersion: 2
     m_Curve:
@@ -167,7 +167,7 @@ MonoBehaviour:
   NormalGravity: 45
   WallrunGravity: 10
   FallingGravityMultiplier: 1
-  CurrentGravity: 45
+  CurrentGravity: 0
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 25

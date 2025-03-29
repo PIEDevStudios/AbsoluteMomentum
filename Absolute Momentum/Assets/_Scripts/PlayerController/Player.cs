@@ -247,6 +247,16 @@ public class Player : StateMachineCore
     
     #region Public Methods
 
+
+    /// <summary>
+    /// Enables or disables player input
+    /// </summary>
+    /// <param name="enable"></param>
+    public void EnablePlayerInput(bool enable)
+    {
+        playerInput.enabled = enable;
+    }
+
     /// <summary>
     /// Method we use to move so that we can simulate physics
     /// </summary>

@@ -8,17 +8,13 @@ using UnityEngine.SceneManagement;
 public class RaceManager : NetworkSingletonPersistent<RaceManager>
 {
     [SerializeField] private float countdownTime = 3f;
+    [SerializeField] private Vector3 startPosition;
 
     // Keep track of players
     private Dictionary<ulong, bool> playerReadyStatus = new Dictionary<ulong, bool>();
 
     // Network variable for countdown timer
     private NetworkVariable<float> countdownTimer = new NetworkVariable<float>(-1f, NetworkVariableReadPermission.Everyone);
-
-    protected void Awake()
-    {
-        base.Awake();
-    }
     
     public override void OnNetworkSpawn()
     {
@@ -44,10 +40,17 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         {
             Debug.Log($"Player {clientId} loaded!");
             playerReadyStatus[clientId] = true;
+            TeleportPlayerToStart(clientId);
             CheckAllPlayersReady();
         }
     }
 
+    private void TeleportPlayerToStart(ulong clientId)
+    {
+        var player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponentInChildren<Player>();
+        player.rb.position = startPosition;
+    }
+    
     private void CheckAllPlayersReady()
     {
         foreach (bool isReady in playerReadyStatus.Values)
@@ -71,7 +74,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
             countdownTimer.Value--;
         }
 
-        // StartRace();
+        StartRace();
     }
 
     private void StartRace()

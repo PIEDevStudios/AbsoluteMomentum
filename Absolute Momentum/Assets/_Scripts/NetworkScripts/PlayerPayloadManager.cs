@@ -92,7 +92,7 @@ public class PlayerPayloadManager : NetworkBehaviour
     void HandleClientTick()
     {
         if (!IsOwner) return;
-        Debug.Log("Handling Client Tick");
+        // Debug.Log("Handling Client Tick");
         var currentTick = timer.CurrentTick;
         var bufferIndex = currentTick % KBufferSize;
         

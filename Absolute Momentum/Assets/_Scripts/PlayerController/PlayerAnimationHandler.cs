@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerAnimationHandler : NetworkBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private WallSensor wallSensor;
     private Animator animator;
     public override void OnNetworkSpawn()
     {
@@ -13,7 +14,19 @@ public class PlayerAnimationHandler : NetworkBehaviour
         if (IsOwner)
         {
             player.stateMachine.OnStateChanged += OnStateChanged;
+            player.slide.stateMachine.OnStateChanged += OnStateChanged;
         }
+    }
+
+    public void Update()
+    {
+        if (!IsOwner) return;
+        SetWallLeft(wallSensor.wallLeft);
+    }
+
+    public void SetWallLeft(bool wallLeft)
+    {
+        animator.SetBool("Wall Left", wallLeft);
     }
 
     /// <summary>
@@ -35,11 +48,11 @@ public class PlayerAnimationHandler : NetworkBehaviour
         {
             return "Run";
         }
-        if (state == player.airborne)
+        if (state == player.airborne || state == player.slide.airborne)
         {
             return "Jump";
         }
-        if (state == player.slide)
+        if (state == player.slide || state == player.slide.grounded)
         {
             return "Slide";
         }
@@ -58,8 +71,8 @@ public class PlayerAnimationHandler : NetworkBehaviour
     {
         animator.ResetTrigger("Jump");
         animator.ResetTrigger("Run");
-        animator.ResetTrigger("Roll");
-        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Wallrun");
+        animator.ResetTrigger("Slide");
         animator.ResetTrigger("Idle");
     }
 
