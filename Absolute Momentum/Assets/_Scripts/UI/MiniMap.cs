@@ -58,34 +58,10 @@ public class MiniMap : MonoBehaviour
 
     void CalculateTransformationMatrix()
     {
-        // // Get the size of the minimap UI
-        // var miniMapDimensions = contentRectTransform.rect.size;
-
-        // // Get the size of the Plane (default Unity Plane is 10x10 units)
-        // float baseSizeX = 10f;
-        // float baseSizeZ = 10f;
-
-        // // Calculate the scaled dimensions of the Plane
-        // float scaledSizeX = baseSizeX * plane.transform.lossyScale.x;
-        // float scaledSizeZ = baseSizeZ * plane.transform.lossyScale.z;
-
-        // Vector2 planeDimensions = new Vector2(scaledSizeX, scaledSizeZ);
-
-        // // Calculate the scale ratio between the minimap and the plane
-        // var scaleRatio = new Vector2(
-        //     miniMapDimensions.x / planeDimensions.x,
-        //     miniMapDimensions.y / planeDimensions.y
-        // );
-
-        // // No translation needed since the origin (0,0,0) is the center of the plane
-        // var translation = Vector2.zero;
-
-        // // Create the transformation matrix
-        // transformationMatrix = Matrix4x4.TRS(translation, Quaternion.identity, scaleRatio);
         var minimapSize = contentRectTransform.rect.size;
         var worldSize = new Vector2(this.worldSize.x, this.worldSize.y);
 
-        var translation = -minimapSize ;
+        var translation = minimapSize * 0;
         var scaleRatio = minimapSize / worldSize;
 
         transformationMatrix = Matrix4x4.TRS(translation, Quaternion.identity, scaleRatio);
