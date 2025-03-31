@@ -37,7 +37,6 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Debug.Log("Trying to send server rpc");
             TeleportPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
         }
     }
@@ -59,7 +58,6 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     [Rpc(SendTo.Server, RequireOwnership = false)]
     public void TeleportPlayerServerRpc(ulong clientId)
     {
-        Debug.Log("Recieved Server Rpc");
         TeleportPlayerToStart(clientId);
     }
 
@@ -81,7 +79,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         // All players ready, start countdown
         StartCoroutine(BeginCountdown());
     }
-
+    
     private IEnumerator BeginCountdown()
     {
         countdownTimer.Value = countdownTime;
@@ -101,8 +99,6 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         Debug.Log("Race Started!");
         // Implement race start logic here (e.g., enable player controls)
     }
-
-    // Optional: Getter for countdown timer for clients to read
     public float GetCountdownTimer()
     {
         return countdownTimer.Value;
