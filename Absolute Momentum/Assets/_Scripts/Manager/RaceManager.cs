@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RaceManager : NetworkSingletonPersistent<RaceManager>
 {
     [SerializeField] private float countdownTime = 3f;
-    [SerializeField] private Vector3 startPosition;
+    [SerializeField] private Vector3[] startPositions;
+    private int currentTeleportIndex;
 
     // Keep track of players
     private Dictionary<ulong, bool> playerReadyStatus = new Dictionary<ulong, bool>();
@@ -30,10 +32,19 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         playerReadyStatus[clientId] = false;
         
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("Trying to send server rpc");
+            TeleportPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+        }
+    }
+
 
     // Call this method from each player's script once their scene has loaded
-    [ServerRpc(RequireOwnership = false)]
+    [Rpc(SendTo.Server, RequireOwnership = false)]
     public void PlayerLoadedSceneServerRpc(ulong clientId)
     {
         if (playerReadyStatus.ContainsKey(clientId))
@@ -44,11 +55,19 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
             CheckAllPlayersReady();
         }
     }
+    
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    public void TeleportPlayerServerRpc(ulong clientId)
+    {
+        Debug.Log("Recieved Server Rpc");
+        TeleportPlayerToStart(clientId);
+    }
 
     private void TeleportPlayerToStart(ulong clientId)
     {
-        var player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponentInChildren<Player>();
-        player.rb.position = startPosition;
+        var player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponentInChildren<PlayerPayloadManager>();
+        player.TeleportPlayer(startPositions[currentTeleportIndex % startPositions.Length]);
+        currentTeleportIndex++;
     }
     
     private void CheckAllPlayersReady()

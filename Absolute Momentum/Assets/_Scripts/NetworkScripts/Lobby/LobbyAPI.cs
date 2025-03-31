@@ -13,7 +13,7 @@ using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
 using TMPro;
 
-public class LobbyAPI : SingletonPersistent<LobbyAPI>
+public class LobbyAPI : MonoBehaviour
 {
     public event Action<List<Lobby>> LobbiesUpdated;
 

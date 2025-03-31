@@ -13,6 +13,8 @@ public class PlayerPayloadManager : NetworkBehaviour
     private NetworkTimer timer;
     private float cooldownTimer;
     private bool canReconcile = true;
+    private bool wasTeleported = false;    
+    private Vector3 teleportPosition;
     private const float KServerTickRate = 60f;
     private const int KBufferSize = 1024;
     [Header("Netcode")] 
@@ -139,12 +141,12 @@ public class PlayerPayloadManager : NetworkBehaviour
         float positionError = Vector3.Distance(rewindState.position, clientState.position);
         // Debug.Log("Server trying to reconcile. Position error: " + positionError + " RSTATE: " + rewindState.position + " CSTATE: " + clientState.position);
  
-        if (positionError > reconciliationThreshold)
-        {
-            ReconcileState(rewindState);
-            cooldownTimer = reconciliationCooldownTime;
-            Debug.Log("Server reconciled");
-        }
+        // if (positionError > reconciliationThreshold)
+        // {
+        //     ReconcileState(rewindState);
+        //     cooldownTimer = reconciliationCooldownTime;
+        //     Debug.Log("Server reconciled");
+        // }
         
         lastProcessedState = rewindState;
 
@@ -239,6 +241,13 @@ public class PlayerPayloadManager : NetworkBehaviour
     {
         player.Move(player.playerInput.GetInputValues());
 
+        if (wasTeleported)
+        {
+            player.rb.position = teleportPosition;
+            player.rb.linearVelocity = Vector3.zero;
+            wasTeleported = false;
+        }
+        
         return new StatePayload()
         {
             tick = inputPayload.tick,
@@ -248,6 +257,22 @@ public class PlayerPayloadManager : NetworkBehaviour
             angularVelocity = player.rb.angularVelocity,
         };
 
+    }
+
+    public void TeleportPlayer(Vector3 position)
+    {
+        Debug.Log("Teleporting Player");
+        teleportPosition = position;
+        wasTeleported = true;
+        TeleportPlayerClientRpc(position);
+    }
+    
+    [Rpc(SendTo.ClientsAndHost)]
+    void TeleportPlayerClientRpc(Vector3 position)
+    {
+        if (!IsOwner) return;
+        teleportPosition = position;
+        wasTeleported = true;
     }
     
 }

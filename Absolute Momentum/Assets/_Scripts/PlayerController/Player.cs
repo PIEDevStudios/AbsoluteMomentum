@@ -114,7 +114,7 @@ public class Player : StateMachineCore
 
         
         // Call FixedUpdate logic
-        stateMachine.currentState.DoFixedUpdateBranch(); 
+        // stateMachine.currentState.DoFixedUpdateBranch(); 
     }
 
     #endregion
@@ -265,13 +265,6 @@ public class Player : StateMachineCore
         // Calls update logic in the currently active state
         stateMachine.currentState.DoUpdateBranch();
         wallrunResetTimer -= Time.deltaTime;
-        
-        // Debug reset player input
-        if (inputValues.ResetInput)
-        {
-            ResetPlayer();
-        }
-        
         timeSinceLastGrounded += Time.deltaTime;
 
         if (groundSensor.grounded)

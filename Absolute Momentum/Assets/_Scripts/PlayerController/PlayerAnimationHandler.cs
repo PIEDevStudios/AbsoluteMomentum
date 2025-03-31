@@ -34,7 +34,7 @@ public class PlayerAnimationHandler : NetworkBehaviour
     /// </summary>
     private void OnStateChanged(object sender, StateMachine.OnStateChangedEventArgs eventArgs)
     {
-        Debug.Log("State changed to : " + eventArgs.nextState);
+        // Debug.Log("State changed to : " + eventArgs.nextState);
         SetTrigger(getTriggerName(eventArgs.nextState));
     }
 

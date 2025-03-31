@@ -698,10 +698,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4797929895202974445, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
-      propertyPath: wallSensor
-      value: 
-      objectReference: {fileID: 8600541307452225779}
     - target: {fileID: 5340615071919367284, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -743,7 +739,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: -1619331379173837765, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+    - {fileID: 2516520678224389900, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -790,14 +786,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5034370465468976250, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
   m_PrefabInstance: {fileID: 2222777955612407107}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8600541307452225779 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7603103142646631856, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
-  m_PrefabInstance: {fileID: 2222777955612407107}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaba382b981d2de42bb132a322a42703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
