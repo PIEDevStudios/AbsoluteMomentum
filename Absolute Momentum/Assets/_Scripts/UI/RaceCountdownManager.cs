@@ -10,6 +10,7 @@ public class RaceCountdownManager : MonoBehaviour
     public event Action OnCountdownFinished; // Event triggered when countdown finishes
     private RaceManager raceManager;
     private float countdownValue;
+    private bool hasCountdownFinished;
     private void Start()
     {
         countdownText.enabled = false;
@@ -26,9 +27,11 @@ public class RaceCountdownManager : MonoBehaviour
                 player.playerInput.enabled = false;
             countdownText.text = countdownValue.ToString();
             countdownText.enabled = true;
+            hasCountdownFinished = false;
         }
-        else if (countdownValue == 0)
+        else if (countdownValue == 0 && !hasCountdownFinished)
         {
+            hasCountdownFinished = true;
             StartCoroutine(CountdownCoroutine());
         }
     }

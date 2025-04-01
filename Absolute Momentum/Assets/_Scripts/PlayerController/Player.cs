@@ -123,13 +123,17 @@ public class Player : StateMachineCore
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
         if (scene.name == "Track test") 
         {
             Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
             Debug.Log("Race Manager Instance: " + RaceManager.Instance.gameObject.name);
+
+            if (IsServer)
+            {
+                RaceManager.Instance.ResetRaceManagerValues();
+            }
+            
             RaceManager.Instance.PlayerLoadedSceneServerRpc(NetworkManager.Singleton.LocalClientId);
-            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
     

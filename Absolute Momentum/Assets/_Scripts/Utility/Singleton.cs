@@ -46,11 +46,11 @@ public abstract class NetworkSingleton<T> : NetworkBehaviour where T : NetworkBe
             Debug.Log("NETWORK SINGLETON DELETED");
             Destroy(gameObject);
         }
-            
-
-        
-        Instance = this as T;
-        Debug.Log("NETWORK SINGLETON CREATED: " + Instance.name);
+        else
+        {
+            Instance = this as T;
+            Debug.Log("NETWORK SINGLETON CREATED: " + Instance.name);
+        }
     }
     protected virtual void OnApplicationQuit()
     {
@@ -69,9 +69,11 @@ public abstract class NetworkSingletonPersistent<T> : NetworkSingleton<T> where 
             Debug.Log("NETWORK SINGLETON DELETED");
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
-        base.Awake();
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            base.Awake();
+        }
     }
 }
 

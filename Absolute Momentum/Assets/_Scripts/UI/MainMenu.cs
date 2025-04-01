@@ -22,6 +22,17 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject lobbyStartTrigger;
     [SerializeField] private TextMeshProUGUI lobbyCodeText;
     [SerializeField] private TMP_InputField joinCodeTextInput;
+
+    private void Awake()
+    {
+        // If player is already connected (returning from a race) do NOT load menu UI
+        if (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsClient)
+        {
+            mainMenu.SetActive(false);
+            lobbyHud.SetActive(true);
+            return;
+        }
+    }
     public void OpenLobbyMenu()
     {
         lobbyMenu.SetActive(true);

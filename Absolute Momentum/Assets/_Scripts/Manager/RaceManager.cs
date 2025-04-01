@@ -97,10 +97,22 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     private void StartRace()
     {
         Debug.Log("Race Started!");
+        // Reset Player Ready Dictionary for next race
         // Implement race start logic here (e.g., enable player controls)
     }
     public float GetCountdownTimer()
     {
         return countdownTimer.Value;
+    }
+
+    public void ResetRaceManagerValues()
+    {
+        foreach (var clientsId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            playerReadyStatus[clientsId] = false;
+        }
+
+        currentTeleportIndex = 0;
+        countdownTimer.Value = 3f;
     }
 }
