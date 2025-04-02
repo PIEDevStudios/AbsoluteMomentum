@@ -40,18 +40,6 @@ public class MiniMap : MonoBehaviour
     }
 
     private void UpdateMiniMapIcons() {
-        // float iconScale = 1 / contentRectTransform.transform.localScale.x;
-        // foreach (var kvp in miniMapWorldObjectsLookup)
-        // {
-        //     var miniMapWorldObject = kvp.Key;
-        //     var miniMapIcon = kvp.Value;
-        //     var mapPosition = WorldPositionToMapPosition(miniMapWorldObject.transform.position);
-        //     miniMapIcon.RectTransform.anchoredPosition = mapPosition;
-        //     var rotation = miniMapWorldObject.transform.rotation.eulerAngles;
-        //     miniMapIcon.IconRectTransform.localRotation = Quaternion.AngleAxis(-rotation.y, Vector3.forward);
-        //     miniMapIcon.IconRectTransform.localScale = Vector3.one * iconScale;
-        // }
-
         foreach (var kvp in miniMapWorldObjectsLookup)
         {
             var miniMapWorldObject = kvp.Key;
@@ -60,16 +48,6 @@ public class MiniMap : MonoBehaviour
             // POSITION
             var mapPosition = WorldPositionToMapPosition(miniMapWorldObject.transform.position);
             miniMapIcon.RectTransform.anchoredPosition = mapPosition;
-
-            // ROTATION DEBUG
-            Vector3 forward = miniMapWorldObject.transform.forward;
-            float angle = Mathf.Atan2(forward.x, forward.z) * Mathf.Rad2Deg;
-            Debug.Log($"Object: {miniMapWorldObject.name} | " +
-                    $"Forward: {forward} | " +
-                    $"Calculated Angle: {angle} | " +
-                    $"Transform Rotation: {miniMapWorldObject.transform.eulerAngles.y}");
-
-            miniMapIcon.IconRectTransform.localEulerAngles = new Vector3(0, 0, -angle);
         }
     }
 
