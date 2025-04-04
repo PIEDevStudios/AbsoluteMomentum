@@ -12,11 +12,21 @@ public class BasePad : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Activate Pad");
-            ActivatePad(other);
+            
+            ActivatePad(other.rigidbody);
+        }
+    }
+    
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Activate Pad");
+            ActivatePad(other.attachedRigidbody);
         }
     }
 
-    public virtual void ActivatePad(Collision other)
+    public virtual void ActivatePad(Rigidbody other)
     {
         
     }

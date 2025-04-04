@@ -5,9 +5,8 @@ public class JumpPad : BasePad
     [SerializeField] private float jumpAmount;
 
 
-    public override void ActivatePad(Collision other)
+    public override void ActivatePad(Rigidbody rb)
     {
-        Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
         if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);

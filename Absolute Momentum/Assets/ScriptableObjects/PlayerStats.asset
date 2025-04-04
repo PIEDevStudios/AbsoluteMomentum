@@ -89,7 +89,7 @@ MonoBehaviour:
   MinimumSlideAirTime: 0.25
   SlideDrag: 0.5
   BoostYVeloMult: 0
-  SlopeSlideForce: 60
+  SlopeSlideForce: 10
   SlideGroundAcceleration: 1500
   SlideAirAcceleration: 5000
   slidePlayerScale: {x: 1, y: 1, z: 1}
@@ -126,9 +126,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  wallrunForce: 10
-  wallrunResetTime: 0.4
-  wallJumpUpForce: 15
+  wallrunForce: 20
+  wallrunResetTime: 0
+  wallJumpUpForce: 25
   wallJumpSideForce: 30
   wallDragCurve:
     serializedVersion: 2

@@ -214,7 +214,7 @@ public class Player : StateMachineCore
         }
         
         // Transition to wallrun
-        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && inputValues.moveVector.y > 0 && stateMachine.currentState != slide && wallrunResetTimer < 0f)
+        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && stateMachine.currentState != slide && wallrunResetTimer < 0f)
         {
             stateMachine.SetState(wallrun);
             return;
