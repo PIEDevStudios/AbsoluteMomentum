@@ -38,6 +38,7 @@ public class PlayerStats : ScriptableObject
     [Header("Wall Movement")]
     public float wallrunForce;
 
+    public float stickToWallForce;
     public float wallrunResetTime;
     public float wallJumpUpForce;
     public float wallJumpSideForce;

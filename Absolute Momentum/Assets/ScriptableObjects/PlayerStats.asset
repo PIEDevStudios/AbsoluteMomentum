@@ -29,7 +29,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 10
+      time: 15.025665
       value: 0
       inSlope: 0
       outSlope: 0
@@ -40,8 +40,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 37.327328
       value: 357.95132
-      inSlope: 13.098659
-      outSlope: 13.098659
+      inSlope: 16.050432
+      outSlope: 16.050432
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -127,6 +127,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   wallrunForce: 10
+  stickToWallForce: 100
   wallrunResetTime: 0.1
   wallJumpUpForce: 12
   wallJumpSideForce: 20
@@ -165,8 +166,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   gravityEnabled: 1
   NormalGravity: 20
-  WallrunGravity: 5
-  FallingGravityMultiplier: 1
+  WallrunGravity: 1
+  FallingGravityMultiplier: 1.5
   CurrentGravity: 0
   JumpForce: 20
   EndJumpEarlyForceScale: 0.5

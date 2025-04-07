@@ -68,7 +68,7 @@ public class PlayerWallrun : State
         // Keep on wall force
         if (!(wallSensor.wallLeft && inputValues.moveVector.x > 0) && !(wallSensor.wallRight && inputValues.moveVector.x < 0))
         {
-            rb.AddForce(-wallNormal * 100f, ForceMode.Force);
+            rb.AddForce(-wallNormal * player.stats.stickToWallForce, ForceMode.Force);
         }
         
         
