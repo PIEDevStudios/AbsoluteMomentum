@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Networkside
 public class NetworkTimer
 {
     private float timer;

@@ -121,19 +121,20 @@ public class Player : StateMachineCore
     
     #region Helper (Private) Methods
     
+    /// <summary>
+    /// Loads character into race track, then notifies race manager that player is loaded in
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (!IsOwner) return;
+
         if (scene.name == "Track test") 
         {
             Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
-            Debug.Log("Race Manager Instance: " + RaceManager.Instance.gameObject.name);
-
-            if (IsServer)
-            {
-                RaceManager.Instance.ResetRaceManagerValues();
-            }
             
-            RaceManager.Instance.PlayerLoadedSceneServerRpc(NetworkManager.Singleton.LocalClientId);
+            StartCoroutine(NotifyRaceManagerWhenReady());
         }
     }
     
@@ -245,6 +246,30 @@ public class Player : StateMachineCore
 
 
         
+    }
+
+    /// <summary>
+    /// Lets race manager know that it is ready
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator NotifyRaceManagerWhenReady()
+    {
+        // Small delay to make sure everything's initialized (optional, but often useful)
+        yield return new WaitForSeconds(0.5f);
+
+        while (RaceManager.Instance == null)
+        {
+            Debug.Log("Waiting for RaceManager...");
+            yield return null;
+        }
+
+        if (IsServer)
+        {
+            RaceManager.Instance.ResetRaceManagerValues(); // Only server resets
+        }
+        
+        RaceManager.Instance.MarkPlayerSceneReadyServerRpc();
+        Debug.Log("Player has notified server they are ready.");
     }
     
     #endregion
