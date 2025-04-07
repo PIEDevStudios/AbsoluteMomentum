@@ -34,27 +34,35 @@ public class PlayerAnimationHandler : NetworkBehaviour
     /// </summary>
     private void OnStateChanged(object sender, StateMachine.OnStateChangedEventArgs eventArgs)
     {
-        // Debug.Log("State changed to : " + eventArgs.nextState);
+        if (eventArgs.nextState == player.slide || eventArgs.nextState == player.slide.grounded || eventArgs.nextState == player.slide.airborne)
+        {
+            animator.SetBool("Slide", true);
+
+            if (eventArgs.nextState == player.slide) return;
+        }
+        else
+        {
+            animator.SetBool("Slide", false);
+        }
+        
         SetTrigger(getTriggerName(eventArgs.nextState));
     }
 
     private String getTriggerName(State state)
     {
+        
+        
         if (state == player.idle)
         {
             return "Idle";
         }
-        if (state == player.move)
+        if (state == player.move || state == player.slide.grounded)
         {
             return "Run";
         }
         if (state == player.airborne || state == player.slide.airborne)
         {
             return "Jump";
-        }
-        if (state == player.slide || state == player.slide.grounded)
-        {
-            return "Slide";
         }
         if (state == player.wallrun)
         {
@@ -72,7 +80,6 @@ public class PlayerAnimationHandler : NetworkBehaviour
         animator.ResetTrigger("Jump");
         animator.ResetTrigger("Run");
         animator.ResetTrigger("Wallrun");
-        animator.ResetTrigger("Slide");
         animator.ResetTrigger("Idle");
     }
 

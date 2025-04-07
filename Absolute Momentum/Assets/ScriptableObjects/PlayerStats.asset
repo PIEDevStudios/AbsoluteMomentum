@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef464e9f8b6dd1747993335ea6a2723c, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  SprintAcceleration: 2.5
+  SprintAcceleration: 1
   GroundDrag: 0
   NoInputDeceleration: 0
   StickToSlopeForce: 100
@@ -49,7 +49,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AirAcceleration: 100
+  AirAcceleration: 30
   AirDrag: 0
   AirStrafeAcceleration: 100
   airDragCurve:
@@ -126,10 +126,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  wallrunForce: 20
-  wallrunResetTime: 0
-  wallJumpUpForce: 25
-  wallJumpSideForce: 30
+  wallrunForce: 10
+  wallrunResetTime: 0.1
+  wallJumpUpForce: 12
+  wallJumpSideForce: 20
   wallDragCurve:
     serializedVersion: 2
     m_Curve:
@@ -164,13 +164,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   gravityEnabled: 1
-  NormalGravity: 45
-  WallrunGravity: 10
+  NormalGravity: 20
+  WallrunGravity: 5
   FallingGravityMultiplier: 1
   CurrentGravity: 0
-  JumpForce: 40
+  JumpForce: 20
   EndJumpEarlyForceScale: 0.5
-  EndJumpEarlyTime: 25
+  EndJumpEarlyTime: 0
   JumpFrameBufferAmount: 10
   FallSpeedLimit: 60
   DashSpeed: 50
