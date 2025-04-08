@@ -73,7 +73,7 @@ public class SlideAirborne : State
         if (playerInput.moveVector.magnitude == 0f)
         {
             Debug.DrawRay(player.transform.position, -flatVel.normalized, Color.blue);
-            rb.AddForce(-flatVel.normalized * stats.NoInputDeceleration);
+            rb.AddForce(-flatVel.normalized * stats.GroundNoInputDeceleration);
         }
 
     }

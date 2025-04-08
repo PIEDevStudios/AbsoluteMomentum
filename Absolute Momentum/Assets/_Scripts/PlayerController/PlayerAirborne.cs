@@ -47,7 +47,7 @@ public class PlayerAirborne : State
             rb.AddForce(forceInVeloDirection * flatVel.normalized, ForceMode.Force);
         }
         
-        NoInputDeceleration();
+        NoInputDeceleration(inputValues);
         LimitVelocity();
     }
 
@@ -63,17 +63,17 @@ public class PlayerAirborne : State
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
     }
 
-    private void NoInputDeceleration()
+    private void NoInputDeceleration(PlayerInput.InputValues inputValues)
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         // If player is not pressing any move button, decelerate them
-        if (playerInput.moveVector.magnitude == 0f)
+        if (inputValues.moveVector.magnitude == 0f)
         {
             Debug.DrawRay(player.transform.position, -flatVel.normalized, Color.blue);
-            rb.AddForce(-flatVel.normalized * stats.NoInputDeceleration);
+            rb.AddForce(-flatVel.normalized * stats.AirNoInputDeceleration);
         }
         // If our velocity is close to 0 and still not pressing an input, set velo to 0
-        if (playerInput.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
+        if (inputValues.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }

@@ -54,6 +54,7 @@ public class PlayerMove : State
         // Adds a force to the player in the direction they are pressing relative to the camera
         //Debug.Log("MOVE FIXED UPDATE");
         rb.AddForce((forwardOriented * inputValues.moveVector.y + rightOriented * inputValues.moveVector.x).normalized * (stats.SprintAcceleration * 100f));
+        NoInputDeceleration(inputValues);
         StickToSlope();
     }
 
@@ -66,6 +67,22 @@ public class PlayerMove : State
         {
             Debug.Log("Stick to slope");
             rb.AddForce(Vector3.down * stats.StickToSlopeForce);
+        }
+    }
+    
+    private void NoInputDeceleration(PlayerInput.InputValues inputValues)
+    {
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        // If player is not pressing any move button, decelerate them
+        if (inputValues.moveVector.magnitude == 0f)
+        {
+            Debug.DrawRay(player.transform.position, -flatVel.normalized, Color.blue);
+            rb.AddForce(-flatVel.normalized * stats.GroundNoInputDeceleration);
+        }
+        // If our velocity is close to 0 and still not pressing an input, set velo to 0
+        if (inputValues.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
+        {
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
     }
 

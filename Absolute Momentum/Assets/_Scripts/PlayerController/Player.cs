@@ -237,7 +237,7 @@ public class Player : StateMachineCore
         float timeSinceLastMove = Time.time - inputValues.timeOfLastMoveInput;
         
         // Transition to idle
-        if (groundSensor.grounded && timeSinceLastMove >= 0.1f && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
+        if (groundSensor.grounded && (nonAirborneGroundCheck && flatVel.magnitude < 1f || airborneGroundCheck && timeSinceLastMove >= 0.1f || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(idle);
             return;

@@ -11,7 +11,7 @@ public class PlayerStats : ScriptableObject
     // public float MaxSprintSpeed;
     public float SprintAcceleration;
     public float GroundDrag;
-    public float NoInputDeceleration;
+    public float GroundNoInputDeceleration;
     public float StickToSlopeForce;
     public AnimationCurve groundDragCurve;
     
@@ -19,6 +19,7 @@ public class PlayerStats : ScriptableObject
     public float AirAcceleration;
     public float AirDrag;
     // public float AirSoftMaxSpeed;
+    public float AirNoInputDeceleration;
     public float AirStrafeAcceleration;
     public AnimationCurve airDragCurve;
 
