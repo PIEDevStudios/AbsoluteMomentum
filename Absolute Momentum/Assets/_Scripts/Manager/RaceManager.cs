@@ -10,6 +10,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 {
     [SerializeField] private float countdownTime = 3f;
     [SerializeField] private Vector3[] startPositions;
+
     private int currentTeleportIndex;
 
     // Keep track of players
@@ -17,7 +18,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
     // Network variable for countdown timer
     private NetworkVariable<float> countdownTimer = new NetworkVariable<float>(-1f, NetworkVariableReadPermission.Everyone);
-    
+
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -29,57 +30,57 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     private void AddClientReadyStatus(ulong clientId)
     {
         if (!IsServer) return;
-        playerReadyStatus[clientId] = false;
+
+        if (!playerReadyStatus.ContainsKey(clientId))
+        {
+            playerReadyStatus[clientId] = false;
+        }
+    }
+
+    // Called by players when their scene is fully loaded and they are ready
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    public void MarkPlayerSceneReadyServerRpc(RpcParams rpcParams = default)
+    {
+        ulong clientId = rpcParams.Receive.SenderClientId;
         
-    }
+        if (!playerReadyStatus.ContainsKey(clientId))
+            playerReadyStatus[clientId] = false;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TeleportPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
-        }
-    }
+        Debug.Log($"[Server] Player {clientId} marked ready at time: {NetworkManager.Singleton.ServerTime.Time:F2} seconds");
 
-
-    // Call this method from each player's script once their scene has loaded
-    [Rpc(SendTo.Server, RequireOwnership = false)]
-    public void PlayerLoadedSceneServerRpc(ulong clientId)
-    {
-        if (playerReadyStatus.ContainsKey(clientId))
-        {
-            Debug.Log($"Player {clientId} loaded!");
-            playerReadyStatus[clientId] = true;
-            TeleportPlayerToStart(clientId);
-            CheckAllPlayersReady();
-        }
-    }
-    
-    [Rpc(SendTo.Server, RequireOwnership = false)]
-    public void TeleportPlayerServerRpc(ulong clientId)
-    {
+        playerReadyStatus[clientId] = true;
         TeleportPlayerToStart(clientId);
+        CheckAllPlayersReady();
     }
 
     private void TeleportPlayerToStart(ulong clientId)
     {
-        var player = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponentInChildren<PlayerPayloadManager>();
-        player.TeleportPlayer(startPositions[currentTeleportIndex % startPositions.Length]);
-        currentTeleportIndex++;
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
+        {
+            var player = client.PlayerObject.GetComponentInChildren<PlayerPayloadManager>();
+            if (player != null)
+            {
+                player.TeleportPlayer(startPositions[currentTeleportIndex % startPositions.Length]);
+                currentTeleportIndex++;
+            }
+        }
     }
-    
+
     private void CheckAllPlayersReady()
     {
-        foreach (bool isReady in playerReadyStatus.Values)
+        foreach (var isReady in playerReadyStatus.Values)
         {
             if (!isReady)
-                return; // Still waiting for others
+            {
+                Debug.Log($"Player is not Ready");
+                return;
+            }
         }
 
-        // All players ready, start countdown
+        Debug.Log("All players are ready. Starting race countdown.");
         StartCoroutine(BeginCountdown());
     }
-    
+
     private IEnumerator BeginCountdown()
     {
         countdownTimer.Value = countdownTime;
@@ -97,9 +98,9 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     private void StartRace()
     {
         Debug.Log("Race Started!");
-        // Reset Player Ready Dictionary for next race
-        // Implement race start logic here (e.g., enable player controls)
+        // Additional race-start logic goes here (e.g., enabling movement)
     }
+
     public float GetCountdownTimer()
     {
         return countdownTimer.Value;
@@ -107,12 +108,12 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
     public void ResetRaceManagerValues()
     {
-        foreach (var clientsId in NetworkManager.Singleton.ConnectedClientsIds)
+        foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            playerReadyStatus[clientsId] = false;
+            playerReadyStatus[clientId] = false;
         }
 
         currentTeleportIndex = 0;
-        countdownTimer.Value = 3f;
+        countdownTimer.Value = countdownTime;
     }
 }
