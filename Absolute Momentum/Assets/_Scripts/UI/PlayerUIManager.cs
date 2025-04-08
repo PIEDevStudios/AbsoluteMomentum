@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class PlayerUIManager : NetworkBehaviour
 {
     [SerializeField] private GameObject inGameUI, resultsUI, leaderboardParent;
     [SerializeField] private GameObject LeaderBoardUIElement;
+    [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private Player player;
 
     public void OnEnable()
@@ -17,6 +19,16 @@ public class PlayerUIManager : NetworkBehaviour
     public void OnDisable()
     {
         RaceManager.Instance.OnTimeSubmitted -= UpdateResultsUI;
+    }
+
+
+    private void Update()
+    {
+        if (!player.IsOwner) return;
+        float time = player.playerRaceTimeManager.timer;
+        int minutes = Mathf.FloorToInt(time / 60);
+        time -= minutes * 60;
+        timerText.text = minutes + ":" + time.ToString("00.00");
     }
     
     public void DisplayResultsUI()
@@ -48,11 +60,13 @@ public class PlayerUIManager : NetworkBehaviour
 
         for(int i = 0; i < raceTimes.Count; i++)
         {
-            
+            float time = raceTimes[i].Value;
+            int minutes = Mathf.FloorToInt(time / 60);
+            time -= minutes * 60;
             GameObject element = Instantiate(LeaderBoardUIElement, leaderboardParent.transform);
             PlayerLeaderboardElement elementScript = element.GetComponent<PlayerLeaderboardElement>();
             elementScript.positionText.text = (i+1).ToString();
-            elementScript.timeText.text = raceTimes[i].Value.ToString("0:00.00");
+            elementScript.timeText.text = minutes + ":" + time.ToString("00.00");
             elementScript.usernameText.text = "Player " + raceTimes[i].Key;
         }
         
