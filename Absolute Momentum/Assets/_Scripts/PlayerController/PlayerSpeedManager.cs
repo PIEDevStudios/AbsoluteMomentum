@@ -1,10 +1,13 @@
 using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 
 public class PlayerSpeedManager : MonoBehaviour
 {
     [SerializeField] private Player player;
     [ReadOnly] public AnimationCurve currentCurve;
+    
+    [SerializeField] private TextMeshProUGUI speedText;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,7 +25,11 @@ public class PlayerSpeedManager : MonoBehaviour
         {
             flatVel = Vector3.ProjectOnPlane(player.rb.linearVelocity, player.slopeSensor.hit.normal);
         }
-        
+
+        if (speedText != null)
+        {
+            speedText.text = "Velocity: " + flatVel.magnitude.ToString("0.00");
+        }
         
         float forceToApply = currentCurve.Evaluate(flatVel.magnitude);
         
