@@ -10,10 +10,19 @@ public class RaceFinishTrigger : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!IsServer) return; // Only the server should handle player finish tracking
-
         if (other.CompareTag("Player") && other.transform.root.TryGetComponent(out NetworkObject networkObject))
         {
+            // If this client is the owner of the object that collided, stop the timer on the client
+            if (networkObject.IsOwner)
+            {
+                Player player = networkObject.GetComponentInChildren<Player>();
+                player.playerRaceTimeManager.StopTimer();
+                player.playerUI.DisplayResultsUI();
+            }
+                
+            
+            if (!IsServer) return; // Only the server should handle player finish tracking
+            
             ulong playerId = networkObject.OwnerClientId;
 
             if (!finishedPlayers.Contains(playerId))

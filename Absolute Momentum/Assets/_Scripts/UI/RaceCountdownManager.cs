@@ -5,7 +5,7 @@ using System;
 using Unity.Netcode;
 
 // Client Side
-public class RaceCountdownManager : MonoBehaviour
+public class RaceCountdownManager : NetworkBehaviour
 {
     [SerializeField] private TextMeshProUGUI countdownText; // Reference to TextMeshProUGUI
     [SerializeField] private Player player;
@@ -17,6 +17,13 @@ public class RaceCountdownManager : MonoBehaviour
     private void Start()
     {
         countdownText.enabled = false;
+
+        if (IsOwner)
+        {
+            OnCountdownFinished += player.playerRaceTimeManager.StartTimer;
+        }
+           
+        
         raceManager = RaceManager.Instance;
     }
 

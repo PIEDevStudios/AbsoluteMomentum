@@ -4,12 +4,12 @@ using UnityEngine;
 public class NetworkTimer
 {
     private float timer;
-    public float MinTimeBetweeenTicks { get; }
+    public float MinTimeBetweenTicks { get; }
     public int CurrentTick;
 
     public NetworkTimer(float serverTickRate)
     {
-        MinTimeBetweeenTicks = 1f / serverTickRate;
+        MinTimeBetweenTicks = 1f / serverTickRate;
     }
 
     public void Update(float deltaTime)
@@ -19,9 +19,9 @@ public class NetworkTimer
 
     public bool ShouldTick()
     {
-        if (timer >= MinTimeBetweeenTicks)
+        if (timer >= MinTimeBetweenTicks)
         {
-            timer -= MinTimeBetweeenTicks;
+            timer -= MinTimeBetweenTicks;
             CurrentTick++;
             return true;
         }

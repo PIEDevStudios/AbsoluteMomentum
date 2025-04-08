@@ -24,4 +24,17 @@ public class Utilites : MonoBehaviour
         float _val = _min2 + (_max2 - _min2) * ((_value - _min1) / (_max1 - _min1));
         return _clamp ? Mathf.Clamp(_val, Mathf.Min(_min2, _max2), Mathf.Max(_min2, _max2)) : _val;
     }
+    
+    /// <summary>
+    /// Destroys all children of a gameObject
+    /// </summary>
+    /// <param name="parent"></param>
+    public static void DestroyAllChildren(GameObject parent)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+    }
+    
 }

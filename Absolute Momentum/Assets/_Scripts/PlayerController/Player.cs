@@ -42,9 +42,12 @@ public class Player : StateMachineCore
     [SerializeField] private PlayerJumpManager jumpManager;
     [SerializeField] private PlayerWalljumpManager walljumpManager;
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
+    [field:SerializeField] public PlayerRaceTimeManager playerRaceTimeManager {get; private set;}
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
     [SerializeField] private AudioListener audioListner;
+    [field:SerializeField] public PlayerUIManager playerUI {get; private set;}
 
+    
     [Header("Missle")]
     [SerializeField] private GameObject MissilePrefab;
     private float timeSinceLastMissileFire;
@@ -66,6 +69,7 @@ public class Player : StateMachineCore
         {
             audioListner.enabled = false;
             playerCamera.Priority = 0;
+            playerUI.gameObject.SetActive(false);
             enabled = false;
             return;
         }
@@ -133,7 +137,7 @@ public class Player : StateMachineCore
         if (scene.name == "Track test") 
         {
             Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
-            
+            playerUI.DisplayInGameUI();
             StartCoroutine(NotifyRaceManagerWhenReady());
         }
     }

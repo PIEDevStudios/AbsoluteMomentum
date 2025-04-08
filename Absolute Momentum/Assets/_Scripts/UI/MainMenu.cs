@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         // If player is already connected (returning from a race) do NOT load menu UI
-        if (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsClient)
+        if (NetworkManager.Singleton != null && (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsClient))
         {
             mainMenu.SetActive(false);
             lobbyHud.SetActive(true);

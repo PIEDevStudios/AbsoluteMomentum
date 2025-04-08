@@ -15,10 +15,13 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
     // Keep track of players
     private Dictionary<ulong, bool> playerReadyStatus = new Dictionary<ulong, bool>();
+    private Dictionary<ulong, float> playerRaceTimes = new Dictionary<ulong, float>();
 
     // Network variable for countdown timer
     private NetworkVariable<float> countdownTimer = new NetworkVariable<float>(-1f, NetworkVariableReadPermission.Everyone);
 
+    public Action OnTimeSubmitted;
+    
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -37,6 +40,21 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         }
     }
 
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    public void SubmitRaceTimeServerRPC(float time, RpcParams rpcParams = default)
+    {
+        ulong clientId = rpcParams.Receive.SenderClientId;
+        playerRaceTimes[clientId] = time;
+        SubmitRaceTimeClientRPC(clientId, time);
+    }
+    
+    [Rpc(SendTo.ClientsAndHost, RequireOwnership = false)]
+    private void SubmitRaceTimeClientRPC(ulong clientId, float time)
+    {
+        playerRaceTimes[clientId] = time;
+        OnTimeSubmitted?.Invoke();
+    }
+    
     // Called by players when their scene is fully loaded and they are ready
     [Rpc(SendTo.Server, RequireOwnership = false)]
     public void MarkPlayerSceneReadyServerRpc(RpcParams rpcParams = default)
@@ -98,6 +116,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     private void StartRace()
     {
         Debug.Log("Race Started!");
+        playerRaceTimes.Clear();
         // Additional race-start logic goes here (e.g., enabling movement)
     }
 
@@ -115,5 +134,14 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
         currentTeleportIndex = 0;
         countdownTimer.Value = countdownTime;
+    }
+    
+    public Dictionary<ulong, float> getRaceTimes()
+    {
+        foreach (var player in playerRaceTimes)
+        {
+            Debug.Log("Player " + player.Key + " finished with a time of " + player.Value);
+        }
+        return playerRaceTimes;
     }
 }
