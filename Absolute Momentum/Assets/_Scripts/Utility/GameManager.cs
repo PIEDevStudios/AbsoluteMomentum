@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Scripts.Utility
 {
-    public class GameManager : ScriptableSingleton<GameManager>
+    public class GameManager : Singleton<GameManager>
     {
         public List<GameObject> Players = new List<GameObject>();
     }

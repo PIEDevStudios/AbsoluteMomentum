@@ -163,7 +163,7 @@ public class Player : StateMachineCore
 
         float distSq = float.MaxValue;
         GameObject closestPlayer = null;
-        foreach (var player in GameManager.instance.Players)
+        foreach (var player in GameManager.Instance.Players)
         {
             if (closestPlayer is null || Vector3.SqrMagnitude(player.transform.position - gameObject.transform.position) < distSq)
             {

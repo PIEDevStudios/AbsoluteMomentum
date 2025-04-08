@@ -1374,7 +1374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8592625978044654653, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: TransitionStateInfoList.Array.size
-      value: 2828
+      value: 2784
       objectReference: {fileID: 0}
     - target: {fileID: 8592625978044654653, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: TransitionStateInfoList.Array.data[2798].TransitionIndex
@@ -2158,6 +2158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9137055174493889187, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+    - {fileID: 8592625978044654653, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

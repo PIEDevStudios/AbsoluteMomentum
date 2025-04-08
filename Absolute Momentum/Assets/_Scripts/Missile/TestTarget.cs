@@ -14,7 +14,7 @@ namespace _Scripts.Missile
 
         private void Start()
         {
-            GameManager.instance.Players.Add(self);
+            GameManager.Instance.Players.Add(self);
         }
 
         private void FixedUpdate()
