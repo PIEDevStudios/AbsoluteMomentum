@@ -31,6 +31,11 @@ public class LobbyUIMenu : MonoBehaviour
         AutoRefreshLobby();
     }
 
+    void OnEnable()
+    {
+        lobbyAPI.ListLobbies();
+    }
+
     private void AutoRefreshLobby()
     {
         refreshTimeCD -= Time.deltaTime;

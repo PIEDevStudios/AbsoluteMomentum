@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 
 public class Player : StateMachineCore
 {
@@ -138,7 +139,7 @@ public class Player : StateMachineCore
         {
             Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
             playerUI.DisplayInGameUI();
-            StartCoroutine(NotifyRaceManagerWhenReady());
+            // StartCoroutine(NotifyRaceManagerWhenReady());
         }
     }
     

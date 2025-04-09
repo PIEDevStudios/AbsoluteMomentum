@@ -68,6 +68,20 @@ public class PlayerUIManager : NetworkBehaviour
             elementScript.positionText.text = (i+1).ToString();
             elementScript.timeText.text = minutes + ":" + time.ToString("00.00");
             elementScript.usernameText.text = "Player " + raceTimes[i].Key;
+
+            if (raceTimes[i].Key == NetworkManager.LocalClientId)
+            {
+                elementScript.timeText.color = Color.red;
+                elementScript.usernameText.color = Color.red;
+                elementScript.positionText.color = Color.red;
+            }
+            else
+            {
+                elementScript.timeText.color = Color.white;
+                elementScript.usernameText.color = Color.white;
+                elementScript.positionText.color = Color.white;
+            }
+            
         }
         
     }
