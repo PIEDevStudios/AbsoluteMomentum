@@ -14,7 +14,6 @@ public class PlayerAirborne : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        player.SetTrigger("Jump");
         rb.linearDamping = stats.AirDrag;
         
         

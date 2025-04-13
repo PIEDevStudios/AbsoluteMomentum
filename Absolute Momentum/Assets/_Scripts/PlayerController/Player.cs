@@ -90,7 +90,8 @@ public class Player : StateMachineCore
         playerCamera.Priority = 100;
         
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
+        playerUI.raceCountdownManager.OnCountdownFinished += EnablePlayerInput;
+
     }
 
     public void Update()
@@ -138,8 +139,10 @@ public class Player : StateMachineCore
         if (scene.name == "Track test") 
         {
             Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
-            playerUI.DisplayInGameUI();
-            // StartCoroutine(NotifyRaceManagerWhenReady());
+            playerRaceTimeManager.ResetTimer();
+            playerUI.HideAllUI();
+            DisablePlayerInput();
+            StartCoroutine(NotifyRaceManagerWhenLoaded());
         }
     }
     
@@ -257,7 +260,7 @@ public class Player : StateMachineCore
     /// Lets race manager know that it is ready
     /// </summary>
     /// <returns></returns>
-    private IEnumerator NotifyRaceManagerWhenReady()
+    private IEnumerator NotifyRaceManagerWhenLoaded()
     {
         // Small delay to make sure everything's initialized (optional, but often useful)
         yield return new WaitForSeconds(0.5f);
@@ -273,8 +276,8 @@ public class Player : StateMachineCore
             RaceManager.Instance.ResetRaceManagerValues(); // Only server resets
         }
         
-        RaceManager.Instance.MarkPlayerSceneReadyServerRpc();
-        Debug.Log("Player has notified server they are ready.");
+        RaceManager.Instance.TeleportToStartServerRpc();
+        Debug.Log("Player has notified server they are loaded.");
     }
     
     #endregion
@@ -283,12 +286,18 @@ public class Player : StateMachineCore
 
 
     /// <summary>
-    /// Enables or disables player input
+    /// Enables player input
     /// </summary>
-    /// <param name="enable"></param>
-    public void EnablePlayerInput(bool enable)
+    public void EnablePlayerInput()
     {
-        playerInput.enabled = enable;
+        playerInput.enabled = true;
+    }
+    /// <summary>
+    /// Disables player input
+    /// </summary>
+    public void DisablePlayerInput()
+    {
+        playerInput.enabled = false;
     }
 
     /// <summary>
@@ -340,29 +349,7 @@ public class Player : StateMachineCore
     {
         stats.CurrentGravity = gravity;
     }
-
-    /// <summary>
-    /// Reset all animation triggers. If a new trigger is added to the animator, it needs to be reset in this function.
-    /// </summary>
-    public void ResetAllTriggers()
-    {
-        // animator.ResetTrigger("Jump");
-        // animator.ResetTrigger("Walk");
-        // animator.ResetTrigger("Roll");
-        // animator.ResetTrigger("Attack");
-        // animator.ResetTrigger("Idle");
-    }
-
-    /// <summary>
-    /// Set a trigger in the player's animator
-    /// </summary>
-    /// <param name="trigger"></param>
-    public void SetTrigger(string trigger)
-    {
-        // ResetAllTriggers();
-        // animator.SetTrigger(trigger);
-    }
-
+    
     #endregion
     
     #region Debug Methods

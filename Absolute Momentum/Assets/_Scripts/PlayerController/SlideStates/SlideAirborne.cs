@@ -11,7 +11,6 @@ public class SlideAirborne : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        player.SetTrigger("Jump");
         rb.linearDamping = stats.AirDrag;
         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         hardMaxSpeed = speedOnEnter.magnitude;

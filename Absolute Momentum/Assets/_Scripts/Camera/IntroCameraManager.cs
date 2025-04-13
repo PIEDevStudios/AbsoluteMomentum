@@ -18,8 +18,6 @@ public class IntroCameraManager : NetworkBehaviour
 
     private void Start()
     {
-
-        
         StartCoroutine(PlayIntroSequence());
     }
 
@@ -49,11 +47,10 @@ public class IntroCameraManager : NetworkBehaviour
         
         // Player camera should be the last camera that is active
         
-        RaceManager.Instance.MarkPlayerSceneReadyServerRpc();
-        
         yield return new WaitForSeconds(delayBeforeCountdown);
-
-        StartCountdown();
+        
+        RaceManager.Instance.MarkPlayerSceneReadyServerRpc();
+        NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<Player>().playerUI.DisplayInGameUI();
     }
 
     private void DisableAllCameras()
@@ -63,13 +60,5 @@ public class IntroCameraManager : NetworkBehaviour
             if (shot.cameraObject != null)
                 shot.cameraObject.SetActive(false);
         }
-    }
-
-    private void StartCountdown()
-    {
-        // if (countdownUI != null)
-        //     countdownUI.SetActive(true);
-
-        Debug.Log("Countdown started!");
     }
 }

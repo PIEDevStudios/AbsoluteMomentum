@@ -29,4 +29,9 @@ public class PlayerRaceTimeManager : NetworkBehaviour
         timerActive = false;
         RaceManager.Instance.SubmitRaceTimeServerRPC(timer);
     }
+
+    public void ResetTimer()
+    {
+        timer = 0f;
+    }
 }

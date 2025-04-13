@@ -61,12 +61,17 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     {
         ulong clientId = rpcParams.Receive.SenderClientId;
         
-        if (!playerReadyStatus.ContainsKey(clientId))
-            playerReadyStatus[clientId] = false;
-
         Debug.Log($"[Server] Player {clientId} marked ready at time: {NetworkManager.Singleton.ServerTime.Time:F2} seconds");
 
         playerReadyStatus[clientId] = true;
+        CheckAllPlayersReady();
+    }
+    
+    // Called by players when their scene is fully loaded and they are ready
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    public void TeleportToStartServerRpc(RpcParams rpcParams = default)
+    {
+        ulong clientId = rpcParams.Receive.SenderClientId;
         TeleportPlayerToStart(clientId);
         CheckAllPlayersReady();
     }

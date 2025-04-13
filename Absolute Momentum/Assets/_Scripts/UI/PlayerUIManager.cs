@@ -9,6 +9,7 @@ public class PlayerUIManager : NetworkBehaviour
     [SerializeField] private GameObject inGameUI, resultsUI, leaderboardParent;
     [SerializeField] private GameObject LeaderBoardUIElement;
     [SerializeField] private TextMeshProUGUI timerText;
+    [field:SerializeField] public RaceCountdownManager raceCountdownManager {get; private set;}
     [SerializeField] private Player player;
 
     public void OnEnable()
