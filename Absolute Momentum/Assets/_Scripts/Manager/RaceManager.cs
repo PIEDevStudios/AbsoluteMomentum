@@ -28,6 +28,17 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         {
             NetworkManager.Singleton.OnClientConnectedCallback += AddClientReadyStatus;
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Track test")
+        {
+            playerRaceTimes.Clear();
+        }
     }
 
     private void AddClientReadyStatus(ulong clientId)
