@@ -22,10 +22,12 @@ public class LobbyTrigger : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(!IsServer) return;
+        
         Debug.Log("TRIGGER" + other);
-        if (IsServer && other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            PlayerReadyServerRpc();
+            PlayerReady();
         }
     }
 
@@ -69,9 +71,7 @@ public class LobbyTrigger : NetworkBehaviour
             NetworkManager.Singleton.SceneManager.LoadScene(SceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void PlayerReadyServerRpc()
+    private void PlayerReady()
     {
         numPlayersReady++;
         UpdateLobbyTextClientRpc(numPlayersReady, NetworkManager.Singleton.ConnectedClientsList.Count);
@@ -96,6 +96,8 @@ public class LobbyTrigger : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if(!IsServer) return;
+        
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerUnreadyServerRpc();
