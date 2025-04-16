@@ -24,7 +24,7 @@ public class IntroCameraManager : NetworkBehaviour
     private IEnumerator PlayIntroSequence()
     {
         // Reset Race Manager Values
-        
+        NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<Player>().playerUI.DisplayLevelPreviewUI();
         if (IsServer)
         {
             RaceManager.Instance.ResetRaceManagerValues(); // Only server resets

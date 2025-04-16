@@ -5,12 +5,12 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class RaceManager : NetworkSingletonPersistent<RaceManager>
 {
-    [SerializeField] private float countdownTime = 3f;
+    [SerializeField] private float countdownTime = 3f, introJingleDelay = 2f;
     [SerializeField] private Vector3[] startPositions;
-
     private int currentTeleportIndex;
 
     // Keep track of players
@@ -91,6 +91,8 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
     private void CheckAllPlayersReady()
     {
+        countdownTimer.Value = -1;
+        
         foreach (var isReady in playerReadyStatus.Values)
         {
             if (!isReady)
@@ -101,13 +103,15 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         }
 
         Debug.Log("All players are ready. Starting race countdown.");
+        StartCountdownClientRPC();
         StartCoroutine(BeginCountdown());
     }
 
     private IEnumerator BeginCountdown()
     {
+        yield return new WaitForSeconds(introJingleDelay);
+        
         countdownTimer.Value = countdownTime;
-
         while (countdownTimer.Value > 0)
         {
             Debug.Log("Countdown: " + countdownTimer.Value);
@@ -122,7 +126,20 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     {
         Debug.Log("Race Started!");
         playerRaceTimes.Clear();
+        StartRaceClientRPC();
         // Additional race-start logic goes here (e.g., enabling movement)
+    }
+
+    [ClientRpc]
+    private void StartRaceClientRPC()
+    {
+        IntroAudioEvents.Instance.PlayAudio(0);
+    }
+    
+    [ClientRpc]
+    private void StartCountdownClientRPC()
+    {
+        IntroAudioEvents.Instance.PlayAudio(1);
     }
 
     public float GetCountdownTimer()

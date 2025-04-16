@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerUIManager : NetworkBehaviour
 {
-    [SerializeField] private GameObject inGameUI, resultsUI, leaderboardParent;
+    [SerializeField] private GameObject inGameUI, resultsUI, levelPreviewUI, leaderboardParent;
     [SerializeField] private GameObject LeaderBoardUIElement;
     [SerializeField] private TextMeshProUGUI timerText;
     [field:SerializeField] public RaceCountdownManager raceCountdownManager {get; private set;}
@@ -34,19 +34,26 @@ public class PlayerUIManager : NetworkBehaviour
     
     public void DisplayResultsUI()
     {
-        inGameUI.SetActive(false);
+        HideAllUI();
         UpdateResultsUI();
         resultsUI.SetActive(true);
     }
     
     public void DisplayInGameUI()
     {
+        HideAllUI();
         inGameUI.SetActive(true);
-        resultsUI.SetActive(false);
+    }
+
+    public void DisplayLevelPreviewUI()
+    {
+        HideAllUI();
+        levelPreviewUI.SetActive(true);
     }
 
     public void HideAllUI()
     {
+        levelPreviewUI.SetActive(false);
         inGameUI.SetActive(false);
         resultsUI.SetActive(false);
     }
