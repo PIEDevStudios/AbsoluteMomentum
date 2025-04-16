@@ -6,7 +6,7 @@ public class SlideAirborne : State
     [SerializeField] private Player player;
     [SerializeField] private Transform orientation;
     private PlayerStats stats => player.stats;
-    private float hardMaxSpeed, softMaxSpeed;
+    private float hardMaxSpeed, softMaxSpeed, acceleration;
     private Vector3 speedOnEnter; // Player's flat (x and z) speed when they enter airborne
     public override void DoEnterLogic()
     {
@@ -14,6 +14,7 @@ public class SlideAirborne : State
         rb.linearDamping = stats.AirDrag;
         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         hardMaxSpeed = speedOnEnter.magnitude;
+        acceleration = stats.AirAcceleration;
         player.playerSpeedManager.currentCurve = stats.airDragCurve;
     }
     
@@ -28,22 +29,20 @@ public class SlideAirborne : State
         base.DoTickUpdateState(inputValues);
         // Player Turning
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        player.playerObj.forward = flatVel;
         Vector3 playerInputVector = orientation.forward * inputValues.moveVector.y + orientation.right * inputValues.moveVector.x;
-        Vector3 forceVector = playerInputVector.normalized * (player.stats.SlideAirAcceleration * (1 / flatVel.magnitude));
+        Vector3 forceVector = playerInputVector.normalized * acceleration;
         float forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized);
         Vector3 perpendicularForce = forceVector - (forceInVeloDirection * flatVel.normalized);
-        Debug.Log("Flat Vel: " + flatVel);
-        Debug.Log("Corrected Force Vector: " + perpendicularForce);
-        rb.AddForce(perpendicularForce, ForceMode.Force);
         
+        rb.AddForce(perpendicularForce, ForceMode.Force);
+
         if (forceInVeloDirection < 0f)
         {
             rb.AddForce(forceInVeloDirection * flatVel.normalized, ForceMode.Force);
         }
         
+        NoInputDeceleration(inputValues);
         LimitVelocity();
-        NoInputDeceleration();
     }
     
     
@@ -59,21 +58,19 @@ public class SlideAirborne : State
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
     }
     
-    private void NoInputDeceleration()
+    private void NoInputDeceleration(PlayerInput.InputValues inputValues)
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        // If our velocity is close to 0 and still not pressing an input, set velo to 0
-        if (playerInput.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
-        {
-            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-            return;
-        }
         // If player is not pressing any move button, decelerate them
-        if (playerInput.moveVector.magnitude == 0f)
+        if (inputValues.moveVector.magnitude == 0f)
         {
             Debug.DrawRay(player.transform.position, -flatVel.normalized, Color.blue);
-            rb.AddForce(-flatVel.normalized * stats.GroundNoInputDeceleration);
+            rb.AddForce(-flatVel.normalized * stats.AirNoInputDeceleration);
         }
-
+        // If our velocity is close to 0 and still not pressing an input, set velo to 0
+        if (inputValues.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
+        {
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+        }
     }
 }

@@ -1785,6 +1785,10 @@ PrefabInstance:
       propertyPath: <playerUI>k__BackingField
       value: 
       objectReference: {fileID: 15471659953634451}
+    - target: {fileID: 2434520221287803836, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3463898940094336630, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2689,20 +2693,6 @@ MonoBehaviour:
     TransitionDuration: 0.25
     TriggerNameHash: 1748754976
     TransitionIndex: 0
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 640249298
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
   - IsCrossFadeExit: 0
     Layer: 0
     OriginatingState: 640249298
