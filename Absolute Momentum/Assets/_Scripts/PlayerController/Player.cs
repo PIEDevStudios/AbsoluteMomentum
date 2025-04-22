@@ -351,6 +351,12 @@ public class Player : StateMachineCore
         stats.CurrentGravity = gravity;
     }
     
+    public void TriggerDeathScreen(int index)
+    {
+        if (!IsOwner) return;
+        playerUI.deathScreenManager.PlayDeathScreen(index);
+    }
+
     #endregion
     
     #region Debug Methods
