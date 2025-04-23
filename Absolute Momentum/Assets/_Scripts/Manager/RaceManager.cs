@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 {
     [SerializeField] private float countdownTime = 3f, introJingleDelay = 2f;
     [SerializeField] private Vector3[] startPositions;
+    [field:SerializeField] public String[] levelNames { get; private set; }
     private int currentTeleportIndex;
 
     // Keep track of players
@@ -35,7 +37,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Track test")
+        if (levelNames.Contains(scene.name))
         {
             playerRaceTimes.Clear();
         }

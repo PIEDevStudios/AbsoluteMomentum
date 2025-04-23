@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq;
 using Unity.Netcode.Components;
 
 public class Player : StateMachineCore
@@ -136,7 +137,7 @@ public class Player : StateMachineCore
     {
         if (!IsOwner) return;
 
-        if (scene.name == "Track test") 
+        if (RaceManager.Instance.levelNames.Contains(scene.name)) 
         {
             Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
             playerRaceTimeManager.ResetTimer();
@@ -350,6 +351,12 @@ public class Player : StateMachineCore
         stats.CurrentGravity = gravity;
     }
     
+    public void TriggerDeathScreen(int index)
+    {
+        if (!IsOwner) return;
+        playerUI.deathScreenManager.PlayDeathScreen(index);
+    }
+
     #endregion
     
     #region Debug Methods

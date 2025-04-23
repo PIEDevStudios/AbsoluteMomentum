@@ -73,6 +73,7 @@ RectTransform:
   - {fileID: 4797144792324545981}
   - {fileID: 4599941183490920879}
   - {fileID: 4338549520979096425}
+  - {fileID: 7840597986861160939}
   m_Father: {fileID: 7418350527356540808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -163,6 +164,7 @@ MonoBehaviour:
   LeaderBoardUIElement: {fileID: 8933913903813595566, guid: 9ef8d27cd75e2b845a3fe8f6e3b7d7a0, type: 3}
   timerText: {fileID: 5222510559220933902}
   <raceCountdownManager>k__BackingField: {fileID: 4080387294885220262}
+  <deathScreenManager>k__BackingField: {fileID: 5732767549481652343}
   player: {fileID: 927473891614420570}
 --- !u!1 &767041133234167550
 GameObject:
@@ -897,6 +899,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3188914812501127890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7840597986861160939}
+  - component: {fileID: 5732767549481652343}
+  m_Layer: 0
+  m_Name: DeathScreenManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7840597986861160939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3188914812501127890}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -959.99994, y: -540.1418, z: 0}
+  m_LocalScale: {x: 2.2695034, y: 2.2695034, z: 2.2695034}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6395223048424202473}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5732767549481652343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3188914812501127890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f594115ce00e54ebe947273684fde0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathScreensPrefabs:
+  - {fileID: 2506639877738881360, guid: 99ef7b8cd4b99024a94036ace433408b, type: 3}
 --- !u!1 &3238629911873270863
 GameObject:
   m_ObjectHideFlags: 0

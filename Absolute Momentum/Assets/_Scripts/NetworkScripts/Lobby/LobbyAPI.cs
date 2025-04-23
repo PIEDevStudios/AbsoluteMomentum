@@ -13,13 +13,11 @@ using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
 using TMPro;
 
-public class LobbyAPI : MonoBehaviour
+public class LobbyAPI : SingletonPersistent<LobbyAPI>
 {
     public event Action<List<Lobby>> LobbiesUpdated;
 
     [SerializeField] private TextMeshProUGUI usernameText;
-
-    public static LobbyAPI Instance { get; private set; }
     
     private Lobby currentLobby;
     private string playerName;
@@ -33,20 +31,10 @@ public class LobbyAPI : MonoBehaviour
     public delegate void LobbyJoinedHandler(Lobby lobby);
     public event LobbyJoinedHandler OnLobbyJoined;
 
-    private void Awake()
+    protected override void Awake()
     {
-        // Implement a singleton pattern.
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            // Call async initialize without awaiting by discarding the returned Task.
-            _ = InitializeServices();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
+        _ = InitializeServices();
     }
 
     /// <summary>

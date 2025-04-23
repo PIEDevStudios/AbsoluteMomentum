@@ -708,6 +708,9 @@ MonoBehaviour:
   - {x: -9.31, y: 2, z: 3.83}
   - {x: -6.31, y: 2, z: 3.83}
   - {x: -3.31, y: 2, z: 3.83}
+  <levelNames>k__BackingField:
+  - Level_01
+  - Track test
 --- !u!1001 &1584244714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -943,7 +946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: SceneName
-      value: Track test
+      value: Level_01
       objectReference: {fileID: 0}
     - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: LobbyCountdown
