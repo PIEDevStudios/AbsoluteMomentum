@@ -194,8 +194,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767041133234167550}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16580646, y: -0.80508214, z: 0.264723, w: 0.50425464}
-  m_LocalPosition: {x: 3.4389298, y: 4.5903273, z: 1.668292}
+  m_LocalRotation: {x: 0.3355481, y: -0.3253702, z: 0.124745145, w: 0.8752031}
+  m_LocalPosition: {x: 2.2110982, y: 4.814663, z: -2.5627775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,8 +366,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990830039854890529}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16580646, y: -0.80508214, z: 0.264723, w: 0.50425464}
-  m_LocalPosition: {x: 3.4389298, y: 4.5903273, z: 1.668292}
+  m_LocalRotation: {x: 0.3355481, y: -0.3253702, z: 0.124745145, w: 0.8752031}
+  m_LocalPosition: {x: 2.2110982, y: 4.814663, z: -2.5627775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -450,7 +450,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 3
   HorizontalAxis:
-    Value: -115.878914
+    Value: -40.786777
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -460,7 +460,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 23.003942
+    Value: 29.531317
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -1840,6 +1840,10 @@ PrefabInstance:
     - target: {fileID: 3463898940094336630, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068411563121013261, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5340615071919367284, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22547,6 +22551,13 @@ MonoBehaviour:
   - IsCrossFadeExit: 0
     Layer: 0
     OriginatingState: -1947527841
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 640249298
     DestinationState: 1748754976
     TransitionDuration: 0.25
     TriggerNameHash: 1748754976
