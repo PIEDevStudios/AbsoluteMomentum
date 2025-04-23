@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class DeathScreenManager : MonoBehaviour
 {
-    [SerializeField] private BaseDeathScreen[] deathScreens; // Assign prefabs
-    private BaseDeathScreen activeScreen;
+    [SerializeField] private GameObject[] deathScreensPrefabs; // Assign prefabs
+    private GameObject activeScreen;
 
     public void PlayDeathScreen(int index)
     {
-        if (index < 0 || index >= deathScreens.Length) return;
+        Debug.Log("DEATH SCREEN");
+        if (index < 0 || index >= deathScreensPrefabs.Length) return;
 
         if (activeScreen != null)
             Destroy(activeScreen.gameObject);
 
-        activeScreen = Instantiate(deathScreens[index], transform);
-        activeScreen.Play();
+        activeScreen = Instantiate(deathScreensPrefabs[index], transform);
+        activeScreen.GetComponent<BaseDeathScreen>().Play();
     }
 }

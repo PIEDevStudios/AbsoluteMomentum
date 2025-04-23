@@ -10,7 +10,7 @@ public class PlayerUIManager : NetworkBehaviour
     [SerializeField] private GameObject LeaderBoardUIElement;
     [SerializeField] private TextMeshProUGUI timerText;
     [field:SerializeField] public RaceCountdownManager raceCountdownManager {get; private set;}
-    [SerializeField] public DeathScreenManager deathScreenManager { get; private set; }
+    [field:SerializeField] public DeathScreenManager deathScreenManager { get; private set; }
     [SerializeField] private Player player;
 
     public void OnEnable()
@@ -31,6 +31,12 @@ public class PlayerUIManager : NetworkBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         time -= minutes * 60;
         timerText.text = minutes + ":" + time.ToString("00.00");
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            deathScreenManager.PlayDeathScreen(0);
+        }
+        
     }
     
     public void DisplayResultsUI()
