@@ -73,6 +73,7 @@ RectTransform:
   - {fileID: 4797144792324545981}
   - {fileID: 4599941183490920879}
   - {fileID: 4338549520979096425}
+  - {fileID: 7840597986861160939}
   m_Father: {fileID: 7418350527356540808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -163,6 +164,7 @@ MonoBehaviour:
   LeaderBoardUIElement: {fileID: 8933913903813595566, guid: 9ef8d27cd75e2b845a3fe8f6e3b7d7a0, type: 3}
   timerText: {fileID: 5222510559220933902}
   <raceCountdownManager>k__BackingField: {fileID: 4080387294885220262}
+  <deathScreenManager>k__BackingField: {fileID: 5732767549481652343}
   player: {fileID: 927473891614420570}
 --- !u!1 &767041133234167550
 GameObject:
@@ -192,8 +194,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767041133234167550}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16580646, y: -0.80508214, z: 0.264723, w: 0.50425464}
-  m_LocalPosition: {x: 3.4389298, y: 4.5903273, z: 1.668292}
+  m_LocalRotation: {x: 0.3355481, y: -0.3253702, z: 0.124745145, w: 0.8752031}
+  m_LocalPosition: {x: 2.2110982, y: 4.814663, z: -2.5627775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -364,8 +366,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990830039854890529}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16580646, y: -0.80508214, z: 0.264723, w: 0.50425464}
-  m_LocalPosition: {x: 3.4389298, y: 4.5903273, z: 1.668292}
+  m_LocalRotation: {x: 0.3355481, y: -0.3253702, z: 0.124745145, w: 0.8752031}
+  m_LocalPosition: {x: 2.2110982, y: 4.814663, z: -2.5627775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -448,7 +450,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 3
   HorizontalAxis:
-    Value: -115.878914
+    Value: -40.786777
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -458,7 +460,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 23.003942
+    Value: 29.531317
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -897,6 +899,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3188914812501127890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7840597986861160939}
+  - component: {fileID: 5732767549481652343}
+  m_Layer: 0
+  m_Name: DeathScreenManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7840597986861160939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3188914812501127890}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -959.99994, y: -540.1418, z: 0}
+  m_LocalScale: {x: 2.2695034, y: 2.2695034, z: 2.2695034}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6395223048424202473}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5732767549481652343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3188914812501127890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f594115ce00e54ebe947273684fde0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathScreensPrefabs:
+  - {fileID: 2506639877738881360, guid: 99ef7b8cd4b99024a94036ace433408b, type: 3}
 --- !u!1 &3238629911873270863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1840,10 @@ PrefabInstance:
     - target: {fileID: 3463898940094336630, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068411563121013261, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5340615071919367284, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22499,6 +22551,13 @@ MonoBehaviour:
   - IsCrossFadeExit: 0
     Layer: 0
     OriginatingState: -1947527841
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 640249298
     DestinationState: 1748754976
     TransitionDuration: 0.25
     TriggerNameHash: 1748754976

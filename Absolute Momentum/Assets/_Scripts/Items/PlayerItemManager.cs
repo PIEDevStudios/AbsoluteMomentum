@@ -1,12 +1,18 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayerItemPickup : MonoBehaviour
+public class PlayerItemManager : NetworkBehaviour
 {
+    [SerializeField] private GameObject attackItem, movementItem;
+    
     [SerializeField] private ItemPoolSO itemPool;
     [SerializeField] private Transform itemParent; // The parent transform for the items
-    void Update() {
+    void Update()
+    {
+        if (!IsOwner) return;
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             SelectItem();
