@@ -43,6 +43,7 @@ public class PlayerUIManager : NetworkBehaviour
     {
         HideAllUI();
         UpdateResultsUI();
+        Cursor.lockState = CursorLockMode.Confined;
         resultsUI.SetActive(true);
     }
     
@@ -60,6 +61,7 @@ public class PlayerUIManager : NetworkBehaviour
 
     public void HideAllUI()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         levelPreviewUI.SetActive(false);
         inGameUI.SetActive(false);
         resultsUI.SetActive(false);

@@ -39,10 +39,12 @@ public class Player : StateMachineCore
     [field:SerializeField] public Transform orientation { get; private set; }
     [Expandable]
     [SerializeField] public PlayerStats stats;
+    [Header("Player Scripts")]
     [field:SerializeField] public PlayerInput playerInput {get; private set;}
     [field:SerializeField] public CapsuleCollider playerCollider {get; private set;}
     [SerializeField] private PlayerJumpManager jumpManager;
     [SerializeField] private PlayerWalljumpManager walljumpManager;
+    [SerializeField] private PlayerItemManager itemManager;
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
     [field:SerializeField] public PlayerRaceTimeManager playerRaceTimeManager {get; private set;}
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
@@ -142,6 +144,7 @@ public class Player : StateMachineCore
             Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
             playerRaceTimeManager.ResetTimer();
             playerUI.HideAllUI();
+            itemManager.ClearItems();
             DisablePlayerInput();
             StartCoroutine(NotifyRaceManagerWhenLoaded());
         }
