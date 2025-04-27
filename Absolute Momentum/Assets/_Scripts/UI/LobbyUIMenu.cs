@@ -31,10 +31,11 @@ public class LobbyUIMenu : MonoBehaviour
         AutoRefreshLobby();
     }
 
-    void OnEnable()
-    {
-        lobbyAPI.ListLobbies();
-    }
+    // void OnEnable()
+    // {
+    //     Debug.Log(lobbyAPI);
+    //     lobbyAPI.ListLobbies();
+    // }
 
     private void AutoRefreshLobby()
     {
