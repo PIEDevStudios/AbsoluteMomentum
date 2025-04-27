@@ -11,7 +11,7 @@ public class PlayerAnimationHandler : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         animator = player.animator;
-        if (player.IsOwner)
+        if (IsOwner)
         {
             player.stateMachine.OnStateChanged += OnStateChanged;
             player.slide.stateMachine.OnStateChanged += OnStateChanged;
@@ -20,7 +20,7 @@ public class PlayerAnimationHandler : NetworkBehaviour
 
     public void Update()
     {
-        if (!player.IsOwner) return;
+        if (!IsOwner) return;
         SetWallLeft(wallSensor.wallLeft);
     }
 
@@ -34,6 +34,7 @@ public class PlayerAnimationHandler : NetworkBehaviour
     /// </summary>
     private void OnStateChanged(object sender, StateMachine.OnStateChangedEventArgs eventArgs)
     {
+        if (!IsOwner) return;
         if (eventArgs.nextState == player.slide || eventArgs.nextState == player.slide.grounded || eventArgs.nextState == player.slide.airborne)
         {
             animator.SetBool("Slide", true);
@@ -50,7 +51,6 @@ public class PlayerAnimationHandler : NetworkBehaviour
 
     private String getTriggerName(State state)
     {
-        
         
         if (state == player.idle)
         {

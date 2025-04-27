@@ -98,10 +98,10 @@ public class Player : StateMachineCore
     public void Update()
     {
         timeSinceLastMissileFire += Time.deltaTime;
-        if (playerInput.FiredMissile)
-        {
-            TryFireMissile();
-        }            
+        // if (playerInput.FiredMissile)
+        // {
+        //     TryFireMissile();
+        // }            
     }
     
 
