@@ -711,6 +711,7 @@ MonoBehaviour:
   <levelNames>k__BackingField:
   - Level_01
   - Track test
+  - JadeCheckpoint
 --- !u!1001 &1584244714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -946,7 +947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: SceneName
-      value: Level_01
+      value: JadeCheckpoint
       objectReference: {fileID: 0}
     - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: LobbyCountdown
