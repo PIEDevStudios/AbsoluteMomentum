@@ -18,7 +18,8 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     // Keep track of players
     private Dictionary<ulong, bool> playerReadyStatus = new Dictionary<ulong, bool>();
     private Dictionary<ulong, float> playerRaceTimes = new Dictionary<ulong, float>();
-
+    private Dictionary<ulong, int> playerCheckpoints = new Dictionary<ulong, int>();
+    private Dictionary<ulong, int> playerLaps = new Dictionary<ulong, int>();
     // Network variable for countdown timer
     private NetworkVariable<float> countdownTimer = new NetworkVariable<float>(-1f, NetworkVariableReadPermission.Everyone);
 
