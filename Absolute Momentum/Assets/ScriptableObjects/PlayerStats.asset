@@ -108,7 +108,7 @@ MonoBehaviour:
   MinimumSlideAirTime: 0
   SlideDrag: 0
   BoostYVeloMult: 0
-  SlopeSlideForce: 10
+  SlopeSlideForce: 50
   SlideGroundAcceleration: 1500
   SlideAirAcceleration: 5000
   slidePlayerScale: {x: 1, y: 1, z: 1}
@@ -118,15 +118,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: -0.048698425
       value: 0
-      inSlope: 0.92572355
-      outSlope: 0.92572355
+      inSlope: 0.3328672
+      outSlope: 0.3328672
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 39.473873
-      value: 36.586975
+      time: 42.477047
+      value: 14.155426
       inSlope: 1.2072976
       outSlope: 1.2072976
       tangentMode: 0
