@@ -2284,6 +2284,10 @@ PrefabInstance:
       propertyPath: serverCube
       value: 
       objectReference: {fileID: 5963350584269457098}
+    - target: {fileID: 68120598662141413, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: reconciliationThreshold
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 126379346444952541, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_Controller
       value: 

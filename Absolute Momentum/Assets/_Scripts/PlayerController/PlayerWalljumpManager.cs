@@ -33,11 +33,17 @@ public class PlayerWalljumpManager : NetworkBehaviour
     {
         Vector3 wallNormal = wallSensor.wallRight ? wallSensor.wallHitRight.normal : wallSensor.wallHitLeft.normal;
         
-        Vector3 forceToApply = transform.up * player.stats.wallJumpUpForce + wallNormal * player.stats.wallJumpSideForce;
+        // Cancel velocity in the direction of the wall
+        Vector3 velocity = player.rb.linearVelocity;
+        Vector3 velocityIntoWall = Vector3.Project(velocity, wallNormal);
+        Vector3 correctedVelocity = velocity - velocityIntoWall;
+        player.rb.linearVelocity = correctedVelocity;
         
+        Vector3 forceToApply = transform.up * player.stats.wallJumpUpForce + wallNormal * player.stats.wallJumpSideForce;
         player.rb.linearVelocity = new Vector3(player.rb.linearVelocity.x, 0f, player.rb.linearVelocity.z);
         player.rb.AddForce(forceToApply, ForceMode.Impulse);
         player.wallrunResetTimer = player.stats.wallrunResetTime;
+        player.stateMachine.SetState(player.airborne);
         
     }
     

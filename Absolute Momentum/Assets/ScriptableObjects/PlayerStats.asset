@@ -77,15 +77,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: -0.048698425
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.010037328
+      outSlope: 0.010037328
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 50
-      value: 0
+      time: 69.625305
+      value: 0.6993408
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -93,10 +93,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 71.08417
-      value: 200.34904
-      inSlope: 9.502345
-      outSlope: 9.502345
+      time: 84.18689
+      value: 197.58566
+      inSlope: 13.520941
+      outSlope: 13.520941
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -108,8 +108,8 @@ MonoBehaviour:
   MinimumSlideAirTime: 0
   SlideDrag: 0
   BoostYVeloMult: 0
-  SlopeSlideForce: 50
-  SlideGroundAcceleration: 1500
+  SlopeSlideForce: 30
+  SlideGroundAcceleration: 1200
   SlideAirAcceleration: 5000
   slidePlayerScale: {x: 1, y: 1, z: 1}
   slideDragCurve:
@@ -118,15 +118,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: -0.048698425
       value: 0
-      inSlope: 0.3328672
-      outSlope: 0.3328672
+      inSlope: 0.56951076
+      outSlope: 0.56951076
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 42.477047
-      value: 14.155426
+      time: 41.959255
+      value: 23.92398
       inSlope: 1.2072976
       outSlope: 1.2072976
       tangentMode: 0
@@ -173,9 +173,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   wallrunForce: 10
-  stickToWallForce: 100
-  wallrunResetTime: 0
-  wallJumpUpForce: 12
+  stickToWallForce: 1000
+  wallrunResetTime: 0.05
+  wallJumpUpForce: 17
   wallJumpSideForce: 20
   wallDragCurve:
     serializedVersion: 2
