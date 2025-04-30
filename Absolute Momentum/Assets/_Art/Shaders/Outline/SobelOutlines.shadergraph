@@ -1069,6 +1069,34 @@
             },
             "m_InputSlot": {
                 "m_Node": {
+                    "m_Id": "11278eccf08b49b79cb0bbe27377d1bb"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "7b04ed7662df48a6a400d78400e7c2ce"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "2b47a7a03ee04569b117e92896879313"
+                },
+                "m_SlotId": 2
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "7b04ed7662df48a6a400d78400e7c2ce"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
                     "m_Id": "3b603799fb8b4494ac0db600fde33d71"
                 },
                 "m_SlotId": 1
@@ -1128,34 +1156,6 @@
                     "m_Id": "c5c1b08079144909993845c1e6d056f1"
                 },
                 "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "8f1e7a682ef2415d8619e073580d209c"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "11278eccf08b49b79cb0bbe27377d1bb"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "8f1e7a682ef2415d8619e073580d209c"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "2b47a7a03ee04569b117e92896879313"
-                },
-                "m_SlotId": 2
             }
         },
         {
@@ -5841,8 +5841,8 @@
     "m_ObjectId": "742dd6c9c2924ac1bae8a910c8598894",
     "m_Title": "Depth",
     "m_Position": {
-        "x": -3723.999755859375,
-        "y": -134.00006103515626
+        "x": -3724.0,
+        "y": -134.0
     }
 }
 
@@ -7773,8 +7773,8 @@
     "m_ObjectId": "b43296b86f0747fbbab1c04b20648c8d",
     "m_Title": "Normals",
     "m_Position": {
-        "x": -3282.999755859375,
-        "y": 606.9999389648438
+        "x": -3283.0,
+        "y": 607.0001831054688
     }
 }
 
