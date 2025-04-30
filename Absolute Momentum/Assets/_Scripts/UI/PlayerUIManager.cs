@@ -12,6 +12,7 @@ public class PlayerUIManager : NetworkBehaviour
     [field:SerializeField] public RaceCountdownManager raceCountdownManager {get; private set;}
     [field:SerializeField] public DeathScreenManager deathScreenManager { get; private set; }
     [SerializeField] private Player player;
+    [SerializeField] private TextMeshProUGUI lapText;
 
     public void OnEnable()
     {
@@ -36,6 +37,12 @@ public class PlayerUIManager : NetworkBehaviour
         {
             deathScreenManager.PlayDeathScreen(0);
         }
+
+        if (RaceManager.Instance.GetPlayerLaps(player.OwnerClientId) != 0) {
+            lapText.text = "Lap " + RaceManager.Instance.GetPlayerLaps(player.OwnerClientId).ToString();
+        }
+
+        
         
     }
     

@@ -198,4 +198,8 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
             }
         }
     }
+
+    public int GetPlayerLaps(ulong playerID) {
+        return playerLaps[playerID];
+    }
 }
