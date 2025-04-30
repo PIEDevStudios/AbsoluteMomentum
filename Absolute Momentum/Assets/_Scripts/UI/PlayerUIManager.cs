@@ -38,9 +38,7 @@ public class PlayerUIManager : NetworkBehaviour
             deathScreenManager.PlayDeathScreen(0);
         }
 
-        if (RaceManager.Instance.GetPlayerLaps(player.OwnerClientId) != 0) {
-            lapText.text = "Lap " + RaceManager.Instance.GetPlayerLaps(player.OwnerClientId).ToString();
-        }
+        lapText.text = "Lap " + (RaceManager.Instance.GetPlayerLaps(player.OwnerClientId)+1).ToString();
 
         
         
