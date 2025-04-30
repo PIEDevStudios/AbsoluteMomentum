@@ -42,7 +42,7 @@ public class PlayerWalljumpManager : NetworkBehaviour
         Vector3 forceToApply = transform.up * player.stats.wallJumpUpForce + wallNormal * player.stats.wallJumpSideForce;
         player.rb.linearVelocity = new Vector3(player.rb.linearVelocity.x, 0f, player.rb.linearVelocity.z);
         player.rb.AddForce(forceToApply, ForceMode.Impulse);
-        player.wallrunResetTimer = player.stats.wallrunResetTime;
+        player.wallrunResetTime = Time.time;
         player.stateMachine.SetState(player.airborne);
         
     }
