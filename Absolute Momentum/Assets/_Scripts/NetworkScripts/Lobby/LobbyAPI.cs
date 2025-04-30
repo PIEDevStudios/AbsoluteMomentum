@@ -433,17 +433,27 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
     {
         Debug.Log($"Client {clientId} disconnected.");
 
-        // If host is the one who disconnected, shut down everything.
-        if (NetworkManager.Singleton.IsHost && clientId != NetworkManager.Singleton.LocalClientId)
+        // Disconnect everyone (host or client) if any client disconnects
+        if (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsClient)
         {
-            // Handle client disconnect (optional: kick logic or reassign host)
+            Debug.Log("A client disconnected. Forcing all players to disconnect.");
+            ForceDisconnectAll();
+        }
+    }
+
+    private void ForceDisconnectAll()
+    {
+        // Send everyone to main menu and shut down network
+        NetworkManager.Singleton.Shutdown();
+
+        // Optional: clear lobby data if host
+        if (IsHost() && currentLobby != null)
+        {
+            _ = LobbyService.Instance.DeleteLobbyAsync(currentLobby.Id);
+            currentLobby = null;
         }
 
-        // If local client gets disconnected, go to main menu
-        if (clientId == NetworkManager.Singleton.LocalClientId)
-        {
-            GoToMainMenu();
-        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
     }
 
     private void OnServerStopped(bool _)
