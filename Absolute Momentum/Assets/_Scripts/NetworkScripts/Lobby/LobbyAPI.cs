@@ -454,6 +454,7 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
         }
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void OnServerStopped(bool _)
