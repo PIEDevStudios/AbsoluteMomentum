@@ -20,7 +20,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     private Dictionary<ulong, float> playerRaceTimes = new Dictionary<ulong, float>();
     private Dictionary<ulong, int> playerCheckpoints = new Dictionary<ulong, int>();
     private Dictionary<ulong, int> playerLaps = new Dictionary<ulong, int>();
-    private int numCheckpoints;
+    [SerializeField] private int numCheckpoints;
     // Network variable for countdown timer
     private NetworkVariable<float> countdownTimer = new NetworkVariable<float>(-1f, NetworkVariableReadPermission.Everyone);
 
@@ -52,6 +52,8 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         if (!playerReadyStatus.ContainsKey(clientId))
         {
             playerReadyStatus[clientId] = false;
+            playerCheckpoints[clientId] = 0;
+            playerLaps[clientId] = 0;
         }
     }
 
@@ -182,11 +184,14 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         return playerRaceTimes;
     }
 
-    public void UpdateCheckpoint(ulong playerID, int checkpointID) {
+    public void UpdateCheckpoint(ulong playerID, int checkpointID)
+    {
         int lastCheckpoint = playerCheckpoints[playerID];
+        Debug.Log($"Trying to add checkpoint {checkpointID} to player {playerID} (CURRENT: {lastCheckpoint})");
         if (lastCheckpoint == checkpointID - 1) {
             if (checkpointID == numCheckpoints) {
                 playerLaps[playerID] += 1;
+                Debug.Log($"Player {playerID} Completed A Lap! (Current Lap: {playerLaps[playerID]}");
                 playerCheckpoints[playerID] = 0;
             } else {
                 playerCheckpoints[playerID] = checkpointID;
