@@ -60,6 +60,9 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
 
             heartbeatTimer = heartbeatTimeMax;
             lobbyUpdateTimer = lobbyUpdateTimeMax;
+
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+            NetworkManager.Singleton.OnServerStopped += OnServerStopped;
         }
         catch (Exception e)
         {
@@ -424,5 +427,34 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
     private bool IsHost()
     {
         return currentLobby != null && AuthenticationService.Instance.PlayerId == currentLobby.HostId;
+    }
+
+    private void OnClientDisconnected(ulong clientId)
+    {
+        Debug.Log($"Client {clientId} disconnected.");
+
+        // If host is the one who disconnected, shut down everything.
+        if (NetworkManager.Singleton.IsHost && clientId != NetworkManager.Singleton.LocalClientId)
+        {
+            // Handle client disconnect (optional: kick logic or reassign host)
+        }
+
+        // If local client gets disconnected, go to main menu
+        if (clientId == NetworkManager.Singleton.LocalClientId)
+        {
+            GoToMainMenu();
+        }
+    }
+
+    private void OnServerStopped(bool _)
+    {
+        Debug.Log("Server stopped.");
+        GoToMainMenu(); // all clients go to main menu if server stops
+    }
+
+    private void GoToMainMenu()
+    {
+        NetworkManager.Singleton.Shutdown(); // Make sure Netcode is cleaned up
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
     }
 }
