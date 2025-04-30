@@ -9,6 +9,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Linq;
 using Unity.Netcode.Components;
+using UnityEngine.Serialization;
 
 public class Player : StateMachineCore
 {
@@ -56,7 +57,7 @@ public class Player : StateMachineCore
     [SerializeField] private GameObject MissilePrefab;
     private float timeSinceLastMissileFire;
 
-    [ReadOnly] public float wallrunResetTimer;
+    [ReadOnly] public float wallrunResetTime;
     [ReadOnly] public bool leavingGround;
     
     // Variables used for debugging
@@ -227,7 +228,7 @@ public class Player : StateMachineCore
         }
         
         // Transition to wallrun
-        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && stateMachine.currentState != slide && wallrunResetTimer < 0f)
+        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && stateMachine.currentState != slide && Time.time - wallrunResetTime > stats.wallrunResetTime )
         {
             stateMachine.SetState(wallrun);
             return;
@@ -311,7 +312,6 @@ public class Player : StateMachineCore
     {
         // Calls update logic in the currently active state
         stateMachine.currentState.DoUpdateBranch();
-        wallrunResetTimer -= Time.deltaTime;
         timeSinceLastGrounded += Time.deltaTime;
 
         if (groundSensor.grounded)
