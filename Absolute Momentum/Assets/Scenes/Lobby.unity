@@ -712,7 +712,9 @@ MonoBehaviour:
   - Level_01
   - Track test
   - JadeCheckpoint
-  numCheckpoints: 5
+  <lobbyName>k__BackingField: Lobby
+  numCheckpoints: 7
+  numLaps: 1
 --- !u!1001 &1584244714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -948,7 +950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: SceneName
-      value: JadeCheckpoint
+      value: Level_01
       objectReference: {fileID: 0}
     - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: LobbyCountdown

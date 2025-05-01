@@ -29,7 +29,6 @@ public class RaceFinishTrigger : NetworkBehaviour
             {
                 finishedPlayers.Add(playerId);
                 Debug.Log($"Player {playerId} finished!");
-
                 CheckAllPlayersFinished();
             }
         }

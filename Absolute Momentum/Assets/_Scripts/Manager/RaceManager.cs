@@ -13,6 +13,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     [SerializeField] private float countdownTime = 3f, introJingleDelay = 2f;
     [SerializeField] private Vector3[] startPositions;
     [field:SerializeField] public String[] levelNames { get; private set; }
+    [field:SerializeField] public String lobbyName { get; private set; }
     private int currentTeleportIndex;
 
     // Keep track of players
@@ -20,19 +21,21 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     private Dictionary<ulong, float> playerRaceTimes = new Dictionary<ulong, float>();
     private Dictionary<ulong, int> playerCheckpoints = new Dictionary<ulong, int>();
     private Dictionary<ulong, int> playerLaps = new Dictionary<ulong, int>();
-    [SerializeField] private int numCheckpoints;
+    private HashSet<ulong> finishedPlayers = new HashSet<ulong>();
+    [SerializeField] private int numCheckpoints, numLaps = 3;
     // Network variable for countdown timer
     private NetworkVariable<float> countdownTimer = new NetworkVariable<float>(-1f, NetworkVariableReadPermission.Everyone);
+
 
     public Action OnTimeSubmitted;
     
     public override void OnNetworkSpawn()
     {
-        if (IsServer)
-        {
-            NetworkManager.Singleton.OnClientConnectedCallback += AddClientReadyStatus;
-        }
-
+        // if (IsServer)
+        // {
+        //     NetworkManager.Singleton.OnClientConnectedCallback += AddClientReadyStatus;
+        // }
+        NetworkManager.Singleton.OnClientConnectedCallback += AddClientReadyStatus;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
@@ -47,13 +50,14 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
     private void AddClientReadyStatus(ulong clientId)
     {
-        if (!IsServer) return;
+        // if (!IsServer) return;
 
         if (!playerReadyStatus.ContainsKey(clientId))
         {
             playerReadyStatus[clientId] = false;
             playerCheckpoints[clientId] = 0;
             playerLaps[clientId] = 0;
+            finishedPlayers.Clear();
         }
     }
 
@@ -184,22 +188,66 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         return playerRaceTimes;
     }
 
-    public void UpdateCheckpoint(ulong playerID, int checkpointID)
+    public void UpdateCheckpoint(ulong playerID, int checkpointID, Player player)
     {
         int lastCheckpoint = playerCheckpoints[playerID];
+        
         Debug.Log($"Trying to add checkpoint {checkpointID} to player {playerID} (CURRENT: {lastCheckpoint})");
+        
         if (lastCheckpoint == checkpointID - 1) {
-            if (checkpointID == numCheckpoints) {
-                playerLaps[playerID] += 1;
-                Debug.Log($"Player {playerID} Completed A Lap! (Current Lap: {playerLaps[playerID]}");
-                playerCheckpoints[playerID] = 0;
-            } else {
-                playerCheckpoints[playerID] = checkpointID;
-            }
+            playerCheckpoints[playerID] = checkpointID;
         }
+        else if (lastCheckpoint == numCheckpoints && checkpointID == 1) {
+            playerLaps[playerID] += 1;
+            Debug.Log($"Player {playerID} Completed A Lap! (Current Lap: {playerLaps[playerID]}");
+            playerCheckpoints[playerID] = 1;
+                
+            if (player.IsOwner && playerLaps[playerID] >= numLaps)
+            {
+                Debug.Log("Player finished race");
+                player.playerRaceTimeManager.StopTimer();
+                player.playerUI.DisplayResultsUI();
+            }
+                
+            if (!IsServer) return; // Only the server should handle player finish tracking
+                
+            if (!finishedPlayers.Contains(playerID) && playerLaps[playerID] >= numLaps)
+            {
+                finishedPlayers.Add(playerID);
+                Debug.Log($"Player {playerID} finished!");
+                CheckAllPlayersFinished();
+            }
+        } 
     }
 
     public int GetPlayerLaps(ulong playerID) {
         return playerLaps[playerID];
+    }
+    
+    private void CheckAllPlayersFinished()
+    {
+        if (NetworkManager.Singleton.ConnectedClients.Count == finishedPlayers.Count)
+        {
+            Debug.Log("All players finished! Returning to lobby...");
+            LoadLobbyClientRpc();
+            TeleportAllPlayers(Vector3.up);
+        }
+    }
+    
+    [ClientRpc]
+    private void LoadLobbyClientRpc()
+    {
+        if (IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene(lobbyName, LoadSceneMode.Single);
+        }
+    }
+
+    private void TeleportAllPlayers(Vector3 position)
+    {
+        foreach (var player in NetworkManager.Singleton.ConnectedClients)
+        {
+            player.Value.PlayerObject.GetComponentInChildren<PlayerPayloadManager>().TeleportPlayer(position);
+        }
     }
 }
