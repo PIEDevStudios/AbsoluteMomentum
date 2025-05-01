@@ -28,7 +28,7 @@ public class PlayerSpeedManager : MonoBehaviour
 
         if (speedText != null)
         {
-            speedText.text = "Velocity: " + flatVel.magnitude.ToString("0");
+            speedText.text = flatVel.magnitude.ToString("0") + " mph";
         }
         
         float forceToApply = currentCurve.Evaluate(flatVel.magnitude);
