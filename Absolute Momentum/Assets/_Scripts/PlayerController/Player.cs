@@ -49,7 +49,6 @@ public class Player : StateMachineCore
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
     [field:SerializeField] public PlayerRaceTimeManager playerRaceTimeManager {get; private set;}
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
-    [SerializeField] private AudioListener audioListner;
     [field:SerializeField] public PlayerUIManager playerUI {get; private set;}
 
     
@@ -72,7 +71,6 @@ public class Player : StateMachineCore
     {
         if (!IsOwner)
         {
-            audioListner.enabled = false;
             playerCamera.Priority = 0;
             playerUI.gameObject.SetActive(false);
             enabled = false;
@@ -90,7 +88,6 @@ public class Player : StateMachineCore
         
         Cursor.lockState = CursorLockMode.Locked;
         
-        audioListner.enabled = true;
         playerCamera.Priority = 100;
         
         SceneManager.sceneLoaded += OnSceneLoaded;
