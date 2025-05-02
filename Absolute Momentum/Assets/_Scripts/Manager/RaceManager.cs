@@ -44,7 +44,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     {
         if (levelNames.Contains(scene.name))
         {
-            playerRaceTimes.Clear();
+            ResetValues();
         }
     }
 
@@ -54,11 +54,20 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
         if (!playerReadyStatus.ContainsKey(clientId))
         {
+            ResetValues();
             playerReadyStatus[clientId] = false;
+        }
+    }
+
+    private void ResetValues()
+    {
+        foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
             playerCheckpoints[clientId] = 0;
             playerLaps[clientId] = 0;
-            finishedPlayers.Clear();
         }
+        finishedPlayers.Clear();
+        playerRaceTimes.Clear();
     }
 
     [Rpc(SendTo.Server, RequireOwnership = false)]
