@@ -1741,17 +1741,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6929886210940501627}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.08094863, w: 0.9967183}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4599941183490920879}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.286}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -550, y: -466}
-  m_SizeDelta: {x: 1000, y: 200}
+  m_AnchoredPosition: {x: -397, y: -406}
+  m_SizeDelta: {x: 1192.13, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1968283095560623547
 CanvasRenderer:
@@ -1781,7 +1781,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Test Track
+  m_text: Skylane District
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c6700661695c3c54b9b45881ebf53ab3, type: 2}
   m_sharedMaterial: {fileID: 5417989601209283306, guid: c6700661695c3c54b9b45881ebf53ab3, type: 2}

@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4776653709342072, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.168611
+      value: 6.2983546
       objectReference: {fileID: 0}
     - target: {fileID: 4776653709342072, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: m_LocalScale.y
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4776653709342072, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.0453453
+      value: 5.2035275
       objectReference: {fileID: 0}
     - target: {fileID: 4776653709342072, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4776653709342072, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.13
+      value: -4.72
       objectReference: {fileID: 0}
     - target: {fileID: 4776653709342072, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,11 +66,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198563236803704106, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.06900835
+      value: 0.2235294
       objectReference: {fileID: 0}
     - target: {fileID: 198563236803704106, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198563236803704106, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.9812532
       objectReference: {fileID: 0}
     - target: {fileID: 199255154450070170, guid: cd89c56a1fcd0534a946f51a4cf9e51b, type: 3}
       propertyPath: m_Materials.Array.size
