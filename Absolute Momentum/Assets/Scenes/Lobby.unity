@@ -965,10 +965,6 @@ PrefabInstance:
       propertyPath: lobbyStartTrigger
       value: 
       objectReference: {fileID: 1854381714}
-    - target: {fileID: 4027282081648904826, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 16668b683509df74ebe8d8bf02957bc6, type: 3}
     - target: {fileID: 5005232994117476915, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -980,6 +976,10 @@ PrefabInstance:
     - target: {fileID: 7084287641340502982, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932400233556072735, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8274325484903086195, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: m_Pivot.x
@@ -1074,33 +1074,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 380690184097904446, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 380690184097904446, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 380690184097904446, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 380690184097904446, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2732297470298003094, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4227161156
-      objectReference: {fileID: 0}
-    - target: {fileID: 3776632581874192495, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
-      propertyPath: m_Radius
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
-      propertyPath: SceneName
-      value: Level_01
       objectReference: {fileID: 0}
     - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: LobbyCountdown
@@ -1109,10 +1085,6 @@ PrefabInstance:
     - target: {fileID: 6432901070420746257, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: m_Name
       value: Start Circle
-      objectReference: {fileID: 0}
-    - target: {fileID: 6432901070420746257, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8766100717146314618, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: m_LocalPosition.x
