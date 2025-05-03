@@ -59,6 +59,17 @@ public class BoostVolume : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Rigidbody playerRigidbody = other.collider.attachedRigidbody;
+            Vector3 direction = getDirection(boostDirection);
+            direction *= intensity;
+            playerRigidbody.AddForce(direction, ForceMode.Force);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

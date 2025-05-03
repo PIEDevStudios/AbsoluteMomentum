@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skybox
+  m_Name: Skybox 1
   m_Shader: {fileID: -6465566751694194690, guid: cb822436f22c7914d994a2bc5ca91161, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -43,8 +43,8 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _HorizonColor: {r: 0, g: 0.01809858, b: 0.084905684, a: 0}
-    - _SkyColor: {r: 0.06455409, g: 0.18690932, b: 0.5068691, a: 0}
+    - _HorizonColor: {r: 0.69974667, g: 1.6401517, b: 1.7452505, a: 0}
+    - _SkyColor: {r: 1.1310551, g: 1.6768091, b: 1.3760875, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4337149233175942607
