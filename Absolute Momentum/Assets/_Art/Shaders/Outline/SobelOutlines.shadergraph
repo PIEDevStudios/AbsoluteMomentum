@@ -1069,34 +1069,6 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "11278eccf08b49b79cb0bbe27377d1bb"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "7b04ed7662df48a6a400d78400e7c2ce"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "2b47a7a03ee04569b117e92896879313"
-                },
-                "m_SlotId": 2
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "7b04ed7662df48a6a400d78400e7c2ce"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
                     "m_Id": "3b603799fb8b4494ac0db600fde33d71"
                 },
                 "m_SlotId": 1
@@ -1156,6 +1128,34 @@
                     "m_Id": "c5c1b08079144909993845c1e6d056f1"
                 },
                 "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "8f1e7a682ef2415d8619e073580d209c"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "11278eccf08b49b79cb0bbe27377d1bb"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "8f1e7a682ef2415d8619e073580d209c"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "2b47a7a03ee04569b117e92896879313"
+                },
+                "m_SlotId": 2
             }
         },
         {
@@ -1798,7 +1798,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_DepthSamplingMode": 1
+    "m_DepthSamplingMode": 0
 }
 
 {
@@ -2055,7 +2055,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_DepthSamplingMode": 1
+    "m_DepthSamplingMode": 0
 }
 
 {
@@ -3059,7 +3059,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_DepthSamplingMode": 1
+    "m_DepthSamplingMode": 0
 }
 
 {
@@ -7381,7 +7381,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_DepthSamplingMode": 1
+    "m_DepthSamplingMode": 0
 }
 
 {
@@ -7774,7 +7774,7 @@
     "m_Title": "Normals",
     "m_Position": {
         "x": -3283.0,
-        "y": 607.0001831054688
+        "y": 607.0
     }
 }
 
@@ -9613,7 +9613,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_DepthSamplingMode": 1
+    "m_DepthSamplingMode": 0
 }
 
 {

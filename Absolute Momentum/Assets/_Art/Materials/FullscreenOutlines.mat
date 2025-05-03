@@ -38,10 +38,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorThreshold: 1.01
-    - _Depth: 0.0001
-    - _DepthBias: 1
+    - _Depth: 1
+    - _DepthBias: 0.004
     - _DepthMultiplier: 5
-    - _DepthPower: 0.7
+    - _DepthPower: 1
     - _DepthThreshhold: 0.8
     - _Distance: 100
     - _Float: 0.01
