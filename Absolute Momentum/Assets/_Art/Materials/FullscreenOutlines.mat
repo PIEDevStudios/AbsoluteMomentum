@@ -44,7 +44,8 @@ Material:
     - _DepthPower: 1
     - _DepthThreshhold: 0.8
     - _Distance: 100
-    - _Float: 0.01
+    - _Float: 1
+    - _LODfade: 150
     - _Max: 144
     - _Min: 0
     - _NormalBias: 1

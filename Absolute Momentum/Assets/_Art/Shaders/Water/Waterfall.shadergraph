@@ -1547,6 +1547,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "2aa93b22fab74bdeb25f2efdfcc24714"
@@ -2139,8 +2140,8 @@
     "m_ObjectId": "19166ceaabf742af9384dd66a677e286",
     "m_Title": "Movement",
     "m_Position": {
-        "x": -2655.999755859375,
-        "y": -434.99993896484377
+        "x": -2656.0,
+        "y": -434.9999084472656
     }
 }
 
@@ -2603,6 +2604,9 @@
     "m_AlphaClip": false,
     "m_CastShadows": false,
     "m_ReceiveShadows": true,
+    "m_DisableTint": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
@@ -3460,7 +3464,7 @@
     "m_Title": "Base",
     "m_Position": {
         "x": -1950.0001220703125,
-        "y": 389.0
+        "y": 389.0001220703125
     }
 }
 
@@ -3482,7 +3486,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -5397,7 +5401,7 @@
     },
     "m_DefaultValue": {
         "x": 0.0,
-        "y": 0.0
+        "y": 1.0
     },
     "m_Labels": []
 }
@@ -7729,8 +7733,8 @@
     "m_ObjectId": "b369e24cf23f4d958d441a81a7636c26",
     "m_Title": "Color Controls",
     "m_Position": {
-        "x": -942.3912963867188,
-        "y": 388.0000305175781
+        "x": -942.0,
+        "y": 388.0
     }
 }
 
@@ -7749,8 +7753,8 @@
         "y": 1.0
     },
     "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
+        "x": -1.0,
+        "y": 1.0
     },
     "m_Labels": []
 }
@@ -8301,7 +8305,7 @@
     "m_ObjectId": "cfb30bb61bcd427b9c4bf422b9c0e5cf",
     "m_Title": "Randomness",
     "m_Position": {
-        "x": -2365.0,
+        "x": -2365.000244140625,
         "y": -906.0
     }
 }
@@ -9426,7 +9430,7 @@
     "m_Title": "Displacement",
     "m_Position": {
         "x": -1113.0,
-        "y": -906.9999389648438
+        "y": -907.0
     }
 }
 
