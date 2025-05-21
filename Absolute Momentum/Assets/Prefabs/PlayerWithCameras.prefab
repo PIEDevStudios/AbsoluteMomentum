@@ -194,8 +194,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767041133234167550}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19529024, y: -0.54131657, z: 0.13095178, w: 0.80727303}
-  m_LocalPosition: {x: 3.6289983, y: 3.7745168, z: -1.5051959}
+  m_LocalRotation: {x: 0.19046722, y: -0.6260303, z: 0.16140467, w: 0.73875356}
+  m_LocalPosition: {x: 3.934532, y: 3.9751396, z: -0.65440285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,8 +366,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990830039854890529}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16580646, y: -0.80508214, z: 0.264723, w: 0.50425464}
-  m_LocalPosition: {x: 3.4389298, y: 4.5903273, z: 1.668292}
+  m_LocalRotation: {x: 0.19046722, y: -0.6260303, z: 0.16140467, w: 0.73875356}
+  m_LocalPosition: {x: 3.934532, y: 3.9751396, z: -0.65440285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -450,7 +450,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 3
   HorizontalAxis:
-    Value: -115.878914
+    Value: -80.55684
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -460,7 +460,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 23.003942
+    Value: 13.625242
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -945,7 +945,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathScreensPrefabs:
   - {fileID: 2506639877738881360, guid: 99ef7b8cd4b99024a94036ace433408b, type: 3}
-  - {fileID: 7992428199979520963, guid: b73ce08f6e487394bacab12998e36c84, type: 3}
+  - {fileID: 7485599645325008474, guid: f5bbe670c359a4e4382c1ce0fe777aaf, type: 3}
+  - {fileID: 7485599645325008474, guid: 997b21ac3abd347409aa6a765b1ea80c, type: 3}
+  - {fileID: 7485599645325008474, guid: e1c798566888b324181c3326c97e9094, type: 3}
+  - {fileID: 7485599645325008474, guid: 9ca8ca7dfb93791419799ea2eeba0c1a, type: 3}
 --- !u!1 &3238629911873270863
 GameObject:
   m_ObjectHideFlags: 0
@@ -22660,6 +22663,69 @@ MonoBehaviour:
   - IsCrossFadeExit: 0
     Layer: 0
     OriginatingState: -1947527841
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 640249298
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1947527841
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 640249298
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1947527841
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 640249298
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1947527841
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 640249298
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1947527841
+    DestinationState: 1748754976
+    TransitionDuration: 0.25
+    TriggerNameHash: 1748754976
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 640249298
     DestinationState: 1748754976
     TransitionDuration: 0.25
     TriggerNameHash: 1748754976

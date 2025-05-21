@@ -24,7 +24,7 @@ public class DeathTrigger : NetworkBehaviour
             if (player != null)
             {
                 Debug.Log("Death Trigger: Triggering death screen");
-                player.TriggerDeathScreen(1);
+                player.TriggerDeathScreen(4);
             }
             else
             {
