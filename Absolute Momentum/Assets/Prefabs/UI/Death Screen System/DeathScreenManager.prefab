@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4529221007525813878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9103232738622502223}
+  - component: {fileID: 6707172749052345555}
+  m_Layer: 0
+  m_Name: DeathScreenManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9103232738622502223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4529221007525813878}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -959.99994, y: -540.1418, z: 0}
+  m_LocalScale: {x: 2.2695034, y: 2.2695034, z: 2.2695034}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6707172749052345555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4529221007525813878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f594115ce00e54ebe947273684fde0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathScreensPrefabs:
+  - {fileID: 2506639877738881360, guid: 99ef7b8cd4b99024a94036ace433408b, type: 3}
+  - {fileID: 7485599645325008474, guid: f5bbe670c359a4e4382c1ce0fe777aaf, type: 3}
+  - {fileID: 7485599645325008474, guid: 997b21ac3abd347409aa6a765b1ea80c, type: 3}
+  - {fileID: 7485599645325008474, guid: e1c798566888b324181c3326c97e9094, type: 3}
+  - {fileID: 7485599645325008474, guid: 9ca8ca7dfb93791419799ea2eeba0c1a, type: 3}
