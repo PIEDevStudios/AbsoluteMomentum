@@ -50,12 +50,12 @@ public class PlayerJumpManager : NetworkBehaviour
     public void TickUpdate(PlayerInput.InputValues inputValues)
     {
         if (!IsOwner) return;
-        
-        if (framesSinceOnGround == -1)
-        {
-            framesSinceOnGround = (int)FrameBufferNum;
-        }
-        else if (player.stateMachine.currentState is not PlayerAirborne && (player.groundSensor.grounded || player.slopeSensor.isOnSlope))
+        //
+        // if (framesSinceOnGround == -1)
+        // {
+        //     framesSinceOnGround = (int)FrameBufferNum;
+        // }
+        if (player.stateMachine.currentState is not PlayerAirborne && (player.groundSensor.grounded || player.slopeSensor.isOnSlope))
         {
             framesSinceOnGround = 0;
         }
@@ -89,7 +89,7 @@ public class PlayerJumpManager : NetworkBehaviour
     void AttemptJump()
     {
         // If its been too long since the last jump input, return
-        if (framesSinceOnGround >= FrameBufferNum)
+        if (framesSinceOnGround >= FrameBufferNum && !jumping)
         {
             player.leavingGround = false;
             return;

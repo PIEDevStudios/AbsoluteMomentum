@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,12 +24,14 @@ public class WallSensor : MonoBehaviour
 
     private void CheckGround()
     {
-        wallRight = Physics.Raycast(transform.position, player.playerObj.right, out wallHitRight, wallCheckDistance, wallLayer) || Physics.Raycast(transform.position, (player.playerObj.right + player.playerObj.forward).normalized, out wallHitRight, wallCheckDistance, wallLayer);
+        wallRight = Physics.Raycast(transform.position, player.playerObj.right, out wallHitRight, wallCheckDistance,
+            wallLayer);//|| Physics.Raycast(transform.position, (player.playerObj.right + player.playerObj.forward).normalized, out wallHitRight, wallCheckDistance, wallLayer);
         Debug.DrawRay(transform.position, player.playerObj.right * wallCheckDistance);
-        Debug.DrawRay(transform.position, (player.playerObj.right + player.playerObj.forward).normalized  * wallCheckDistance);
-        wallLeft = Physics.Raycast(transform.position, -player.playerObj.right, out wallHitLeft, wallCheckDistance, wallLayer) || Physics.Raycast(transform.position, (-player.playerObj.right + player.playerObj.forward).normalized, out wallHitLeft, wallCheckDistance, wallLayer);
+        // Debug.DrawRay(transform.position, (player.playerObj.right + player.playerObj.forward).normalized  * wallCheckDistance);
+        wallLeft = Physics.Raycast(transform.position, -player.playerObj.right, out wallHitLeft, wallCheckDistance,
+            wallLayer); //|| Physics.Raycast(transform.position, (-player.playerObj.right + player.playerObj.forward).normalized, out wallHitLeft, wallCheckDistance, wallLayer);
         Debug.DrawRay(transform.position, -player.playerObj.right * wallCheckDistance);
-        Debug.DrawRay(transform.position, (-player.playerObj.right + player.playerObj.forward).normalized  * wallCheckDistance);
+        // Debug.DrawRay(transform.position, (-player.playerObj.right + player.playerObj.forward).normalized  * wallCheckDistance);
     }
 
     private void OnDrawGizmos()
