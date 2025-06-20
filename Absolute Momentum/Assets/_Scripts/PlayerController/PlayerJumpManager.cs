@@ -19,6 +19,7 @@ public class PlayerJumpManager : NetworkBehaviour
 
     private int framesSinceLastSpacebar, framesSinceOnGround;
     private bool jumping;
+    private bool jumpEnded;
 
     public override void OnNetworkSpawn()
     {
@@ -70,8 +71,11 @@ public class PlayerJumpManager : NetworkBehaviour
         
         
         //creates variable jump, adds downward force if player lets go of space making character fall faster leading to smaller jump
-        if (jumping && playerInput.jumpReleasedThisFrame && framesSinceOnGround <= playerStats.EndJumpEarlyTime && player.stateMachine.currentState == player.airborne)
+        if (jumping && framesSinceOnGround > -1 && !jumpEnded && !playerInput.jumpHeld && framesSinceOnGround <= playerStats.EndJumpEarlyTime && player.stateMachine.currentState == player.airborne)
         {
+            Debug.Log("end jump early" + rb.linearVelocity.y);
+            Debug.Log("Frames since on ground: " + framesSinceOnGround);
+            jumpEnded = true;
             rb.AddForce(Vector3.down * Mathf.Abs(rb.linearVelocity.y) * downwardForce, ForceMode.Impulse);
         }
     }
@@ -84,8 +88,6 @@ public class PlayerJumpManager : NetworkBehaviour
 
     void AttemptJump()
     {
-        Debug.Log("Attempt Jump");
-        
         // If its been too long since the last jump input, return
         if (framesSinceOnGround >= FrameBufferNum)
         {
@@ -106,14 +108,14 @@ public class PlayerJumpManager : NetworkBehaviour
             }
             
             
-            Debug.Log("Jump");
-            
+            Debug.Log("Jump: " + framesSinceLastSpacebar);
             
             // If we buffer our jump, reset our y velocity before the jump
             if (framesSinceLastSpacebar != 1)
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             }
+            jumpEnded = false;
             rb.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse);
             player.leavingGround = true;
         }
