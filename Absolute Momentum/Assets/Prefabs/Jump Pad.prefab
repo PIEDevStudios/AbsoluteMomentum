@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4038479419280499737}
   - component: {fileID: 3341457834094991938}
   - component: {fileID: 2720028329426604952}
-  - component: {fileID: 7314344199100542003}
   - component: {fileID: 1614676569143942798}
   - component: {fileID: 700507685772047159}
+  - component: {fileID: 8628508851034960735}
   m_Layer: 0
   m_Name: Jump Pad
   m_TagString: Untagged
@@ -347,19 +347,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7314344199100542003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8007003097542645079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7529bec409aa344ba5f8acf3a7f5cfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpAmount: 15
 --- !u!33 &1614676569143942798
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -390,3 +377,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &8628508851034960735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8007003097542645079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78df3671e3d640feacad21dd2c3f7343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 50
+  mode: 0
+  normalFace: 1
