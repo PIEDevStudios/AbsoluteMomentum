@@ -13,9 +13,19 @@ public class CharacterInfo : MonoBehaviour {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public Image portraitImage;
-    public void UpdateInfo(CharacterData data) {
+
+    public SlideInDotTween titleSlide;
+    public SlideInDotTween descriptionSlide;
+    public SlideInDotTween portraitSlide;
+
+    public void UpdateInfo(CharacterData data)
+    {
         nameText.text = data.characterName;
         descriptionText.text = data.description;
         portraitImage.sprite = data.characterImage;
+
+        titleSlide.PlaySlideIn();
+        descriptionSlide.PlaySlideIn();
+        portraitSlide.PlaySlideIn();
     }
 }
