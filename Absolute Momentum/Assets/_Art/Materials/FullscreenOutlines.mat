@@ -39,7 +39,7 @@ Material:
     m_Floats:
     - _ColorThreshold: 1.01
     - _Depth: 9.3
-    - _DepthBias: 0.139
+    - _DepthBias: 1
     - _DepthMultiplier: 1000
     - _DepthPower: 1
     - _DepthThreshhold: 0.8
@@ -48,7 +48,7 @@ Material:
     - _LODfade: 150
     - _Max: 144
     - _Min: 0
-    - _NormalBias: 0.961
+    - _NormalBias: 1
     - _NormalMultiplier: 1
     - _NormalThreshold: 1.01
     - _OVERLAY: 1
