@@ -52,12 +52,28 @@ public class WallJumpPad : BasePad
             Vector3 newVelocity = direction * speed * intensity;
             rb.linearVelocity = newVelocity;
         }
+        else if (mode == Mode.SetVelocity)
+        {
+            float speed = rb.linearVelocity.magnitude;
+            Vector3 newVelocity;
+            if (speed > intensity)
+            {
+                newVelocity = direction * speed;
+            }
+            else
+            {
+                newVelocity = direction * intensity;
+            }
+            rb.linearVelocity = newVelocity;
+        }
+        
     }
     
     public enum Mode {
         AdditiveImpulse,
         RedirectVelocity,
-        RedirectVelocityForced
+        RedirectVelocityForced,
+        SetVelocity
     }
     
 }

@@ -3897,11 +3897,15 @@ PrefabInstance:
       objectReference: {fileID: 1906614414}
     - target: {fileID: 4038479419280499737, guid: 40fe7bb71810d0646bc9a58ca72f1edc, type: 3}
       propertyPath: m_VersionIndex
-      value: 2148
+      value: 2151
       objectReference: {fileID: 0}
     - target: {fileID: 8007003097542645079, guid: 40fe7bb71810d0646bc9a58ca72f1edc, type: 3}
       propertyPath: m_Name
       value: Jump Pad
+      objectReference: {fileID: 0}
+    - target: {fileID: 8628508851034960735, guid: 40fe7bb71810d0646bc9a58ca72f1edc, type: 3}
+      propertyPath: mode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8628508851034960735, guid: 40fe7bb71810d0646bc9a58ca72f1edc, type: 3}
       propertyPath: intensity
