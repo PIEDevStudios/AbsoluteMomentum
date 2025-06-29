@@ -8,8 +8,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using Unity.Netcode;
 using System.Linq;
+using System.Security.Cryptography;
 using Unity.Netcode.Components;
+using Unity.VisualScripting;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Player : StateMachineCore
 {
@@ -38,6 +41,9 @@ public class Player : StateMachineCore
     [field:SerializeField] public Transform graphics { get; private set; }
     [field:SerializeField] public Transform playerObj { get; private set; }
     [field:SerializeField] public Transform orientation { get; private set; }
+    
+    [SerializeField] private TrailRenderer trail;
+    
     [Expandable]
     [SerializeField] public PlayerStats stats;
     [Header("Player Scripts")]
@@ -46,6 +52,7 @@ public class Player : StateMachineCore
     [SerializeField] private PlayerJumpManager jumpManager;
     [SerializeField] private PlayerWalljumpManager walljumpManager;
     [SerializeField] private PlayerItemManager itemManager;
+    [SerializeField] private PlayerPayloadManager payloadManager;
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
     [field:SerializeField] public PlayerRaceTimeManager playerRaceTimeManager {get; private set;}
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
@@ -58,9 +65,6 @@ public class Player : StateMachineCore
 
     [ReadOnly] public float wallrunResetTime;
     [ReadOnly] public bool leavingGround;
-    
-    // Variables used for debugging
-    [Header("Debug")] 
     [SerializeField] private Vector3 spawnPos;
     
     private float timeSinceLastGrounded;
@@ -351,12 +355,59 @@ public class Player : StateMachineCore
         stats.CurrentGravity = gravity;
     }
     
-    public void TriggerDeathScreen(int index)
+    public float TriggerDeathScreen(int index)
     {
-        if (!IsOwner) return;
-        playerUI.deathScreenManager.PlayDeathScreen(index);
+        if (!IsOwner) return -1f;
+        return playerUI.deathScreenManager.PlayDeathScreen(index);
     }
 
+    public void SetSpawnPoint(Vector3 position)
+    {
+        spawnPos = position;
+    }
+
+    public void RespawnPlayer()
+    {
+        float respawnDelay = TriggerDeathScreen(Random.Range(0, playerUI.deathScreenManager.GetNumberOfDeathScreens()));
+
+        if (respawnDelay < 0f) return;
+        
+        StopAllCoroutines();
+        StartCoroutine(TeleportDuringDeathScreen(respawnDelay));
+    }
+
+    private IEnumerator TeleportDuringDeathScreen(float respawnDelay)
+    {
+
+        
+        yield return new WaitForSeconds(respawnDelay);
+
+        float originalTrailTime = trail.time;
+        trail.enabled = false;
+        trail.time = -1f;
+        trail.emitting = false;
+        
+        
+        payloadManager.TeleportPlayer(spawnPos);
+        
+        
+
+        // Wait another frame so Unity drops the old geometry
+        yield return new WaitForSeconds(0.5f);
+        
+        // Restore trail
+        trail.emitting = true;
+        trail.enabled = true;
+        trail.time = 0f;
+        
+        while (trail.time < originalTrailTime)
+        {
+            yield return null;
+            trail.time += Time.deltaTime;
+        }
+        
+    }
+    
     #endregion
     
     #region Debug Methods

@@ -4,7 +4,6 @@ using System.Collections;
 public class FadeToBlackDeathScreen : BaseDeathScreen
 {
     [SerializeField] private CanvasGroup fadeGroup;
-    [SerializeField] private float duration = 1f;
 
     protected override void OnPlay()
     {

@@ -197,7 +197,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         return playerRaceTimes;
     }
 
-    public void UpdateCheckpoint(ulong playerID, int checkpointID, Player player)
+    public void UpdateCheckpoint(ulong playerID, int checkpointID, Player player, Transform spawnPos)
     {
         int lastCheckpoint = playerCheckpoints[playerID];
         
@@ -205,12 +205,15 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         
         if (lastCheckpoint == checkpointID - 1) {
             playerCheckpoints[playerID] = checkpointID;
+            player.SetSpawnPoint(spawnPos.position);
         }
         else if (lastCheckpoint == numCheckpoints && checkpointID == 1) {
             playerLaps[playerID] += 1;
             Debug.Log($"Player {playerID} Completed A Lap! (Current Lap: {playerLaps[playerID]}");
             playerCheckpoints[playerID] = 1;
-                
+            player.SetSpawnPoint(spawnPos.position);    
+            
+            
             if (player.IsOwner && playerLaps[playerID] >= numLaps)
             {
                 Debug.Log("Player finished race");

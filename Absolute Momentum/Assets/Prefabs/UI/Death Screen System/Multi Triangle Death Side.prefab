@@ -125,8 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e37196fb913dcf4d8b2f64f0c4de361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 2
+  respawnPlayerTime: 0.353
   overlayImageRect: {fileID: 92248870503379284}
-  slideDuration: 1.5
   waitAfterSlide: 1
   startXPosition: -2000
   endXPosition: 3000

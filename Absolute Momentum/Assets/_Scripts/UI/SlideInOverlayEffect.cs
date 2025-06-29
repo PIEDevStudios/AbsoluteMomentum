@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SlideInOverlayEffect : BaseDeathScreen
 {
     [SerializeField] private RectTransform overlayImageRect;
-    [SerializeField] private float slideDuration = 1f;
     [SerializeField] private float waitAfterSlide = 1f;
     [SerializeField] private float startYPosition = 2000f;
     [SerializeField] private float endYPosition = 0f;
@@ -53,10 +53,10 @@ public class SlideInOverlayEffect : BaseDeathScreen
         Vector2 endPos = startPos;
         endPos.y = endYPosition;
 
-        while (t < slideDuration)
+        while (t < duration)
         {
             t += Time.deltaTime;
-            float progress = Mathf.Clamp01(t / slideDuration);
+            float progress = Mathf.Clamp01(t / duration);
             float eased = 1f - (1f - progress) * (1f - progress);
             overlayImageRect.anchoredPosition = Vector2.Lerp(startPos, endPos, eased);
             yield return null;

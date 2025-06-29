@@ -776,6 +776,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathScreensPrefabs:
   - {fileID: 2506639877738881360, guid: 99ef7b8cd4b99024a94036ace433408b, type: 3}
+  - {fileID: 7485599645325008474, guid: e1c798566888b324181c3326c97e9094, type: 3}
+  - {fileID: 7485599645325008474, guid: 997b21ac3abd347409aa6a765b1ea80c, type: 3}
+  - {fileID: 7485599645325008474, guid: 9ca8ca7dfb93791419799ea2eeba0c1a, type: 3}
+  - {fileID: 7485599645325008474, guid: f5bbe670c359a4e4382c1ce0fe777aaf, type: 3}
 --- !u!1 &3238629911873270863
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,7 +868,7 @@ MonoBehaviour:
     Layer: 0
     OriginatingState: 640249298
     DestinationState: 1748754976
-    TransitionDuration: 0.25
+    TransitionDuration: 0.2497561
     TriggerNameHash: 1748754976
     TransitionIndex: 1
   - IsCrossFadeExit: 0
@@ -916,11 +920,18 @@ MonoBehaviour:
     TransitionDuration: 0.25
     TriggerNameHash: 984841117
     TransitionIndex: 3
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1541365669
+    DestinationState: 1748754976
+    TransitionDuration: 0
+    TriggerNameHash: 1748754976
+    TransitionIndex: 4
   - IsCrossFadeExit: 0
     Layer: 0
     OriginatingState: 640249298
     DestinationState: 1748754976
-    TransitionDuration: 0.25
+    TransitionDuration: 0.2497561
     TriggerNameHash: 1748754976
     TransitionIndex: 1
   - IsCrossFadeExit: 0
@@ -972,11 +983,18 @@ MonoBehaviour:
     TransitionDuration: 0.25
     TriggerNameHash: 984841117
     TransitionIndex: 3
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1541365669
+    DestinationState: 1748754976
+    TransitionDuration: 0
+    TriggerNameHash: 1748754976
+    TransitionIndex: 4
   - IsCrossFadeExit: 0
     Layer: 0
     OriginatingState: 640249298
     DestinationState: 1748754976
-    TransitionDuration: 0.25
+    TransitionDuration: 0.2497561
     TriggerNameHash: 1748754976
     TransitionIndex: 1
   - IsCrossFadeExit: 0
@@ -1028,6 +1046,13 @@ MonoBehaviour:
     TransitionDuration: 0.25
     TriggerNameHash: 984841117
     TransitionIndex: 3
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1541365669
+    DestinationState: 1748754976
+    TransitionDuration: 0
+    TriggerNameHash: 1748754976
+    TransitionIndex: 4
   m_Animator: {fileID: 2240568983312176798}
 --- !u!1 &3258364069455560819
 GameObject:
@@ -2260,6 +2285,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: 87a5d8676cb8ec54fad5022a4ec516bf, type: 2}
     - target: {fileID: 1299262452964842265, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: trail
+      value: 
+      objectReference: {fileID: 6484462422847397123}
+    - target: {fileID: 1299262452964842265, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: itemManager
       value: 
       objectReference: {fileID: 6381171521294419790}
@@ -2267,6 +2296,10 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 4633578369210212324}
+    - target: {fileID: 1299262452964842265, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: payloadManager
+      value: 
+      objectReference: {fileID: 2173804396490285222}
     - target: {fileID: 1299262452964842265, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: <playerUI>k__BackingField
       value: 
@@ -3168,6 +3201,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 424649657988135205, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
   m_PrefabInstance: {fileID: 2222777955612407107}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2173804396490285222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 68120598662141413, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+  m_PrefabInstance: {fileID: 2222777955612407107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688112e3ad79db142895a5065d20d85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &2240568983312176798 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 126379346444952541, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
@@ -3212,6 +3256,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081e1ea8bf77afe41a211e08aa8c3d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!96 &6484462422847397123 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 5126667516657576000, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+  m_PrefabInstance: {fileID: 2222777955612407107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6558729271255742777 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5034370465468976250, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}

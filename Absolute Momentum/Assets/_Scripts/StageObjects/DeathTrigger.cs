@@ -5,7 +5,6 @@ using UnityEngine;
 public class DeathTrigger : NetworkBehaviour
 {
     [SerializeField] private TriggerMode triggerMode;
-    [SerializeField] private Vector3 respawnPosition;
 
     public enum TriggerMode
     {
@@ -15,28 +14,31 @@ public class DeathTrigger : NetworkBehaviour
 
     private void HandlePlayerDeath(Collider other)
     {
-        Debug.Log("PLAYER DIES");
-        var playerPayload = other.transform.root.GetComponentInChildren<PlayerPayloadManager>();
-        if (playerPayload != null)
-        {
-            Debug.Log("Death Trigger: Found player payload");
-            var player = playerPayload.GetComponent<Player>();
-            if (player != null)
-            {
-                Debug.Log("Death Trigger: Triggering death screen");
-                player.TriggerDeathScreen(4);
-            }
-            else
-            {
-                Debug.Log("Death Trigger: Player component not found");
-            }
-
-            playerPayload.TeleportPlayer(respawnPosition);
-        }
-        else
-        {
-            Debug.Log("Death Trigger: PlayerPayload not found");
-        }
+        // Debug.Log("PLAYER DIES");
+        // var playerPayload = other.transform.root.GetComponentInChildren<PlayerPayloadManager>();
+        // if (playerPayload != null)
+        // {
+        //     Debug.Log("Death Trigger: Found player payload");
+        //     var player = playerPayload.GetComponent<Player>();
+        //     if (player != null)
+        //     {
+        //         Debug.Log("Death Trigger: Triggering death screen");
+        //         player.TriggerDeathScreen(4);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("Death Trigger: Player component not found");
+        //     }
+        //
+        //     playerPayload.TeleportPlayer(respawnPosition);
+        // }
+        // else
+        // {
+        //     Debug.Log("Death Trigger: PlayerPayload not found");
+        // }
+        
+        Player player = other.transform.root.GetComponentInChildren<Player>();
+        player.RespawnPlayer();
     }
 
     private void OnTriggerEnter(Collider other)

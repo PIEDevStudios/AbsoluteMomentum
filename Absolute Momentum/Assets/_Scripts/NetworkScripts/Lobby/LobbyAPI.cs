@@ -111,7 +111,7 @@ public class LobbyAPI : SingletonPersistent<LobbyAPI>
                 try
                 {
                     currentLobby = await LobbyService.Instance.GetLobbyAsync(currentLobby.Id);
-                    Debug.Log("Lobby updated. Players count: " + currentLobby.Players.Count);
+                    // Debug.Log("Lobby updated. Players count: " + currentLobby.Players.Count);
                 }
                 catch (Exception e)
                 {
