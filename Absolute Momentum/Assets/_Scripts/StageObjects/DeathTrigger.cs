@@ -14,29 +14,6 @@ public class DeathTrigger : NetworkBehaviour
 
     private void HandlePlayerDeath(Collider other)
     {
-        // Debug.Log("PLAYER DIES");
-        // var playerPayload = other.transform.root.GetComponentInChildren<PlayerPayloadManager>();
-        // if (playerPayload != null)
-        // {
-        //     Debug.Log("Death Trigger: Found player payload");
-        //     var player = playerPayload.GetComponent<Player>();
-        //     if (player != null)
-        //     {
-        //         Debug.Log("Death Trigger: Triggering death screen");
-        //         player.TriggerDeathScreen(4);
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("Death Trigger: Player component not found");
-        //     }
-        //
-        //     playerPayload.TeleportPlayer(respawnPosition);
-        // }
-        // else
-        // {
-        //     Debug.Log("Death Trigger: PlayerPayload not found");
-        // }
-        
         Player player = other.transform.root.GetComponentInChildren<Player>();
         player.RespawnPlayer();
     }
@@ -44,11 +21,11 @@ public class DeathTrigger : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log($"Death Trigger entered by: {other.name}");
-        if (!IsServer) 
-        {
-            Debug.Log("Death Trigger: Not server, returning");
-            return;
-        }
+        // if (!IsServer) 
+        // {
+        //     Debug.Log("Death Trigger: Not server, returning");
+        //     return;
+        // }
         
         // Only handle death if we're in OnEnter mode
         if (triggerMode == TriggerMode.OnEnter)
@@ -61,11 +38,11 @@ public class DeathTrigger : NetworkBehaviour
     private void OnTriggerExit(Collider other)
     {
         Debug.Log($"Death Trigger exited by: {other.name}");
-        if (!IsServer)
-        {
-            Debug.Log("Death Trigger: Not server, returning");
-            return;
-        }
+        // if (!IsServer)
+        // {
+        //     Debug.Log("Death Trigger: Not server, returning");
+        //     return;
+        // }
         
         // Only handle death if we're in OnExit mode
         if (triggerMode == TriggerMode.OnExit)
