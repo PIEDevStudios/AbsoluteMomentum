@@ -228,15 +228,19 @@ public class Player : StateMachineCore
             return;
         }
         
+        Vector3 XYVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        
         // Transition to wallrun
-        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && stateMachine.currentState != slide && Time.time - wallrunResetTime > stats.wallrunResetTime )
+        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && XYVel.magnitude >= stats.minWallrunEnterSpeed && stateMachine.currentState != slide && stateMachine.currentState != wallrun && Time.time - wallrunResetTime > stats.wallrunResetTime )
         {
             stateMachine.SetState(wallrun);
             return;
         }
         
+        Debug.Log(!groundSensor.grounded + ", " + !slopeSensor.isOnSlope + ", " + !(stateMachine.currentState == slide || stateMachine.currentState == wallrun) + ", " + stateMachine.currentState.isComplete );
+        
         // Transition to airborne
-        if (!groundSensor.grounded && !slopeSensor.isOnSlope && ((stateMachine.currentState != slide && stateMachine.currentState != wallrun) || stateMachine.currentState.isComplete))
+        if (!groundSensor.grounded && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun) || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(airborne);
             return;

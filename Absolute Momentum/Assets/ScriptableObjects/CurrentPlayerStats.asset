@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef464e9f8b6dd1747993335ea6a2723c, type: 3}
-  m_Name: PlayerStats
+  m_Name: CurrentPlayerStats
   m_EditorClassIdentifier: 
   SprintAcceleration: 1
   GroundDrag: 0
@@ -172,26 +172,65 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  wallrunForce: 10
-  stickToWallForce: 1000
-  wallrunResetTime: 0.05
-  wallJumpUpForce: 17
+  wallrunForce: 20
+  stickToWallForce: 15
+  wallrunResetTime: 0.1
+  wallJumpUpForce: 18
   wallJumpSideForce: 20
+  wallrunTurnSpeed: 0.5
+  minWallYSpeed: 5
+  minWallrunEnterSpeed: 10
   wallDragCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: -0.048698425
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.19807085
+      outSlope: 0.19807085
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 60
-      value: 0
+      time: 5
+      value: 1
+      inSlope: 0.16245559
+      outSlope: 0.16245559
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 22.415356
+      value: 3.208969
+      inSlope: 0.36342016
+      outSlope: 0.36342016
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 27.415356
+      value: 6.208969
+      inSlope: 0.90000004
+      outSlope: 0.90000004
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 32.415356
+      value: 12.208969
+      inSlope: 0.71725816
+      outSlope: 0.71725816
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 76.72041
+      value: 22.599228
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -199,9 +238,9 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 109.29354
-      value: 119.7398
-      inSlope: 2.4291174
+      time: 96.22477
+      value: 120.15774
+      inSlope: 5.001883
       outSlope: 0
       tangentMode: 5
       weightedMode: 0
@@ -212,10 +251,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   gravityEnabled: 1
   NormalGravity: 20
-  WallrunGravity: 1
+  WallrunGravity: 7
   FallingGravityMultiplier: 1.5
   CurrentGravity: 0
-  JumpForce: 20
+  JumpForce: 22
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 20
   JumpFrameBufferAmount: 10

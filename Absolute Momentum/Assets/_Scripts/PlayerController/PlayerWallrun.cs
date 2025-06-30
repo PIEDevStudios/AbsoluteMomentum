@@ -7,10 +7,10 @@ public class PlayerWallrun : State
 
     public override void DoEnterLogic()
     {
-        
+        player.playerSpeedManager.currentCurve = player.stats.wallDragCurve;
         rb.linearDamping = 0f;
-        if (rb.linearVelocity.y < 0f)
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        if (rb.linearVelocity.y < player.stats.minWallYSpeed)
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, player.stats.minWallYSpeed, rb.linearVelocity.z);
         base.DoEnterLogic();
         
     }
@@ -41,12 +41,19 @@ public class PlayerWallrun : State
         }
         
         WallRunningMovement(inputValues);
+        
+        if (wallSensor.wallForward)
+        {
+            Debug.Log("Wall Forward");
+            isComplete = true;
+        }
     }
 
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        player.wallrunResetTime = Time.time;
         player.ChangeGravity(player.stats.NormalGravity);
     }
     
@@ -62,13 +69,19 @@ public class PlayerWallrun : State
         
         player.playerObj.forward = wallForward;
         
-        
+        // Vector3 currentForward = player.playerObj.forward;
+        // player.playerObj.forward = Vector3.Slerp(currentForward, wallForward, player.stats.wallrunTurnSpeed);
+
         rb.AddForce(wallForward * player.stats.wallrunForce, ForceMode.Force);
+        
+        // rb.AddForce(wallForward * player.stats.wallrunForce, ForceMode.Force);
+        
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         
         // Keep on wall force
         if (!(wallSensor.wallLeft && inputValues.moveVector.x > 0) && !(wallSensor.wallRight && inputValues.moveVector.x < 0))
         {
-            rb.AddForce(-wallNormal * player.stats.stickToWallForce, ForceMode.Force);
+            rb.AddForce(-wallNormal * player.stats.stickToWallForce * flatVel.magnitude, ForceMode.Force);
         }
         
         
