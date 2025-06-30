@@ -56,19 +56,19 @@ Material:
     - _BaseBlend: 10.57
     - _BaseOffset: -4.91
     - _FallSpeed: 1
-    - _FoamAmount: 0.312
+    - _FoamAmount: 0.37
     - _FoamDisplacement: 0
     - _FoamScale: 4.39
     - _ORIENTATION: 2
     - _PROJECTION: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Randomness: 0
+    - _Randomness: 1
     - _VoronoiSpeed: 1
     m_Colors:
     - _BottomColor: {r: 0.34531856, g: 0.61383617, b: 0.75471693, a: 0}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0}
-    - _FoamStretch: {r: 10.8, g: 1, b: 0, a: 0}
+    - _FoamStretch: {r: 200, g: 1, b: 0, a: 0}
     - _TopColor: {r: 0.081301175, g: 0.82075435, b: 0.8207547, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
