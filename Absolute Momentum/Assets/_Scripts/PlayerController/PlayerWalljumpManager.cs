@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerWalljumpManager : NetworkBehaviour
 {
     [SerializeField] private Player player;
+    private float lastPressedJump;
     private WallSensor wallSensor => player.wallSensor;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void OnNetworkSpawn()
@@ -22,10 +23,14 @@ public class PlayerWalljumpManager : NetworkBehaviour
         
         if (player.stateMachine.currentState == player.wallrun)
         {
-            if (inputValues.jumpPressedThisFrame)
+            if (inputValues.jumpPressedThisFrame || Time.time - lastPressedJump < player.stats.wallJumpBufferTime)
             {
                 WallJump();
             }
+        }
+        else if (inputValues.jumpPressedThisFrame)
+        {
+            lastPressedJump = Time.time;
         }
     }
 
