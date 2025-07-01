@@ -26,17 +26,31 @@ public class WallSensor : MonoBehaviour
 
     private void CheckGround()
     {
+        
+        // Right Wall
         wallRight = Physics.Raycast(transform.position, player.playerObj.right, out wallHitRight, wallCheckDistance,
-            wallLayer);//|| Physics.Raycast(transform.position, (player.playerObj.right + player.playerObj.forward).normalized, out wallHitRight, wallCheckDistance, wallLayer);
-        Debug.DrawRay(transform.position, player.playerObj.right * wallCheckDistance);
-        // Debug.DrawRay(transform.position, (player.playerObj.right + player.playerObj.forward).normalized  * wallCheckDistance);
+            wallLayer);
+
+        Color color = wallRight? Color.red : Color.white;
+        
+        Debug.DrawRay(transform.position, player.playerObj.right * wallCheckDistance, color);
+        
+        // Left Wall
         wallLeft = Physics.Raycast(transform.position, -player.playerObj.right, out wallHitLeft, wallCheckDistance,
-            wallLayer); //|| Physics.Raycast(transform.position, (-player.playerObj.right + player.playerObj.forward).normalized, out wallHitLeft, wallCheckDistance, wallLayer);
-        Debug.DrawRay(transform.position, -player.playerObj.right * wallCheckDistance);
-        // Debug.DrawRay(transform.position, (-player.playerObj.right + player.playerObj.forward).normalized  * wallCheckDistance);
+            wallLayer);
+        
+        color = wallLeft? Color.red : Color.white;
+        
+        Debug.DrawRay(transform.position, -player.playerObj.right * wallCheckDistance, color);
+        
+        
+        // Forward wall
         wallForward = Physics.Raycast(transform.position, player.playerObj.forward, out wallHitForward, wallCheckDistance,
             wallLayer);
-        Debug.DrawRay(transform.position, player.playerObj.forward * wallCheckDistance);
+        
+        color = wallForward? Color.red : Color.white;
+        
+        Debug.DrawRay(transform.position, player.playerObj.forward * wallCheckDistance, color);
         
     }
 }

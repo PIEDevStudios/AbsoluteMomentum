@@ -21,14 +21,14 @@ public class PlayerWalljumpManager : NetworkBehaviour
     {
         if (!IsOwner) return;
         
-        if (player.stateMachine.currentState == player.wallrun)
+        if (player.stateMachine.currentState == player.wallrun || player.stateMachine.currentState == player.wallSlide)
         {
             if (inputValues.jumpPressedThisFrame || Time.time - lastPressedJump < player.stats.wallJumpBufferTime)
             {
                 WallJump();
             }
         }
-        else if (inputValues.jumpPressedThisFrame)
+        else if (inputValues.jumpPressedThisFrame && !player.groundSensor.grounded)
         {
             lastPressedJump = Time.time;
         }
