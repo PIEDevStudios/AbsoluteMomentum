@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class TriangleButton : MonoBehaviour
 {
-    [Header("UI References")]
     public RectTransform topRightTriangle;
     public RectTransform bottomLeftTriangle;
     public TextMeshProUGUI nameText;
@@ -15,7 +14,6 @@ public class TriangleButton : MonoBehaviour
     public Button confirmButton;
     public Button backButton;
 
-    [Header("Animation Settings")]
     [Header("Top Right Triangle Offset")]
     public float topTriangleOffsetX = 150f;
     public float topTriangleOffsetY = 150f;
@@ -25,10 +23,7 @@ public class TriangleButton : MonoBehaviour
     public float bottomTriangleOffsetY = 150f;
     
     public float animationDuration = 0.75f;
-
-    [Header("Position Settings")]
-    public Vector3 hiddenPosition;
-
+    private Vector3 hiddenPosition;
     private Vector2 originalTopRightPos;
     private Vector2 originalBottomLeftPos;
     private Vector3 originalPosition;
@@ -67,7 +62,8 @@ public class TriangleButton : MonoBehaviour
 
     public void OnClicked()
     {
-        if (isExpanded) return;
+        if (isExpanded)
+            return;
 
         isExpanded = true;
         selectManager.OnCharacterSelected(characterIndex);
@@ -154,9 +150,9 @@ public class TriangleButton : MonoBehaviour
         portraitImage.DOFade(1f, 0.3f).SetEase(Ease.InQuad);
     }
 
-    public void MoveToHiddenPosition(float duration = 0.5f)
-    {
-        transform.DOLocalMove(hiddenPosition, duration).SetEase(Ease.InBack);
-    }
+    // public void MoveToHiddenPosition(float duration = 0.5f)
+    // {
+    //     transform.DOLocalMove(hiddenPosition, duration).SetEase(Ease.InBack);
+    // }
 
 }

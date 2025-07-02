@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class SlideInDotTween : MonoBehaviour {
+public class SlideIn : MonoBehaviour {
     public Vector2 startOffset = new Vector2(-300f, 0f);  
     public float duration = 0.5f;
     public float delay = 0f;
