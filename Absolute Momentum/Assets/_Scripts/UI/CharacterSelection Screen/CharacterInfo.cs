@@ -19,9 +19,9 @@ public class CharacterInfo : MonoBehaviour {
 
     public float scaleDuration = 0.3f;
 
-    public SlideInDotTween titleSlide;
-    public SlideInDotTween descriptionSlide;
-    public SlideInDotTween portraitSlide;
+    public SlideIn titleSlide;
+    public SlideIn descriptionSlide;
+    public SlideIn portraitSlide;
 
     void Awake() {
         panelTransform.localScale = Vector3.zero;
