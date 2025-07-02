@@ -64,6 +64,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ParallaxOcclusionMapping_5f453a8c435d42ac9fc975f9231263b4_Heightmap_2_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c6e22566bf42eb741954cc35558781a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_a810b7acdab14b8c9320b7711175c1ad_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c6e22566bf42eb741954cc35558781a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ddb79fd432f44c029e6af7d03b649c3c_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: c6e22566bf42eb741954cc35558781a7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -92,7 +104,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: 4.66
+    - _Depth: 10
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -100,28 +112,33 @@ Material:
     - _EnvironmentReflections: 1
     - _ExtraLines: 1
     - _Float: 1
+    - _FoamCutoff: 0.907
+    - _FoamScale: 0
     - _Foam_Cutoff: 0.1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _IntersectionCutoff: 0.8
-    - _LineScale: 0.25
+    - _IntersectionCutoff: 0.34
+    - _LineScale: 0.15
+    - _Line_Cutoff: 0.1
     - _Metallic: 0
-    - _NormalScale: 250
-    - _NormalStrength: 0.5
+    - _NormalScale: -0
+    - _NormalStrength: 1
     - _OcclusionStrength: 1
     - _Panning_Speed: 1
     - _Parallax: 0.005
-    - _Power: 1
+    - _Power: 10
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RefractionStrength: 0.442
-    - _SineLines: 1
+    - _RefractionScale: 0.5
+    - _RefractionStrength: 0.01
+    - _SineLineCutoff: 0.94
+    - _SineLines: 2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.001
+    - _Speed: 10
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Strength: 1
@@ -133,9 +150,12 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DarkColor: {r: 0.2471698, g: 0.77880746, b: 1, a: 0}
-    - _EdgeColor: {r: 1, g: 0.9983262, b: 0.9009434, a: 0}
+    - _DeepColor: {r: 0, g: 0.4339104, b: 0.5999999, a: 1}
+    - _EdgeColor: {r: 1, g: 0.9983261, b: 0.9009434, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HighlightColor: {r: 0, g: 0.92023313, b: 0.93207544, a: 0}
+    - _HighlightColor: {r: 0.93333334, g: 0.7098134, b: 0, a: 0}
+    - _HorizonColor: {r: 0.32941175, g: 1, b: 0.87759197, a: 1}
+    - _ShallowColor: {r: 0.011764705, g: 0.97135246, b: 1, a: 0.8}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
