@@ -43,6 +43,10 @@ public class PlayerStats : ScriptableObject
     public float wallrunResetTime;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
+    public float wallJumpBufferTime;
+    public float wallrunTurnSpeed;
+    public float minWallYSpeed;
+    public float minWallrunEnterSpeed;
     public AnimationCurve wallDragCurve;
 
     [Header("Gravity")] 

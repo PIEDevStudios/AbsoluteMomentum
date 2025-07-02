@@ -26,6 +26,7 @@ public class Player : StateMachineCore
     [field: SerializeField] public PlayerSlide slide { get; private set; }
     [field: SerializeField] public PlayerWallrun wallrun { get; private set; }
     [field: SerializeField] public PlayerDash dash { get; private set; }
+    [field: SerializeField] public PlayerWallSlide wallSlide { get; private set; }
 
     // Sensor scripts used for ground checks and wall checks
     [field:HorizontalLine(color: EColor.Gray)]
@@ -228,15 +229,28 @@ public class Player : StateMachineCore
             return;
         }
         
+        Vector3 XYVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        
         // Transition to wallrun
-        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) && stateMachine.currentState != slide && Time.time - wallrunResetTime > stats.wallrunResetTime )
+        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) 
+            && XYVel.magnitude >= stats.minWallrunEnterSpeed && stateMachine.currentState != slide && stateMachine.currentState != wallrun && stateMachine.currentState != wallSlide 
+            && Time.time - wallrunResetTime > stats.wallrunResetTime )
         {
             stateMachine.SetState(wallrun);
             return;
         }
         
+        // Transition to wallSlide
+        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight || wallSensor.wallForward) 
+            && XYVel.magnitude <= stats.minWallrunEnterSpeed && stateMachine.currentState != slide && stateMachine.currentState != wallrun && stateMachine.currentState != wallSlide 
+            && Time.time - wallrunResetTime > stats.wallrunResetTime )
+        {
+            stateMachine.SetState(wallSlide);
+            return;
+        }
+        
         // Transition to airborne
-        if (!groundSensor.grounded && !slopeSensor.isOnSlope && ((stateMachine.currentState != slide && stateMachine.currentState != wallrun) || stateMachine.currentState.isComplete))
+        if (!groundSensor.grounded && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun || stateMachine.currentState == wallSlide) || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(airborne);
             return;

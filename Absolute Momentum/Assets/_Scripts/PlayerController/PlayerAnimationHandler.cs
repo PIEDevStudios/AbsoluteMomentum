@@ -64,7 +64,7 @@ public class PlayerAnimationHandler : NetworkBehaviour
         {
             return "Jump";
         }
-        if (state == player.wallrun)
+        if (state == player.wallrun || state == player.wallSlide)
         {
             return "Wallrun";
         }

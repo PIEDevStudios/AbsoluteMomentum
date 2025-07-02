@@ -7,7 +7,7 @@ public class SpeedText : MonoBehaviour
     [SerializeField] private Player player;
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         Vector3 flatVel = new Vector3(player.rb.linearVelocity.x, 0, player.rb.linearVelocity.z);
         speedText.text = "Speed: " +

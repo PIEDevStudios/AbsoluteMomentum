@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerWallrun : State
+public class PlayerWallSlide : State
 {
     [SerializeField] private Player player;
     private WallSensor wallSensor => player.wallSensor;    
@@ -9,8 +9,9 @@ public class PlayerWallrun : State
     {
         player.playerSpeedManager.currentCurve = player.stats.wallDragCurve;
         rb.linearDamping = 0f;
-        if (rb.linearVelocity.y < player.stats.minWallYSpeed)
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, player.stats.minWallYSpeed, rb.linearVelocity.z);
+        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+        if (rb.linearVelocity.y < 0f)
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         base.DoEnterLogic();
         
     }
@@ -23,7 +24,7 @@ public class PlayerWallrun : State
     public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
     {
         base.DoTickUpdateState(inputValues);
-        if (!wallSensor.wallRight && !wallSensor.wallLeft)
+        if (!wallSensor.wallRight && !wallSensor.wallLeft && !wallSensor.wallForward)
         {
             Debug.Log("No Wall detected");
             isComplete = true;
@@ -40,13 +41,8 @@ public class PlayerWallrun : State
             player.ChangeGravity(player.stats.WallrunGravity);
         }
         
-        WallRunningMovement(inputValues);
+        WallSlideMovement(inputValues);
         
-        if (wallSensor.wallForward)
-        {
-            Debug.Log("Wall Forward");
-            isComplete = true;
-        }
     }
 
 
@@ -57,24 +53,25 @@ public class PlayerWallrun : State
         player.ChangeGravity(player.stats.NormalGravity);
     }
     
-    private void WallRunningMovement(PlayerInput.InputValues inputValues)
+    private void WallSlideMovement(PlayerInput.InputValues inputValues)
     {
-        Vector3 wallNormal = wallSensor.wallRight ? wallSensor.wallHitRight.normal : wallSensor.wallHitLeft.normal;
-        Vector3 wallForward = Vector3.Cross(wallNormal, Vector3.up);
+        Vector3 wallNormal;
 
-        if ((player.orientation.forward - wallForward).magnitude > (player.orientation.forward + wallForward).magnitude)
+        if (wallSensor.wallRight)
         {
-            wallForward = -wallForward;
+            wallNormal = wallSensor.wallHitRight.normal;
+            player.playerObj.right = -wallNormal;
         }
-        
-        player.playerObj.forward = wallForward;
-        
-        // Vector3 currentForward = player.playerObj.forward;
-        // player.playerObj.forward = Vector3.Slerp(currentForward, wallForward, player.stats.wallrunTurnSpeed);
-
-        rb.AddForce(wallForward * player.stats.wallrunForce, ForceMode.Force);
-        
-        // rb.AddForce(wallForward * player.stats.wallrunForce, ForceMode.Force);
+        else if (wallSensor.wallLeft)
+        {
+            wallNormal = wallSensor.wallHitLeft.normal;
+            player.playerObj.right = wallNormal;
+        }
+        else
+        {
+            wallNormal = wallSensor.wallHitForward.normal;
+            player.playerObj.right = wallNormal;
+        }
         
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         
