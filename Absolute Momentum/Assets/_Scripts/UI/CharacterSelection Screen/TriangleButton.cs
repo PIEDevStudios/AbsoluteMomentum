@@ -31,6 +31,7 @@ public class TriangleButton : MonoBehaviour
     private CharacterSelectManager selectManager;
     private int characterIndex;
     private bool isExpanded = false;
+    private bool isTweening = false;
 
     public void Initialize(CharacterData data, int index, CharacterSelectManager manager)
     {
@@ -62,10 +63,11 @@ public class TriangleButton : MonoBehaviour
 
     public void OnClicked()
     {
-        if (isExpanded)
+        if (isExpanded || isTweening)
             return;
-
+        
         isExpanded = true;
+        isTweening = true;
         selectManager.OnCharacterSelected(characterIndex);
         selectManager.HideOtherButtons(this);
 
@@ -82,7 +84,8 @@ public class TriangleButton : MonoBehaviour
         bottomLeftTriangle
             .DOAnchorPos(originalBottomLeftPos - bottomTriangleSplitOffset, animationDuration)
             .SetEase(Ease.OutCubic)
-            .SetDelay(delay);
+            .SetDelay(delay)
+            .OnComplete( () => { isTweening = false; });
 
         confirmButton.gameObject.SetActive(true);
         backButton.gameObject.SetActive(true);
@@ -98,8 +101,9 @@ public class TriangleButton : MonoBehaviour
 
     private void OnBack()
     {
-        if (!isExpanded) return;
-
+        if (!isExpanded || isTweening) return;
+        
+        isTweening = true;
         isExpanded = false;
 
         Vector2 overshootTop = originalTopRightPos - new Vector2(15f, 15f);
@@ -113,6 +117,7 @@ public class TriangleButton : MonoBehaviour
         bottomLeftTriangle.DOAnchorPos(overshootBottom, animationDuration * 0.6f).SetEase(Ease.InCubic)
             .OnComplete(() => {
                 bottomLeftTriangle.DOAnchorPos(originalBottomLeftPos, animationDuration * 0.2f).SetEase(Ease.OutBack);
+                isTweening = false;
             });
 
         confirmButton.gameObject.SetActive(false);
