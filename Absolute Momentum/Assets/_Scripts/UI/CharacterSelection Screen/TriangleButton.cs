@@ -4,7 +4,7 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 
-public class TriangleButton : MonoBehaviour
+public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public RectTransform topRightTriangle;
     public RectTransform bottomLeftTriangle;
@@ -17,16 +17,23 @@ public class TriangleButton : MonoBehaviour
     [Header("Top Right Triangle Offset")]
     public float topTriangleOffsetX = 150f;
     public float topTriangleOffsetY = 150f;
-    
+
     [Header("Bottom Left Triangle Offset")]
     public float bottomTriangleOffsetX = 150f;
     public float bottomTriangleOffsetY = 150f;
-    
+
+    [Header("Hover Settings")]
+    public Image hoverIcon;
+    public Vector2 hoverOffset = new Vector2(0, -0.5f);
+    public float hoverExpandDistance = 50f;
+
     public float animationDuration = 0.75f;
     private Vector3 hiddenPosition;
     private Vector2 originalTopRightPos;
     private Vector2 originalBottomLeftPos;
     private Vector3 originalPosition;
+
+    private Sprite characterHoverIcon;
 
     private CharacterSelectManager selectManager;
     private int characterIndex;
@@ -40,6 +47,8 @@ public class TriangleButton : MonoBehaviour
         characterIndex = index;
         selectManager = manager;
 
+        characterHoverIcon = data.hoverIconImage;
+
         confirmButton.gameObject.SetActive(false);
         backButton.gameObject.SetActive(false);
 
@@ -51,6 +60,12 @@ public class TriangleButton : MonoBehaviour
         backButton.onClick.RemoveAllListeners();
         confirmButton.onClick.AddListener(OnConfirm);
         backButton.onClick.AddListener(OnBack);
+
+        if (hoverIcon != null)
+        {
+            hoverIcon.gameObject.SetActive(false);
+            hoverIcon.rectTransform.localScale = Vector3.zero;
+        }
 
         SetTriangleRaycast(true);
 
@@ -64,6 +79,8 @@ public class TriangleButton : MonoBehaviour
     {
         if (isExpanded)
             return;
+
+        HideHoverIcon(); 
 
         isExpanded = true;
         selectManager.OnCharacterSelected(characterIndex);
@@ -106,12 +123,14 @@ public class TriangleButton : MonoBehaviour
         Vector2 overshootBottom = originalBottomLeftPos + new Vector2(15f, 15f);
 
         topRightTriangle.DOAnchorPos(overshootTop, animationDuration * 0.6f).SetEase(Ease.InCubic)
-            .OnComplete(() => {
+            .OnComplete(() =>
+            {
                 topRightTriangle.DOAnchorPos(originalTopRightPos, animationDuration * 0.2f).SetEase(Ease.OutBack);
             });
 
         bottomLeftTriangle.DOAnchorPos(overshootBottom, animationDuration * 0.6f).SetEase(Ease.InCubic)
-            .OnComplete(() => {
+            .OnComplete(() =>
+            {
                 bottomLeftTriangle.DOAnchorPos(originalBottomLeftPos, animationDuration * 0.2f).SetEase(Ease.OutBack);
             });
 
@@ -150,9 +169,66 @@ public class TriangleButton : MonoBehaviour
         portraitImage.DOFade(1f, 0.3f).SetEase(Ease.InQuad);
     }
 
-    // public void MoveToHiddenPosition(float duration = 0.5f)
-    // {
-    //     transform.DOLocalMove(hiddenPosition, duration).SetEase(Ease.InBack);
-    // }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (isExpanded) return;
 
+        ShowHoverIcon();
+        AnimateTrianglesHover(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (isExpanded) return;
+
+        HideHoverIcon();
+        AnimateTrianglesHover(false);
+    }
+    private void ShowHoverIcon()
+    {
+        if (hoverIcon != null && characterHoverIcon != null)
+        {
+            hoverIcon.rectTransform.DOKill();
+            
+            hoverIcon.sprite = characterHoverIcon;
+            hoverIcon.SetNativeSize();
+            
+            hoverIcon.rectTransform.sizeDelta = hoverIcon.rectTransform.sizeDelta * 0.5f;
+            
+            hoverIcon.rectTransform.anchoredPosition = (originalTopRightPos + originalBottomLeftPos) / 2 + hoverOffset;
+            
+            hoverIcon.rectTransform.localScale = Vector3.zero;
+            hoverIcon.gameObject.SetActive(true);
+            
+            hoverIcon.rectTransform
+                .DOScale(Vector3.one, 0.3f)
+                .SetEase(Ease.OutBack);
+        }
+    }
+
+    private void HideHoverIcon()
+    {
+        if (hoverIcon != null && hoverIcon.gameObject.activeInHierarchy)
+        {
+            hoverIcon.rectTransform.DOKill();
+            
+            hoverIcon.rectTransform
+                .DOScale(Vector3.zero, 0.2f)
+                .SetEase(Ease.InBack)
+                .OnComplete(() => hoverIcon.gameObject.SetActive(false));
+        }
+    }
+    
+    private void AnimateTrianglesHover(bool expand)
+    {
+        Vector2 hoverExpansion = expand ? new Vector2(hoverExpandDistance, hoverExpandDistance) : Vector2.zero;
+
+        topRightTriangle
+            .DOAnchorPos(originalTopRightPos + hoverExpansion, 0.3f)
+            .SetEase(Ease.OutSine);
+
+        bottomLeftTriangle
+            .DOAnchorPos(originalBottomLeftPos - hoverExpansion, 0.3f)
+            .SetEase(Ease.OutSine);
+    }
 }

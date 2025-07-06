@@ -6,12 +6,16 @@ using DG.Tweening;
 [System.Serializable]
 public class CharacterData {
     public string characterName;
-    public Sprite iconImage;
-    public Sprite characterImage;
+    public Sprite iconImage;           
+    public Sprite characterImage;   
     public string description;
+    public Sprite hoverIconImage;    
 }
 
-public class CharacterInfo : MonoBehaviour {
+
+
+public class CharacterInfo : MonoBehaviour
+{
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public Image portraitImage;
@@ -23,12 +27,14 @@ public class CharacterInfo : MonoBehaviour {
     public SlideIn descriptionSlide;
     public SlideIn portraitSlide;
 
-    void Awake() {
+    void Awake()
+    {
         panelTransform.localScale = Vector3.zero;
         gameObject.SetActive(false);
     }
 
-    public void UpdateInfo(CharacterData data) {
+    public void UpdateInfo(CharacterData data)
+    {
         nameText.text = data.characterName;
         descriptionText.text = data.description;
         portraitImage.sprite = data.characterImage;
@@ -47,10 +53,11 @@ public class CharacterInfo : MonoBehaviour {
         panelTransform
             .DOScale(1f, scaleDuration)
             .SetEase(Ease.OutBack)
-            .SetDelay(0.35f); 
+            .SetDelay(0.35f);
     }
 
-    public void HidePanel() {
+    public void HidePanel()
+    {
         panelTransform.DOScale(0f, scaleDuration).SetEase(Ease.InBack)
             .OnComplete(() => gameObject.SetActive(false));
     }
