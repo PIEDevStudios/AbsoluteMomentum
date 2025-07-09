@@ -104,7 +104,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: 10
+    - _Depth: 5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -112,7 +112,7 @@ Material:
     - _EnvironmentReflections: 1
     - _ExtraLines: 1
     - _Float: 1
-    - _FoamCutoff: 0.907
+    - _FoamCutoff: 0.98
     - _FoamScale: 0
     - _Foam_Cutoff: 0.1
     - _GlossMapScale: 0
@@ -127,14 +127,14 @@ Material:
     - _OcclusionStrength: 1
     - _Panning_Speed: 1
     - _Parallax: 0.005
-    - _Power: 10
+    - _Power: 4
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RefractionScale: 0.5
     - _RefractionStrength: 0.01
-    - _SineLineCutoff: 0.94
-    - _SineLines: 2
+    - _SineLineCutoff: 0.445
+    - _SineLines: 5
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
