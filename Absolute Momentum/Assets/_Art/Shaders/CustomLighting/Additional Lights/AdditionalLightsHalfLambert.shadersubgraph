@@ -17,6 +17,9 @@
         },
         {
             "m_Id": "e478d95f54f44442847fa527c861a1cc"
+        },
+        {
+            "m_Id": "2cb4b612c8b644dfa638dc0092064397"
         }
     ],
     "m_Keywords": [],
@@ -61,7 +64,7 @@
             "m_Id": "d58664fd9a5640099b3620c6b07fdc13"
         },
         {
-            "m_Id": "3e5043f434d9469ea1196bfcb5973781"
+            "m_Id": "ef809dc13f7c44afa888d61deaa023dd"
         }
     ],
     "m_GroupDatas": [],
@@ -121,20 +124,6 @@
                     "m_Id": "ea49c5f5af3f424e8395b5b246423d48"
                 },
                 "m_SlotId": 7
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "3e5043f434d9469ea1196bfcb5973781"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "ea49c5f5af3f424e8395b5b246423d48"
-                },
-                "m_SlotId": 10
             }
         },
         {
@@ -261,6 +250,34 @@
                     "m_Id": "6cf275da60ff49cc86c1a0ffb6d10af8"
                 },
                 "m_SlotId": 3
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "ea49c5f5af3f424e8395b5b246423d48"
+                },
+                "m_SlotId": 11
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "6cf275da60ff49cc86c1a0ffb6d10af8"
+                },
+                "m_SlotId": 4
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "ef809dc13f7c44afa888d61deaa023dd"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "ea49c5f5af3f424e8395b5b246423d48"
+                },
+                "m_SlotId": 12
             }
         }
     ],
@@ -438,6 +455,21 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "175325187af346c38533417b44f28fb1",
+    "m_Id": 0,
+    "m_DisplayName": "MainAtten",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "1801bd96467f4b66b5bec4312c127e41",
     "m_Id": 2,
     "m_DisplayName": "Diffuse",
@@ -564,6 +596,34 @@
 {
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "2cb4b612c8b644dfa638dc0092064397",
+    "m_Guid": {
+        "m_GuidSerialized": "4e5fe420-304c-4695-879a-6007e4d3312a"
+    },
+    "m_Name": "MainAtten",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "MainAtten",
+    "m_DefaultReferenceName": "_MainAtten",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
     "m_ObjectId": "377282c252964e69bef006c4e4b92b6a",
     "m_Guid": {
         "m_GuidSerialized": "326b6ef2-429d-43c0-8c53-9575021829c3"
@@ -591,40 +651,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.ScreenPositionNode",
-    "m_ObjectId": "3e5043f434d9469ea1196bfcb5973781",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Screen Position",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -1361.0,
-            "y": 307.0,
-            "width": 145.0,
-            "height": 129.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "406558fc0d44411cb1c5d04781566438"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": false,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_ScreenSpaceType": 0
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "3f7783dbbbed4d38b9469a3c857d3a65",
     "m_Id": 9,
@@ -642,31 +668,6 @@
         "x": 0.0,
         "y": 0.0,
         "z": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
-    "m_ObjectId": "406558fc0d44411cb1c5d04781566438",
-    "m_Id": 0,
-    "m_DisplayName": "Out",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
     },
     "m_Labels": []
 }
@@ -756,21 +757,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "4ce823b4f8394a3a9c5929c8672d154a",
-    "m_Id": 10,
-    "m_DisplayName": "ScreenPosition",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "ScreenPosition",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.ViewVectorNode",
     "m_ObjectId": "55f925cf1464476684a513628122c5a9",
     "m_Group": {
@@ -806,6 +792,21 @@
         "m_SerializableColors": []
     },
     "m_Space": 2
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "5cce73b162bc40eea32d3a1c4777467a",
+    "m_Id": 12,
+    "m_DisplayName": "MainAtten",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "MainAtten",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -917,6 +918,9 @@
         },
         {
             "m_Id": "b620089027e44ae7ad80fe082cbd9631"
+        },
+        {
+            "m_Id": "c23fce3e5dd64040b6925c6752b0d124"
         }
     ],
     "synonyms": [],
@@ -1178,6 +1182,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "c23fce3e5dd64040b6925c6752b0d124",
+    "m_Id": 4,
+    "m_DisplayName": "Atten",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Atten",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "c8f4c9cccb7b4703be28cb7845c6608b",
     "m_Id": 0,
@@ -1365,8 +1384,26 @@
         },
         {
             "m_Id": "e478d95f54f44442847fa527c861a1cc"
+        },
+        {
+            "m_Id": "2cb4b612c8b644dfa638dc0092064397"
         }
     ]
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "e97735bbd4124d8984b89962cc453547",
+    "m_Id": 11,
+    "m_DisplayName": "Atten",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Atten",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -1422,7 +1459,7 @@
             "m_Id": "68245acc532b4675b0b7f2e1fc83a305"
         },
         {
-            "m_Id": "4ce823b4f8394a3a9c5929c8672d154a"
+            "m_Id": "5cce73b162bc40eea32d3a1c4777467a"
         },
         {
             "m_Id": "2006fd33dc314b5ea9356d2c8083912f"
@@ -1432,6 +1469,9 @@
         },
         {
             "m_Id": "3f7783dbbbed4d38b9469a3c857d3a65"
+        },
+        {
+            "m_Id": "e97735bbd4124d8984b89962cc453547"
         }
     ],
     "synonyms": [
@@ -1449,7 +1489,43 @@
     "m_FunctionName": "AddAdditionalLights",
     "m_FunctionSource": "",
     "m_FunctionSourceUsePragmas": true,
-    "m_FunctionBody": "Diffuse = MainDiffuse;\r\nSpecular = MainSpecular;\r\nColor = MainColor * (MainDiffuse + MainSpecular);\r\n\r\n#ifndef SHADERGRAPH_PREVIEW\r\n\r\n\tuint pixelLightCount = GetAdditionalLightsCount();\r\n\r\n\tLIGHT_LOOP_BEGIN(pixelLightCount)\r\n\t\t//get light color and direction\r\n\t\tlightIndex = GetPerObjectLightIndex(lightIndex);\r\n\t\tLight light = GetAdditionalPerObjectLight(lightIndex, WorldPosition);\r\n\t\t\r\n\t\t//calculate shadows\r\n\t\tlight.shadowAttenuation = AdditionalLightRealtimeShadow(lightIndex, WorldPosition, light.direction);\r\n\t\tfloat atten = light.distanceAttenuation * light.shadowAttenuation;\r\n\t\t\r\n\t\t//calculate diffuse and specular\r\n\t\tfloat NdotL = saturate(dot(WorldNormal, light.direction) * 0.5 + 0.5);\r\n\t\tfloat thisDiffuse = atten * NdotL;\r\n\t\tfloat3 thisSpecular = LightingSpecular(thisDiffuse, light.direction, WorldNormal, WorldView, 1, Smoothness);\r\n\t\t\r\n\t\t//accumulate light\r\n\t\tDiffuse += thisDiffuse;\r\n\t\tSpecular += thisSpecular;\n\t\t\n\t\t#if defined(_LIGHT_COOKIES)\n\t\t\tfloat3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPosition);\n\t\t\tlight.color *= cookieColor;\n\t\t#endif\r\n\t\tColor += light.color * (thisDiffuse + thisSpecular);\r\n\tLIGHT_LOOP_END\r\n\r\n\tfloat total = Diffuse + dot(Specular, float3(0.333, 0.333, 0.333));\r\n\tColor = total <= 0 ? MainColor : Color / total;\r\n#endif\r\n"
+    "m_FunctionBody": "Diffuse = MainDiffuse;\r\nSpecular = MainSpecular;\r\nColor = MainColor * (MainDiffuse + MainSpecular);\n\rAtten = MainAtten;\n\r\n#ifndef SHADERGRAPH_PREVIEW\r\n\r\n\tuint pixelLightCount = GetAdditionalLightsCount();\r\n\r\n\tLIGHT_LOOP_BEGIN(pixelLightCount)\r\n\t\t//get light color and direction\r\n\t\tlightIndex = GetPerObjectLightIndex(lightIndex);\r\n\t\tLight light = GetAdditionalPerObjectLight(lightIndex, WorldPosition);\r\n\t\t\r\n\t\t//calculate shadows\r\n\t\tlight.shadowAttenuation = AdditionalLightRealtimeShadow(lightIndex, WorldPosition, light.direction);\r\n\t\tfloat atten = light.distanceAttenuation * light.shadowAttenuation;\r\n\t\t\r\n\t\t//calculate diffuse and specular\r\n\t\tfloat NdotL = saturate(dot(WorldNormal, light.direction) * 0.5 + 0.5);\r\n\t\tfloat thisDiffuse = atten * NdotL;\r\n\t\tfloat3 thisSpecular = LightingSpecular(thisDiffuse, light.direction, WorldNormal, WorldView, 1, Smoothness);\r\n\t\t\r\n\t\t//accumulate light\r\n\t\tDiffuse += thisDiffuse;\r\n\t\tSpecular += thisSpecular;\n\t\t\n\t\t#if defined(_LIGHT_COOKIES)\n\t\t\tfloat3 cookieColor = SampleAdditionalLightCookie(lightIndex, WorldPosition);\n\t\t\tlight.color *= cookieColor;\n\t\t#endif\r\n\t\tColor += light.color * (thisDiffuse + thisSpecular);\n\t\tAtten += atten;\r\n\tLIGHT_LOOP_END\r\n\r\n\tfloat total = Diffuse + dot(Specular, float3(0.333, 0.333, 0.333));\r\n\tColor = total <= 0 ? MainColor : Color / total;\r\n#endif\r\n"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "ef809dc13f7c44afa888d61deaa023dd",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1345.0,
+            "y": 307.0,
+            "width": 129.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "175325187af346c38533417b44f28fb1"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "2cb4b612c8b644dfa638dc0092064397"
+    }
 }
 
 {

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ramp
+  m_Name: Stylized
   m_Shader: {fileID: -6465566751694194690, guid: 851d3d4b21deae84b8007b3e997a3009, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,6 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CustomTriplanar_2152e1cfe3274f37bd5a29b14c55127f_BaseMap_3804349840_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 460b14f7de2dfef47ae144a4fd0dfb36, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -111,19 +115,19 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _Float: 0.796
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HardlightCutoff: 0.25
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PatternScale: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _ShadowCutoff: 0
-    - _Smoothness: 0.5
+    - _ShadowCutoff: 0.25
+    - _ShadowStrength: 1
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularCutoff: 0.6
     - _SpecularHighlights: 1
@@ -132,18 +136,18 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _ssaoScale: 0
+    - _ssaoScale: 10
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse: {r: 0.121319704, g: 0.482, b: 0.16722442, a: 0}
+    - _Diffuse: {r: 0.8, g: 0.8, b: 0.8, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Shadow: {r: 0.14536425, g: 0.433, b: 0.22577854, a: 0}
+    - _Shadow: {r: 0.6, g: 0.6, b: 0.6, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Specular: {r: 0.17138708, g: 0.53900003, b: 0.11425805, a: 0}
+    - _Specular: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &3617366490857441509
+--- !u!114 &8477218814044901038
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
