@@ -133,8 +133,8 @@ Material:
     - _ReceiveShadows: 1
     - _RefractionScale: 0.5
     - _RefractionStrength: 0.01
-    - _SineLineCutoff: 0.445
-    - _SineLines: 5
+    - _SineLineCutoff: 0.5
+    - _SineLines: 1.9
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -151,7 +151,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DarkColor: {r: 0.2471698, g: 0.77880746, b: 1, a: 0}
     - _DeepColor: {r: 0, g: 0.4339104, b: 0.5999999, a: 1}
-    - _EdgeColor: {r: 1, g: 0.9983261, b: 0.9009434, a: 1}
+    - _EdgeColor: {r: 0.9056604, g: 0.9056604, b: 0.8159487, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighlightColor: {r: 0.93333334, g: 0.7098134, b: 0, a: 0}
     - _HorizonColor: {r: 0.32941175, g: 1, b: 0.87759197, a: 1}
