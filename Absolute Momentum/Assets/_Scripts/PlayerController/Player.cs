@@ -43,8 +43,6 @@ public class Player : StateMachineCore
     [field:SerializeField] public Transform playerObj { get; private set; }
     [field:SerializeField] public Transform orientation { get; private set; }
     
-    [SerializeField] private TrailRenderer trail;
-    
     [Expandable]
     [SerializeField] public PlayerStats stats;
     [Header("Player Scripts")]
@@ -392,34 +390,8 @@ public class Player : StateMachineCore
 
     private IEnumerator TeleportDuringDeathScreen(float respawnDelay)
     {
-
-        
         yield return new WaitForSeconds(respawnDelay);
-
-        float originalTrailTime = trail.time;
-        trail.enabled = false;
-        trail.time = -1f;
-        trail.emitting = false;
-        
-        
         payloadManager.TeleportPlayer(spawnPos);
-        
-        
-
-        // Wait another frame so Unity drops the old geometry
-        yield return new WaitForSeconds(0.5f);
-        
-        // Restore trail
-        trail.emitting = true;
-        trail.enabled = true;
-        trail.time = 0f;
-        
-        while (trail.time < originalTrailTime)
-        {
-            yield return null;
-            trail.time += Time.deltaTime;
-        }
-        
     }
     
     #endregion
