@@ -63,7 +63,10 @@ public class PlayerMove : State
     
     private void NoInputDeceleration()
     {
+        
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        Debug.Log(flatVel.magnitude);
+        
         // If player is not pressing any move button, decelerate them
         if (player.playerInput.moveVector.magnitude == 0f)
         {
@@ -71,9 +74,11 @@ public class PlayerMove : State
             rb.AddForce(-flatVel.normalized * stats.GroundNoInputDeceleration);
         }
         // If our velocity is close to 0 and still not pressing an input, set velo to 0
-        if (player.playerInput.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
+        if (player.playerInput.moveVector.magnitude == 0f && flatVel.magnitude < 3f)
         {
+            Debug.Log("Reset Velo");
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+            isComplete = true;
         }
     }
 

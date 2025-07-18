@@ -107,6 +107,9 @@ public class Player : StateMachineCore
         
         Application.targetFrameRate = framerate;
 
+        // State transitions
+        HandleTransitions();  
+        
         stateMachine.currentState.DoUpdateBranch();
         timeSinceLastGrounded += Time.deltaTime;
 
@@ -120,15 +123,17 @@ public class Player : StateMachineCore
             leavingGround = false;
         }
         
-        // State transitions
-        HandleTransitions();          
+        
     }
     
 
 
     
-    void FixedUpdate() 
+    void FixedUpdate()
     {
+
+        if (!IsOwner) return;
+        
         if (rb.linearVelocity.y > 0)
         {
             // Simulate custom gravity
