@@ -107,7 +107,8 @@ public class PlayerJumpManager : NetworkBehaviour
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             }
             jumpEnded = false;
-            rb.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse);
+            Vector3 jumpDirection = player.slopeSensor.isOnSlope ? player.slopeSensor.hit.normal : Vector3.up;
+            rb.AddForce(jumpDirection * playerStats.JumpForce, ForceMode.Impulse);
             player.leavingGround = true;
         }
         
