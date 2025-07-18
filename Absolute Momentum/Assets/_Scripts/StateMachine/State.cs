@@ -58,12 +58,6 @@ public class State : NetworkBehaviour
     /// Consider this the "FixedUpdate" method of this state.
     /// </summary>
     public virtual void DoFixedUpdateState() { }
-    
-    /// <summary>
-    /// This method is called once every server tick while this state is active.
-    /// </summary>
-    public virtual void DoTickUpdateState(PlayerInput.InputValues inputValues) { }
-    
 
     /// <summary>
     /// This method is called during ExitLogic().
