@@ -24,12 +24,12 @@ public class SlideAirborne : State
         base.DoUpdateState();
     }
     
-    public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
+    public override void DoFixedUpdateState()
     {
-        base.DoTickUpdateState(inputValues);
+        base.DoFixedUpdateState();
         // Player Turning
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-        Vector3 playerInputVector = orientation.forward * inputValues.moveVector.y + orientation.right * inputValues.moveVector.x;
+        Vector3 playerInputVector = orientation.forward * player.playerInput.moveVector.y + orientation.right * player.playerInput.moveVector.x;
         Vector3 forceVector = playerInputVector.normalized * acceleration;
         float forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized);
         Vector3 perpendicularForce = forceVector - (forceInVeloDirection * flatVel.normalized);
@@ -41,7 +41,7 @@ public class SlideAirborne : State
             rb.AddForce(forceInVeloDirection * flatVel.normalized, ForceMode.Force);
         }
         
-        NoInputDeceleration(inputValues);
+        NoInputDeceleration();
         LimitVelocity();
     }
     
@@ -58,17 +58,17 @@ public class SlideAirborne : State
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
     }
     
-    private void NoInputDeceleration(PlayerInput.InputValues inputValues)
+    private void NoInputDeceleration()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         // If player is not pressing any move button, decelerate them
-        if (inputValues.moveVector.magnitude == 0f)
+        if (player.playerInput.moveVector.magnitude == 0f)
         {
             Debug.DrawRay(player.transform.position, -flatVel.normalized, Color.blue);
             rb.AddForce(-flatVel.normalized * stats.AirNoInputDeceleration);
         }
         // If our velocity is close to 0 and still not pressing an input, set velo to 0
-        if (inputValues.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
+        if (player.playerInput.moveVector.magnitude == 0f && flatVel.magnitude < 2f)
         {
             rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
         }
