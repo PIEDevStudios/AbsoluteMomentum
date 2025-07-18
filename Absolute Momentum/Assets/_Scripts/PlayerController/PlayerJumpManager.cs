@@ -31,12 +31,12 @@ public class PlayerJumpManager : NetworkBehaviour
         framesSinceOnGround = (int)FrameBufferNum;
     }
 
-    public void Update(PlayerInput.InputValues inputValues)
+    public void Update()
     {
         if (!IsOwner) return;
 
         // From update
-        if (inputValues.jumpPressedThisFrame)
+        if (player.playerInput.jumpPressedThisFrame)
         {
             framesSinceLastSpacebar = 0;
         }

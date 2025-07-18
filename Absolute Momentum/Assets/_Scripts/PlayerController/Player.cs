@@ -201,9 +201,9 @@ public class Player : StateMachineCore
     private void HandleTransitions()
     {
         
-        // Cache xInput and yInput from inputValues
-        float xInput = inputValues.moveVector.x;
-        float yInput = inputValues.moveVector.y;
+        // Cache xInput and yInput from playerInputs
+        float xInput = playerInput.moveVector.x;
+        float yInput = playerInput.moveVector.y;
         
         
         // condition for transitioning to a "grounded" state (move or idle) when transitioning from airborne
@@ -226,8 +226,8 @@ public class Player : StateMachineCore
         // }
 
         // Transition to slide
-        bool groundedSlideTransition = inputValues.slidePressedThisFrame && groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
-        bool airborneSlideTransition = inputValues.slideHeld && !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;
+        bool groundedSlideTransition = playerInput.slidePressedThisFrame && groundSensor.grounded && flatVel.magnitude > stats.minimumSlideSpeed;
+        bool airborneSlideTransition = playerInput.slideHeld && !groundSensor.grounded && timeSinceLastGrounded > stats.MinimumSlideAirTime;
         if (groundedSlideTransition || airborneSlideTransition)
         {
             stateMachine.SetState(slide);
@@ -268,7 +268,7 @@ public class Player : StateMachineCore
             return;
         }
 
-        float timeSinceLastMove = Time.time - inputValues.timeOfLastMoveInput;
+        float timeSinceLastMove = Time.time - playerInput.timeOfLastMoveInput;
         
         // Transition to idle
         if (groundSensor.grounded && (nonAirborneGroundCheck && flatVel.magnitude < 1f || airborneGroundCheck && timeSinceLastMove >= 0.1f || stateMachine.currentState.isComplete))
@@ -333,14 +333,12 @@ public class Player : StateMachineCore
         // Calls update logic in the currently active state
         stateMachine.currentState.DoUpdateBranch();
         timeSinceLastGrounded += Time.deltaTime;
-        thirdPersonCam.TickUpdate(inputValues, deltaTime);
 
         if (groundSensor.grounded)
         {
             timeSinceLastGrounded = 0;
         }
-
-
+        
         if (!groundSensor.grounded)
         {
             leavingGround = false;
