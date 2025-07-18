@@ -31,7 +31,7 @@ public class PlayerJumpManager : NetworkBehaviour
         framesSinceOnGround = (int)FrameBufferNum;
     }
 
-    public void TickUpdate(PlayerInput.InputValues inputValues)
+    public void Update(PlayerInput.InputValues inputValues)
     {
         if (!IsOwner) return;
 
@@ -73,14 +73,8 @@ public class PlayerJumpManager : NetworkBehaviour
             Debug.Log("end jump early" + rb.linearVelocity.y);
             Debug.Log("Frames since on ground: " + framesSinceOnGround);
             jumpEnded = true;
-            rb.AddForce(Vector3.down * Mathf.Abs(rb.linearVelocity.y) * downwardForce, ForceMode.Impulse);
+            rb.AddForce(Vector3.down * Mathf.Abs(rb.linearVelocity.y) * downwardForce * Time.deltaTime * 100, ForceMode.Impulse);
         }
-    }
-    void FixedUpdate()
-    {
-        
-        
-        
     }
 
     void AttemptJump()

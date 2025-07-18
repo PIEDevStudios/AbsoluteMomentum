@@ -131,7 +131,7 @@ public class Player : StateMachineCore
 
         
         // Call FixedUpdate logic
-        // stateMachine.currentState.DoFixedUpdateBranch(); 
+        Move();
     }
 
     #endregion
@@ -198,7 +198,7 @@ public class Player : StateMachineCore
     /// <summary>
     /// Handles transitions between states in player state machine
     /// </summary>
-    private void HandleTransitions(PlayerInput.InputValues inputValues)
+    private void HandleTransitions()
     {
         
         // Cache xInput and yInput from inputValues
@@ -328,11 +328,11 @@ public class Player : StateMachineCore
     /// <summary>
     /// Method we use to move so that we can simulate physics
     /// </summary>
-    public void Move(PlayerInput.InputValues inputValues, float deltaTime)
+    public void Move()
     {
         // Calls update logic in the currently active state
         stateMachine.currentState.DoUpdateBranch();
-        timeSinceLastGrounded += deltaTime;
+        timeSinceLastGrounded += Time.deltaTime;
         thirdPersonCam.TickUpdate(inputValues, deltaTime);
 
         if (groundSensor.grounded)
@@ -347,7 +347,7 @@ public class Player : StateMachineCore
         }
         
         // State transitions
-        HandleTransitions(inputValues);
+        HandleTransitions();
         
         if (rb.linearVelocity.y > 0)
         {
@@ -358,10 +358,8 @@ public class Player : StateMachineCore
         {
             rb.AddForce(Vector3.down * stats.CurrentGravity * stats.FallingGravityMultiplier, ForceMode.Force);
         }
-        // Call FixedUpdate logic
-        jumpManager.TickUpdate(inputValues);
-        walljumpManager.TickUpdate(inputValues);
-        stateMachine.currentState.DoTickUpdateBranch(inputValues);
+        
+        stateMachine.currentState.DoFixedUpdateBranch();
     }
     
     /// <summary>

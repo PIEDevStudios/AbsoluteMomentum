@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ThirdPersonCam : NetworkBehaviour
 {
     public Transform orientation;
     public Transform PlayerTransform;
     public Transform playerObj;
-    public Player Player;
+    [FormerlySerializedAs("Player")] public Player player;
     public PlayerInput playerInput;
     [SerializeField, Range(0, 10)]private float sensitivity = 5f;
     [SerializeField] private float rotationSpeed;
@@ -28,7 +29,7 @@ public class ThirdPersonCam : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void TickUpdate(PlayerInput.InputValues inputValues, float deltaTime)
+    public void Update()
     {
         // freeLookCam.m_YAxis.m_MaxSpeed = sensitivity;
         // freeLookCam.m_XAxis.m_MaxSpeed = sensitivity * 100f;
@@ -38,12 +39,12 @@ public class ThirdPersonCam : NetworkBehaviour
         orientation.forward = _viewDir.normalized;
 
         // rotate player object
-        Vector2 _inputVector = inputValues.moveVector;
+        Vector2 _inputVector = player.playerInput.moveVector;
         Vector3 _inputDir = orientation.forward * _inputVector.y + orientation.right * _inputVector.x;
 
-        if (_inputDir != Vector3.zero && (Player.stateMachine.currentState is PlayerIdle || Player.stateMachine.currentState is PlayerMove || Player.stateMachine.currentState is PlayerAirborne))
+        if (_inputDir != Vector3.zero && (player.stateMachine.currentState is PlayerIdle || player.stateMachine.currentState is PlayerMove || player.stateMachine.currentState is PlayerAirborne))
         {
-            playerObj.forward = Vector3.Slerp(playerObj.forward, _inputDir.normalized, deltaTime * rotationSpeed);
+            playerObj.forward = Vector3.Slerp(playerObj.forward, _inputDir.normalized, Time.deltaTime * rotationSpeed);
         }
         
 
