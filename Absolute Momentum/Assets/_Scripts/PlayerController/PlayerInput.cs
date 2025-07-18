@@ -62,7 +62,7 @@ public class PlayerInput : MonoBehaviour
         // Slide
         slideHeld = playerActionMap.FindAction("Slide").ReadValue<float>() > 0;
         slidePressedThisFrame = playerActionMap.FindAction("Slide").WasPerformedThisFrame();
-        slideReleasedThisFrame = jumpReleasedThisFrame = playerActionMap.FindAction("Slide").WasReleasedThisFrame();
+        slideReleasedThisFrame = playerActionMap.FindAction("Slide").WasReleasedThisFrame();
         
         dashPressedThisFrame = playerActionMap.FindAction("Dash").WasPerformedThisFrame();
         

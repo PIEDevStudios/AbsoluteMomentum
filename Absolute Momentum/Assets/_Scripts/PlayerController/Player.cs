@@ -107,11 +107,21 @@ public class Player : StateMachineCore
         
         Application.targetFrameRate = framerate;
 
-        // timeSinceLastMissileFire += Time.deltaTime;
-        // if (playerInput.FiredMissile)
-        // {
-        //     TryFireMissile();
-        // }            
+        stateMachine.currentState.DoUpdateBranch();
+        timeSinceLastGrounded += Time.deltaTime;
+
+        if (groundSensor.grounded)
+        {
+            timeSinceLastGrounded = 0;
+        }
+        
+        if (!groundSensor.grounded)
+        {
+            leavingGround = false;
+        }
+        
+        // State transitions
+        HandleTransitions();          
     }
     
 
@@ -128,10 +138,8 @@ public class Player : StateMachineCore
         {
             rb.AddForce(Vector3.down * stats.CurrentGravity * stats.FallingGravityMultiplier, ForceMode.Force);
         }
-
         
-        // Call FixedUpdate logic
-        Move();
+        stateMachine.currentState.DoFixedUpdateBranch();
     }
 
     #endregion
@@ -324,41 +332,7 @@ public class Player : StateMachineCore
     {
         playerInput.enabled = false;
     }
-
-    /// <summary>
-    /// Method we use to move so that we can simulate physics
-    /// </summary>
-    public void Move()
-    {
-        // Calls update logic in the currently active state
-        stateMachine.currentState.DoUpdateBranch();
-        timeSinceLastGrounded += Time.deltaTime;
-
-        if (groundSensor.grounded)
-        {
-            timeSinceLastGrounded = 0;
-        }
-        
-        if (!groundSensor.grounded)
-        {
-            leavingGround = false;
-        }
-        
-        // State transitions
-        HandleTransitions();
-        
-        if (rb.linearVelocity.y > 0)
-        {
-            // Simulate custom gravity
-            rb.AddForce(Vector3.down * stats.CurrentGravity, ForceMode.Force);
-        }
-        else
-        {
-            rb.AddForce(Vector3.down * stats.CurrentGravity * stats.FallingGravityMultiplier, ForceMode.Force);
-        }
-        
-        stateMachine.currentState.DoFixedUpdateBranch();
-    }
+    
     
     /// <summary>
     /// Changes the custom gravity scale that the player is currently experiencing
