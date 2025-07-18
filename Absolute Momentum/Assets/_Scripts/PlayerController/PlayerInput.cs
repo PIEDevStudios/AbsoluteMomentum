@@ -27,26 +27,6 @@ public class PlayerInput : MonoBehaviour
     public bool dashPressedThisFrame { get; private set; }
     
     public bool FiredMissile  { get; private set; }
-    
-    public struct InputValues
-    {
-        public Vector2 moveVector;
-        public Vector2 lookVector;
-        public float timeOfLastMoveInput;
-        public bool jumpPressedThisFrame;
-        public bool jumpReleasedThisFrame;
-        public bool jumpHeld;
-        public bool sprintHeld;
-        public bool sprintPressedThisFrame;
-        public bool slidePressedThisFrame;
-        public bool slideReleasedThisFrame;
-        public bool slideHeld;
-        public bool ResetInput;
-        public bool FiredMissle;
-    }
-    
-    
-    
 
     private void OnEnable()
     {
@@ -58,7 +38,7 @@ public class PlayerInput : MonoBehaviour
         playerInputAction.Disable();
     }
     
-    public void TickUpdate()
+    public void Update()
     {
         InputActionMap playerActionMap = playerInputAction.actionMaps[0];
         moveVector = playerActionMap.FindAction("Move").ReadValue<Vector2>();
@@ -71,20 +51,18 @@ public class PlayerInput : MonoBehaviour
         
         
         // Jump
-        bool heldLastFrame = jumpHeld;
         jumpHeld = playerActionMap.FindAction("Jump").ReadValue<float>() > 0;
-        jumpPressedThisFrame = !heldLastFrame && jumpHeld;
-        jumpReleasedThisFrame = heldLastFrame && !jumpHeld;
+        jumpPressedThisFrame = playerActionMap.FindAction("Jump").WasPerformedThisFrame();
+        jumpReleasedThisFrame = playerActionMap.FindAction("Jump").WasReleasedThisFrame();
         
         // Sprint
-        heldLastFrame = sprintHeld;
         sprintHeld = playerActionMap.FindAction("Sprint").ReadValue<float>() > 0;
-        sprintPressedThisFrame = !heldLastFrame && sprintHeld;
+        sprintPressedThisFrame = playerActionMap.FindAction("Sprint").WasPerformedThisFrame();
         
-        heldLastFrame = slideHeld;
+        // Slide
         slideHeld = playerActionMap.FindAction("Slide").ReadValue<float>() > 0;
-        slidePressedThisFrame = !heldLastFrame && slideHeld;
-        slideReleasedThisFrame = heldLastFrame && !slideHeld;
+        slidePressedThisFrame = playerActionMap.FindAction("Slide").WasPerformedThisFrame();
+        slideReleasedThisFrame = jumpReleasedThisFrame = playerActionMap.FindAction("Slide").WasReleasedThisFrame();
         
         dashPressedThisFrame = playerActionMap.FindAction("Dash").WasPerformedThisFrame();
         
@@ -92,24 +70,5 @@ public class PlayerInput : MonoBehaviour
         
         // DEBUG INPUTS
         ResetInput = Input.GetKeyDown(R);
-    }
-    
-    public InputValues GetInputValues()
-    {
-        return new InputValues()
-        {
-            moveVector = moveVector,
-            lookVector = lookVector,
-            timeOfLastMoveInput = timeOfLastMoveInput,
-            jumpPressedThisFrame = jumpPressedThisFrame,
-            jumpReleasedThisFrame = jumpReleasedThisFrame,
-            jumpHeld = jumpHeld,
-            sprintPressedThisFrame = sprintPressedThisFrame,
-            sprintHeld = sprintHeld,
-            slidePressedThisFrame = slidePressedThisFrame,
-            slideReleasedThisFrame = slideReleasedThisFrame,
-            slideHeld = slideHeld,
-            ResetInput = ResetInput
-        };
     }
 }
