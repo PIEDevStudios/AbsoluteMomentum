@@ -2518,7 +2518,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3355069265857045987, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: intensity
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7064617399936118610, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: m_Name
@@ -7620,7 +7620,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3355069265857045987, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: intensity
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 7064617399936118610, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: m_Name
@@ -8733,7 +8733,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3355069265857045987, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: intensity
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7064617399936118610, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: m_Name
@@ -12546,6 +12546,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1817345718}
     m_Modifications:
+    - target: {fileID: 3355069265857045987, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
+      propertyPath: intensity
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 7064617399936118610, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: m_Name
       value: pad green (6)
@@ -13998,6 +14002,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1817345718}
     m_Modifications:
+    - target: {fileID: 3355069265857045987, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
+      propertyPath: intensity
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 7064617399936118610, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: m_Name
       value: pad green (5)
@@ -20689,6 +20697,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1817345718}
     m_Modifications:
+    - target: {fileID: 3355069265857045987, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
+      propertyPath: intensity
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 7064617399936118610, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: m_Name
       value: pad green (1)
@@ -22515,7 +22527,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3355069265857045987, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: intensity
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7064617399936118610, guid: 62136fa2e7429d8458f0baee5143d209, type: 3}
       propertyPath: m_Name

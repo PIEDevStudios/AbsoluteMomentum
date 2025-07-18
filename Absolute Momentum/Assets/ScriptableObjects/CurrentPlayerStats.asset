@@ -199,11 +199,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  wallrunForce: 20
+  wallrunForce: 19
   stickToWallForce: 15
   wallrunResetTime: 0.1
-  wallJumpUpForce: 18
-  wallJumpSideForce: 20
+  wallJumpUpForce: 13
+  wallJumpSideForce: 18
   wallJumpBufferTime: 0.125
   wallrunTurnSpeed: 0.5
   minWallYSpeed: 5
@@ -212,46 +212,46 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.048698425
-      value: 0
-      inSlope: 0.19807085
-      outSlope: 0.19807085
+      time: 0.23897171
+      value: 5.032776
+      inSlope: 1.0262306
+      outSlope: 1.0262306
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 5
-      value: 1
-      inSlope: 0.16245559
-      outSlope: 0.16245559
+      time: 5.095886
+      value: 10.01709
+      inSlope: 0.58452046
+      outSlope: 0.58452046
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 22.415356
-      value: 3.208969
-      inSlope: 0.36342016
-      outSlope: 0.36342016
+      time: 22.03181
+      value: 12.435715
+      inSlope: 0.2840308
+      outSlope: 0.2840308
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 27.415356
-      value: 6.208969
-      inSlope: 0.90000004
-      outSlope: 0.90000004
+      time: 27.607128
+      value: 14.806625
+      inSlope: 0.7275283
+      outSlope: 0.7275283
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 32.415356
-      value: 12.208969
-      inSlope: 0.71725816
-      outSlope: 0.71725816
+      value: 19.758163
+      inSlope: 0.5469652
+      outSlope: 0.5469652
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -278,11 +278,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   gravityEnabled: 1
-  NormalGravity: 45
+  NormalGravity: 30
   WallrunGravity: 14
   FallingGravityMultiplier: 1.5
   CurrentGravity: 0
-  JumpForce: 22
+  JumpForce: 18
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 20
   JumpFrameBufferAmount: 10

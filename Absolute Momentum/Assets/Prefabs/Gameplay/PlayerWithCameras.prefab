@@ -597,7 +597,7 @@ MonoBehaviour:
   orientation: {fileID: 6228127852056927477}
   PlayerTransform: {fileID: 6108369673085079863}
   playerObj: {fileID: 6558729271255742777}
-  Player: {fileID: 927473891614420570}
+  player: {fileID: 927473891614420570}
   playerInput: {fileID: 860752480025509057}
   sensitivity: 5
   rotationSpeed: 10
@@ -2687,6 +2687,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7929614013388318277, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8159947536066555453, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: speedText
       value: 
@@ -2791,7 +2795,8 @@ PrefabInstance:
       propertyPath: serializeData2.selectionData.positions.Array.data[7].z
       value: -1.0635197
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 68120598662141413, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2839370865359580903, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
