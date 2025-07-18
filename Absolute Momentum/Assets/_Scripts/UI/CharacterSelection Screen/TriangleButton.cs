@@ -80,13 +80,9 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if (isExpanded || isTweening)
             return;
-<<<<<<< HEAD
 
         HideHoverIcon(); 
-
-=======
         
->>>>>>> ad5d2b6dc399e2af3e786c4a77a2f02bd347005e
         isExpanded = true;
         isTweening = true;
         selectManager.OnCharacterSelected(characterIndex);
