@@ -30,9 +30,9 @@ public class PlayerSlide : State
 
     }
 
-    public override void DoFixedUpdateState()
+    public override void DoUpdateState()
     {
-        base.DoFixedUpdateState();
+        base.DoUpdateState();
         
         if (player.playerInput.slideReleasedThisFrame)
         {
