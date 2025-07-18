@@ -167,6 +167,37 @@ MonoBehaviour:
   <deathScreenManager>k__BackingField: {fileID: 5732767549481652343}
   player: {fileID: 927473891614420570}
   lapText: {fileID: 1294009816276991503}
+--- !u!1 &1350203501689734983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 404716516167744742}
+  m_Layer: 0
+  m_Name: StepSensorOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &404716516167744742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350203501689734983}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4161216122739317668}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1621593593502440678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,6 +2583,10 @@ PrefabInstance:
       propertyPath: <thirdPersonCam>k__BackingField
       value: 
       objectReference: {fileID: 8912417194727135980}
+    - target: {fileID: 1618725839944101103, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: stepRayOrigin
+      value: 
+      objectReference: {fileID: 404716516167744742}
     - target: {fileID: 2476640896483328786, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: serializeData2.selectionData.maxConnectionDistance
       value: 0.12129837
@@ -2758,7 +2793,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2839370865359580903, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 404716516167744742}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8005580418996443892, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       insertIndex: -1
@@ -2809,6 +2847,11 @@ Transform:
 --- !u!4 &3891751513919419348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2943845248248956567, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+  m_PrefabInstance: {fileID: 2222777955612407107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4161216122739317668 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2839370865359580903, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
   m_PrefabInstance: {fileID: 2222777955612407107}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6108369673085079863 stripped

@@ -51,7 +51,6 @@ public class Player : StateMachineCore
     [SerializeField] private PlayerJumpManager jumpManager;
     [SerializeField] private PlayerWalljumpManager walljumpManager;
     [SerializeField] private PlayerItemManager itemManager;
-    [SerializeField] private PlayerPayloadManager payloadManager;
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
     [field:SerializeField] public PlayerRaceTimeManager playerRaceTimeManager {get; private set;}
     [field:SerializeField] public ThirdPersonCam thirdPersonCam {get; private set;}
@@ -392,13 +391,18 @@ public class Player : StateMachineCore
         if (respawnDelay < 0f) return;
         
         StopAllCoroutines();
-        StartCoroutine(TeleportDuringDeathScreen(respawnDelay));
+        StartCoroutine(RespawnDuringDeathScreen(respawnDelay));
     }
 
-    private IEnumerator TeleportDuringDeathScreen(float respawnDelay)
+    public void TeleportPlayer(Vector3 position)
+    {
+        rb.position = position;
+    }
+
+    private IEnumerator RespawnDuringDeathScreen(float respawnDelay)
     {
         yield return new WaitForSeconds(respawnDelay);
-        payloadManager.TeleportPlayer(spawnPos);
+        rb.position = spawnPos;
     }
     
     #endregion

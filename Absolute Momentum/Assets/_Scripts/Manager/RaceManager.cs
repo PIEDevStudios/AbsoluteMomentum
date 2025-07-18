@@ -110,7 +110,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     {
         if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
         {
-            var player = client.PlayerObject.GetComponentInChildren<PlayerPayloadManager>();
+            var player = client.PlayerObject.GetComponentInChildren<Player>();
             if (player != null)
             {
                 player.TeleportPlayer(startPositions[currentTeleportIndex % startPositions.Length]);
@@ -259,7 +259,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     {
         foreach (var player in NetworkManager.Singleton.ConnectedClients)
         {
-            player.Value.PlayerObject.GetComponentInChildren<PlayerPayloadManager>().TeleportPlayer(position);
+            player.Value.PlayerObject.GetComponentInChildren<Player>().TeleportPlayer(position);
         }
     }
 }

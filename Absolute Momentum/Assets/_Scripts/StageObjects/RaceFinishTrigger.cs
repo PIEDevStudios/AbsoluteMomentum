@@ -57,7 +57,7 @@ public class RaceFinishTrigger : NetworkBehaviour
     {
         foreach (var player in NetworkManager.Singleton.ConnectedClients)
         {
-            player.Value.PlayerObject.GetComponentInChildren<PlayerPayloadManager>().TeleportPlayer(position);
+            player.Value.PlayerObject.GetComponentInChildren<Player>().TeleportPlayer(position);
         }
     }
 }
