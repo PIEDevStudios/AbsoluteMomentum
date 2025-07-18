@@ -31,12 +31,12 @@ public class PlayerJumpManager : NetworkBehaviour
         framesSinceOnGround = (int)FrameBufferNum;
     }
 
-    public void Update()
+    public void TickUpdate(PlayerInput.InputValues inputValues)
     {
         if (!IsOwner) return;
-        
+
         // From update
-        if (playerInput.jumpPressedThisFrame)
+        if (inputValues.jumpPressedThisFrame)
         {
             framesSinceLastSpacebar = 0;
         }
@@ -45,16 +45,13 @@ public class PlayerJumpManager : NetworkBehaviour
         {
             jumping = false;
         }
-    }
-
-    public void TickUpdate(PlayerInput.InputValues inputValues)
-    {
-        if (!IsOwner) return;
+        
         //
         // if (framesSinceOnGround == -1)
         // {
         //     framesSinceOnGround = (int)FrameBufferNum;
         // }
+        
         if (player.stateMachine.currentState is not PlayerAirborne && (player.groundSensor.grounded || player.slopeSensor.isOnSlope))
         {
             framesSinceOnGround = 0;

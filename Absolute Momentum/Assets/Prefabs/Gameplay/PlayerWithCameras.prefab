@@ -2537,9 +2537,21 @@ PrefabInstance:
       value: 0.06299329
       objectReference: {fileID: 0}
     - target: {fileID: 1299262452964842265, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: framerate
+      value: 144
+      objectReference: {fileID: 0}
+    - target: {fileID: 1299262452964842265, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1347968922712035819}
+    - target: {fileID: 1299262452964842265, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: <playerUI>k__BackingField
       value: 
       objectReference: {fileID: 15471659953634451}
+    - target: {fileID: 1299262452964842265, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: <thirdPersonCam>k__BackingField
+      value: 
+      objectReference: {fileID: 8912417194727135980}
     - target: {fileID: 2476640896483328786, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: serializeData2.selectionData.maxConnectionDistance
       value: 0.12129837
@@ -2582,7 +2594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3867814867038613470, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: _Editor_OnValidateTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5340615071919367284, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_LocalPosition.x

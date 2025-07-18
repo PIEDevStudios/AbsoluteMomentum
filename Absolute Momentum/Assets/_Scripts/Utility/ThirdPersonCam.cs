@@ -28,7 +28,7 @@ public class ThirdPersonCam : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    public void TickUpdate(PlayerInput.InputValues inputValues, float deltaTime)
     {
         // freeLookCam.m_YAxis.m_MaxSpeed = sensitivity;
         // freeLookCam.m_XAxis.m_MaxSpeed = sensitivity * 100f;
@@ -38,12 +38,12 @@ public class ThirdPersonCam : NetworkBehaviour
         orientation.forward = _viewDir.normalized;
 
         // rotate player object
-        Vector2 _inputVector = playerInput.moveVector;
+        Vector2 _inputVector = inputValues.moveVector;
         Vector3 _inputDir = orientation.forward * _inputVector.y + orientation.right * _inputVector.x;
 
         if (_inputDir != Vector3.zero && (Player.stateMachine.currentState is PlayerIdle || Player.stateMachine.currentState is PlayerMove || Player.stateMachine.currentState is PlayerAirborne))
         {
-            playerObj.forward = Vector3.Slerp(playerObj.forward, _inputDir.normalized, Time.deltaTime * rotationSpeed);
+            playerObj.forward = Vector3.Slerp(playerObj.forward, _inputDir.normalized, deltaTime * rotationSpeed);
         }
         
 

@@ -110,7 +110,6 @@ public class PlayerPayloadManager : NetworkBehaviour
         
         clientInputBuffer.Add(inputPayload, bufferIndex);
         SendToServerRpc(inputPayload);
-
         StatePayload statePayload = ProcessMovement(inputPayload);
         clientStateBuffer.Add(statePayload, bufferIndex);
         
@@ -239,7 +238,7 @@ public class PlayerPayloadManager : NetworkBehaviour
     
     StatePayload ProcessMovement(InputPayload inputPayload)
     {
-        player.Move(player.playerInput.GetInputValues());
+        player.Move(player.playerInput.GetInputValues(), timer.deltaTime);
 
         if (wasTeleported)
         {

@@ -54,6 +54,7 @@ public class Player : StateMachineCore
     [SerializeField] private PlayerPayloadManager payloadManager;
     [field:SerializeField] public PlayerSpeedManager playerSpeedManager {get; private set;}
     [field:SerializeField] public PlayerRaceTimeManager playerRaceTimeManager {get; private set;}
+    [field:SerializeField] public ThirdPersonCam thirdPersonCam {get; private set;}
     [SerializeField] private CinemachineVirtualCameraBase playerCamera;
     [field:SerializeField] public PlayerUIManager playerUI {get; private set;}
 
@@ -67,7 +68,9 @@ public class Player : StateMachineCore
     [SerializeField] private Vector3 spawnPos;
     
     private float timeSinceLastGrounded;
-    
+
+    [Header("Debug")] 
+    [SerializeField] private int framerate = 144;
 
     #region Unity Methods
     public override void OnNetworkSpawn()
@@ -100,7 +103,12 @@ public class Player : StateMachineCore
 
     public void Update()
     {
-        timeSinceLastMissileFire += Time.deltaTime;
+
+        if (!IsOwner) return;
+        
+        Application.targetFrameRate = framerate;
+
+        // timeSinceLastMissileFire += Time.deltaTime;
         // if (playerInput.FiredMissile)
         // {
         //     TryFireMissile();
@@ -321,11 +329,12 @@ public class Player : StateMachineCore
     /// <summary>
     /// Method we use to move so that we can simulate physics
     /// </summary>
-    public void Move(PlayerInput.InputValues inputValues)
+    public void Move(PlayerInput.InputValues inputValues, float deltaTime)
     {
         // Calls update logic in the currently active state
         stateMachine.currentState.DoUpdateBranch();
-        timeSinceLastGrounded += Time.deltaTime;
+        timeSinceLastGrounded += deltaTime;
+        thirdPersonCam.TickUpdate(inputValues, deltaTime);
 
         if (groundSensor.grounded)
         {
@@ -341,8 +350,6 @@ public class Player : StateMachineCore
         // State transitions
         HandleTransitions(inputValues);
         
-        
-        // Old FixedUpdate logic
         if (rb.linearVelocity.y > 0)
         {
             // Simulate custom gravity
