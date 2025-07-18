@@ -9,13 +9,11 @@ public class SlideGrounded : State
     private Vector3 directionCross;
     private PlayerStats stats => player.stats;
     private float hardMaxSpeed, softMaxSpeed;
-    private Vector3 speedOnEnter; // Player's flat (x and z) speed when they enter airborne
     private bool skipFirstLimitCall;
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
         player.playerSpeedManager.currentCurve = stats.slideDragCurve;
-        speedOnEnter = Vector3.zero;
         skipFirstLimitCall = true;
         
         rb.linearDamping = player.stats.SlideDrag;
@@ -38,9 +36,9 @@ public class SlideGrounded : State
         base.DoUpdateState();
     }
 
-    public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
+    public override void DoFixedUpdateState()
     {
-        base.DoTickUpdateState(inputValues);
+        base.DoFixedUpdateState();
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, player.slopeSensor.hit.normal);
         player.playerObj.forward = flatVel;
         if (player.slopeSensor.isOnSlope && player.groundSensor.grounded && rb.linearVelocity.y < 0f)
@@ -71,7 +69,7 @@ public class SlideGrounded : State
         RaycastHit hit = player.slopeSensor.hit;
         Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;
         Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
-        Vector3 playerInputVector = forwardOriented * inputValues.moveVector.y + rightOriented * inputValues.moveVector.x;
+        Vector3 playerInputVector = forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x;
         Vector3 forceVector = playerInputVector.normalized * (player.stats.SlideGroundAcceleration * (1 / flatVel.magnitude));
         Vector3 forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized) * flatVel.normalized;
         Vector3 perpendicularForce = forceVector - forceInVeloDirection;
@@ -100,8 +98,6 @@ public class SlideGrounded : State
         }
         
     }
-
-
     private void SlopeBoost()
     {
         // Calculate direction of the vector we need to cross the normal with depending on which way the slope is pointed
@@ -113,54 +109,5 @@ public class SlideGrounded : State
         rb.AddForce(direction.normalized * (player.stats.BoostYVeloMult * ySpeedFactor), ForceMode.Impulse);
     }
     
-        
-    /// <summary>
-    /// Limits the player's velocity
-    /// If the player's velocity goes above the hardMaxSpeed limit, set speed to hardMaxSpeed
-    /// If the player's velocity drops below the hardMaxSpeed limit and hardMaxSpeed > softMaxSpeed, set new hardMaxSpeed limit to current velo
-    /// If the player's velocity drops below the hardMaxSpeed limit and currentVelo <= softMaxSpeed, set new hardMaxSpeed limit to softMaxSpeed 
-    /// </summary>
-    // private void LimitVelocity()
-    // {
-    //     // Skips first limit call to wait for boost force to kick in
-    //     if (skipFirstLimitCall)
-    //     {
-    //         skipFirstLimitCall = false;
-    //         return;
-    //     }
-    //     
-    //     // set speedOnEnter once boost force has kicked in
-    //     if (speedOnEnter == Vector3.zero)
-    //     {
-    //         // for speed limiting
-    //         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-    //         hardMaxSpeed = speedOnEnter.magnitude;
-    //         softMaxSpeed = 0f;
-    //         return;
-    //     }
-    //     
-    //     
-    //     
-    //     // Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-    //     // if (flatVel.magnitude > hardMaxSpeed)
-    //     // {
-    //     //     Vector3 limitedVel = flatVel.normalized * hardMaxSpeed;
-    //     //     rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-    //     // }
-    //     // flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-    //     //
-    //     // if (flatVel.magnitude < hardMaxSpeed && flatVel.magnitude > softMaxSpeed)
-    //     // {
-    //     //     hardMaxSpeed = flatVel.magnitude;
-    //     // }
-    //     // else if (flatVel.magnitude < softMaxSpeed)
-    //     // {
-    //     //     hardMaxSpeed = softMaxSpeed;
-    //     // }
-    //     
-    //     
-    //     // Clamp Fall speed
-    //     rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -stats.FallSpeedLimit, stats.FallSpeedLimit), rb.linearVelocity.z);
-    // }
     
 }
