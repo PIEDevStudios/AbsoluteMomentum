@@ -95,13 +95,4 @@ public class State : NetworkBehaviour
         DoFixedUpdateState();
     }
 
-    /// <summary>
-    /// Calls DoTickUpdate for every state down the branch
-    /// </summary>
-    public void DoTickUpdateBranch(PlayerInput.InputValues inputValues)
-    {
-        currentState?.DoTickUpdateBranch(inputValues);
-        DoTickUpdateState(inputValues);
-    }
-
 }
