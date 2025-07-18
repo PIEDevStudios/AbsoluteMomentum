@@ -21,9 +21,9 @@ public class PlayerWallSlide : State
         base.DoUpdateState();
     }
 
-    public override void DoTickUpdateState(PlayerInput.InputValues inputValues)
+    public override void DoFixedUpdateState()
     {
-        base.DoTickUpdateState(inputValues);
+        base.DoFixedUpdateState();
         if (!wallSensor.wallRight && !wallSensor.wallLeft && !wallSensor.wallForward)
         {
             Debug.Log("No Wall detected");
@@ -41,7 +41,7 @@ public class PlayerWallSlide : State
             player.ChangeGravity(player.stats.WallrunGravity);
         }
         
-        WallSlideMovement(inputValues);
+        WallSlideMovement();
         
     }
 
@@ -53,7 +53,7 @@ public class PlayerWallSlide : State
         player.ChangeGravity(player.stats.NormalGravity);
     }
     
-    private void WallSlideMovement(PlayerInput.InputValues inputValues)
+    private void WallSlideMovement()
     {
         Vector3 wallNormal;
 
@@ -76,7 +76,7 @@ public class PlayerWallSlide : State
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         
         // Keep on wall force
-        if (!(wallSensor.wallLeft && inputValues.moveVector.x > 0) && !(wallSensor.wallRight && inputValues.moveVector.x < 0))
+        if (!(wallSensor.wallLeft && player.playerInput.moveVector.x > 0) && !(wallSensor.wallRight && player.playerInput.moveVector.x < 0))
         {
             rb.AddForce(-wallNormal * player.stats.stickToWallForce * flatVel.magnitude, ForceMode.Force);
         }
