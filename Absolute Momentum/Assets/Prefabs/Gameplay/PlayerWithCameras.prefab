@@ -2620,12 +2620,20 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3867814867038613470, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: MovingParameter
+      value: Moving
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867814867038613470, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: _EditorCategory
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3867814867038613470, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: SlidingParameter
       value: Slide
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867814867038613470, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: GroundedParameter
+      value: Grounded
       objectReference: {fileID: 0}
     - target: {fileID: 3867814867038613470, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: _Editor_OnValidateTrigger
@@ -2697,7 +2705,7 @@ PrefabInstance:
       objectReference: {fileID: 3541122721445004258}
     - target: {fileID: 9093625666504618516, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: serializeData2.selectionData.maxConnectionDistance
-      value: 0.20006572
+      value: 0.20006573
       objectReference: {fileID: 0}
     - target: {fileID: 9093625666504618516, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: serializeData2.selectionData.positions.Array.data[0].x

@@ -44,7 +44,7 @@ public class ThirdPersonCam : NetworkBehaviour
 
         if (_inputDir != Vector3.zero && (player.stateMachine.currentState is PlayerIdle || player.stateMachine.currentState is PlayerMove || player.stateMachine.currentState is PlayerAirborne))
         {
-            playerObj.forward = Vector3.Slerp(playerObj.forward, _inputDir.normalized, Time.deltaTime * rotationSpeed);
+            playerObj.forward = Vector3.SlerpUnclamped(playerObj.forward, _inputDir.normalized, Time.deltaTime * rotationSpeed);
         }
         
 

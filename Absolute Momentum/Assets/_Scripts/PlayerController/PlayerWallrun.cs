@@ -67,7 +67,7 @@ public class PlayerWallrun : State
             wallForward = -wallForward;
         }
         
-        player.playerObj.forward = wallForward;
+        player.playerObj.forward = Vector3.Slerp(player.playerObj.forward, wallForward, player.stats.wallrunTurnSpeed * Time.deltaTime);
         
         // Vector3 currentForward = player.playerObj.forward;
         // player.playerObj.forward = Vector3.Slerp(currentForward, wallForward, player.stats.wallrunTurnSpeed);

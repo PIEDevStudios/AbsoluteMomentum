@@ -22,6 +22,16 @@ public class PlayerAnimationHandler : NetworkBehaviour
     {
         if (!IsOwner) return;
         SetWallLeft(wallSensor.wallLeft);
+        
+        animator.SetBool("Grounded", player.groundSensor.grounded);
+        if (player.stateMachine.currentState == player.idle)
+        {
+            animator.SetBool("Moving", false);
+        }
+        else
+        {
+            animator.SetBool("Moving", true);
+        }
     }
 
     public void SetWallLeft(bool wallLeft)
