@@ -7,6 +7,9 @@ public class GroundSensor : MonoBehaviour
     [SerializeField] private float rayLength;
     [SerializeField] private CapsuleCollider playerCapsuleCollider;
     [SerializeField] private float radiusMultiplier = 1f;
+    private float coyoteTimeCounter = 0;
+    [SerializeField] private float maxCoyoteTime = 0.1f;
+    public bool IsGroundedCoyote => coyoteTimeCounter < maxCoyoteTime;
     public LayerMask groundLayer;
     public bool grounded { get; private set; }
     public RaycastHit hit { get; private set; }
@@ -14,6 +17,10 @@ public class GroundSensor : MonoBehaviour
     private void Update()
     {
         CheckGround();
+        if (grounded)
+            coyoteTimeCounter = 0;
+        else
+            coyoteTimeCounter += Time.deltaTime;
     }
 
     private void CheckGround()

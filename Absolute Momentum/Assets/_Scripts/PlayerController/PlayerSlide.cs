@@ -18,12 +18,12 @@ public class PlayerSlide : State
         graphics.localScale = player.stats.slidePlayerScale;
         
         
-        if (!player.groundSensor.grounded && !player.slopeSensor.isOnSlope)
+        if (!player.groundSensor.IsGroundedCoyote && !player.slopeSensor.isOnSlope)
         {
             stateMachine.SetState(airborne, true);
         }
         
-        if (player.groundSensor.grounded)
+        if (player.groundSensor.IsGroundedCoyote)
         {
             stateMachine.SetState(grounded, true);
         }

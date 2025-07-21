@@ -64,7 +64,7 @@ public class PlayerMove : State
         }
         else if (player.groundSensor.grounded && !player.slopeSensor.isOnSlope)
         {
-            player.ChangeGravity(stats.NormalGravity);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         }
     }
     

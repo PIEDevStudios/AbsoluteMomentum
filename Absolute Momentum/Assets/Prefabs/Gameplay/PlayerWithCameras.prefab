@@ -2501,6 +2501,10 @@ PrefabInstance:
       propertyPath: rayLength
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4101196671528148134, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
+      propertyPath: maxCoyoteTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5340615071919367284, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2575,7 +2579,7 @@ PrefabInstance:
       objectReference: {fileID: 3541122721445004258}
     - target: {fileID: 9093625666504618516, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: serializeData2.selectionData.maxConnectionDistance
-      value: 0.20006572
+      value: 0.20006573
       objectReference: {fileID: 0}
     - target: {fileID: 9093625666504618516, guid: edb09358b3edb4a4cb435b97e3c28b1c, type: 3}
       propertyPath: serializeData2.selectionData.positions.Array.data[0].x

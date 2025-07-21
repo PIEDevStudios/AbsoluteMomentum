@@ -268,14 +268,14 @@ public class Player : StateMachineCore
         }
         
         // Transition to airborne
-        if (!groundSensor.grounded && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun || stateMachine.currentState == wallSlide) || stateMachine.currentState.isComplete))
+        if (!groundSensor.IsGroundedCoyote && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun || stateMachine.currentState == wallSlide) || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(airborne);
             return;
         }
         
         // Transition to move
-        if (groundSensor.grounded && (xInput != 0 || yInput != 0) && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
+        if (groundSensor.IsGroundedCoyote && (xInput != 0 || yInput != 0) && (nonAirborneGroundCheck || airborneGroundCheck || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(move);
             return;
@@ -284,7 +284,7 @@ public class Player : StateMachineCore
         float timeSinceLastMove = Time.time - playerInput.timeOfLastMoveInput;
         
         // Transition to idle
-        if (groundSensor.grounded && (nonAirborneGroundCheck && flatVel.magnitude < 1f || airborneGroundCheck && timeSinceLastMove >= 0.1f || stateMachine.currentState.isComplete))
+        if (groundSensor.IsGroundedCoyote && (nonAirborneGroundCheck && flatVel.magnitude < 1f || airborneGroundCheck && timeSinceLastMove >= 0.1f || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(idle);
             return;
