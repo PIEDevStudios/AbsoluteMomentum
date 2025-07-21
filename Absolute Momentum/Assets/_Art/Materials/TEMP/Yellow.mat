@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Billboards
+  m_Name: Yellow
   m_Shader: {fileID: -6465566751694194690, guid: 851d3d4b21deae84b8007b3e997a3009, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -133,15 +133,15 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _ssaoScale: 10
+    - _ssaoScale: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.754717, g: 0.64168096, b: 0.44499823, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse: {r: 0.56700003, g: 0.47720364, b: 0.36688238, a: 0}
+    - _Diffuse: {r: 0.3992353, g: 0.617, b: 0.617, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Shadow: {r: 0.36200002, g: 0.3046697, b: 0.23423532, a: 0}
+    - _Shadow: {r: 0.29376474, g: 0.45400003, b: 0.45400003, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Specular: {r: 0.8666667, g: 0.73007274, b: 0.56078434, a: 0}
+    - _Specular: {r: 0.56078434, g: 0.86666656, b: 0.8666667, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5549412136249187776

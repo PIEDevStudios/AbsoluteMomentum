@@ -110,6 +110,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _Emission: 0
     - _EnvironmentReflections: 1
     - _Float: 0
     - _GlossMapScale: 0
@@ -123,7 +124,7 @@ Material:
     - _ReceiveShadows: 1
     - _ShadowCutoff: 0.25
     - _ShadowStrength: 0.75
-    - _Smoothness: 1
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularCutoff: 0.6
     - _SpecularHighlights: 1
@@ -134,7 +135,7 @@ Material:
     - _ZWrite: 1
     - _ssaoScale: 10
     m_Colors:
-    - _BaseColor: {r: 0.7028302, g: 1, b: 0.7310945, a: 1}
+    - _BaseColor: {r: 0.4255518, g: 0.6886792, b: 0.44978717, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Diffuse: {r: 0.34705517, g: 0.553, b: 0.30891722, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
