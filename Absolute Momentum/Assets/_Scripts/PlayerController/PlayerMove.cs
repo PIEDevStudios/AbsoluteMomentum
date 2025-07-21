@@ -20,7 +20,6 @@ public class PlayerMove : State
         base.DoEnterLogic();
         rb.linearDamping = stats.GroundDrag;
         player.ChangeGravity(0);
-        rb.AddForce(-player.groundSensor.hit.normal * 2f, ForceMode.Impulse);
         player.playerSpeedManager.currentCurve = stats.groundDragCurve;
     }
 
@@ -38,15 +37,18 @@ public class PlayerMove : State
     {
         base.DoFixedUpdateState();
         
+        StickToSlope();
+        
         RaycastHit hit = player.slopeSensor.hit;
         Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;
         Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
         
         // Adds a force to the player in the direction they are pressing relative to the camera
+        Debug.DrawRay(transform.position, (forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x).normalized * (stats.SprintAcceleration * 100f), Color.green);
         rb.AddForce((forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x).normalized * (stats.SprintAcceleration * 100f));
         
         NoInputDeceleration();
-        StickToSlope();
+        
     }
 
     /// <summary>
@@ -54,10 +56,15 @@ public class PlayerMove : State
     /// </summary>
     private void StickToSlope()
     {
-        if (!player.groundSensor.grounded)
+        if (!player.groundSensor.grounded && player.slopeSensor.isOnSlope)
         {
             Debug.Log("Stick to slope");
+            player.ChangeGravity(0);
             rb.AddForce(Vector3.down * stats.StickToSlopeForce);
+        }
+        else if (player.groundSensor.grounded && !player.slopeSensor.isOnSlope)
+        {
+            player.ChangeGravity(stats.NormalGravity);
         }
     }
     

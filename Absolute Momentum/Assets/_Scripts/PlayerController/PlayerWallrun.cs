@@ -17,6 +17,12 @@ public class PlayerWallrun : State
 
     public override void DoUpdateState()
     {
+        if (player.playerInput.moveVector.y != 0) return;
+        if (wallSensor.wallRight && player.playerInput.moveVector.x < 0f || wallSensor.wallLeft && player.playerInput.moveVector.x > 0f)
+        {
+            isComplete = true;
+        }
+        
         base.DoUpdateState();
     }
 

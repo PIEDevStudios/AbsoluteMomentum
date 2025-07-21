@@ -58,10 +58,12 @@ public class SlideGrounded : State
         if (player.slopeSensor.isOnSlope)
         {
             rb.linearDamping = 0f;
+            player.ChangeGravity(0f);
         }
         else
         {
             rb.linearDamping = player.stats.SlideDrag;
+            player.ChangeGravity(player.stats.NormalGravity);
         }
         
         // Player Turning
