@@ -75,9 +75,6 @@
         },
         {
             "m_Id": "3c349ccce2c34ffb8c358360575e7fd3"
-        },
-        {
-            "m_Id": "46c63483e7d847f594be9bb635689437"
         }
     ],
     "m_GroupDatas": [],
@@ -572,51 +569,6 @@
         "x": 0.0,
         "y": 1.0
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.SubGraphNode",
-    "m_ObjectId": "46c63483e7d847f594be9bb635689437",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "DiffuseHalfLambert",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -410.9999694824219,
-            "y": 105.00000762939453,
-            "width": 193.9999542236328,
-            "height": 95.0000228881836
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "d128aa6ecd4d4848b9e9322abd7d94ad"
-        },
-        {
-            "m_Id": "cf48ffbe4d62411fa152fb695c1a2f75"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": false,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"3c98ea90e049b4b41a219a79275c510f\",\n        \"type\": 3\n    }\n}",
-    "m_PropertyGuids": [
-        "42f03cdf-ab82-433f-a0e3-14eb41af7d89"
-    ],
-    "m_PropertyIds": [
-        1671879612
-    ],
-    "m_Dropdowns": [],
-    "m_DropdownSelectedEntries": []
 }
 
 {
@@ -1576,21 +1528,6 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "cf48ffbe4d62411fa152fb695c1a2f75",
-    "m_Id": 1,
-    "m_DisplayName": "Diffuse",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Diffuse",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "cfafef239c954d62a3b9121a01023c2a",
     "m_Id": 6,
     "m_DisplayName": "B",
@@ -1600,29 +1537,6 @@
     "m_StageCapability": 2,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "d128aa6ecd4d4848b9e9322abd7d94ad",
-    "m_Id": 1671879612,
-    "m_DisplayName": "NormalWS",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "_NormalWS",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
     "m_Labels": []
 }
 

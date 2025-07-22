@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FullscreenOutlines
+  m_Name: Outlines
   m_Shader: {fileID: -6465566751694194690, guid: ac9045821aec3164d88d82bbbecc2478, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -60,7 +60,7 @@ Material:
     - _normalMultiplier: 1
     - _normalStep: 0.569
     m_Colors:
-    - _Color: {r: 0.16037738, g: 0.024964407, b: 0.03173508, a: 0}
+    - _Color: {r: 0.11320752, g: 0.0934496, b: 0.0934496, a: 0}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
