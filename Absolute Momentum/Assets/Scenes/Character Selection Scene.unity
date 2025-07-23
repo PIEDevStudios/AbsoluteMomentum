@@ -269,7 +269,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6741387766016646302, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_Name
-      value: CharacterSelectButton (1)
+      value: Etoile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.b
+      value: 0.7584905
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.g
+      value: 0.3420363
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.r
+      value: 0.46661082
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.y
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.y
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetX
@@ -278,6 +306,10 @@ PrefabInstance:
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetY
       value: 578
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: hoverExpandDistance
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: bottomTriangleOffsetX
@@ -353,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -182.80928
+      value: -209.80928
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -479,7 +511,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6741387766016646302, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_Name
-      value: CharacterSelectButton (3)
+      value: Sangeo
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.b
+      value: 0.12385191
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.g
+      value: 0.12385191
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.r
+      value: 0.9245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.y
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.y
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetX
@@ -488,6 +548,10 @@ PrefabInstance:
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetY
       value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: hoverExpandDistance
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: bottomTriangleOffsetX
@@ -563,7 +627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 356.92114
+      value: 420.92114
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -875,7 +939,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6741387766016646302, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_Name
-      value: CharacterSelectButton (4)
+      value: Leilei
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.b
+      value: 0.41870406
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.g
+      value: 0.81886786
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.r
+      value: 0.47154438
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.y
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.y
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetX
@@ -884,6 +976,10 @@ PrefabInstance:
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetY
       value: 760
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: hoverExpandDistance
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: bottomTriangleOffsetX
@@ -959,7 +1055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -364.49307
+      value: -419.49307
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -988,7 +1084,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6741387766016646302, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_Name
-      value: CharacterSelectButton (2)
+      value: Bia
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.b
+      value: 0.0862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.g
+      value: 0.6805134
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.r
+      value: 0.8862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.y
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.y
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetX
@@ -997,6 +1121,10 @@ PrefabInstance:
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetY
       value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: hoverExpandDistance
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: bottomTriangleOffsetX
@@ -1072,7 +1200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 177.2064
+      value: 210.2064
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1721,15 +1849,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6741387766016646302, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_Name
-      value: CharacterSelectButton
+      value: Baku
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: splitOffset.y
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.b
+      value: 0.20080444
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.g
+      value: 0.20080444
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: squareColor.r
+      value: 0.89433956
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: animationDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: smallSquareSize.y
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.x
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: expandedIconSize.y
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetX
@@ -1738,6 +1894,10 @@ PrefabInstance:
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: topTriangleOffsetY
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
+      propertyPath: hoverExpandDistance
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7097241778626160118, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: bottomTriangleOffsetX
@@ -1813,7 +1973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2.9691162
+      value: 0.030883789
       objectReference: {fileID: 0}
     - target: {fileID: 7115708859483667444, guid: 8604099af8bee674d8a56fe57701ca46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

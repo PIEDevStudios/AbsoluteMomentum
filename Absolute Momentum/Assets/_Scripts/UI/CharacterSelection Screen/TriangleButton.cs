@@ -26,6 +26,9 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public Image hoverIcon;
     public Vector2 hoverOffset = new Vector2(0, -0.5f);
     public float hoverExpandDistance = 50f;
+    public Vector2 smallSquareSize = new Vector2(65f, 65f);
+    public Vector2 expandedIconSize = new Vector2(150f, 150f);
+    public Color squareColor = Color.white; 
 
     public float animationDuration = 0.75f;
     private Vector3 hiddenPosition;
@@ -64,8 +67,13 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         if (hoverIcon != null)
         {
-            hoverIcon.gameObject.SetActive(false);
-            hoverIcon.rectTransform.localScale = Vector3.zero;
+            // Set up as small colored square initially
+            hoverIcon.sprite = null; // Remove sprite to show solid color
+            hoverIcon.color = squareColor;
+            hoverIcon.rectTransform.sizeDelta = smallSquareSize;
+            hoverIcon.rectTransform.anchoredPosition = (originalTopRightPos + originalBottomLeftPos) / 2 + hoverOffset;
+            hoverIcon.gameObject.SetActive(true); // Keep it visible as a small square
+            hoverIcon.rectTransform.localScale = Vector3.one;
         }
 
         SetTriangleRaycast(true);
@@ -76,12 +84,22 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         portraitImage.color = color;
     }
 
+    // Method to change square color at runtime
+    public void SetSquareColor(Color newColor)
+    {
+        squareColor = newColor;
+        if (hoverIcon != null && hoverIcon.sprite == null)
+        {
+            hoverIcon.color = squareColor;
+        }
+    }
+
     public void OnClicked()
     {
         if (isExpanded || isTweening)
             return;
 
-        HideHoverIcon(); 
+        ResetToSquare();
         isExpanded = true;
         isTweening = true;
         selectManager.OnCharacterSelected(characterIndex);
@@ -108,6 +126,11 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         FadeOutNameAndImage();
         SetTriangleRaycast(false);
+
+        if (hoverIcon != null)
+        {
+            hoverIcon.gameObject.SetActive(false);
+        }
     }
 
     private void OnConfirm()
@@ -144,6 +167,12 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         selectManager.ShowAllButtons();
         FadeInNameAndImage();
         SetTriangleRaycast(true);
+
+        if (hoverIcon != null)
+        {
+            ResetToSquare();
+            hoverIcon.gameObject.SetActive(true);
+        }
     }
 
     private void SetTriangleRaycast(bool enabled)
@@ -177,7 +206,7 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if (isExpanded) return;
 
-        ShowHoverIcon();
+        ExpandToHoverIcon();
         AnimateTrianglesHover(true);
     }
 
@@ -185,41 +214,37 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if (isExpanded) return;
 
-        HideHoverIcon();
+        ResetToSquare();
         AnimateTrianglesHover(false);
     }
-    private void ShowHoverIcon()
+    
+    private void ExpandToHoverIcon()
     {
         if (hoverIcon != null && characterHoverIcon != null)
         {
             hoverIcon.rectTransform.DOKill();
             
             hoverIcon.sprite = characterHoverIcon;
-            hoverIcon.SetNativeSize();
-            
-            hoverIcon.rectTransform.sizeDelta = hoverIcon.rectTransform.sizeDelta * 0.5f;
-            
-            hoverIcon.rectTransform.anchoredPosition = (originalTopRightPos + originalBottomLeftPos) / 2 + hoverOffset;
-            
-            hoverIcon.rectTransform.localScale = Vector3.zero;
-            hoverIcon.gameObject.SetActive(true);
+            hoverIcon.color = Color.white; 
             
             hoverIcon.rectTransform
-                .DOScale(Vector3.one, 0.3f)
+                .DOSizeDelta(expandedIconSize, 0.3f)
                 .SetEase(Ease.OutBack);
         }
     }
 
-    private void HideHoverIcon()
+    private void ResetToSquare()
     {
-        if (hoverIcon != null && hoverIcon.gameObject.activeInHierarchy)
+        if (hoverIcon != null)
         {
             hoverIcon.rectTransform.DOKill();
             
+            hoverIcon.sprite = null;
+            hoverIcon.color = squareColor;
+            
             hoverIcon.rectTransform
-                .DOScale(Vector3.zero, 0.2f)
-                .SetEase(Ease.InBack)
-                .OnComplete(() => hoverIcon.gameObject.SetActive(false));
+                .DOSizeDelta(smallSquareSize, 0.2f)
+                .SetEase(Ease.InBack);
         }
     }
     
