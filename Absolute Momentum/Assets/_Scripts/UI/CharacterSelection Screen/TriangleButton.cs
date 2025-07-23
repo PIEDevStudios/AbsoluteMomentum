@@ -82,7 +82,6 @@ public class TriangleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             return;
 
         HideHoverIcon(); 
-
         isExpanded = true;
         isTweening = true;
         selectManager.OnCharacterSelected(characterIndex);
