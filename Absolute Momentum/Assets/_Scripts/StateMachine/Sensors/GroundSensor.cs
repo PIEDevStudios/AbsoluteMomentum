@@ -27,10 +27,6 @@ public class GroundSensor : MonoBehaviour
     {
         // grounded = Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
         grounded = Physics.SphereCast(transform.position, playerCapsuleCollider.radius * radiusMultiplier, Vector3.down, out RaycastHit _hit, rayLength, groundLayer);
-        if (!grounded)
-        {
-            Debug.Log("NO GROUND");
-        }
         hit = _hit;
     }
 

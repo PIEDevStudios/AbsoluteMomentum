@@ -9,8 +9,8 @@ public class PlayerAirborne : State
     [SerializeField] private Player player;
     [SerializeField] private Transform orientation;
     private PlayerStats stats => player.stats;
-    private float hardMaxSpeed, softMaxSpeed, acceleration;
-    private Vector3 speedOnEnter; // Player's flat (x and z) speed when they enter airborne
+    private float softMaxSpeed, acceleration;
+    private Vector3 speedOnEnter;
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
@@ -21,7 +21,6 @@ public class PlayerAirborne : State
         
         speedOnEnter = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         acceleration = stats.AirAcceleration;
-        hardMaxSpeed = speedOnEnter.magnitude;
         player.playerSpeedManager.currentCurve = stats.airDragCurve;
     }
 
@@ -41,7 +40,7 @@ public class PlayerAirborne : State
         
         rb.AddForce(perpendicularForce, ForceMode.Force);
 
-        if (forceInVeloDirection < 0f)
+        if (flatVel.magnitude < speedOnEnter.magnitude * player.stats.AirMaxSpeedMult)
         {
             rb.AddForce(forceInVeloDirection * flatVel.normalized, ForceMode.Force);
         }

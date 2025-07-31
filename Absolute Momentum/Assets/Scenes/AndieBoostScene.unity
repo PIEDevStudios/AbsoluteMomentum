@@ -10407,6 +10407,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3371746405641386805, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2140254790}
+    - targetCorrespondingSourceObject: {fileID: 4567715624470109054, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 99f128c3fad81d1418ab3e337151f29e, type: 3}
 --- !u!1 &545547469
 GameObject:
@@ -39549,7 +39552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1316c5c02ba92534280a375de0b0b921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceAmount: 25
+  acceleration: 35
 --- !u!1 &2028129877
 GameObject:
   m_ObjectHideFlags: 0
@@ -41028,8 +41031,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138993609}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.27568144, y: 0.000001533663, z: -0.0000004398469, w: 0.96124905}
-  m_LocalPosition: {x: 103.318855, y: 51.206413, z: 5}
+  m_LocalRotation: {x: 0.17117035, y: 0.8122556, z: -0.29307976, w: 0.47438988}
+  m_LocalPosition: {x: 101.89222, y: 50.269463, z: 9.728411}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41128,6 +41131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b669fadabaccb24ab6c7309d0bfab09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   player: {fileID: 2040783066}
 --- !u!43 &2142105717
 Mesh:

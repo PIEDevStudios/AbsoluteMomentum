@@ -18,6 +18,8 @@ public class PlayerStats : ScriptableObject
     [Header("Air Movement")]
     public float AirAcceleration;
     public float AirDrag;
+
+    public float AirMaxSpeedMult; // How much more speed can you gain once airborne?
     // public float AirSoftMaxSpeed;
     public float AirNoInputDeceleration;
     public float AirStrafeAcceleration;
