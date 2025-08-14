@@ -31225,6 +31225,10 @@ PrefabInstance:
       value: 612963211
       objectReference: {fileID: 0}
     - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
+      propertyPath: SceneName
+      value: TemplateRaceScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420705315888994287, guid: 0b035c37e7cbaef40b0fc48c073dc0f7, type: 3}
       propertyPath: LobbyCountdown
       value: 
       objectReference: {fileID: 1584244715}
@@ -63365,15 +63369,13 @@ MonoBehaviour:
   countdownTime: 3
   introJingleDelay: 3.5
   startPositions:
-  - {x: -9.31, y: 2, z: 3.83}
-  - {x: -6.31, y: 2, z: 3.83}
-  - {x: -3.31, y: 2, z: 3.83}
+  - {x: 75.61, y: -38.88076, z: 11.111853}
   <levelNames>k__BackingField:
-  - Level_01
+  - TemplateRaceScene
   - Track test
   - JadeCheckpoint
-  <lobbyName>k__BackingField: Lobby
-  numCheckpoints: 7
+  <lobbyName>k__BackingField: LobbyConcepts
+  numCheckpoints: 4
   numLaps: 3
 --- !u!1001 &1465082704
 PrefabInstance:
