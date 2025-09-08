@@ -25,6 +25,10 @@ public class RaceCountdownManager : NetworkBehaviour
            
         
         raceManager = RaceManager.Instance;
+        if (raceManager == null)
+        {
+            enabled = false;
+        }
     }
     private void Update()
     {

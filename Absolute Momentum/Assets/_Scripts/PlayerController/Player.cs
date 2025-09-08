@@ -1,3 +1,4 @@
+using System;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
@@ -70,11 +71,20 @@ public class Player : StateMachineCore
 
     [Header("Debug")] 
     [SerializeField] private int framerate = 144;
+    [SerializeField] private bool disableOwnerCheck;
 
     #region Unity Methods
+
+    private void Awake()
+    {
+        Debug.Log("Player Awake");
+        SetupInstances();
+        stateMachine.SetState(idle);
+    }
+
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner)
+        if (!IsOwner && !disableOwnerCheck)
         {
             playerCamera.Priority = 0;
             playerUI.gameObject.SetActive(false);
@@ -82,8 +92,8 @@ public class Player : StateMachineCore
             return;
         }
         
-        SetupInstances();
-        stateMachine.SetState(idle);
+        // SetupInstances();
+        // stateMachine.SetState(idle);
         // ResetPlayer();
         
         // Disable gravity and simulate gravity manually (to allow for different gravity scales)
@@ -102,8 +112,11 @@ public class Player : StateMachineCore
 
     public void Update()
     {
-
-        if (!IsOwner) return;
+        Debug.Log("Player preupdate");
+        
+        if (!IsOwner && !disableOwnerCheck) return;
+        
+        Debug.Log("Player Update");
         
         Application.targetFrameRate = framerate;
 
@@ -132,7 +145,7 @@ public class Player : StateMachineCore
     void FixedUpdate()
     {
 
-        if (!IsOwner) return;
+        if (!IsOwner && !disableOwnerCheck) return;
         
         if (rb.linearVelocity.y > 0)
         {
@@ -158,7 +171,7 @@ public class Player : StateMachineCore
     /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!IsOwner) return;
+        if (!IsOwner && !disableOwnerCheck) return;
 
         if (RaceManager.Instance.levelNames.Contains(scene.name)) 
         {
@@ -350,7 +363,7 @@ public class Player : StateMachineCore
     
     public float TriggerDeathScreen(int index)
     {
-        if (!IsOwner) return -1f;
+        if (!IsOwner && !disableOwnerCheck) return -1f;
         return playerUI.deathScreenManager.PlayDeathScreen(index);
     }
 
