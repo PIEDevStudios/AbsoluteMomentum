@@ -18,7 +18,9 @@ public class TempSpawnPlayer : MonoBehaviour
     void Start()
     {
         NetworkManager.Singleton.StartHost();
-        NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<Rigidbody>().position = transform.position;
+        Player player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<Player>();
+        player.rb.position = transform.position;
+        player.SetSpawnPoint(transform.position);
     }
 
     // Update is called once per frame
