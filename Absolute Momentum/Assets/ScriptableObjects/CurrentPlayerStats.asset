@@ -136,7 +136,7 @@ MonoBehaviour:
   MinimumSlideAirTime: 0
   SlideDrag: 0
   BoostYVeloMult: 0
-  SlopeSlideForce: 30
+  SlopeSlideForce: 50
   SlideGroundAcceleration: 1200
   SlideAirAcceleration: 5000
   slidePlayerScale: {x: 1, y: 1, z: 1}
@@ -146,56 +146,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: -0.048698425
       value: 0
-      inSlope: 0.56951076
-      outSlope: 0.56951076
-      tangentMode: 34
+      inSlope: 0.14287329
+      outSlope: 0.14287329
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 41.959255
-      value: 23.92398
-      inSlope: 1.2072976
-      outSlope: 1.2072976
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 58.091072
-      value: 75.4492
-      inSlope: 5.8712397
-      outSlope: 5.8712397
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.07071715
-      outWeight: 0.44837347
-    - serializedVersion: 3
-      time: 70.63249
-      value: 168.884
-      inSlope: 4.3111787
-      outSlope: 4.3111787
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 86.213905
-      value: 187.14948
-      inSlope: 1.1553509
-      outSlope: 1.1553509
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.04096638
     - serializedVersion: 3
       time: 103.923615
       value: 207.31094
-      inSlope: 1.1384416
-      outSlope: 1.1384416
-      tangentMode: 34
+      inSlope: 4.670129
+      outSlope: 4.670129
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.038856726
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

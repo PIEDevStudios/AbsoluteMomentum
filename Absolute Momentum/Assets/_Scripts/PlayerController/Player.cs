@@ -71,7 +71,7 @@ public class Player : StateMachineCore
 
     [Header("Debug")] 
     [SerializeField] private int framerate = 144;
-    [SerializeField] private bool disableOwnerCheck;
+    [SerializeField] private bool debugMode;
 
     #region Unity Methods
 
@@ -84,7 +84,7 @@ public class Player : StateMachineCore
 
     public override void OnNetworkSpawn()
     {
-        if (!IsOwner && !disableOwnerCheck)
+        if (!IsOwner && !debugMode)
         {
             playerCamera.Priority = 0;
             playerUI.gameObject.SetActive(false);
@@ -114,7 +114,7 @@ public class Player : StateMachineCore
     {
         Debug.Log("Player preupdate");
         
-        if (!IsOwner && !disableOwnerCheck) return;
+        if (!IsOwner && !debugMode) return;
         
         Debug.Log("Player Update");
         
@@ -136,6 +136,12 @@ public class Player : StateMachineCore
             leavingGround = false;
         }
         
+        if(!debugMode) return;
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RespawnPlayer();
+        }
         
     }
     
@@ -145,7 +151,7 @@ public class Player : StateMachineCore
     void FixedUpdate()
     {
 
-        if (!IsOwner && !disableOwnerCheck) return;
+        if (!IsOwner && !debugMode) return;
         
         if (rb.linearVelocity.y > 0)
         {
@@ -171,7 +177,7 @@ public class Player : StateMachineCore
     /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!IsOwner && !disableOwnerCheck) return;
+        if (!IsOwner && !debugMode) return;
 
         if (RaceManager.Instance.levelNames.Contains(scene.name)) 
         {
@@ -363,7 +369,7 @@ public class Player : StateMachineCore
     
     public float TriggerDeathScreen(int index)
     {
-        if (!IsOwner && !disableOwnerCheck) return -1f;
+        if (!IsOwner && !debugMode) return -1f;
         return playerUI.deathScreenManager.PlayDeathScreen(index);
     }
 
