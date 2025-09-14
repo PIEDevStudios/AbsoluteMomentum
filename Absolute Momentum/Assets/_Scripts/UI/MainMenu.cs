@@ -9,6 +9,8 @@ using UnityEngine;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using UnityEngine.SceneManagement;
+
 /// <summary>
 /// Manages navigation around the main menu
 /// </summary>
@@ -21,10 +23,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject lobbyHud;
     [SerializeField] private GameObject lobbyStartTrigger;
     [SerializeField] private TextMeshProUGUI lobbyCodeText;
+    [SerializeField] private TMP_Dropdown mapSelection;
     [SerializeField] private TMP_InputField joinCodeTextInput;
 
     private void Awake()
     {
+        AddMapsToSelection();
         // If player is already connected (returning from a race) do NOT load menu UI
         if (NetworkManager.Singleton != null && (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsClient))
         {
@@ -32,6 +36,8 @@ public class MainMenu : MonoBehaviour
             lobbyHud.SetActive(true);
             return;
         }
+        
+        
     }
     public void OpenLobbyMenu()
     {
@@ -64,6 +70,24 @@ public class MainMenu : MonoBehaviour
     {
         settingsMenu.SetActive(false);
         mainMenu.SetActive(true);
+    }
+
+    public void AddMapsToSelection()
+    {
+        Debug.Log("Adding maps");
+        List<TMP_Dropdown.OptionData> maps = new List<TMP_Dropdown.OptionData>();
+        for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData();
+            string path = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(path);
+            Debug.Log("Adding map: " + i);
+            Debug.Log(sceneName);
+            data.text = sceneName;
+            maps.Add(data);
+        }
+        
+        mapSelection.options = maps;
     }
 
     public void QuitGame()
