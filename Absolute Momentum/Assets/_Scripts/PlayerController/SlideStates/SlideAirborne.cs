@@ -31,14 +31,14 @@ public class SlideAirborne : State
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
         Vector3 playerInputVector = orientation.forward * player.playerInput.moveVector.y + orientation.right * player.playerInput.moveVector.x;
         Vector3 forceVector = playerInputVector.normalized * acceleration;
-        float forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized);
-        Vector3 perpendicularForce = forceVector - (forceInVeloDirection * flatVel.normalized);
+        Vector3 forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized) * flatVel.normalized;
+        Vector3 perpendicularForce = forceVector - forceInVeloDirection;
         
         rb.AddForce(perpendicularForce, ForceMode.Force);
 
-        if (forceInVeloDirection < 0f)
+        if (forceInVeloDirection.magnitude < 0f)
         {
-            rb.AddForce(forceInVeloDirection * flatVel.normalized, ForceMode.Force);
+            rb.AddForce(forceInVeloDirection.magnitude * flatVel.normalized, ForceMode.Force);
         }
         
         NoInputDeceleration();

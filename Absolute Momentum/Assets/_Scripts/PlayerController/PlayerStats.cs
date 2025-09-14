@@ -32,15 +32,13 @@ public class PlayerStats : ScriptableObject
     public float SlideDrag;
     public float BoostYVeloMult; 
     public float SlopeSlideForce; // amount that the slope pulls the player down 
-
+    public AnimationCurve SlideTurnMult;
     public float SlideGroundAcceleration;
-    public float SlideAirAcceleration;
     public Vector3 slidePlayerScale;
     public AnimationCurve slideDragCurve;
 
     [Header("Wall Movement")]
     public float wallrunForce;
-
     public float stickToWallForce;
     public float wallrunResetTime;
     public float wallJumpUpForce;
@@ -56,6 +54,7 @@ public class PlayerStats : ScriptableObject
 
     public float NormalGravity;
     public float WallrunGravity;
+    public float WallslideGravity;
     public float FallingGravityMultiplier;
 
     [ReadOnly, SerializeField] public float CurrentGravity;
