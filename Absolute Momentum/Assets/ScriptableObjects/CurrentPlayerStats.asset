@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef464e9f8b6dd1747993335ea6a2723c, type: 3}
   m_Name: CurrentPlayerStats
   m_EditorClassIdentifier: 
-  SprintAcceleration: 1
+  SprintAcceleration: 1.2
   GroundDrag: 0
   GroundNoInputDeceleration: 90
   StickToSlopeForce: 100
@@ -283,8 +283,9 @@ MonoBehaviour:
   JumpForce: 15
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 20
-  JumpFrameBufferAmount: 10
+  JumpBufferAmount: 0.5
   FallSpeedLimit: 60
+  coyoteTime: 0.25
   DashSpeed: 50
   DashTime: 0.2
   velocityChangeMidDashStrength: 0.02
