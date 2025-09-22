@@ -13,11 +13,11 @@ public class PlayerJumpManager : NetworkBehaviour
     [SerializeField] private Player player;
     [SerializeField] private PlayerInput playerInput;
     private PlayerStats playerStats => player.stats;
-    float FrameBufferNum => playerStats.JumpFrameBufferAmount;
+    float JumpBufferTime => playerStats.JumpBufferAmount;
     float JumpForce => playerStats.JumpForce;
     private float downwardForce => playerStats.EndJumpEarlyForceScale;
 
-    private int framesSinceLastSpacebar, framesSinceOnGround;
+    private float timeSinceLastSpacebar, timeSinceOnGround, coyoteTimer;
     private bool jumping;
     private bool jumpEnded;
 
@@ -27,8 +27,8 @@ public class PlayerJumpManager : NetworkBehaviour
         {
             return;
         }
-        framesSinceLastSpacebar = (int)FrameBufferNum; // ensure player doesn't jump on start
-        framesSinceOnGround = (int)FrameBufferNum;
+        timeSinceLastSpacebar = JumpBufferTime; // ensure player doesn't jump on start
+        timeSinceOnGround = JumpBufferTime;
     }
 
     public void Update()
@@ -38,7 +38,7 @@ public class PlayerJumpManager : NetworkBehaviour
         // From update
         if (player.playerInput.jumpPressedThisFrame)
         {
-            framesSinceLastSpacebar = 0;
+            timeSinceLastSpacebar = 0;
         }
         
         if((player.groundSensor.grounded || player.slopeSensor.isOnSlope) && rb.linearVelocity.y < 0)
@@ -54,24 +54,24 @@ public class PlayerJumpManager : NetworkBehaviour
         
         if (player.stateMachine.currentState is not PlayerAirborne && (player.groundSensor.grounded || player.slopeSensor.isOnSlope))
         {
-            framesSinceOnGround = 0;
+            timeSinceOnGround = 0;
         }
         else
         {
-            framesSinceOnGround++;
+            timeSinceOnGround += Time.deltaTime;
         }
-        framesSinceLastSpacebar++;
-        if (framesSinceLastSpacebar < FrameBufferNum)
+        timeSinceLastSpacebar+= Time.deltaTime;
+        if (timeSinceLastSpacebar < JumpBufferTime)
         {
             AttemptJump();
         }
         
         
         //creates variable jump, adds downward force if player lets go of space making character fall faster leading to smaller jump
-        if (jumping && framesSinceOnGround > -1 && !jumpEnded && !playerInput.jumpHeld && framesSinceOnGround <= playerStats.EndJumpEarlyTime && player.stateMachine.currentState == player.airborne)
+        if (jumping && timeSinceOnGround > -1 && !jumpEnded && !playerInput.jumpHeld && timeSinceOnGround <= playerStats.EndJumpEarlyTime && player.stateMachine.currentState == player.airborne)
         {
             Debug.Log("end jump early" + rb.linearVelocity.y);
-            Debug.Log("Frames since on ground: " + framesSinceOnGround);
+            Debug.Log("Frames since on ground: " + timeSinceOnGround);
             jumpEnded = true;
             rb.AddForce(Vector3.down * Mathf.Abs(rb.linearVelocity.y) * downwardForce * Time.deltaTime * 100, ForceMode.Impulse);
         }
@@ -80,7 +80,7 @@ public class PlayerJumpManager : NetworkBehaviour
     void AttemptJump()
     {
         // If its been too long since the last jump input, return
-        if (framesSinceOnGround >= FrameBufferNum && !jumping)
+        if (timeSinceOnGround >= JumpBufferTime && !jumping)
         {
             player.leavingGround = false;
             return;
@@ -99,10 +99,10 @@ public class PlayerJumpManager : NetworkBehaviour
             }
             
             
-            Debug.Log("Jump: " + framesSinceLastSpacebar);
+            Debug.Log("Jump: " + timeSinceLastSpacebar);
             
             // If we buffer our jump, reset our y velocity before the jump
-            if (framesSinceLastSpacebar != 1)
+            if (timeSinceLastSpacebar != 1)
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             }
@@ -117,8 +117,8 @@ public class PlayerJumpManager : NetworkBehaviour
         
         jumping = true;
 
-        framesSinceLastSpacebar = (int)FrameBufferNum; // ensure two jumps don't happen off one input
-        framesSinceOnGround = -1; // magic� (look at fixed update)
+        timeSinceLastSpacebar = JumpBufferTime; // ensure two jumps don't happen off one input
+        timeSinceOnGround = 0; // magic� (look at fixed update)
     }
 
     private void OnDrawGizmos()
@@ -129,7 +129,7 @@ public class PlayerJumpManager : NetworkBehaviour
             GUIStyle style = new GUIStyle();
             style.alignment = TextAnchor.MiddleCenter;
             style.normal.textColor = Color.white;
-            UnityEditor.Handles.Label(transform.position + Vector3.up * 2.5f, $"Ticks since: Spacebar: {framesSinceLastSpacebar} Ground: {framesSinceOnGround}", style);
+            UnityEditor.Handles.Label(transform.position + Vector3.up * 2.5f, $"Ticks since: Spacebar: {timeSinceLastSpacebar} Ground: {timeSinceOnGround}", style);
         }
         #endif
     }
