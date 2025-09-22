@@ -6065,7 +6065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1711432077
 Transform:
   m_ObjectHideFlags: 0
@@ -6952,17 +6952,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3603984886895568321, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5759405135069350176, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
       propertyPath: m_Name
       value: TestPlayerSpawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 5759405135069350176, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6694645402369394005, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6970,11 +6962,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6694645402369394005, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.22
+      value: 1.34
       objectReference: {fileID: 0}
     - target: {fileID: 6694645402369394005, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.45
+      value: 6.79
       objectReference: {fileID: 0}
     - target: {fileID: 6694645402369394005, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7003,10 +6995,6 @@ PrefabInstance:
     - target: {fileID: 6694645402369394005, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8284596599084890897, guid: 01ab030de306f754f8dbd1a147013dd9, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
