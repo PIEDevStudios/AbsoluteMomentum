@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 public class RaceManager : NetworkSingletonPersistent<RaceManager>
 {
     [SerializeField] private float countdownTime = 3f, introJingleDelay = 2f;
-    [SerializeField] private Vector3[] startPositions;
+    private List<Vector3> startPositions;
     [field:SerializeField] public String[] levelNames { get; private set; }
     [field:SerializeField] public String lobbyName { get; private set; }
     private int currentTeleportIndex;
@@ -25,7 +25,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     [SerializeField] private int numCheckpoints, numLaps = 3;
     // Network variable for countdown timer
     private NetworkVariable<float> countdownTimer = new NetworkVariable<float>(-1f, NetworkVariableReadPermission.Everyone);
-
+    private NetworkVariable<int> raceScene  = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone);
 
     public Action OnTimeSubmitted;
     
@@ -38,6 +38,21 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         NetworkManager.Singleton.OnClientConnectedCallback += AddClientReadyStatus;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
+    }
+
+    public void SetRaceScene(int raceSceneIndex)
+    {
+        raceScene.Value = raceSceneIndex;
+    }
+
+    public string GetRaceScene()
+    {
+        return levelNames[raceScene.Value];
+    }
+
+    public Vector3 GetFirstStartPosition()
+    {
+        return startPositions[0];
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -66,6 +81,14 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
             playerCheckpoints[clientId] = 0;
             playerLaps[clientId] = 0;
         }
+        startPositions = new List<Vector3>();
+        
+        var spawnPositionObjects = GameObject.FindGameObjectsWithTag("SpawnPosition");
+        foreach (var spawnPosition in spawnPositionObjects)
+        {
+            startPositions.Add(spawnPosition.transform.position);
+        }
+        
         finishedPlayers.Clear();
         playerRaceTimes.Clear();
     }
@@ -113,7 +136,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
             var player = client.PlayerObject.GetComponentInChildren<Player>();
             if (player != null)
             {
-                player.TeleportPlayer(startPositions[currentTeleportIndex % startPositions.Length]);
+                player.TeleportPlayer(startPositions[currentTeleportIndex % startPositions.Count]);
                 currentTeleportIndex++;
             }
         }
@@ -233,7 +256,9 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     }
 
     public int GetPlayerLaps(ulong playerID) {
-        return playerLaps[playerID];
+        if(playerLaps.ContainsKey(playerID))
+            return playerLaps[playerID];
+        return -1;
     }
     
     private void CheckAllPlayersFinished()

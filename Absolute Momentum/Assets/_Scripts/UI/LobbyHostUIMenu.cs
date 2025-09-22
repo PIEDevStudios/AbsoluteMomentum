@@ -12,6 +12,7 @@ public class LobbyHostUIMenu : MonoBehaviour
     // [SerializeField] private TMP_Dropdown map;
     // [SerializeField] private TMP_Dropdown gameMd;
     [SerializeField] private GameObject lobbyGameUI;
+    [SerializeField] private TMP_Dropdown level;
 
 
     // This exists for testing
@@ -31,6 +32,8 @@ public class LobbyHostUIMenu : MonoBehaviour
         lobbyName.text = "";
         this.gameObject.SetActive(false);
         lobbyGameUI.SetActive(true);
+        RaceManager.Instance.SetRaceScene(level.value);
+    
     }
 
     public void BackLobby()

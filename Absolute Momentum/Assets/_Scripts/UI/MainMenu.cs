@@ -76,14 +76,10 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Adding maps");
         List<TMP_Dropdown.OptionData> maps = new List<TMP_Dropdown.OptionData>();
-        for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
+        foreach (var map in RaceManager.Instance.levelNames)
         {
             TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData();
-            string path = SceneUtility.GetScenePathByBuildIndex(i);
-            string sceneName = System.IO.Path.GetFileNameWithoutExtension(path);
-            Debug.Log("Adding map: " + i);
-            Debug.Log(sceneName);
-            data.text = sceneName;
+            data.text = map;
             maps.Add(data);
         }
         

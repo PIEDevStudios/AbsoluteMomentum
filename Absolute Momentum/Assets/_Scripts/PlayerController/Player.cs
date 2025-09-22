@@ -112,11 +112,8 @@ public class Player : StateMachineCore
 
     public void Update()
     {
-        Debug.Log("Player preupdate");
         
         if (!IsOwner && !debugMode) return;
-        
-        Debug.Log("Player Update");
         
         Application.targetFrameRate = framerate;
 
@@ -321,7 +318,9 @@ public class Player : StateMachineCore
     {
         // Small delay to make sure everything's initialized (optional, but often useful)
         yield return new WaitForSeconds(0.5f);
-
+        
+        spawnPos = RaceManager.Instance.GetFirstStartPosition();
+        
         while (RaceManager.Instance == null)
         {
             Debug.Log("Waiting for RaceManager...");

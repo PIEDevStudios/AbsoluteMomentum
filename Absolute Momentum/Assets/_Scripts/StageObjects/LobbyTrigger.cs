@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class LobbyTrigger : NetworkBehaviour
 {
-    [SerializeField] private string SceneName;
     [SerializeField] private TextMeshPro LobbyText;
     [SerializeField] private TMP_Text LobbyCountdown;
     [SerializeField] private float countdown = 3f;
@@ -23,8 +22,6 @@ public class LobbyTrigger : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(!IsServer) return;
-        
-        Debug.Log("TRIGGER" + other);
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerReady();
@@ -34,7 +31,7 @@ public class LobbyTrigger : NetworkBehaviour
     private IEnumerator Countdown()
     {
         float currentCountdown = countdown;
-
+        Debug.Log("Starting Countdown");
         while (currentCountdown >= 0)
         {
             if (IsServer && numPlayersReady != NetworkManager.Singleton.ConnectedClientsList.Count)
@@ -68,7 +65,7 @@ public class LobbyTrigger : NetworkBehaviour
         // AudioManager.Instance.SetMusicArea(AudioManager.MusicArea.Level);
         if (IsServer)
         {
-            NetworkManager.Singleton.SceneManager.LoadScene(SceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene(RaceManager.Instance.GetRaceScene(), UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
     }
     private void PlayerReady()
@@ -97,6 +94,8 @@ public class LobbyTrigger : NetworkBehaviour
     private void OnTriggerExit(Collider other)
     {
         if(!IsServer) return;
+        
+        Debug.Log("Removing Player from ready list");
         
         if (other.gameObject.CompareTag("Player"))
         {
