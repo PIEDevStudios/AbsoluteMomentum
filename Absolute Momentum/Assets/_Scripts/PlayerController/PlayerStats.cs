@@ -63,7 +63,7 @@ public class PlayerStats : ScriptableObject
     public float JumpForce;
     public float EndJumpEarlyForceScale;
     public float EndJumpEarlyTime;
-    [FormerlySerializedAs("JumpFrameBufferAmount")] public uint JumpBufferAmount;
+    public float JumpBufferAmount;
     public float FallSpeedLimit;
     public float coyoteTime;
 

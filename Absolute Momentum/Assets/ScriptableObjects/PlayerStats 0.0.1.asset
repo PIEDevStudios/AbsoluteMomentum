@@ -137,8 +137,13 @@ MonoBehaviour:
   SlideDrag: 0
   BoostYVeloMult: 0
   SlopeSlideForce: 30
+  SlideTurnMult:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   SlideGroundAcceleration: 1200
-  SlideAirAcceleration: 5000
   slidePlayerScale: {x: 1, y: 1, z: 1}
   slideDragCurve:
     serializedVersion: 2
@@ -281,13 +286,15 @@ MonoBehaviour:
   gravityEnabled: 1
   NormalGravity: 30
   WallrunGravity: 14
+  WallslideGravity: 0
   FallingGravityMultiplier: 1.25
   CurrentGravity: 0
   JumpForce: 15
   EndJumpEarlyForceScale: 0.5
   EndJumpEarlyTime: 20
-  JumpFrameBufferAmount: 10
+  JumpBufferAmount: 0
   FallSpeedLimit: 60
+  coyoteTime: 0
   DashSpeed: 50
   DashTime: 0.2
   velocityChangeMidDashStrength: 0.02

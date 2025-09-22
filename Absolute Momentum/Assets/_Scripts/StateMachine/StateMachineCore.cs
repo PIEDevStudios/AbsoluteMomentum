@@ -85,7 +85,7 @@ public abstract class StateMachineCore : NetworkBehaviour
                 style.normal.textColor = Color.red;
             }
             style.fontSize = 40;
-            UnityEditor.Handles.Label(transform.position + Vector3.up * 3, "Active States: " + string.Join(" > ", states), style);
+            UnityEditor.Handles.Label(transform.position + Vector3.up, "Active States: " + string.Join(" > ", states), style);
         
         }
         #endif
