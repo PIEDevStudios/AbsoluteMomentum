@@ -15,7 +15,6 @@ public class PlayerSlide : State
         
         enterHitboxScale = colliderPivot.localScale;
         colliderPivot.localScale = player.stats.slidePlayerScale;
-        graphics.localScale = player.stats.slidePlayerScale;
         
         
         if (!player.groundSensor.IsGroundedCoyote && !player.slopeSensor.isOnSlope)
@@ -46,7 +45,6 @@ public class PlayerSlide : State
     {
         base.DoExitLogic();
         colliderPivot.localScale = enterHitboxScale;
-        graphics.localScale = enterHitboxScale;
     }
 
 
