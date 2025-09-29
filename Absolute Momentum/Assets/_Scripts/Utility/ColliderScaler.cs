@@ -4,6 +4,7 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class ColliderScaler : MonoBehaviour
 {
+    [SerializeField] private float padding = 10f;
     [ContextMenu("Scale Collider to Fit Scene")]
     public void ScaleColliderToFitScene()
     {
@@ -15,7 +16,7 @@ public class ColliderScaler : MonoBehaviour
             Debug.LogError("No Collider found on this GameObject.");
             return;
         }
-
+        ResetCollider(collider);
         Bounds sceneBounds = CalculateSceneBounds();
         if (sceneBounds.size == Vector3.zero)
         {
@@ -29,7 +30,7 @@ public class ColliderScaler : MonoBehaviour
         if (collider is BoxCollider boxCollider)
         {
             boxCollider.center = sceneBounds.center - transform.position;
-            boxCollider.size = sceneBounds.size;
+            boxCollider.size = sceneBounds.size + Vector3.one * padding;
         }
         else if (collider is SphereCollider sphereCollider)
         {
@@ -48,6 +49,7 @@ public class ColliderScaler : MonoBehaviour
 
     private Bounds CalculateSceneBounds()
     {
+
         Bounds bounds = new Bounds(Vector3.zero, Vector3.zero);
         Renderer[] renderers = FindObjectsOfType<Renderer>();
         Collider[] colliders = FindObjectsOfType<Collider>();
