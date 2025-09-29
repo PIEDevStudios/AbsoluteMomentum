@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 141a11d251921a14f94ce7d13ce0e286, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 861d581c191bf0e4a817f4aee924bb57, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -104,11 +104,13 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: 3
+    - _Depth: 0.25
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Distortion: 0.25
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _EdgeCutoff: 0.95
     - _EnvironmentReflections: 1
     - _ExtraLines: 1
     - _Float: 1
@@ -123,7 +125,7 @@ Material:
     - _Line_Cutoff: 0.1
     - _Metallic: 0
     - _NormalScale: -0
-    - _NormalStrength: 1
+    - _NormalStrength: 0.25
     - _OcclusionStrength: 1
     - _Panning_Speed: 1
     - _Parallax: 0.005
@@ -133,6 +135,7 @@ Material:
     - _ReceiveShadows: 1
     - _RefractionScale: 0.5
     - _RefractionStrength: 0.01
+    - _Scale: 5
     - _SineLineCutoff: 0.5
     - _SineLines: 1.9
     - _Smoothness: 0.5
@@ -155,6 +158,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighlightColor: {r: 0.93333334, g: 0.7098134, b: 0, a: 0}
     - _HorizonColor: {r: 0.32941175, g: 1, b: 0.87759197, a: 1}
+    - _NormalSpeed: {r: 1, g: 1, b: 0, a: 0}
     - _ShallowColor: {r: 0.011764705, g: 0.97135246, b: 1, a: 0.8}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
