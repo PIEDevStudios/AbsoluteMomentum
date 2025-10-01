@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DirectionalArrow
-  m_Shader: {fileID: -6465566751694194690, guid: 4d8e4aa2de4c1174d8954523b34703c0, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b7e7bcaac7bb9a74ea5003c59f1d03f8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -115,7 +115,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _MinPatternTransparency: 0
+    - _MinPatternTransparency: 0.661
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -133,12 +133,12 @@ Material:
     - _ZWrite: 1
     - _ssaoScale: 10
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.94136554, b: 0.6839622, a: 1}
+    - _BaseColor: {r: 1.8892621, g: 1.6490941, b: 0.5792549, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeColor: {r: 1, g: 1, b: 1, a: 0}
+    - _EdgeColor: {r: 1, g: 0.8809101, b: 0.5896226, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MiddleColor: {r: 1, g: 1, b: 1, a: 0}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
+    - _MiddleColor: {r: 1.6603774, g: 1.4406174, b: 0.61872554, a: 0}
+    - _OutlineColor: {r: 1, g: 0.9147984, b: 0.7688679, a: 0}
     - _PatternScale: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
