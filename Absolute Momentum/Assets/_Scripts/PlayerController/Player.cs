@@ -389,7 +389,8 @@ public class Player : StateMachineCore
 
     public void TeleportPlayer(Vector3 position)
     {
-        rb.position = position;
+        rb.MovePosition(position);
+        rb.MovePosition(position);
     }
 
     private IEnumerator RespawnDuringDeathScreen(float respawnDelay)

@@ -136,6 +136,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
             var player = client.PlayerObject.GetComponentInChildren<Player>();
             if (player != null)
             {
+                Debug.Log($"Teleport Player {clientId} to {startPositions[currentTeleportIndex % startPositions.Count]}");
                 player.TeleportPlayer(startPositions[currentTeleportIndex % startPositions.Count]);
                 currentTeleportIndex++;
             }
