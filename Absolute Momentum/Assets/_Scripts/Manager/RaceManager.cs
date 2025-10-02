@@ -128,7 +128,13 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         TeleportPlayerToStart(clientId);
         CheckAllPlayersReady();
     }
-
+    // Called by players when their scene is fully loaded and they are ready
+    [Rpc(SendTo.SpecifiedInParams, RequireOwnership = false)]
+    public void TeleportToStartClientRpc(Vector3 position, RpcParams rpcParams)
+    {
+        var player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<Player>();
+        player?.TeleportPlayer(position);
+    }
     private void TeleportPlayerToStart(ulong clientId)
     {
         if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientId, out var client))
@@ -137,6 +143,8 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
             if (player != null)
             {
                 Debug.Log($"Teleport Player {clientId} to {startPositions[currentTeleportIndex % startPositions.Count]}");
+
+                TeleportToStartClientRpc(startPositions[currentTeleportIndex % startPositions.Count], RpcTarget.Single(clientId, RpcTargetUse.Temp));
                 player.TeleportPlayer(startPositions[currentTeleportIndex % startPositions.Count]);
                 currentTeleportIndex++;
             }
