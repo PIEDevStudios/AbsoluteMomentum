@@ -76,10 +76,10 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Adding maps");
         List<TMP_Dropdown.OptionData> maps = new List<TMP_Dropdown.OptionData>();
-        foreach (var map in RaceManager.Instance.levelNames)
+        foreach (var map in RaceManager.Instance.Races)
         {
             TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData();
-            data.text = map;
+            data.text = map.sceneName;
             maps.Add(data);
         }
         

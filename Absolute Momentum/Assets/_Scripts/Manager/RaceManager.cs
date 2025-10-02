@@ -12,7 +12,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 {
     [SerializeField] private float countdownTime = 3f, introJingleDelay = 2f;
     private List<Vector3> startPositions;
-    [field:SerializeField] public String[] levelNames { get; private set; }
+    [field:SerializeField] public RaceData[] Races { get; private set; }
     [field:SerializeField] public String lobbyName { get; private set; }
     private int currentTeleportIndex;
 
@@ -22,12 +22,19 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
     private Dictionary<ulong, int> playerCheckpoints = new Dictionary<ulong, int>();
     private Dictionary<ulong, int> playerLaps = new Dictionary<ulong, int>();
     private HashSet<ulong> finishedPlayers = new HashSet<ulong>();
-    [SerializeField] private int numCheckpoints, numLaps = 3;
     // Network variable for countdown timer
     private NetworkVariable<float> countdownTimer = new NetworkVariable<float>(-1f, NetworkVariableReadPermission.Everyone);
     private NetworkVariable<int> raceScene  = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone);
-
+    
     public Action OnTimeSubmitted;
+
+    [Serializable]
+    public struct RaceData
+    {
+        public string sceneName;
+        public int numCheckpoints;
+        public int numLaps;
+    }
     
     public override void OnNetworkSpawn()
     {
@@ -47,7 +54,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
     public string GetRaceScene()
     {
-        return levelNames[raceScene.Value];
+        return Races[raceScene.Value].sceneName;
     }
 
     public Vector3 GetFirstStartPosition()
@@ -57,10 +64,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (levelNames.Contains(scene.name))
-        {
-            ResetValues();
-        }
+        ResetValues();
     }
 
     private void AddClientReadyStatus(ulong clientId)
@@ -239,14 +243,14 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
             playerCheckpoints[playerID] = checkpointID;
             player.SetSpawnPoint(spawnPos.position);
         }
-        else if (lastCheckpoint == numCheckpoints && checkpointID == 1) {
+        else if (lastCheckpoint == Races[raceScene.Value].numCheckpoints && checkpointID == 1) {
             playerLaps[playerID] += 1;
             Debug.Log($"Player {playerID} Completed A Lap! (Current Lap: {playerLaps[playerID]}");
             playerCheckpoints[playerID] = 1;
             player.SetSpawnPoint(spawnPos.position);    
             
             
-            if (player.IsOwner && playerLaps[playerID] >= numLaps)
+            if (player.IsOwner && playerLaps[playerID] >= Races[raceScene.Value].numLaps)
             {
                 Debug.Log("Player finished race");
                 player.playerRaceTimeManager.StopTimer();
@@ -255,7 +259,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
                 
             if (!IsServer) return; // Only the server should handle player finish tracking
                 
-            if (!finishedPlayers.Contains(playerID) && playerLaps[playerID] >= numLaps)
+            if (!finishedPlayers.Contains(playerID) && playerLaps[playerID] >= Races[raceScene.Value].numLaps)
             {
                 finishedPlayers.Add(playerID);
                 Debug.Log($"Player {playerID} finished!");

@@ -176,14 +176,19 @@ public class Player : StateMachineCore
     {
         if (!IsOwner && !debugMode) return;
 
-        if (RaceManager.Instance.levelNames.Contains(scene.name)) 
+
+        foreach (var race in RaceManager.Instance.Races)
         {
-            Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
-            playerRaceTimeManager.ResetTimer();
-            playerUI.HideAllUI();
-            itemManager.ClearItems();
-            DisablePlayerInput();
-            StartCoroutine(NotifyRaceManagerWhenLoaded());
+            if (race.sceneName.ContainsInsensitive(scene.name))
+            {
+                Debug.Log("Player Race Scene Loaded, CLIENT ID: " + NetworkManager.Singleton.LocalClientId);
+                playerRaceTimeManager.ResetTimer();
+                playerUI.HideAllUI();
+                itemManager.ClearItems();
+                DisablePlayerInput();
+                StartCoroutine(NotifyRaceManagerWhenLoaded());
+                return;
+            }
         }
     }
     

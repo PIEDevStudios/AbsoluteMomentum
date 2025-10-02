@@ -67765,14 +67765,17 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   countdownTime: 3
   introJingleDelay: 3.5
-  <levelNames>k__BackingField:
-  - TemplateRaceScene
-  - BenLevel1
-  - Nate Track
-  - Nate Track 2
+  <Races>k__BackingField:
+  - sceneName: BenLevel1
+    numCheckpoints: 4
+    numLaps: 3
+  - sceneName: Nate Track
+    numCheckpoints: 2
+    numLaps: 3
+  - sceneName: Nate Track 2
+    numCheckpoints: 4
+    numLaps: 3
   <lobbyName>k__BackingField: LobbyConcepts
-  numCheckpoints: 4
-  numLaps: 3
 --- !u!1001 &1465082704
 PrefabInstance:
   m_ObjectHideFlags: 0
