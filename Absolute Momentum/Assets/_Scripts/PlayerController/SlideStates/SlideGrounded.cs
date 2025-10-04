@@ -75,8 +75,6 @@ public class SlideGrounded : State
         Vector3 forceVector = playerInputVector.normalized * (player.stats.SlideGroundAcceleration * stats.SlideTurnMult.Evaluate(flatVel.magnitude));
         Vector3 forceInVeloDirection = Vector3.Dot(forceVector, flatVel.normalized) * flatVel.normalized;
         Vector3 perpendicularForce = forceVector - forceInVeloDirection;
-        Debug.Log("Flat Vel: " + flatVel);
-        Debug.Log("Corrected Force Vector: " + perpendicularForce);
         rb.AddForce(perpendicularForce, ForceMode.Force);
         StickToSlope();
         

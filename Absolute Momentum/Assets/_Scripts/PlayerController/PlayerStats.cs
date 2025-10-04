@@ -10,6 +10,8 @@ public class PlayerStats : ScriptableObject
     [Header("Ground Movement")]
     // public float MaxSprintSpeed;
     public float SprintAcceleration;
+
+    public float CrouchAcceleration;
     public float GroundDrag;
     public float GroundNoInputDeceleration;
     public float StickToSlopeForce;

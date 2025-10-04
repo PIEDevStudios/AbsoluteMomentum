@@ -32,12 +32,4 @@ public class PlayerIdle : State
         }
     }
     
-    // private void OnTriggerStay(Collider other)
-    // {
-    //     if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-    //     {
-    //         rb.linearDamping = 100;
-    //     }
-    // }
-    
 }

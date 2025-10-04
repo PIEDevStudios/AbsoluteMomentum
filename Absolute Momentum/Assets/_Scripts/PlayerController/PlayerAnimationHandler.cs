@@ -15,6 +15,7 @@ public class PlayerAnimationHandler : NetworkBehaviour
         {
             player.stateMachine.OnStateChanged += OnStateChanged;
             player.slide.stateMachine.OnStateChanged += OnStateChanged;
+            player.move.stateMachine.OnStateChanged += OnStateChanged;
         }
     }
 
@@ -45,6 +46,9 @@ public class PlayerAnimationHandler : NetworkBehaviour
     private void OnStateChanged(object sender, StateMachine.OnStateChangedEventArgs eventArgs)
     {
         if (!IsOwner) return;
+
+        if (eventArgs.nextState == player.move) return;
+        
         if (eventArgs.nextState == player.slide || eventArgs.nextState == player.slide.grounded || eventArgs.nextState == player.slide.airborne)
         {
             animator.SetBool("Slide", true);
@@ -57,16 +61,17 @@ public class PlayerAnimationHandler : NetworkBehaviour
         }
         
         SetTrigger(getTriggerName(eventArgs.nextState));
+        Debug.Log("Output Trigger: " + getTriggerName(eventArgs.nextState));
     }
 
     private String getTriggerName(State state)
     {
-        
+        Debug.Log("Transitioning to: " + state);
         if (state == player.idle)
         {
             return "Idle";
         }
-        if (state == player.move || state == player.slide.grounded)
+        if (state == player.slide.grounded || state == player.move.runState)
         {
             return "Run";
         }
@@ -77,6 +82,11 @@ public class PlayerAnimationHandler : NetworkBehaviour
         if (state == player.wallrun || state == player.wallSlide)
         {
             return "Wallrun";
+        }
+
+        if (state == player.move.crouchState)
+        {
+            return "Crouch Walk";
         }
 
         return "";
@@ -91,6 +101,8 @@ public class PlayerAnimationHandler : NetworkBehaviour
         animator.ResetTrigger("Run");
         animator.ResetTrigger("Wallrun");
         animator.ResetTrigger("Idle");
+        animator.ResetTrigger("Crouch Walk");
+
     }
 
     /// <summary>

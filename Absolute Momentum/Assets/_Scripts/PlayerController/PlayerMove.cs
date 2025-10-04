@@ -5,11 +5,15 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
 using FMODUnity;
+using UnityEngine.Serialization;
 
 public class PlayerMove : State
 {
     [SerializeField] private Player player;
-    [SerializeField] private Transform orientation;
+    [SerializeField] private Transform orientation, colliderPivot; 
+    public State runState;
+    public State crouchState;
+    private Vector3 enterHitboxScale;
     private float maxSpeed;
     private float acceleration;
     
@@ -18,6 +22,8 @@ public class PlayerMove : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        stateMachine.SetState(player.playerInput.slideHeld ? crouchState : runState, true);
+        enterHitboxScale = colliderPivot.localScale;
         rb.linearDamping = stats.GroundDrag;
         player.ChangeGravity(0);
         player.playerSpeedManager.currentCurve = stats.groundDragCurve;
@@ -26,11 +32,14 @@ public class PlayerMove : State
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        colliderPivot.localScale = enterHitboxScale;
         player.ChangeGravity(stats.NormalGravity);
     }
 
     public override void DoUpdateState()
     {
+        stateMachine.SetState(player.playerInput.slideHeld ? crouchState : runState);
+        colliderPivot.localScale = player.playerInput.slideHeld ? player.stats.slidePlayerScale : enterHitboxScale;
         base.DoUpdateState();
     }
     public override void DoFixedUpdateState()
@@ -43,9 +52,11 @@ public class PlayerMove : State
         Vector3 forwardOriented = Vector3.Cross(orientation.right, hit.normal).normalized;
         Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
         
+        float acceleration = player.playerInput.slideHeld ? stats.CrouchAcceleration : stats.SprintAcceleration;
+        
         // Adds a force to the player in the direction they are pressing relative to the camera
         Debug.DrawRay(transform.position, (forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x).normalized * (stats.SprintAcceleration * 100f), Color.green);
-        rb.AddForce((forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x).normalized * (stats.SprintAcceleration * 100f));
+        rb.AddForce((forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x).normalized * (acceleration * 100f));
         
         NoInputDeceleration();
         
