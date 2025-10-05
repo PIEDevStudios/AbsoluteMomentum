@@ -28,6 +28,7 @@ public class Player : StateMachineCore
     [field: SerializeField] public PlayerWallrun wallrun { get; private set; }
     [field: SerializeField] public PlayerDash dash { get; private set; }
     [field: SerializeField] public PlayerWallSlide wallSlide { get; private set; }
+    [field: SerializeField] public PlayerVault vault { get; private set; }
 
     // Sensor scripts used for ground checks and wall checks
     [field:HorizontalLine(color: EColor.Gray)]
@@ -35,6 +36,7 @@ public class Player : StateMachineCore
     [field:SerializeField] public GroundSensor groundSensor {get; private set;}
     [field:SerializeField] public WallSensor wallSensor {get; private set;}
     [field:SerializeField] public SlopeSensor slopeSensor {get; private set;}
+    [field:SerializeField] public VaultSensor VaultSensor {get; private set;}
 
     
     // References to other components on the player
@@ -247,7 +249,7 @@ public class Player : StateMachineCore
         bool nonAirborneGroundCheck = stateMachine.currentState == idle || stateMachine.currentState == move;
         
         Vector3 flatVel = Vector3.ProjectOnPlane(rb.linearVelocity, slopeSensor.hit.normal);
-
+        
         // Transition to dash
         // if (playerInput.dashPressedThisFrame && true) // TODO: ensure player has whatever item is required to dash
         // {
@@ -269,6 +271,13 @@ public class Player : StateMachineCore
         }
         
         Vector3 XYVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
+        if (stateMachine.currentState == airborne && VaultSensor.CheckForLedge(out RaycastHit ledgeHit))
+        {
+            stateMachine.SetState(vault);
+            return;
+        }
+        
         
         // Transition to wallrun
         if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) 
@@ -279,17 +288,17 @@ public class Player : StateMachineCore
             return;
         }
         
-        // Transition to wallSlide
-        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight || wallSensor.wallForward) 
-            && XYVel.magnitude <= stats.minWallrunEnterSpeed && stateMachine.currentState != slide && stateMachine.currentState != wallrun && stateMachine.currentState != wallSlide 
-            && Time.time - wallrunResetTime > stats.wallrunResetTime )
-        {
-            stateMachine.SetState(wallSlide);
-            return;
-        }
+        // // Transition to wallSlide
+        // if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight || wallSensor.wallForward) 
+        //     && XYVel.magnitude <= stats.minWallrunEnterSpeed && stateMachine.currentState != slide && stateMachine.currentState != wallrun && stateMachine.currentState != wallSlide 
+        //     && Time.time - wallrunResetTime > stats.wallrunResetTime )
+        // {
+        //     stateMachine.SetState(wallSlide);
+        //     return;
+        // }
         
         // Transition to airborne
-        if (!groundSensor.IsGroundedCoyote && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun || stateMachine.currentState == wallSlide) || stateMachine.currentState.isComplete))
+        if (!groundSensor.IsGroundedCoyote && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun || stateMachine.currentState == wallSlide || stateMachine.currentState == vault) || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(airborne);
             return;

@@ -1288,6 +1288,7 @@ Transform:
   - {fileID: 600040470829862939}
   - {fileID: 8866534327209329395}
   - {fileID: 1165426326097932377}
+  - {fileID: 4080221796510423404}
   m_Father: {fileID: 6558729271255742777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &627870415500503277
@@ -3066,7 +3067,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2335730112591174991}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.37268764, y: -0.5841206, z: -0.34333628, w: 0.6340562}
+  m_LocalRotation: {x: -0.3727799, y: -0.58408403, z: -0.34344187, w: 0.6339785}
   m_LocalPosition: {x: 1.0816401, y: 0.081478596, z: -0.051472854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3678,6 +3679,7 @@ Transform:
   - {fileID: 8190594752977061959}
   - {fileID: 5996516877215897752}
   - {fileID: 1568568928533971993}
+  - {fileID: 8914919487603035394}
   m_Father: {fileID: 6558729271255742777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3032402057309088248
@@ -4492,9 +4494,11 @@ MonoBehaviour:
   <wallrun>k__BackingField: {fileID: 2744010714141051844}
   <dash>k__BackingField: {fileID: 0}
   <wallSlide>k__BackingField: {fileID: 6858612717320064349}
+  <vault>k__BackingField: {fileID: 8306439990349877786}
   <groundSensor>k__BackingField: {fileID: 2752407882252921317}
   <wallSensor>k__BackingField: {fileID: 8600541307452225779}
   <slopeSensor>k__BackingField: {fileID: 1269488202452132282}
+  <VaultSensor>k__BackingField: {fileID: 7080381429812518175}
   <graphics>k__BackingField: {fileID: 376345292301143635}
   <playerObj>k__BackingField: {fileID: 6558729271255742777}
   <orientation>k__BackingField: {fileID: 6228127852056927477}
@@ -6281,6 +6285,56 @@ Transform:
   - {fileID: 8159711567709692722}
   m_Father: {fileID: 7083855944892098778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5212981773436901747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8914919487603035394}
+  - component: {fileID: 7080381429812518175}
+  m_Layer: 0
+  m_Name: Vault Sensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8914919487603035394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212981773436901747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6352673253928390308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7080381429812518175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5212981773436901747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef150c510436c1740b3db0e383ceefa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ledgeCheckDistance: 0.6
+  ledgeHeight: 1.4
+  ledgeLowerHeight: 0.5
+  ledgeLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &5335325552505580862
 GameObject:
   m_ObjectHideFlags: 0
@@ -7092,6 +7146,55 @@ MonoBehaviour:
   localInertiaProperty: 0
   windInfluenceProperty: 0
   blendWeightProperty: 0
+--- !u!1 &5625991118170907982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4080221796510423404}
+  - component: {fileID: 8306439990349877786}
+  m_Layer: 0
+  m_Name: Vault
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4080221796510423404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5625991118170907982}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7656827757809234585}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8306439990349877786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5625991118170907982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b04a20d6dfaf2342b2fd852471ea095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  player: {fileID: 927473891614420570}
+  climbDuration: 0.2
+  climbUpOffset: 1
+  wallOffset: 0.3
 --- !u!1 &5655221870588702756
 GameObject:
   m_ObjectHideFlags: 0
@@ -22308,7 +22411,7 @@ MonoBehaviour:
       - Value: 2
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.20006573
+      maxConnectionDistance: 0.20006572
       userEdit: 0
     preBuildData:
       enabled: 0
