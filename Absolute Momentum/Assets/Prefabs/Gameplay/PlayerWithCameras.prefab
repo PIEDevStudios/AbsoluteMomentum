@@ -3066,8 +3066,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2335730112591174991}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.49145496, y: 0.30004835, z: -0.18517296, w: 0.7963379}
-  m_LocalPosition: {x: -0.63371253, y: 4.022, z: -0.77356863}
+  m_LocalRotation: {x: -0.37268764, y: -0.5841206, z: -0.34333628, w: 0.6340562}
+  m_LocalPosition: {x: 1.0816401, y: 0.081478596, z: -0.051472854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3150,7 +3150,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 3
   HorizontalAxis:
-    Value: 39.324554
+    Value: -87.27548
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -3160,7 +3160,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 45
+    Value: -8.129849
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -3984,6 +3984,13 @@ MonoBehaviour:
     TransitionIndex: 4
   - IsCrossFadeExit: 0
     Layer: 0
+    OriginatingState: 2081823275
+    DestinationState: 572830746
+    TransitionDuration: 0.25
+    TriggerNameHash: 572830746
+    TransitionIndex: 2
+  - IsCrossFadeExit: 0
+    Layer: 0
     OriginatingState: 640249298
     DestinationState: 1748754976
     TransitionDuration: 0.2497561
@@ -4436,6 +4443,7 @@ GameObject:
   - component: {fileID: 1512026121112661637}
   - component: {fileID: 6651059187819503534}
   - component: {fileID: 7250414778010156504}
+  - component: {fileID: 2439413249763523404}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4698,6 +4706,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &2439413249763523404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371746405641386805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833fa89383273e341a405c26e60cadf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <RayDistance>k__BackingField: 1.5
+  <MaxStepHeight>k__BackingField: 0.5
+  <MaxLerp>k__BackingField: 500
+  <Orientation>k__BackingField: {fileID: 6228127852056927477}
+  <GroundLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &3403064455577424824
 GameObject:
   m_ObjectHideFlags: 0
