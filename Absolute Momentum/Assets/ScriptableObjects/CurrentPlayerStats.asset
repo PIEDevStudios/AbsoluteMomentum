@@ -107,15 +107,15 @@ MonoBehaviour:
       time: -0.048698425
       value: 0
       inSlope: 0.0078325085
-      outSlope: 0.33790737
+      outSlope: 0.26888672
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 59.844715
-      value: 20.238426
-      inSlope: 0.33790737
+      time: 65.45744
+      value: 17.613731
+      inSlope: 0.26888672
       outSlope: -0.16965336
       tangentMode: 5
       weightedMode: 0
@@ -295,3 +295,4 @@ MonoBehaviour:
   VelocityChangeImplementation: 2
   ReorientVelocity: 1
   AddSpeedFromDash: 1
+  VaultSpeedBoost: 15

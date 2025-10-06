@@ -114,8 +114,13 @@ public class Player : StateMachineCore
 
     public void Update()
     {
-        
         if (!IsOwner && !debugMode) return;
+        
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RespawnPlayer();
+        }
         
         Application.targetFrameRate = framerate;
 
@@ -137,10 +142,7 @@ public class Player : StateMachineCore
         
         if(!debugMode) return;
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RespawnPlayer();
-        }
+
         
     }
     
@@ -272,7 +274,7 @@ public class Player : StateMachineCore
         
         Vector3 XYVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
-        if (stateMachine.currentState == airborne && VaultSensor.CheckForLedge(out RaycastHit ledgeHit))
+        if (stateMachine.currentState == airborne && VaultSensor.CheckForLedge(out RaycastHit ledgeHit) && rb.linearVelocity.y < 2f)
         {
             stateMachine.SetState(vault);
             return;
@@ -412,6 +414,7 @@ public class Player : StateMachineCore
     {
         yield return new WaitForSeconds(respawnDelay);
         rb.position = spawnPos;
+        stateMachine.SetState(idle);
     }
     
     #endregion

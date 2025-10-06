@@ -46,6 +46,7 @@ public class PlayerVault : State
 
         rb.position = targetPosition;
         isComplete = true;
+        rb.AddForce(player.playerObj.forward * player.stats.VaultSpeedBoost, ForceMode.Impulse);
     }
 
     public override void DoExitLogic()

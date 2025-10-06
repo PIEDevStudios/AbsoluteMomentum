@@ -28,7 +28,6 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        AddMapsToSelection();
         // If player is already connected (returning from a race) do NOT load menu UI
         if (NetworkManager.Singleton != null && (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsClient))
         {
@@ -38,6 +37,11 @@ public class MainMenu : MonoBehaviour
         }
         
         
+    }
+
+    public void Start()
+    {
+        AddMapsToSelection();
     }
     public void OpenLobbyMenu()
     {

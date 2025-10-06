@@ -73,6 +73,8 @@ public class PlayerStats : ScriptableObject
     public float DashSpeed;
     public float DashTime;
     public float velocityChangeMidDashStrength;
+
+
     public enum DashImpl
     {
         UseOrientation = 1,
@@ -107,4 +109,8 @@ public class PlayerStats : ScriptableObject
     public VelocityChangeImpl VelocityChangeImplementation;
     public bool ReorientVelocity;
     public DashSpeedFromImpl AddSpeedFromDash;
+    
+    
+    [Header("Vaulting")] 
+    public float VaultSpeedBoost;
 }

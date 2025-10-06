@@ -73935,6 +73935,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1721153037}
     m_Modifications:
+    - target: {fileID: 2178071878704560964, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2543933793887329125, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: mapSelection
       value: 
@@ -73965,7 +73969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7611136737919860275, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7932400233556072735, guid: d1ba8606e7c91d44baa7c893f013ca67, type: 3}
       propertyPath: m_hasFontAssetChanged
