@@ -282,7 +282,7 @@ public class Player : StateMachineCore
         
         
         // Transition to wallrun
-        if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) 
+        if (playerInput.wallrunHeld && !wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight) 
             && XYVel.magnitude >= stats.minWallrunEnterSpeed && stateMachine.currentState != slide && stateMachine.currentState != wallrun && stateMachine.currentState != wallSlide 
             && Time.time - wallrunResetTime > stats.wallrunResetTime )
         {
@@ -290,14 +290,14 @@ public class Player : StateMachineCore
             return;
         }
         
-        // // Transition to wallSlide
-        // if (!wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight || wallSensor.wallForward) 
-        //     && XYVel.magnitude <= stats.minWallrunEnterSpeed && stateMachine.currentState != slide && stateMachine.currentState != wallrun && stateMachine.currentState != wallSlide 
-        //     && Time.time - wallrunResetTime > stats.wallrunResetTime )
-        // {
-        //     stateMachine.SetState(wallSlide);
-        //     return;
-        // }
+        // Transition to wallSlide
+        if (playerInput.wallrunHeld && !wallSensor.minHeightSensor.grounded && (wallSensor.wallLeft || wallSensor.wallRight || wallSensor.wallForward) 
+            && XYVel.magnitude <= stats.minWallrunEnterSpeed && stateMachine.currentState != slide && stateMachine.currentState != wallrun && stateMachine.currentState != wallSlide 
+            && Time.time - wallrunResetTime > stats.wallrunResetTime )
+        {
+            stateMachine.SetState(wallSlide);
+            return;
+        }
         
         // Transition to airborne
         if (!groundSensor.IsGroundedCoyote && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun || stateMachine.currentState == wallSlide || stateMachine.currentState == vault) || stateMachine.currentState.isComplete))

@@ -1,5 +1,5 @@
 {
-    "name": "InputSystem_Actions",
+    "name": "PlayerInputs",
     "maps": [
         {
             "name": "Player",
@@ -99,6 +99,15 @@
                     "name": "FireMissile",
                     "type": "Button",
                     "id": "901a9de2-6323-4ef7-9ed2-906a5fe30046",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Wallrun",
+                    "type": "Button",
+                    "id": "76ffab4f-7ad5-4af5-a7f4-763fd9c75ccc",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -521,6 +530,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "FireMissile",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ad156ab-f714-4055-a9d4-dc408df04707",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Wallrun",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

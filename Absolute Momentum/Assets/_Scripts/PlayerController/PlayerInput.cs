@@ -22,6 +22,10 @@ public class PlayerInput : MonoBehaviour
     public bool slideReleasedThisFrame { get; private set; }
     public bool slideHeld { get; private set; }
     
+    
+    public bool wallrunPressedThisFrame { get; private set; }
+    public bool wallrunReleasedThisFrame { get; private set; }
+    public bool wallrunHeld { get; private set; }
     public bool ResetInput { get; private set;}
 
     public bool dashPressedThisFrame { get; private set; }
@@ -63,6 +67,10 @@ public class PlayerInput : MonoBehaviour
         slideHeld = playerActionMap.FindAction("Slide").ReadValue<float>() > 0;
         slidePressedThisFrame = playerActionMap.FindAction("Slide").WasPerformedThisFrame();
         slideReleasedThisFrame = playerActionMap.FindAction("Slide").WasReleasedThisFrame();
+        
+        wallrunHeld = playerActionMap.FindAction("Wallrun").ReadValue<float>() > 0;
+        wallrunPressedThisFrame = playerActionMap.FindAction("Wallrun").WasPerformedThisFrame();
+        wallrunReleasedThisFrame = playerActionMap.FindAction("Wallrun").WasReleasedThisFrame();
         
         dashPressedThisFrame = playerActionMap.FindAction("Dash").WasPerformedThisFrame();
         
