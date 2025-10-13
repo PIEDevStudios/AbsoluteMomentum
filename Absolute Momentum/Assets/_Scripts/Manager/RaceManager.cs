@@ -280,7 +280,7 @@ public class RaceManager : NetworkSingletonPersistent<RaceManager>
         {
             Debug.Log("All players finished! Returning to lobby...");
             LoadLobbyClientRpc();
-            TeleportAllPlayers(Vector3.up);
+            TeleportAllPlayers(new Vector3(0,10,0));
         }
     }
     

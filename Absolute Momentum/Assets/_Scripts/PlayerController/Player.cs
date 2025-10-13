@@ -180,7 +180,11 @@ public class Player : StateMachineCore
     {
         if (!IsOwner && !debugMode) return;
 
-
+        if (scene.buildIndex == 0)
+        {
+            
+        }
+        
         foreach (var race in RaceManager.Instance.Races)
         {
             if (race.sceneName.ContainsInsensitive(scene.name))
