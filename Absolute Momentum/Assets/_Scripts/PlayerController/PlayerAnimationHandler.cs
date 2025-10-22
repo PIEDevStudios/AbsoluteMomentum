@@ -7,10 +7,9 @@ public class PlayerAnimationHandler : NetworkBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private WallSensor wallSensor;
-    private Animator animator;
+    private Animator animator => player.animator;
     public override void OnNetworkSpawn()
     {
-        animator = player.animator;
         if (IsOwner)
         {
             player.stateMachine.OnStateChanged += OnStateChanged;
