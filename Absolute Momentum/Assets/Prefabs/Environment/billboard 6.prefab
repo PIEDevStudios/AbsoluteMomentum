@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< Updated upstream
 --- !u!1001 &4036509792925646483
+=======
+--- !u!1001 &1299819092824644547
+>>>>>>> Stashed changes
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,6 +12,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream
     - target: {fileID: -8679921383154817045, guid: 82ed120c594650d4da7f0971927e1058, type: 3}
       propertyPath: m_LocalPosition.x
       value: 45.5
@@ -53,6 +58,53 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 503f8c24286ff8b4c847df11d8732f5b, type: 2}
     - target: {fileID: 919132149155446097, guid: 82ed120c594650d4da7f0971927e1058, type: 3}
+=======
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.3229725
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -82.985466
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3bb2cb0647be6be4abb93b70702ab09c, type: 2}
+    - target: {fileID: 919132149155446097, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+>>>>>>> Stashed changes
       propertyPath: m_Name
       value: billboard 6
       objectReference: {fileID: 0}
@@ -60,6 +112,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+<<<<<<< Updated upstream
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 82ed120c594650d4da7f0971927e1058, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7831596838408384767}
@@ -70,12 +123,28 @@ GameObject:
   m_PrefabInstance: {fileID: 4036509792925646483}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &7831596838408384767
+=======
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6210325175116118459}
+  m_SourcePrefab: {fileID: 100100000, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+--- !u!1 &2218175948708669074 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+  m_PrefabInstance: {fileID: 1299819092824644547}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &6210325175116118459
+>>>>>>> Stashed changes
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 3802719878054069186}
+=======
+  m_GameObject: {fileID: 2218175948708669074}
+>>>>>>> Stashed changes
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -90,4 +159,8 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
+<<<<<<< Updated upstream
   m_Mesh: {fileID: 6992468949732962114, guid: 82ed120c594650d4da7f0971927e1058, type: 3}
+=======
+  m_Mesh: {fileID: 6992468949732962114, guid: 2eb0427d094d9314b9b615703c060004, type: 3}
+>>>>>>> Stashed changes

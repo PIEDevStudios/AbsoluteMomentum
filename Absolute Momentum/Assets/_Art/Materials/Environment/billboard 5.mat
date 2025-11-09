@@ -1,10 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<< Updated upstream
---- !u!114 &-4249748513835325417
-=======
 --- !u!114 &-8179067682000454315
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: billboard 1
+  m_Name: billboard 5
   m_Shader: {fileID: -6465566751694194690, guid: 851d3d4b21deae84b8007b3e997a3009, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,11 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-<<<<<<< Updated upstream
-        m_Texture: {fileID: 0}
-=======
-        m_Texture: {fileID: 2800000, guid: 54eed27a2dc3a9540bcc146921b2cd4c, type: 3}
->>>>>>> Stashed changes
+        m_Texture: {fileID: 2800000, guid: 354370383f484e4499a78cbe944b034c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
