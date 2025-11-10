@@ -56,6 +56,8 @@ public class PlayerItemManager : NetworkBehaviour
         {
             attackItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
             attackItemImage.sprite = selectedItem.PowerupIcon;
+            attackItem.player = GetComponent<Player>();
+            
         }
         if (movementItem != null)
         {
@@ -98,6 +100,8 @@ public class PlayerItemManager : NetworkBehaviour
         {
             movementItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
             movementItemImage.sprite = selectedItem.PowerupIcon;
+            movementItem.player = GetComponent<Player>();
+
         }
 
         if (attackItem != null)

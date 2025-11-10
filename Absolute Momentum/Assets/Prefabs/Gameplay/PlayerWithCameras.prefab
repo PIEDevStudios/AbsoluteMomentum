@@ -2353,7 +2353,7 @@ MonoBehaviour:
   leavingGround: 0
   spawnPos: {x: 0, y: 2, z: 0}
   framerate: -1
-  debugMode: 1
+  debugMode: 0
 --- !u!114 &860752480025509057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3227,6 +3227,7 @@ MonoBehaviour:
     CharacterPrefab: {fileID: 8716332236102775476, guid: 89bce2f262a481044ad2d1d133b40704, type: 3}
   - character: 1
     CharacterPrefab: {fileID: 2901953196026605472, guid: 096847a494d9f1142bb249c6696755c6, type: 3}
+  ownerNetworkAnimator: {fileID: 3601426322581584612}
 --- !u!1 &4633921768735699778
 GameObject:
   m_ObjectHideFlags: 0
