@@ -6,6 +6,7 @@ public class ItemSO : ScriptableObject
 {
     public string powerupName;
     public string powerupDescrip;
+    public Sprite PowerupIcon;
     [FormerlySerializedAs("powerup")] public GameObject prefab;
 
 }

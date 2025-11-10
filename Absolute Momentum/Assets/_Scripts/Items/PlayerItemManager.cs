@@ -2,11 +2,13 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PlayerItemManager : NetworkBehaviour
 {
     [SerializeField] private BaseItem attackItem, movementItem;
+    [SerializeField] private Image attackItemImage, movementItemImage; 
     [SerializeField] private float orbitRadius;
     [SerializeField] private ItemPoolSO attackItemPool, movementItemPool;
     [SerializeField] private Transform itemParent; // The parent transform for the items
@@ -29,14 +31,16 @@ public class PlayerItemManager : NetworkBehaviour
             SelectMovementItem();
         }
 
-        if (attackItem != null && Input.GetKeyDown(KeyCode.Mouse0))
+        if (attackItem != null && Input.GetKeyDown(KeyCode.Q))
         {
             attackItem.ActivateItem();
+            attackItemImage.sprite = null;
         }
         
-        if (movementItem != null && Input.GetKeyDown(KeyCode.Mouse1))
+        if (movementItem != null && Input.GetKeyDown(KeyCode.E))
         {
             movementItem.ActivateItem();
+            movementItemImage.sprite = null;
         }
         
     }
@@ -45,12 +49,14 @@ public class PlayerItemManager : NetworkBehaviour
         if (attackItem != null) return;
         
         int randomItemNum = Random.Range(0, attackItemPool.items.Length);
+        
         ItemSO selectedItem = attackItemPool.items[randomItemNum];
+        
         if (selectedItem != null)
         {
             attackItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
+            attackItemImage.sprite = selectedItem.PowerupIcon;
         }
-        
         if (movementItem != null)
         {
             attackItem.transform.localPosition = new Vector3(-movementItem.transform.localPosition.x, attackItem.transform.localPosition.y, attackItem.transform.localPosition.z);
@@ -91,6 +97,7 @@ public class PlayerItemManager : NetworkBehaviour
         if (selectedItem != null)
         {
             movementItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
+            movementItemImage.sprite = selectedItem.PowerupIcon;
         }
 
         if (attackItem != null)

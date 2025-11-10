@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a78387036f19541afc767b57284c63, type: 3}
   m_Name: Banana
   m_EditorClassIdentifier: 
-  powerupName: Banana
+  powerupName: Apple
   powerupDescrip: 
-  powerup: {fileID: 7480816417552754497, guid: 717a29d2958d6e147a08031229d8792d, type: 3}
+  PowerupIcon: {fileID: 6645427384175290001, guid: 4dffe6eab57ca4e4ba2f967307bd1c29, type: 3}
+  prefab: {fileID: 7480816417552754497, guid: 717a29d2958d6e147a08031229d8792d, type: 3}
