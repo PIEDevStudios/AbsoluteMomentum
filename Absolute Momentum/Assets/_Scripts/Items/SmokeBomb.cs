@@ -21,6 +21,13 @@ public class SmokeBomb : BaseItem
 
     public override void ActivateItem()
     {
+        ActivateItemServerRpc();
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void ActivateItemServerRpc()
+    {
+        if (!IsServer) return;
         base.ActivateItem();
         NetworkObject projectile = Instantiate(projectilePrefab, player.transform.position, player.orientation.rotation).GetComponent<NetworkObject>();
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
@@ -29,4 +36,5 @@ public class SmokeBomb : BaseItem
         projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
         Destroy(gameObject);
     }
+    
 }

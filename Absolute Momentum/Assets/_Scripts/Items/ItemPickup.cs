@@ -15,13 +15,18 @@ public class ItemPickup : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!IsOwner) return;
-        
         if (other.CompareTag("Player"))
         {
             PlayerItemManager itemManager = other.transform.root.GetComponentInChildren<PlayerItemManager>();
+            if (itemManager == null || !itemManager.IsOwner) return;
             itemManager.SelectItem(itemType);
-            GetComponent<NetworkObject>().Despawn();
+            DespawnItemServerRpc();
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DespawnItemServerRpc()
+    {
+        GetComponent<NetworkObject>().Despawn();
     }
 }
