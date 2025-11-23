@@ -31,16 +31,42 @@ public class PlayerItemManager : NetworkBehaviour
             SelectMovementItem();
         }
 
-        if (attackItem != null && Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            attackItem.ActivateItem();
-            attackItemImage.sprite = null;
+            ActivateAttackItemServerRpc();
+            attackItemImage.sprite = null; 
+            Debug.Log($"activate attack");
         }
         
-        if (movementItem != null && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+            ActivateMovementItemServerRpc();
+            movementItemImage.sprite = null;
+            Debug.Log($"activate move");
+
+        }
+        
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ActivateAttackItemServerRpc()
+    {
+        if (attackItem != null)
+        {
+            attackItem.ActivateItem();
+            
+        }
+        
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void ActivateMovementItemServerRpc()
+    {
+        if (movementItem != null)
         {
             movementItem.ActivateItem();
-            movementItemImage.sprite = null;
+            
         }
         
     }
@@ -48,25 +74,10 @@ public class PlayerItemManager : NetworkBehaviour
     {
         if (attackItem != null) return;
         
-        int randomItemNum = Random.Range(0, attackItemPool.items.Length);
-        
-        ItemSO selectedItem = attackItemPool.items[randomItemNum];
-        
-        if (selectedItem != null)
-        {
-            attackItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
-            attackItemImage.sprite = selectedItem.PowerupIcon;
-            attackItem.player = GetComponent<Player>();
-            
-        }
-        if (movementItem != null)
-        {
-            attackItem.transform.localPosition = new Vector3(-movementItem.transform.localPosition.x, attackItem.transform.localPosition.y, attackItem.transform.localPosition.z);
-        }
-        else
-        {
-            attackItem.transform.localPosition = new Vector3(orbitRadius, 0, 0);
-        }
+        int itemIndex = Random.Range(0, attackItemPool.items.Length);
+        ItemSO selectedItem = attackItemPool.items[itemIndex];
+        attackItemImage.sprite = selectedItem.PowerupIcon;
+        SpawnAttackItemServerRpc(itemIndex);
 
     }
 
@@ -82,6 +93,50 @@ public class PlayerItemManager : NetworkBehaviour
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnAttackItemServerRpc(int itemIndex)
+    {
+        ItemSO selectedItem = attackItemPool.items[itemIndex];
+        if (selectedItem != null)
+        {
+            attackItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
+            attackItemImage.sprite = selectedItem.PowerupIcon;
+            attackItem.player = GetComponent<Player>();
+            attackItem.GetComponent<NetworkObject>().Spawn();
+        }
+        if (movementItem != null)
+        {
+            attackItem.transform.localPosition = new Vector3(-movementItem.transform.localPosition.x, attackItem.transform.localPosition.y, attackItem.transform.localPosition.z);
+        }
+        else
+        {
+            attackItem.transform.localPosition = new Vector3(orbitRadius, 0, 0);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnMovementItemServerRpc(int itemIndex)
+    {
+        ItemSO selectedItem = movementItemPool.items[itemIndex];
+        if (selectedItem != null)
+        {
+            movementItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
+            movementItemImage.sprite = selectedItem.PowerupIcon;
+            movementItem.player = GetComponent<Player>();
+            movementItem.GetComponent<NetworkObject>().Spawn();
+
+        }
+
+        if (attackItem != null)
+        {
+            movementItem.transform.localPosition = new Vector3(-attackItem.transform.localPosition.x, movementItem.transform.localPosition.y, movementItem.transform.localPosition.z);
+        }
+        else
+        {
+            movementItem.transform.localPosition = new Vector3(-orbitRadius, 0, 0);
+        }
+    }
+    
     public void ClearItems()
     {
         Destroy(movementItem?.gameObject); 
@@ -94,24 +149,11 @@ public class PlayerItemManager : NetworkBehaviour
     {
         if (movementItem != null) return;
         
-        int randomItemNum = Random.Range(0, movementItemPool.items.Length);
-        ItemSO selectedItem = movementItemPool.items[randomItemNum];
-        if (selectedItem != null)
-        {
-            movementItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
-            movementItemImage.sprite = selectedItem.PowerupIcon;
-            movementItem.player = GetComponent<Player>();
+        int itemIndex = Random.Range(0, movementItemPool.items.Length);
+        ItemSO selectedItem = movementItemPool.items[itemIndex];
+        movementItemImage.sprite = selectedItem.PowerupIcon;
+        SpawnMovementItemServerRpc(itemIndex);
 
-        }
-
-        if (attackItem != null)
-        {
-            movementItem.transform.localPosition = new Vector3(-attackItem.transform.localPosition.x, movementItem.transform.localPosition.y, movementItem.transform.localPosition.z);
-        }
-        else
-        {
-            movementItem.transform.localPosition = new Vector3(-orbitRadius, 0, 0);
-        }
 
     }
 }
