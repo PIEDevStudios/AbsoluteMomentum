@@ -23,11 +23,12 @@ public class GlueProjectile : NetworkBehaviour
     
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Enter Glue Projectile");
+        
         Player player = collision.gameObject.transform.GetComponentInParent<Player>();
         if (player != null && player.IsOwner)
         {
-            player = affectedPlayer;
+            Debug.Log("Slowdown");
+            affectedPlayer = player;
             affectedPlayer.SpeedMultiplier -= slowdown;
         }
     }
@@ -37,8 +38,8 @@ public class GlueProjectile : NetworkBehaviour
         Player player = collision.gameObject.transform.GetComponentInParent<Player>();
         if (player != null && player.IsOwner)
         {
-            player = null;
             affectedPlayer.SpeedMultiplier += slowdown;
+            affectedPlayer = null;
         }
     }
 
