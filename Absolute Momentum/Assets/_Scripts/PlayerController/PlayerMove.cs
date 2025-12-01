@@ -53,7 +53,7 @@ public class PlayerMove : State
         Vector3 rightOriented = Vector3.Cross(hit.normal, forwardOriented).normalized;
         
         float acceleration = player.playerInput.slideHeld ? stats.CrouchAcceleration : stats.SprintAcceleration;
-        
+        acceleration *= player.SpeedMultiplier;
         // Adds a force to the player in the direction they are pressing relative to the camera
         Debug.DrawRay(transform.position, (forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x).normalized * (stats.SprintAcceleration * 100f), Color.green);
         rb.AddForce((forwardOriented * player.playerInput.moveVector.y + rightOriented * player.playerInput.moveVector.x).normalized * (acceleration * 100f));

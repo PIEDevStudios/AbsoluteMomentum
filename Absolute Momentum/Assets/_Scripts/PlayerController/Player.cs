@@ -40,9 +40,8 @@ public class Player : StateMachineCore
 
     
     // References to other components on the player
-    [field:HorizontalLine(color: EColor.Gray)]
-    [Header("Player Components")]
-    [field:SerializeField] public Transform graphics { get; private set; }
+    [field: HorizontalLine(color: EColor.Gray)] [Header("Player Components")] [field: SerializeField]
+    public Transform graphics;
     [field:SerializeField] public Transform playerObj { get; private set; }
     [field:SerializeField] public Transform orientation { get; private set; }
     
@@ -71,6 +70,14 @@ public class Player : StateMachineCore
     
     private float timeSinceLastGrounded;
 
+    private float speedMultiplier = 1f;
+    public float SpeedMultiplier
+    {
+        get => speedMultiplier;
+        set => speedMultiplier = Mathf.Clamp(value, 0.1f, 10f);
+    }
+    
+    
     [Header("Debug")] 
     [SerializeField] private int framerate = 144;
     [SerializeField] private bool debugMode;

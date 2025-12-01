@@ -46,7 +46,7 @@ public abstract class StateMachineCore : NetworkBehaviour
         foreach (State _state in _allChildStates)
         {
             _state.SetCore(this);
-            _state.gameObject.SetActive(false);
+            // _state.gameObject.SetActive(false);
         }
     }
 

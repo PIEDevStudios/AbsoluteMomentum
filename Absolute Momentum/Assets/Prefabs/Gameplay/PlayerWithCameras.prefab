@@ -1142,6 +1142,60 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1931324535633855231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5191695262887546624}
+  - component: {fileID: 4102687979403201389}
+  m_Layer: 0
+  m_Name: DummyGraphics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5191695262887546624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931324535633855231}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6558729271255742777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &4102687979403201389
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931324535633855231}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2303196672758917450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,288 +1821,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 2081823275
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 0
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 640249298
-    DestinationState: 1748754976
-    TransitionDuration: 0.2497561
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 640249298
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 210132201
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 210132201
-    DestinationState: 640249298
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1288781466
-    DestinationState: -1288781466
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: -1947527841
-    TransitionDuration: 0.25
-    TriggerNameHash: 984841117
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: 210132201
-    TransitionDuration: 0.25
-    TriggerNameHash: 984841117
-    TransitionIndex: 3
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: 1748754976
-    TransitionDuration: 0
-    TriggerNameHash: 1748754976
-    TransitionIndex: 4
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 2081823275
-    DestinationState: 572830746
-    TransitionDuration: 0.25
-    TriggerNameHash: 572830746
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 640249298
-    DestinationState: 1748754976
-    TransitionDuration: 0.2497561
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 640249298
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 210132201
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 210132201
-    DestinationState: 640249298
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1288781466
-    DestinationState: -1288781466
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: -1947527841
-    TransitionDuration: 0.25
-    TriggerNameHash: 984841117
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: 210132201
-    TransitionDuration: 0.25
-    TriggerNameHash: 984841117
-    TransitionIndex: 3
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: 1748754976
-    TransitionDuration: 0
-    TriggerNameHash: 1748754976
-    TransitionIndex: 4
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 1748754976
-    DestinationState: 572830746
-    TransitionDuration: 0.25
-    TriggerNameHash: 572830746
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 640249298
-    DestinationState: 1748754976
-    TransitionDuration: 0.2497561
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 640249298
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 210132201
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 210132201
-    DestinationState: 640249298
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1288781466
-    DestinationState: -1288781466
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: -1947527841
-    TransitionDuration: 0.25
-    TriggerNameHash: 984841117
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: 210132201
-    TransitionDuration: 0.25
-    TriggerNameHash: 984841117
-    TransitionIndex: 3
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: 1748754976
-    TransitionDuration: 0
-    TriggerNameHash: 1748754976
-    TransitionIndex: 4
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 572830746
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 0
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 640249298
-    DestinationState: 1748754976
-    TransitionDuration: 0.2497561
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1947527841
-    DestinationState: 640249298
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 210132201
-    DestinationState: 1748754976
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 210132201
-    DestinationState: 640249298
-    TransitionDuration: 0.25
-    TriggerNameHash: 125937960
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1288781466
-    DestinationState: -1288781466
-    TransitionDuration: 0.25
-    TriggerNameHash: 1748754976
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: -1947527841
-    TransitionDuration: 0.25
-    TriggerNameHash: 984841117
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: 210132201
-    TransitionDuration: 0.25
-    TriggerNameHash: 984841117
-    TransitionIndex: 3
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: -1541365669
-    DestinationState: 1748754976
-    TransitionDuration: 0
-    TriggerNameHash: 1748754976
-    TransitionIndex: 4
-  m_Animator: {fileID: 0}
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 4102687979403201389}
 --- !u!1 &3258364069455560819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,7 +2095,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   rb: {fileID: 7820755405363151246}
   statesParent: {fileID: 585583725787266812}
-  animator: {fileID: 0}
+  animator: {fileID: 4102687979403201389}
   <idle>k__BackingField: {fileID: 5554240967382712080}
   <move>k__BackingField: {fileID: 625501535740467628}
   <airborne>k__BackingField: {fileID: 1598488798500674796}
@@ -2334,7 +2108,7 @@ MonoBehaviour:
   <wallSensor>k__BackingField: {fileID: 8600541307452225779}
   <slopeSensor>k__BackingField: {fileID: 1269488202452132282}
   <VaultSensor>k__BackingField: {fileID: 7080381429812518175}
-  <graphics>k__BackingField: {fileID: 0}
+  graphics: {fileID: 5191695262887546624}
   <playerObj>k__BackingField: {fileID: 6558729271255742777}
   <orientation>k__BackingField: {fileID: 6228127852056927477}
   stats: {fileID: 11400000, guid: c8f0da422cc38be46b59da0d57816f3d, type: 2}
@@ -3170,6 +2944,7 @@ Transform:
   - {fileID: 3954004177025399961}
   - {fileID: 6748811769221224111}
   - {fileID: 3796106380241680135}
+  - {fileID: 5191695262887546624}
   m_Father: {fileID: 6108369673085079863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6356712237417588780

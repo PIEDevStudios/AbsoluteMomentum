@@ -18,9 +18,8 @@ public class CharacterSwapper : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private CharacterSwapperData[] characterSwapperData;
     [SerializeField] private OwnerNetworkAnimator ownerNetworkAnimator;
-    private GameObject currentGraphics;
 
-    void Start()
+    void Awake()
     {
         SwapCharacters(characterSwapperData[0]);
     }
@@ -36,9 +35,11 @@ public class CharacterSwapper : MonoBehaviour
 
     private void SwapCharacters(CharacterSwapperData data)
     {
-        Destroy(currentGraphics);
-        currentGraphics = Instantiate(data.CharacterPrefab, transform);
-        player.animator = currentGraphics.GetComponentInChildren<Animator>();
-        ownerNetworkAnimator.Animator = currentGraphics.GetComponentInChildren<Animator>();
+        ownerNetworkAnimator.enabled = false;
+        Destroy(player.graphics.gameObject);
+        player.graphics = Instantiate(data.CharacterPrefab, transform).transform;
+        player.animator = player.graphics.GetComponentInChildren<Animator>();
+        ownerNetworkAnimator.Animator = player.animator;
+        ownerNetworkAnimator.enabled = true;
     }
 }
