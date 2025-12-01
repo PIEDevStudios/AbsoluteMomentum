@@ -6,6 +6,7 @@ public class GlueProjectile : NetworkBehaviour
 {
     public Transform visuals;
     [SerializeField] private float slowdown = 0.5f;
+    private Player affectedPlayer;
     void OnCollisionEnter(Collision collision)
     {
         if (!IsServer) return;
@@ -22,17 +23,30 @@ public class GlueProjectile : NetworkBehaviour
     
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.TryGetComponent(out Player player))
+        Debug.Log("Enter Glue Projectile");
+        Player player = collision.gameObject.transform.GetComponentInParent<Player>();
+        if (player != null && player.IsOwner)
         {
-            player.SpeedMultiplier -= slowdown;
+            player = affectedPlayer;
+            affectedPlayer.SpeedMultiplier -= slowdown;
         }
     }
     
     void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.TryGetComponent(out Player player))
+        Player player = collision.gameObject.transform.GetComponentInParent<Player>();
+        if (player != null && player.IsOwner)
         {
-            player.SpeedMultiplier += slowdown;
+            player = null;
+            affectedPlayer.SpeedMultiplier += slowdown;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (affectedPlayer != null)
+        {
+            affectedPlayer.SpeedMultiplier += slowdown;
         }
     }
 
