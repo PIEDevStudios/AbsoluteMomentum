@@ -55,7 +55,6 @@ public class PlayerItemManager : NetworkBehaviour
         if (attackItem != null)
         {
             attackItem.ActivateItem();
-            
         }
         
     }
@@ -66,7 +65,6 @@ public class PlayerItemManager : NetworkBehaviour
         if (movementItem != null)
         {
             movementItem.ActivateItem();
-            
         }
         
     }
@@ -101,7 +99,7 @@ public class PlayerItemManager : NetworkBehaviour
         {
             attackItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
             attackItemImage.sprite = selectedItem.PowerupIcon;
-            attackItem.player = GetComponent<Player>();
+            attackItem.Player = GetComponent<Player>();
             attackItem.GetComponent<NetworkObject>().Spawn();
         }
         if (movementItem != null)
@@ -122,7 +120,7 @@ public class PlayerItemManager : NetworkBehaviour
         {
             movementItem = Instantiate(selectedItem.prefab, itemParent).GetComponent<BaseItem>();
             movementItemImage.sprite = selectedItem.PowerupIcon;
-            movementItem.player = GetComponent<Player>();
+            movementItem.Player = GetComponent<Player>();
             movementItem.GetComponent<NetworkObject>().Spawn();
 
         }

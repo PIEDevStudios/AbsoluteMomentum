@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using DG.Tweening;
@@ -6,12 +7,10 @@ using Unity.Netcode;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
-public class SmokeBomb : BaseItem
+public class SpeedBoost : BaseItem
 {
-    [SerializeField] private float throwForce = 70f;
-    [SerializeField] private float throwUpwardForce = 10f;
     [SerializeField] private float hoverAmount = 3f, hoverTime = 1f;
-    public GameObject projectilePrefab;
+    [SerializeField] private float _speedMultiplier = 0.5f, _speedTime = 5f;
 
     public void Start()
     {
@@ -22,19 +21,21 @@ public class SmokeBomb : BaseItem
     public override void ActivateItem()
     {
         ActivateItemServerRpc();
+        Player.StartCoroutine(ChangeSpeed());
+        Destroy(gameObject);
     }
     
     [ServerRpc(RequireOwnership = false)]
     private void ActivateItemServerRpc()
     {
         if (!IsServer) return;
-        base.ActivateItem();
-        NetworkObject projectile = Instantiate(projectilePrefab, Player.transform.position, Player.orientation.rotation).GetComponent<NetworkObject>();
-        Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-        projectile.Spawn(true);
-        Vector3 forceToAdd = Player.orientation.forward * throwForce + transform.up  * throwUpwardForce;
-        projectileRb.AddForce(forceToAdd, ForceMode.Impulse);
-        Destroy(gameObject);
+    }
+
+    private IEnumerator ChangeSpeed()
+    {
+        Player.SpeedMultiplier += _speedMultiplier;
+        yield return new WaitForSeconds(_speedTime);
+        Player.SpeedMultiplier -= _speedMultiplier;
     }
     
 }

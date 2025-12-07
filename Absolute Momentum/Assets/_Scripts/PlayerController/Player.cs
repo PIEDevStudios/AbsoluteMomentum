@@ -311,7 +311,7 @@ public class Player : StateMachineCore
         }
         
         // Transition to airborne
-        if (!groundSensor.IsGroundedCoyote && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun || stateMachine.currentState == wallSlide || stateMachine.currentState == vault) || stateMachine.currentState.isComplete))
+        if (!groundSensor.IsGroundedCoyote && !slopeSensor.isOnSlope && ( !(stateMachine.currentState == slide || stateMachine.currentState == wallrun || stateMachine.currentState == wallSlide || stateMachine.currentState == vault || stateMachine.currentState == dash) || stateMachine.currentState.isComplete))
         {
             stateMachine.SetState(airborne);
             return;

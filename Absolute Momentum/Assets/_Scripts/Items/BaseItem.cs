@@ -3,6 +3,6 @@ using UnityEngine;
 
 public class BaseItem : NetworkBehaviour
 {
-    public Player player;
+    [HideInInspector] public Player Player;
     public virtual void ActivateItem() { }
 }
