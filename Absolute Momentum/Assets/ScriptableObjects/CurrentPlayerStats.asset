@@ -287,11 +287,11 @@ MonoBehaviour:
   JumpBufferAmount: 0.5
   FallSpeedLimit: 60
   coyoteTime: 0.25
-  DashSpeed: 100
-  DashTime: 0.5
+  DashSpeed: 30
+  DashTime: 0.4
   velocityChangeMidDashStrength: 0.02
   AddSpeedToDash: 2
-  DashImplementation: 4
+  DashImplementation: 1
   VelocityChangeImplementation: 2
   ReorientVelocity: 1
   AddSpeedFromDash: 1
