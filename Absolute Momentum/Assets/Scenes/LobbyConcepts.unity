@@ -18894,7 +18894,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c00a1908992015945ad4396afba2c52e, type: 2}
+  - {fileID: 2100000, guid: b839a8e3f3e854f4babb4aedb0776ce2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37160,7 +37160,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c00a1908992015945ad4396afba2c52e, type: 2}
+  - {fileID: 2100000, guid: b839a8e3f3e854f4babb4aedb0776ce2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -64098,7 +64098,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c00a1908992015945ad4396afba2c52e, type: 2}
+  - {fileID: 2100000, guid: b839a8e3f3e854f4babb4aedb0776ce2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82915,7 +82915,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c00a1908992015945ad4396afba2c52e, type: 2}
+  - {fileID: 2100000, guid: b839a8e3f3e854f4babb4aedb0776ce2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86519,6 +86519,10 @@ PrefabInstance:
     - target: {fileID: 2915005076488745395, guid: d2860ddb046152e4b9a5aca374d144eb, type: 3}
       propertyPath: m_Name
       value: grate
+      objectReference: {fileID: 0}
+    - target: {fileID: 6794887127816540062, guid: d2860ddb046152e4b9a5aca374d144eb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
