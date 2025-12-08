@@ -1,8 +1,9 @@
 using System;
 using DG.Tweening;
+using Unity.Netcode;
 using UnityEngine;
 
-public class ItemPickup : MonoBehaviour
+public class ItemPickup : NetworkBehaviour
 {
     [SerializeField] private PlayerItemManager.ItemType itemType;
     [SerializeField] private float rotationTime = 2f, hoverTime = .8f, hoverDistance = .3f;
@@ -16,9 +17,16 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
             PlayerItemManager itemManager = other.transform.root.GetComponentInChildren<PlayerItemManager>();
+            if (itemManager == null || !itemManager.IsOwner) return;
             itemManager.SelectItem(itemType);
+            DespawnItemServerRpc();
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DespawnItemServerRpc()
+    {
+        GetComponent<NetworkObject>().Despawn();
     }
 }

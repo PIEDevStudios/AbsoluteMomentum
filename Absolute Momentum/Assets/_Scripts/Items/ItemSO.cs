@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,6 +7,7 @@ public class ItemSO : ScriptableObject
 {
     public string powerupName;
     public string powerupDescrip;
-    [FormerlySerializedAs("powerup")] public GameObject prefab;
+    public Sprite PowerupIcon;
+    public GameObject prefab;
 
 }

@@ -8,7 +8,7 @@ public class PlayerDash : State
     [SerializeField] private Player player;
     [SerializeField] private Transform orientation;
     
-    [SerializeField] private GameObject camera;
+    private GameObject camera;
     private Vector3 lastVelocity;
     [NonSerialized] public float timeInDash;
     private PlayerStats stats => player.stats;
@@ -20,7 +20,7 @@ public class PlayerDash : State
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-
+        camera = Camera.main?.gameObject;
         player.ChangeGravity(0);
         lastVelocity = player.rb.linearVelocity;
         timeInDash = 0;
