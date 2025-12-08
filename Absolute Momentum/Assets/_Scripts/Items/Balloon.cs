@@ -7,7 +7,7 @@ using Unity.Netcode;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
-public class Baloon : BaseItem
+public class Balloon : BaseItem
 {
     [SerializeField] private float _itemTime, _hoverStrength;
 
@@ -15,13 +15,14 @@ public class Baloon : BaseItem
     {
         ActivateItemServerRpc();
         Player.StartCoroutine(AddBalloonForce());
-        Destroy(gameObject);
+        
     }
     
     [ServerRpc(RequireOwnership = false)]
     private void ActivateItemServerRpc()
     {
         if (!IsServer) return;
+        NetworkObject.Despawn(true);
     }
     
     private IEnumerator AddBalloonForce()

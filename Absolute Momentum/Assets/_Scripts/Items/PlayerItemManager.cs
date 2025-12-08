@@ -92,8 +92,9 @@ public class PlayerItemManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnAttackItemServerRpc(int itemIndex)
+    public void SpawnAttackItemServerRpc(int itemIndex, ServerRpcParams rpcParams = default)
     {
+        ulong ownerClientId = rpcParams.Receive.SenderClientId;
         ItemSO selectedItem = attackItemPool.items[itemIndex];
         if (selectedItem != null)
         {
@@ -113,8 +114,9 @@ public class PlayerItemManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnMovementItemServerRpc(int itemIndex)
+    public void SpawnMovementItemServerRpc(int itemIndex, ServerRpcParams rpcParams = default)
     {
+        ulong ownerClientId = rpcParams.Receive.SenderClientId;
         ItemSO selectedItem = movementItemPool.items[itemIndex];
         if (selectedItem != null)
         {
