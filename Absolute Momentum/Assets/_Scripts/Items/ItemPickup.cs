@@ -19,13 +19,18 @@ public class ItemPickup : NetworkBehaviour
         {
             PlayerItemManager itemManager = other.transform.root.GetComponentInChildren<PlayerItemManager>();
             if (itemManager == null || !itemManager.IsOwner) return;
-            itemManager.SelectItem(itemType);
-            DespawnItemServerRpc();
+
+            if (itemType == PlayerItemManager.ItemType.Attack)
+                itemManager.SelectAttackItem();
+            else
+                itemManager.SelectMovementItem();
+            
+            DespawnPickupServerRpc();
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void DespawnItemServerRpc()
+    private void DespawnPickupServerRpc()
     {
         GetComponent<NetworkObject>().Despawn();
     }

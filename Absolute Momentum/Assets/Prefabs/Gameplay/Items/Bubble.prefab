@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9188915638034826394}
   - component: {fileID: 2506813200229502347}
   - component: {fileID: 8216417615552455174}
-  - component: {fileID: 3629568134539881294}
+  - component: {fileID: 8452285230636745656}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &3629568134539881294
+--- !u!114 &8452285230636745656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,13 +144,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 9197291775953825093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969942cef3c94bb47a09405c3c80dd48, type: 3}
+  m_Script: {fileID: 11500000, guid: 61820542934b47b5a62338b0d44d65ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   Player: {fileID: 0}
-  throwForce: 30
+  ItemUserClientID: 0
+  throwForce: 40
   throwUpwardForce: 0
-  hoverAmount: 0.5
-  hoverTime: 0.75
+  hoverAmount: 3
+  hoverTime: 1
   projectilePrefab: {fileID: 6924457004929308279, guid: 5593d633f4becd14a8c707b9d2422de8, type: 3}

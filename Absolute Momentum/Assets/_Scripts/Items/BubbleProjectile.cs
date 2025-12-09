@@ -1,30 +1,51 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BubbleProjectile : NetworkBehaviour
 {
     public float bubbleTime = 1f, bubbleSpeed = 35f;
-    public ulong playerID;
+    public ulong ItemUserClientID;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        Invoke(nameof(DespawnBubbleServerRpc), 5f);
+    }
+    
     void OnTriggerEnter(Collider collision)
     {
+        
         if (!IsServer) return;
         
+        Debug.Log("Bubble hit: " + collision.gameObject.name);
+        
         Player player = collision.gameObject.transform.root.GetComponentInChildren<Player>();
-        if (player != null)
+        
+        if (player != null && player.OwnerClientId != ItemUserClientID)
         {
-            player.StartCoroutine(BubblePlayer(player));
+            BubblePlayerClientRpc(player.NetworkObjectId);
             GetComponent<Collider>().enabled = false;
-            StartCoroutine(DespawnAfterSeconds(1f));
+            DespawnBubbleServerRpc();
         }
     }
 
-    private IEnumerator DespawnAfterSeconds(float seconds)
+    
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void DespawnBubbleServerRpc()
     {
-        yield return new WaitForSeconds(seconds);
-        NetworkObject.Despawn();
+        NetworkObject.Despawn(true);
     }
 
+    [ClientRpc]
+    private void BubblePlayerClientRpc(ulong networkObjectId)
+    {
+        Player player = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].GetComponentInChildren<Player>();
+        player.StartCoroutine(BubblePlayer(player));
+    }
+    
     private IEnumerator BubblePlayer(Player player)
     {
         Debug.Log("Bubbling Player: " + player.OwnerClientId);

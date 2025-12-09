@@ -20,9 +20,7 @@ public class SpeedBoost : BaseItem
 
     public override void ActivateItem()
     {
-        ActivateItemServerRpc();
         Player.StartCoroutine(ChangeSpeed());
-        Destroy(gameObject);
     }
     
     [ServerRpc(RequireOwnership = false)]

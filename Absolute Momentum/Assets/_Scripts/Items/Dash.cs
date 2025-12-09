@@ -19,10 +19,8 @@ public class Dash : BaseItem
 
     public override void ActivateItem()
     {
-        ActivateItemServerRpc();
         Player.stateMachine.SetState(Player.dash);
         Debug.Log("PLAYER DASH");
-        Destroy(gameObject);
     }
     
     [ServerRpc(RequireOwnership = false)]

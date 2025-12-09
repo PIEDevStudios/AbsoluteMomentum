@@ -13,7 +13,7 @@ public class Bubble : BaseItem
     [SerializeField] private float hoverAmount = 3f, hoverTime = 1f;
     public GameObject projectilePrefab;
 
-    public void Start()
+    public void Awake()
     {
         transform.localPosition = new Vector3(transform.localPosition.x, -hoverAmount, transform.localPosition.z);
         transform.DOLocalMoveY(transform.localPosition.y + hoverAmount, hoverTime).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
@@ -27,9 +27,9 @@ public class Bubble : BaseItem
     [ServerRpc(RequireOwnership = false)]
     private void ActivateItemServerRpc()
     {
-        if (!IsServer) return;
-        base.ActivateItem();
+        Debug.Log($"Activate Bubble with ThrowerID{ItemUserClientID}");
         NetworkObject projectile = Instantiate(projectilePrefab, Player.transform.position, Player.orientation.rotation).GetComponent<NetworkObject>();
+        projectile.GetComponent<BubbleProjectile>().ItemUserClientID = ItemUserClientID;
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
         projectile.Spawn(true);
         Vector3 forceToAdd = Player.orientation.forward * throwForce + transform.up  * throwUpwardForce;

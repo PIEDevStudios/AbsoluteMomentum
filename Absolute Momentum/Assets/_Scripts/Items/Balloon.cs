@@ -13,17 +13,9 @@ public class Balloon : BaseItem
 
     public override void ActivateItem()
     {
-        ActivateItemServerRpc();
         Player.StartCoroutine(AddBalloonForce());
-        
     }
     
-    [ServerRpc(RequireOwnership = false)]
-    private void ActivateItemServerRpc()
-    {
-        if (!IsServer) return;
-        NetworkObject.Despawn(true);
-    }
     
     private IEnumerator AddBalloonForce()
     {
